@@ -1,0 +1,60 @@
+import 'package:green_go/features/core/domain/failure.dart';
+import 'package:green_go/features/map/domain/single_transport_model.dart';
+import 'package:green_go/features/map/infrastructure/transport_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'transport_notifier.freezed.dart';
+
+enum TransportActionEnum {
+  pure,
+  starting,
+  start,
+  pouse,
+  turnOn,
+}
+
+@freezed
+class TransportState with _$TransportState {
+  factory TransportState({
+    required SingleTransportModel? transport,
+    required bool isLoading,
+    Failure? error,
+    required TransportActionEnum actionState,
+  }) = _TransportState;
+  factory TransportState.initial() => TransportState(
+      transport: null, isLoading: false, actionState: TransportActionEnum.pure);
+}
+
+class TransportNotifier extends StateNotifier<TransportState> {
+  final TransportRepository _repository;
+  TransportNotifier(this._repository) : super(TransportState.initial());
+
+  Future<void> getTransport(
+      double latitude, double longitude, String qrCode) async {
+    state = state.copyWith(isLoading: true);
+    final dataOrFailure =
+        await _repository.getTransport(latitude, longitude, qrCode);
+    state = dataOrFailure.fold(
+      (l) => state.copyWith(error: l, isLoading: false),
+      (r) => state.copyWith(transport: r, isLoading: false),
+    );
+  }
+
+  Future<bool> start(double latitude, double longitude, String qrCode,
+      int regionId, int tariffId) async {
+    state = state.copyWith(actionState: TransportActionEnum.starting);
+    final dataOrFailure = await _repository.start(
+        latitude, longitude, qrCode, regionId, tariffId);
+    state = dataOrFailure.fold(
+        (l) => state.copyWith(
+              error: l,
+              actionState: TransportActionEnum.pure,
+            ),
+        (r) => state.copyWith(
+              actionState: TransportActionEnum.start,
+            ));
+    return dataOrFailure.fold((l) => false, (r) => true);
+  }
+}

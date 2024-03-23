@@ -1,0 +1,289 @@
+{
+  "@@locale": "en",
+  "hello": "Hello",
+  "home": "Dashboard",
+  "language": "Language",
+  "days": "{count,plural, =1{1 день} =2{2 дня} other{{count} дней}}",
+  "@days": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "hours": "{count,plural, =1{1 час} =2{2 часа} other{{count} часов}}",
+  "@hours": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "minutes": "{count,plural, =1{1 минуту} =2{2 минуты} other{{count} минут}}",
+  "@minutes": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "daysCustom": "{count} дня",
+  "@daysCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "hoursCustom": "{count} часа",
+  "@hoursCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "minutesCustom": "{count} минуты",
+  "@minutesCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "title": "Tana",
+  "woman": "Woman",
+  "man": "Man",
+  "delete": "Delete",
+  "sendNewCode": "Send a new code",
+  "formError": "Required fields cannot be empty",
+  "gender": "Gender",
+  "birthday": "Birthday",
+  "next": "Next",
+  "phoneNumber": "Phone Number",
+  "codeSentNumber": "A 6-digit code has been sent to {phoneNumber} to verify the phone number",
+  "fullName": "Full name",
+  "name": "Name",
+  "refresh": "Refresh",
+  "category": "Category",
+  "priceRange": "Price range",
+  "products":"Продукты",
+  "color": "Color",
+  "sortPrice": "Sort by",
+  "catalog": "Catalog",
+  "favorites": "Favorites",
+  "promotions": "Promotions and discounts",
+  "profile": "Profile",
+  "personalData": "Personal data",
+  "callSuport":"Позвоните в центр поддержки",
+  "ourSocials":"Наши социальные сети",
+  "addToCart": "add to cart",
+  "notAvailable": "Not available",
+  "cashback": "Accumulation",
+  "orderHistory": "My orders",
+  "travelHistory":"Travel history",
+  "scanIt":"Scan it",
+  "myCards":"Mening kartalarim",
+  "aboutCompany": "About company",
+  "contactUs": "Contact us",
+  "settings": "Settings",
+  "contacts": "Contacts",
+  "publicOffer": "Public offer",
+  "aboutApp": "About the app",
+  "changeProfileDetails": "Change profile details",
+  "notifications": "Notifications",
+  "showRooms": "Showrooms",
+  "blog": "Blog",
+  "exit": "Exit",
+  "appUpdateTitle": "Update is available",
+  "appUpdateSubtitle": "Please update to continue",
+  "smsWillBeSent": "Sms code will be sent to your number",
+  "auth": "Sign in",
+  "deleteDialogTitle": "Do yo really want to delete your account?",
+  "yes": "Yes",
+  "no": "No",
+  "exitDialogTitle": "Do you really want to sign out?",
+  "goHome": "Go home",
+  "bonusToBeGiven": "Bonuses",
+  "points": "{count} points",
+  "@points": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalPrice": "Total price",
+  "checkout": "Checkout",
+  "cart": "Cart",
+  "map": "Map",
+  "search": "Search",
+  "select": "Select",
+  "orderSuccessTitle": "Your order has been placed",
+  "orderId": "Order number",
+  "orderSuccessSubtitle": "Operator will contact you soon",
+  "goToPayment": "Pay",
+  "clickMapHint": "Find your location on the map and click on it!",
+  "yourAddress": "Your address",
+  "edit": "Edit",
+  "selectOnMap": "Select on map",
+  "landmark": "Landmark",
+  "enterLandmark": "Enter landmark",
+  "comment": "Comment",
+  "common":"Umumiy",
+  "help":"Help",
+  "commentOrder": "Comment",
+  "delivery": "Delivery",
+  "pickUp": "Pick up",
+  "payment":"Payment",
+  "paid":"Paid",
+  "paymentType": "Payment type",
+  "click": "CLICK",
+  "payme": "PAYME",
+  "visa": "VISA",
+  "master": "Mastercard",
+  "cash": "Cash",
+  "uzcar": "Terminal",
+  "receiverEmpty": "Enter the recipient's name",
+  "paymentTypeNotChosen": "Payment type is not chosen",
+  "addressIsMissing": "Enter your delivery address",
+  "invalidPhone": "Invalid phone format",
+  "yourName": "Your name",
+  "extraNumber": "Additional number",
+  "more": "More",
+  "qr": "QR",
+  "back": "Back",
+  "agreeAndAccept": "I have read and accept ",
+  "ofPublicOffer": "terms and conditions",
+  "selectGender": "Select gender",
+  "yourBalance": "Your balance",
+  "cashbackDesc": "1 point = 1 UZS",
+  "show": "Show",
+  "qrCode": "QR-code",
+  "cashier": " to cashier",
+  "selectLang": "Select language",
+  "confirm": "Confirm",
+  "active": "Active",
+  "completed": "Completed",
+  "number": "#",
+  "type": "Type",
+  "date": "Date",
+  "status": "Status",
+  "view": "View",
+  "repeatOrder": "Repeat order",
+  "addToCartQuest": "Add products to cart?",
+  "viewOrder": "View order",
+  "productPrice": "{price} UZS",
+  "@productPrice": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "orderStatus": "Order status",
+  "writeOffBonuses": "We'll write off bonuses",
+  "cancelOrder": "Cancel order",
+  "confirmCancelOrder": "Do you want to cancel order?",
+  "orderIsProcessing": "Your order is being processed",
+  "yourOrder": "Your order",
+  "success": "Success",
+  "myBalance":"My balance",
+  "personal":"Personal",
+  "ok": "OK",
+  "save": "Save",
+  "deleteAccount": "Delete account",
+  "sendFeedbackSuccess": "Your feedback has been sent",
+  "send": "Send",
+  "openMap": "Open map",
+  "workTime": "Work time",
+  "manager": "Manager",
+  "address": "Address",
+  "navigate": "Navigate",
+  "manufacturer": "Manufacturer",
+  "material": "Upholstery",
+  "frame": "Frame",
+  "cross": "Cross and legs",
+  "onWheels": "Has wheel",
+  "heightAdjustment": "Height adjustment",
+  "maxWeight": "Max. load capacity",
+  "article": "Article",
+  "giveBack": "Return {percent}%",
+  "@giveBack": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "installment": "Installment",
+  "installmentPrice": "{price} UZS/month",
+  "@installmentPrice": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "materials": "Materials",
+  "similarProducts": "Similar products",
+  "recommendWithProduct": "Recommended with this model",
+  "description": "Description",
+  "characteristics": "Characteristics",
+  "collectionProducts": "Products of the collection",
+  "collections": "Collections",
+  "ideas": "Ideas by Dafna",
+  "toInstallment": "installment",
+  "buy": "Buy",
+  "topProducts": "Bestsellers",
+  "newProducts": "New products",
+  "recommendedProducts": "Recommended",
+  "emptyViewTitle": "There's nothing yet",
+  "emptyViewTSubtitle": "Back to Shopping",
+  "reset": "Reset",
+  "filter": "Filter",
+  "to90": "till 90",
+  "from90To120": "90 - 120",
+  "from120To150": "120 - 150",
+  "from150": "from 150",
+  "addedToFavs": "Product has been added to favorites",
+  "removedFromFavs": "Product has been removed from favorites",
+  "productAddedToCart": "Product has been added to cart",
+  "editConfig": "Edit configuration",
+  "orderInitialTitle": "Заказ оформлен",
+  "orderProcessingTitle": "Заказ формируется",
+  "orderIsOnWayTitle": "В пути",
+  "orderDeliverdTitle": "Доставлен",
+  "orderReadyToGoTitle": "Заказ готов",
+  "orderInitialDesc": "Ожидаем подтверждения",
+  "orderProcessingDesc": "Ваш заказ формируется",
+  "orderIsOnWayDesc": "Ваш заказ в пути",
+  "orderDeliverdDesc": "Ваш заказ доставлен",
+  "orderReadyToGoDesc": "Вы можете забрать заказ",
+  "months": "{count} months",
+  "@months": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "sale": "Sale",
+  "isLimited": "Buy Now",
+  "selectInstallment": "Select installment plan",
+  "invalidBalance": "You cannot withdraw more than your balance",
+  "withdrawalAmount": "Amount you want to withdraw",
+  "connectionError": "Connection error, please check your internet",
+  "generalError": "Something went wrong, try again, or contact support",
+  "retry": "Retry",
+  "preOrder":"Pre order",
+  "all":"All",
+  "createOrder":"Create order",
+  "sevenDays":"7 days",
+  "thirtyDays":"30 days",
+  "nintyDays":"90 days",
+  "enterDeadline":"Enter your deadline",
+  "income":"Income",
+  "fullFilledOrder":"Выполненные заказы",
+  "dateRange": "При сравнении {fromDate} и {toDate}",
+  "@dateRange": {
+    "placeholders": {
+      "fromDate": {}
+    }
+  },
+  "monday":"M",
+  "tuesday":"T",
+  "wednesday":"W",
+  "thursday":"T",
+  "friday":"F",
+  "saturday":"S",
+  "sunday":"S",
+  "statistics":"Statistics"
+}

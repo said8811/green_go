@@ -1,0 +1,290 @@
+{
+  "@@locale": "ru",
+  "hello": "Привет",
+  "home": "Главная",
+  "language": "Язык",
+  "days": "{count,plural, =1{1 день} =2{2 дня} other{{count} дней}}",
+  "@days": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "hours": "{count,plural, =1{1 час} =2{2 часа} other{{count} часов}}",
+  "@hours": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "minutes": "{count,plural, =1{1 минуту} =2{2 минуты} other{{count} минут}}",
+  "@minutes": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "daysCustom": "{count} дня",
+  "@daysCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "hoursCustom": "{count} часа",
+  "@hoursCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "minutesCustom": "{count} минуты",
+  "@minutesCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "title": "Tana",
+  "woman": "Женщина",
+  "man": "Мужщина",
+  "delete": "Удалить",
+  "sendNewCode": "Отправить код заново",
+  "formError": "Заполните все поля",
+  "gender": "Пол",
+  "birthday": "Дата рождения",
+  "next": "Далее",
+  "phoneNumber": "Номер телефона",
+  "fullName": "ФИО",
+  "name": "Имя",
+  "codeSentNumber": "На номер {phoneNumber} был отправлен 6-значный код для подтверждения номера телефона.",
+  "refresh": "Обновить",
+  "category": "Категория",
+  "priceRange": "Диапазон цены",
+  "color": "Цвет",
+  "sortPrice": "Сортировать по",
+  "catalog": "Каталог",
+  "favorites": "Избранное",
+  "promotions": "Акции и скидки",
+  "profile": "Профиль",
+  "personalData": "Личные данные",
+  "callSuport":"Позвоните в центр поддержки",
+  "ourSocials":"Наши социальные сети",
+  "addToCart": "в корзину",
+  "notAvailable": "Нет в наличии",
+  "cashback": "Кешбек",
+  "orderHistory": "Мои заказы",
+  "travelHistory":"История путешествий",
+  "scanIt":"Сканировать",
+  "myCards":"Мои карты",
+  "aboutCompany": "О компании",
+  "contactUs": "Связаться с нами",
+  "settings": "Настройки",
+  "contacts": "Контакты",
+  "publicOffer": "Публичная оферта",
+  "aboutApp": "О Приложении",
+  "changeProfileDetails": "Изменить данные профиля",
+  "notifications": "Уведомления",
+  "showRooms": "Шорумы",
+  "blog": "Блог",
+  "exit": "Выйти",
+  "appUpdateTitle": "Доступно новая версия",
+  "appUpdateSubtitle": "Пожалуйста обновите чтобы продолжить",
+  "smsWillBeSent": "Пароль будет отправлен вам в SMS",
+  "auth": "Авторизация",
+  "deleteDialogTitle": "Вы действительно хотите удалить свой аккаунт?",
+  "yes": "Да",
+  "no": "Нет",
+  "exitDialogTitle": "Вы действительно хотите выйти?",
+  "goHome": "На главную",
+  "bonusToBeGiven": "Вернем бонусами",
+  "points": "{count} балл",
+  "@points": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalPrice": "Итоговая цена",
+  "checkout": "Оформить заказ",
+  "cart": "Корзина",
+  "map": "Карта",
+  "search": "Поиск",
+  "select": "Выбрать",
+  "orderSuccessTitle": "Ваш заказ успешно принят!",
+  "orderId": "Номер заказа",
+  "orderSuccessSubtitle": "Оператор свяжется с вами для консультации в ближайшее время",
+  "goToPayment": "К оплате",
+  "clickMapHint": "Найдите место на карте и кликайте на него!",
+  "yourAddress": "Ваш адрес",
+  "edit": "Изменть",
+  "selectOnMap": "Указать на карте",
+  "landmark": "Ориентир",
+  "enterLandmark": "Введите ориентир",
+  "comment": "Комментарий",
+  "common":"Общий",
+  "commentOrder": "Комментарий к заказу",
+  "delivery": "Доставка",
+  "pickUp": "Самовывоз",
+  "payment":"Оплата",
+  "paid":"Оплаченный",
+  "paymentType": "Способ оплаты",
+  "click": "CLICK",
+  "payme": "PAYME",
+  "visa": "VISA",
+  "master": "Mastercard",
+  "cash": "Наличные",
+  "help":"Помощ",
+  "uzcar": "Терминал",
+  "receiverEmpty": "Укажите имя получателья",
+  "paymentTypeNotChosen": "Выберите способ оплаты",
+  "addressIsMissing": "Укажите адрес доставки",
+  "invalidPhone": "Неверный формат телефона",
+  "yourName": "Ваше имя",
+  "extraNumber": "Дополнительный номер",
+  "more": "Подробнее",
+  "qr": "QR",
+  "back": "Назад",
+  "agreeAndAccept": "Ознакомился (лась) и подтверждаю принятие ",
+  "ofPublicOffer": "публичной оферты",
+  "selectGender": "Выберите пол",
+  "yourBalance": "Ваш баланс",
+  "cashbackDesc": "1 балл = 1 сум",
+  "show": "Покажите",
+  "qrCode": "QR-код",
+  "cashier": " кассиру",
+  "selectLang": "Выберите язык",
+  "confirm": "Подтвердить",
+  "active": "Активные",
+  "completed": "Завершенные",
+  "number": "№",
+  "type": "Тип",
+  "date": "Дата",
+  "status": "Статус",
+  "view": "Посмотреть",
+  "repeatOrder": "Повторить заказ",
+  "addToCartQuest": "Добавить товары в корзину?",
+  "viewOrder": "Посмотреть заказ",
+  "productPrice": "{price} сум",
+  "@productPrice": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "orderStatus": "Статус заказа",
+  "writeOffBonuses": "Спишем бонусов",
+  "cancelOrder": "Отменить заказ",
+  "confirmCancelOrder": "Хотите отменить заказ?",
+  "orderIsProcessing": "Ваш заказ формируется",
+  "yourOrder": "Ваш заказ",
+  "success": "Успешно",
+  "myBalance":"Персональный аккаунт",
+  "personal":"Персональный",
+  "ok": "OK",
+  "save": "Сохранить",
+  "deleteAccount": "Удалить аккаунт",
+  "sendFeedbackSuccess": "Ваш отзыв успешно отправлен",
+  "send": "Отправить",
+  "openMap": "Открыть карту",
+  "workTime": "График работы",
+  "manager": "Менеджер",
+  "address": "Адрес",
+  "navigate": "Построить маршрут",
+  "manufacturer": "Производитель",
+  "material": "Обивка",
+  "frame": "Материал каркаса",
+  "cross": "Крестовина и ножки",
+  "onWheels": "Имеется колесо",
+  "heightAdjustment": "Регулировка высоты",
+  "maxWeight": "Макс. грузоподёмность",
+  "article": "Артикул",
+  "giveBack": "Вернем {percent}%",
+  "@giveBack": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "installment": "Рассрочка",
+  "installmentPrice": "{price} сум/мес",
+  "@installmentPrice": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "materials": "Материалы",
+  "similarProducts": "Похожие товары",
+  "recommendWithProduct": "С этой моделью рекомендуем",
+  "description": "Описание",
+  "characteristics": "Характеристики",
+  "collectionProducts": "Товары коллекции",
+  "collections": "Коллекции",
+  "ideas": "Идеи от Dafna",
+  "toInstallment": "в рассрочку",
+  "buy": "Купить",
+  "topProducts": "Лидеры продаж",
+  "newProducts": "Новинки",
+  "recommendedProducts": "Рекомендуем",
+  "emptyViewTitle": "Пока ничего нет",
+  "emptyViewTSubtitle": "Вернуться к покупкам",
+  "reset": "Сбросить",
+  "filter": "Фильтр",
+  "to90": "до 90",
+  "from90To120": "90 - 120",
+  "from120To150": "120 - 150",
+  "from150": "от 150",
+  "addedToFavs": "Продукт добавлен в избранное",
+  "removedFromFavs": "Продукт удален из избранных",
+  "productAddedToCart": "Продукт добавлен в корзину",
+  "editConfig": "Изменить конфигурацию",
+  "orderInitialTitle": "Заказ оформлен",
+  "orderProcessingTitle": "Заказ формируется",
+  "orderIsOnWayTitle": "В пути",
+  "orderDeliverdTitle": "Доставлен",
+  "orderReadyToGoTitle": "Заказ готов",
+  "orderInitialDesc": "Ожидаем подтверждения",
+  "orderProcessingDesc": "Ваш заказ формируется",
+  "orderIsOnWayDesc": "Ваш заказ в пути",
+  "orderDeliverdDesc": "Ваш заказ доставлен",
+  "products":"Продукты",
+  "orderReadyToGoDesc": "Вы можете забрать заказ",
+  "months": "{count} месяцев",
+  "@months": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "sale": "Скидки",
+  "isLimited": "Успейте купить",
+  "selectInstallment": "Выберите рассрочку",
+  "invalidBalance": "Вы не можете снять больше, чем ваш баланс",
+  "withdrawalAmount": "Сумма которую хотите снять",
+  "connectionError": "Connection error, please check your internet",
+  "generalError": "Something went wrong, try again, or contact support",
+  "retry": "Retry",
+  "preOrder":"Предзаказ",
+  "all":"Общий",
+  "createOrder":"Создать заказ",
+  "sevenDays":"7 дней",
+  "thirtyDays":"30 дней",
+  "nintyDays":"90 дней",
+  "enterDeadline":"Введите срок",
+  "income":"Доход",
+  "fullFilledOrder":"Выполненные заказы",
+  "dateRange": "При сравнении {fromDate} и {toDate}",
+  "@dateRange": {
+    "placeholders": {
+      "fromDate": {},
+      "toDate":{}
+    }
+  },
+  "monday":"Пн",
+  "tuesday":"Вт",
+  "wednesday":"Ср",
+  "thursday":"Че",
+  "friday":"Пт",
+  "saturday":"Сб",
+  "sunday":"Вс",
+  "statistics":"Статистика"
+}

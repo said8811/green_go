@@ -1,0 +1,290 @@
+{
+  "@@locale": "uz",
+  "hello": "Salom",
+  "home": "Asosiy",
+  "language": "Til",
+  "days": "{count,plural, =1{1 день} =2{2 дня} other{{count} дней}}",
+  "@days": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "hours": "{count,plural, =1{1 час} =2{2 часа} other{{count} часов}}",
+  "@hours": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "minutes": "{count,plural, =1{1 минуту} =2{2 минуты} other{{count} минут}}",
+  "@minutes": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "count"
+      }
+    }
+  },
+  "daysCustom": "{count} дня",
+  "@daysCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "hoursCustom": "{count} часа",
+  "@hoursCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "minutesCustom": "{count} минуты",
+  "@minutesCustom": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "title": "Tana",
+  "woman": "Ayol",
+  "man": "Erkak",
+  "delete": "O'chirish",
+  "sendNewCode": "Yangi kod yuborish",
+  "formError": "Barcha maydonlarni to'ldiring",
+  "gender": "Jins",
+  "birthday": "Tug'ilgan kun",
+  "next": "Keyingi",
+  "phoneNumber": "Telefon raqami",
+  "fullName": "FIO",
+  "name": "Ism",
+  "codeSentNumber": "Telefon raqamini tasdiqlash uchun 6-raqamli kod {phoneNumber} ga yuborildi",
+  "refresh": "Yangilash",
+  "category": "Kategoriya",
+  "priceRange": "Narxlar diapazoni",
+  "color": "Rang",
+  "sortPrice": "Saralash",
+  "catalog": "Katalog",
+  "favorites": "Tanlanganlar",
+  "products":"Productlar",
+  "promotions": "Aksiya va chegirmalar",
+  "profile": "Profil",
+  "personalData": "Shaxsiy ma'lumotlar",
+  "callSuport":"Qo‘llab quvvatlash markaziga qo‘ng‘iroq",
+  "ourSocials":"Bizning ijtimoiy tarmoqlarimiz",
+  "addToCart": "savatga",
+  "notAvailable": "Mavjud emas",
+  "cashback": "Jamg'arma",
+  "orderHistory": "Mening buyurtmalarim",
+  "travelHistory":"Sayohatlar tarixi",
+  "scanIt":"Scan qilish",
+  "myCards":"Mening kartalarim",
+  "aboutCompany": "Kompaniya haqida",
+  "contactUs": "Biz bilan bog'lanish",
+  "settings": "Sozlamalar",
+  "contacts": "Kontaktlar",
+  "publicOffer": "Foydalanish shartlari",
+  "aboutApp": "Ilova haqida",
+  "changeProfileDetails": "Shaxsiy ma'lumotlarini o'zgartirish",
+  "notifications": "Xabarlar",
+  "showRooms": "Shourumlar",
+  "blog": "Blog",
+  "exit": "Chiqish",
+  "appUpdateTitle": "Yangi versiya chiqdi",
+  "appUpdateSubtitle": "Iltimos, davom etish uchun ilovani yangilang",
+  "smsWillBeSent": "Sizga sms kod yuboriladi",
+  "auth": "Ilovaga kirish",
+  "deleteDialogTitle": "Siz rostan ham akkauntingizni o'chirib yubormoqchimisiz",
+  "yes": "Ha",
+  "no": "Yo'q",
+  "exitDialogTitle": "Siz rostan ham ilovadan chiqmoqchimisiz",
+  "goHome": "Bosh sahifaga",
+  "bonusToBeGiven": "Bonus",
+  "points": "{count} bal",
+  "@points": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalPrice": "Jami",
+  "checkout": "Buyurtma berish",
+  "cart": "Savatcha",
+  "map": "Xarita",
+  "search": "Qidirish",
+  "select": "Tanlash",
+  "orderSuccessTitle": "Buyurtmangiz qabul qilindi",
+  "orderId": "Buyurtma raqami",
+  "orderSuccessSubtitle": "Operator tez orada siz bilan bog'lanadi",
+  "goToPayment": "To'lovga o'tish",
+  "clickMapHint": "Xaritada joylashuvni toping va ustiga bosing!",
+  "yourAddress": "Manzil",
+  "edit": "Tahrirlash",
+  "selectOnMap": "Xaritada ko'rsatish",
+  "landmark": "Orientir",
+  "enterLandmark": "Orientir kiriting",
+  "comment": "Izoh",
+  "common":"Umumiy",
+  "commentOrder": "Buyurtmaga izoh",
+  "delivery": "Yetkazib berish",
+  "pickUp": "Olib ketish",
+  "payment":"To'lov",
+  "paid":"To'langan",
+  "paymentType": "To'lov turi",
+  "click": "CLICK",
+  "payme": "PAYME",
+  "visa": "VISA",
+  "master": "Mastercard",
+  "cash": "Naqd",
+  "uzcar": "Terminal",
+  "receiverEmpty": "Qabul qilivchinining ismini kiriting",
+  "paymentTypeNotChosen": "To'lov turi tanlanmagan",
+  "addressIsMissing": "Yetkazib berish manzilingizni kiriting",
+  "invalidPhone": "Telefon formati noto‘g‘ri",
+  "yourName": "Ismingiz",
+  "extraNumber": "Qo'shimcha raqam",
+  "more": "Batafsil",
+  "qr": "QR",
+  "back": "Orqaga",
+  "agreeAndAccept": "Tanishib chiqdim va qabul qilaman",
+  "ofPublicOffer": "foydalanish shartlarini",
+  "selectGender": "Jinsni tanlang",
+  "yourBalance": "Balansingiz",
+  "cashbackDesc": "1 ball = 1 UZS",
+  "show": "Ko'rsating",
+  "qrCode": "QR-kodni ",
+  "cashier": " kassirga",
+  "selectLang": "Tilni tanlang",
+  "confirm": "Tasdiqlash",
+  "active": "Aktiv",
+  "completed": "Tugallangan",
+  "number": "№",
+  "type": "Tur",
+  "date": "Sana",
+  "status": "Status",
+  "view": "Ko'rib chiqish",
+  "repeatOrder": "Buyurtmani takrorlash",
+  "addToCartQuest": "Savatchaga qo'shishni istaysizmi?",
+  "viewOrder": "Buyurtmani ko'rish",
+  "productPrice": "{price} so'm",
+  "@productPrice": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "orderStatus": "Buyurtma statusi",
+  "writeOffBonuses": "Bonuslar yechiladi",
+  "cancelOrder": "Buyurtmani bekor qilish",
+  "confirmCancelOrder": "Buyurtmani bekor qilishni hohlaysizmi?",
+  "orderIsProcessing": "Sizning buyurtmangiz tayyorlanmoqda",
+  "yourOrder": "Sizning buyurtmangiz",
+  "success": "Muvaffaqiyatli",
+  "myBalance":"Shaxsiy hisob",
+  "personal":"Shaxsiy",
+  "ok": "OK",
+  "save": "Saqlash",
+  "deleteAccount": "Akkauntni o'chirish",
+  "sendFeedbackSuccess": "Sizning izohingiz yuborildi",
+  "send": "Yuborish",
+  "openMap": "Xaritada ko'rish",
+  "workTime": "Ish vaqti",
+  "manager": "Menejer",
+  "address": "Adres",
+  "navigate": "Marshrut yaratish",
+  "manufacturer": "Ishlab chiqaruvchi",
+  "material": "Qoplama",
+  "frame": "Karkas",
+  "cross": "Oyoq va xoch",
+  "onWheels": "G'ildirak bor",
+  "heightAdjustment": "Balandlikni sozlash",
+  "maxWeight": "Maks. yuk ko'tarish",
+  "article": "Aritkul",
+  "giveBack": "{percent}% qaytaramiz",
+  "@giveBack": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "installment": "Bo'lib to'lash",
+  "installmentPrice": "{price} so'm/oy",
+  "@installmentPrice": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "materials": "Materiallar",
+  "similarProducts": "O'xshash tovarlar",
+  "recommendWithProduct": "Ushbu model bilan tavsiya qilinadi",
+  "description": "Tavsif",
+  "characteristics": "Xususiyatlari",
+  "collectionProducts": "Kolleksiyadagi mahsulotlar",
+  "collections": "Kolleksiyalar",
+  "ideas": "Dafnadan g'oyalar",
+  "toInstallment": "bo'lib to'lash",
+  "buy": "Sotib olish",
+  "topProducts": "Bestsellerlar",
+  "newProducts": "Yangi mahsulotlar",
+  "recommendedProducts": "Tavsiya etamiz",
+  "emptyViewTitle": "Hozircha hech narsa yo'q",
+  "emptyViewTSubtitle": "Xaridga qaytish",
+  "reset": "Tozalash",
+  "filter": "Filter",
+  "to90": "90 gacha",
+  "from90To120": "90 - 120",
+  "from120To150": "120 - 150",
+  "from150": "150 dan",
+  "addedToFavs": "Mahsulot sevimlilar ro'yxatiga qo'shildi",
+  "removedFromFavs": "Mahsulot sevimlilar ro'yxatidan chiqarildi",
+  "productAddedToCart": "Mahsulot savatchaga qo'shildi",
+  "editConfig": "Konfiguratsiyani o'zgartirish",
+  "orderInitialTitle": "Заказ оформлен",
+  "orderProcessingTitle": "Заказ формируется",
+  "orderIsOnWayTitle": "В пути",
+  "orderDeliverdTitle": "Доставлен",
+  "orderReadyToGoTitle": "Заказ готов",
+  "orderInitialDesc": "Ожидаем подтверждения",
+  "orderProcessingDesc": "Ваш заказ формируется",
+  "orderIsOnWayDesc": "Ваш заказ в пути",
+  "orderDeliverdDesc": "Ваш заказ доставлен",
+  "orderReadyToGoDesc": "Вы можете забрать заказ",
+  "months": "{count} oy",
+  "@months": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "sale": "Chegirmalar",
+  "isLimited": "Sotib olishga shoshiling",
+  "selectInstallment": "Bo'lib to'lashni tanlang",
+  "invalidBalance": "Balansingizdan ko'proq mablag'ni yechib ololmaysiz",
+  "withdrawalAmount": "Siz yechib olmoqchi bo'lgan miqdor",
+  "connectionError": "Connection error, please check your internet",
+  "generalError": "Something went wrong, try again, or contact support",
+  "retry": "Retry",
+  "preOrder":"Предзаказ",
+  "help":"Yordam",
+  "all":"Общий",
+  "createOrder":"Создать заказ",
+  "sevenDays":"7 kun",
+  "thirtyDays":"30 kun",
+  "nintyDays":"90 kun",
+  "enterDeadline":"O'z muddatini kiritish",
+  "income":"Tushum",
+  "fullFilledOrder":"Bajarilgan buyurtmalar",
+  "dateRange": "{fromDate} sanasidan {toDate} sanasigacha\nsolishtirganda",
+  "@dateRange": {
+    "placeholders": {
+      "fromDate": {},
+      "toDate":{}
+    }
+  }, 
+  "monday":"Du",
+  "tuesday":"Se",
+  "wednesday":"Ch",
+  "thursday":"Py",
+  "friday":"Jm",
+  "saturday":"Sh",
+  "sunday":"Yk",
+  "statistics":"Statistika"
+}
