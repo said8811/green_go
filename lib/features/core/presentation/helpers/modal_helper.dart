@@ -211,7 +211,7 @@ Future<void> showScrollableModal({
     builder: (BuildContext context) => DraggableScrollableSheet(
       builder: builder,
       maxChildSize: maxOffset ?? .95,
-      initialChildSize: initialOffset ?? 0.5,
+      initialChildSize: initialOffset ?? 0.7,
     ),
   );
 }

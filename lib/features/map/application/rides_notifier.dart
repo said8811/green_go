@@ -22,6 +22,7 @@ class RidesState with _$RidesState {
     required List<RideModel> rides,
     required bool isLoading,
     Failure? error,
+    String? imgPath,
     required RideAction actionState,
   }) = _RidesState;
   factory RidesState.initial() =>
@@ -50,5 +51,36 @@ class RidesNotifier extends StateNotifier<RidesState> {
       (l) => state.copyWith(error: l, actionState: RideAction.pure),
       (r) => state.copyWith(actionState: RideAction.pause),
     );
+  }
+
+  Future<void> turnOn() async {
+    state = state.copyWith(actionState: RideAction.turningOn);
+    final succesOrFailure = await _repository.turnOnRide(state.rides[0].id);
+    state = succesOrFailure.fold(
+      (l) => state.copyWith(error: l, actionState: RideAction.pause),
+      (r) => state.copyWith(actionState: RideAction.pure),
+    );
+  }
+
+  Future<void> finish(
+    double? latitude,
+    double? longitude,
+  ) async {
+    final action = state.actionState;
+    state = state.copyWith(actionState: RideAction.stoping);
+    final succesOrFailure = await _repository.finish(
+        state.rides[0].id, latitude, longitude, state.imgPath!);
+    state = succesOrFailure.fold(
+      (l) => state.copyWith(error: l, actionState: action),
+      (r) => state.copyWith(actionState: RideAction.stop),
+    );
+  }
+
+  void cleanError() {
+    state = state.copyWith(error: null);
+  }
+
+  void setImagePath(String path) {
+    state = state.copyWith(imgPath: path);
   }
 }

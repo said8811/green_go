@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_go/features/map/domain/ride_model.dart';
+import 'package:green_go/features/map/presentation/pages/finish_page.dart';
 import 'package:green_go/features/map/presentation/pages/map_page.dart';
 import 'package:green_go/features/profile/presentation/pages/about_page.dart';
 import 'package:green_go/features/profile/presentation/pages/balance_page.dart';
 import 'package:green_go/features/profile/presentation/pages/history_page.dart';
 import 'package:green_go/features/profile/presentation/pages/settings_page.dart';
+import 'package:green_go/features/profile/presentation/pages/single_ride_page.dart';
 import 'package:green_go/features/qr/presentation/qr_camera_page.dart';
 import 'package:green_go/features/splash/splash_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -65,6 +68,21 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
         path: AppRoute.settings.routePathWithSlash,
         name: AppRoute.settings.name,
         pageBuilder: (_, __) => const NoTransitionPage(child: SettingsPage()),
+        redirect: (_, __) => ref.watch(authRedirectLogicProvider),
+      ),
+      GoRoute(
+        path: AppRoute.finishPage.routePathWithSlash,
+        name: AppRoute.finishPage.name,
+        pageBuilder: (_, __) => const NoTransitionPage(child: FinishPage()),
+        redirect: (_, __) => ref.watch(authRedirectLogicProvider),
+      ),
+      GoRoute(
+        path: AppRoute.singleRideHistory.routePathWithSlash,
+        name: AppRoute.singleRideHistory.name,
+        pageBuilder: (_, state) => NoTransitionPage(
+            child: SingleRideView(
+          ride: state.extra as RideModel,
+        )),
         redirect: (_, __) => ref.watch(authRedirectLogicProvider),
       ),
       GoRoute(

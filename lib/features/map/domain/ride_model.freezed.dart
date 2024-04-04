@@ -24,6 +24,7 @@ mixin _$RideModel {
   int get bicycleId => throw _privateConstructorUsedError;
   int get lockerId => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get qrCode => throw _privateConstructorUsedError;
   @JsonKey(fromJson: JsonHelpers.intToDouble)
   double get pricePerMinute => throw _privateConstructorUsedError;
@@ -33,6 +34,15 @@ mixin _$RideModel {
   double get startPrice => throw _privateConstructorUsedError;
   LatLongModel get startPoint => throw _privateConstructorUsedError;
   LatLongModel get endPoint => throw _privateConstructorUsedError;
+  TarifModel? get tariff => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
+  String get startAt => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
+  String get finishedAt => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
+  double get total => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+  List<String> get coordinates => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,15 +60,22 @@ abstract class $RideModelCopyWith<$Res> {
       int bicycleId,
       int lockerId,
       int userId,
-      String qrCode,
+      @JsonKey(defaultValue: "") String qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double startPrice,
       LatLongModel startPoint,
-      LatLongModel endPoint});
+      LatLongModel endPoint,
+      TarifModel? tariff,
+      @JsonKey(defaultValue: "") String startAt,
+      @JsonKey(defaultValue: "") String finishedAt,
+      @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble) double total,
+      @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+      List<String> coordinates});
 
   $LatLongModelCopyWith<$Res> get startPoint;
   $LatLongModelCopyWith<$Res> get endPoint;
+  $TarifModelCopyWith<$Res>? get tariff;
 }
 
 /// @nodoc
@@ -84,6 +101,11 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
     Object? startPrice = null,
     Object? startPoint = null,
     Object? endPoint = null,
+    Object? tariff = freezed,
+    Object? startAt = null,
+    Object? finishedAt = null,
+    Object? total = null,
+    Object? coordinates = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -126,6 +148,26 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
           ? _value.endPoint
           : endPoint // ignore: cast_nullable_to_non_nullable
               as LatLongModel,
+      tariff: freezed == tariff
+          ? _value.tariff
+          : tariff // ignore: cast_nullable_to_non_nullable
+              as TarifModel?,
+      startAt: null == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      finishedAt: null == finishedAt
+          ? _value.finishedAt
+          : finishedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as double,
+      coordinates: null == coordinates
+          ? _value.coordinates
+          : coordinates // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 
@@ -144,6 +186,18 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
       return _then(_value.copyWith(endPoint: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TarifModelCopyWith<$Res>? get tariff {
+    if (_value.tariff == null) {
+      return null;
+    }
+
+    return $TarifModelCopyWith<$Res>(_value.tariff!, (value) {
+      return _then(_value.copyWith(tariff: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -159,17 +213,25 @@ abstract class _$$RideModelImplCopyWith<$Res>
       int bicycleId,
       int lockerId,
       int userId,
-      String qrCode,
+      @JsonKey(defaultValue: "") String qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double startPrice,
       LatLongModel startPoint,
-      LatLongModel endPoint});
+      LatLongModel endPoint,
+      TarifModel? tariff,
+      @JsonKey(defaultValue: "") String startAt,
+      @JsonKey(defaultValue: "") String finishedAt,
+      @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble) double total,
+      @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+      List<String> coordinates});
 
   @override
   $LatLongModelCopyWith<$Res> get startPoint;
   @override
   $LatLongModelCopyWith<$Res> get endPoint;
+  @override
+  $TarifModelCopyWith<$Res>? get tariff;
 }
 
 /// @nodoc
@@ -193,6 +255,11 @@ class __$$RideModelImplCopyWithImpl<$Res>
     Object? startPrice = null,
     Object? startPoint = null,
     Object? endPoint = null,
+    Object? tariff = freezed,
+    Object? startAt = null,
+    Object? finishedAt = null,
+    Object? total = null,
+    Object? coordinates = null,
   }) {
     return _then(_$RideModelImpl(
       id: null == id
@@ -235,6 +302,26 @@ class __$$RideModelImplCopyWithImpl<$Res>
           ? _value.endPoint
           : endPoint // ignore: cast_nullable_to_non_nullable
               as LatLongModel,
+      tariff: freezed == tariff
+          ? _value.tariff
+          : tariff // ignore: cast_nullable_to_non_nullable
+              as TarifModel?,
+      startAt: null == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      finishedAt: null == finishedAt
+          ? _value.finishedAt
+          : finishedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as double,
+      coordinates: null == coordinates
+          ? _value._coordinates
+          : coordinates // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -247,13 +334,21 @@ class _$RideModelImpl implements _RideModel {
       required this.bicycleId,
       required this.lockerId,
       required this.userId,
-      required this.qrCode,
+      @JsonKey(defaultValue: "") required this.qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble) required this.pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble)
       required this.pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) required this.startPrice,
       required this.startPoint,
-      required this.endPoint});
+      required this.endPoint,
+      required this.tariff,
+      @JsonKey(defaultValue: "") required this.startAt,
+      @JsonKey(defaultValue: "") required this.finishedAt,
+      @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
+      required this.total,
+      @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+      required final List<String> coordinates})
+      : _coordinates = coordinates;
 
   factory _$RideModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RideModelImplFromJson(json);
@@ -267,6 +362,7 @@ class _$RideModelImpl implements _RideModel {
   @override
   final int userId;
   @override
+  @JsonKey(defaultValue: "")
   final String qrCode;
   @override
   @JsonKey(fromJson: JsonHelpers.intToDouble)
@@ -281,10 +377,29 @@ class _$RideModelImpl implements _RideModel {
   final LatLongModel startPoint;
   @override
   final LatLongModel endPoint;
+  @override
+  final TarifModel? tariff;
+  @override
+  @JsonKey(defaultValue: "")
+  final String startAt;
+  @override
+  @JsonKey(defaultValue: "")
+  final String finishedAt;
+  @override
+  @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
+  final double total;
+  final List<String> _coordinates;
+  @override
+  @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+  List<String> get coordinates {
+    if (_coordinates is EqualUnmodifiableListView) return _coordinates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_coordinates);
+  }
 
   @override
   String toString() {
-    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint)';
+    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, total: $total, coordinates: $coordinates)';
   }
 
   @override
@@ -308,7 +423,14 @@ class _$RideModelImpl implements _RideModel {
             (identical(other.startPoint, startPoint) ||
                 other.startPoint == startPoint) &&
             (identical(other.endPoint, endPoint) ||
-                other.endPoint == endPoint));
+                other.endPoint == endPoint) &&
+            (identical(other.tariff, tariff) || other.tariff == tariff) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.finishedAt, finishedAt) ||
+                other.finishedAt == finishedAt) &&
+            (identical(other.total, total) || other.total == total) &&
+            const DeepCollectionEquality()
+                .equals(other._coordinates, _coordinates));
   }
 
   @JsonKey(ignore: true)
@@ -324,7 +446,12 @@ class _$RideModelImpl implements _RideModel {
       pausePricePerMinute,
       startPrice,
       startPoint,
-      endPoint);
+      endPoint,
+      tariff,
+      startAt,
+      finishedAt,
+      total,
+      const DeepCollectionEquality().hash(_coordinates));
 
   @JsonKey(ignore: true)
   @override
@@ -346,7 +473,7 @@ abstract class _RideModel implements RideModel {
       required final int bicycleId,
       required final int lockerId,
       required final int userId,
-      required final String qrCode,
+      @JsonKey(defaultValue: "") required final String qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble)
       required final double pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble)
@@ -354,7 +481,14 @@ abstract class _RideModel implements RideModel {
       @JsonKey(fromJson: JsonHelpers.intToDouble)
       required final double startPrice,
       required final LatLongModel startPoint,
-      required final LatLongModel endPoint}) = _$RideModelImpl;
+      required final LatLongModel endPoint,
+      required final TarifModel? tariff,
+      @JsonKey(defaultValue: "") required final String startAt,
+      @JsonKey(defaultValue: "") required final String finishedAt,
+      @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
+      required final double total,
+      @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+      required final List<String> coordinates}) = _$RideModelImpl;
 
   factory _RideModel.fromJson(Map<String, dynamic> json) =
       _$RideModelImpl.fromJson;
@@ -368,6 +502,7 @@ abstract class _RideModel implements RideModel {
   @override
   int get userId;
   @override
+  @JsonKey(defaultValue: "")
   String get qrCode;
   @override
   @JsonKey(fromJson: JsonHelpers.intToDouble)
@@ -382,6 +517,20 @@ abstract class _RideModel implements RideModel {
   LatLongModel get startPoint;
   @override
   LatLongModel get endPoint;
+  @override
+  TarifModel? get tariff;
+  @override
+  @JsonKey(defaultValue: "")
+  String get startAt;
+  @override
+  @JsonKey(defaultValue: "")
+  String get finishedAt;
+  @override
+  @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
+  double get total;
+  @override
+  @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
+  List<String> get coordinates;
   @override
   @JsonKey(ignore: true)
   _$$RideModelImplCopyWith<_$RideModelImpl> get copyWith =>

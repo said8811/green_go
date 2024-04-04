@@ -24,7 +24,7 @@ class RideRepository {
       if (e.isConnectionError) {
         return left(const Failure.noConnection());
       }
-      return left(Failure.server(e.message));
+      return left(Failure.server(e.response?.data['message']));
     }
   }
 
@@ -40,7 +40,46 @@ class RideRepository {
       if (e.isConnectionError) {
         return left(const Failure.noConnection());
       }
-      return left(Failure.server(e.message));
+      return left(Failure.server(e.response?.data['message']));
+    }
+  }
+
+  Future<Either<Failure, bool>> turnOnRide(int rideId) async {
+    try {
+      final Response response = await _dio.patch("/ride/turn-on/$rideId");
+      if (response.isSuccessful) {
+        return right(true);
+      } else {
+        return left(Failure.server(response.data?['message']));
+      }
+    } on DioException catch (e) {
+      if (e.isConnectionError) {
+        return left(const Failure.noConnection());
+      }
+      return left(Failure.server(e.response?.data['message']));
+    }
+  }
+
+  Future<Either<Failure, bool>> finish(
+      int rideId, double? latitude, double? longitude, String imgPath) async {
+    final formData = FormData.fromMap({
+      'rideId': rideId,
+      'latitude': latitude,
+      'longitude': longitude,
+      'image_file': await MultipartFile.fromFile(imgPath)
+    });
+    try {
+      final Response response = await _dio.post("/finish/", data: formData);
+      if (response.isSuccessful) {
+        return right(true);
+      } else {
+        return left(Failure.server(response.data?['message']));
+      }
+    } on DioException catch (e) {
+      if (e.isConnectionError) {
+        return left(const Failure.noConnection());
+      }
+      return left(Failure.server(e.response?.data['message']));
     }
   }
 }

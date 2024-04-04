@@ -11,7 +11,7 @@ enum TransportActionEnum {
   pure,
   starting,
   start,
-  pouse,
+  ready,
   turnOn,
 }
 
@@ -21,6 +21,7 @@ class TransportState with _$TransportState {
     required SingleTransportModel? transport,
     required bool isLoading,
     Failure? error,
+    String? qrCode,
     required TransportActionEnum actionState,
   }) = _TransportState;
   factory TransportState.initial() => TransportState(
@@ -33,12 +34,15 @@ class TransportNotifier extends StateNotifier<TransportState> {
 
   Future<void> getTransport(
       double latitude, double longitude, String qrCode) async {
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true, qrCode: null);
     final dataOrFailure =
         await _repository.getTransport(latitude, longitude, qrCode);
     state = dataOrFailure.fold(
       (l) => state.copyWith(error: l, isLoading: false),
-      (r) => state.copyWith(transport: r, isLoading: false),
+      (r) => state.copyWith(
+          transport: r,
+          isLoading: false,
+          actionState: TransportActionEnum.ready),
     );
   }
 
@@ -56,5 +60,13 @@ class TransportNotifier extends StateNotifier<TransportState> {
               actionState: TransportActionEnum.start,
             ));
     return dataOrFailure.fold((l) => false, (r) => true);
+  }
+
+  void setQr(String? qrcode) {
+    state = state.copyWith(qrCode: qrcode);
+  }
+
+  void setState(TransportActionEnum action) {
+    state = state.copyWith(actionState: action);
   }
 }

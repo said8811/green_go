@@ -12,13 +12,22 @@ _$RideModelImpl _$$RideModelImplFromJson(Map<String, dynamic> json) =>
       bicycleId: json['bicycleId'] as int,
       lockerId: json['lockerId'] as int,
       userId: json['userId'] as int,
-      qrCode: json['qrCode'] as String,
+      qrCode: json['qrCode'] as String? ?? '',
       pricePerMinute: JsonHelpers.intToDouble(json['pricePerMinute']),
       pausePricePerMinute: JsonHelpers.intToDouble(json['pausePricePerMinute']),
       startPrice: JsonHelpers.intToDouble(json['startPrice']),
       startPoint:
           LatLongModel.fromJson(json['startPoint'] as Map<String, dynamic>),
       endPoint: LatLongModel.fromJson(json['endPoint'] as Map<String, dynamic>),
+      tariff: json['tariff'] == null
+          ? null
+          : TarifModel.fromJson(json['tariff'] as Map<String, dynamic>),
+      startAt: json['startAt'] as String? ?? '',
+      finishedAt: json['finishedAt'] as String? ?? '',
+      total: json['total'] == null ? 0 : JsonHelpers.intToDouble(json['total']),
+      coordinates: json['coordinates'] == null
+          ? []
+          : JsonHelpers.queueToString(json['coordinates'] as List?),
     );
 
 Map<String, dynamic> _$$RideModelImplToJson(_$RideModelImpl instance) =>
@@ -33,4 +42,9 @@ Map<String, dynamic> _$$RideModelImplToJson(_$RideModelImpl instance) =>
       'startPrice': instance.startPrice,
       'startPoint': instance.startPoint,
       'endPoint': instance.endPoint,
+      'tariff': instance.tariff,
+      'startAt': instance.startAt,
+      'finishedAt': instance.finishedAt,
+      'total': instance.total,
+      'coordinates': instance.coordinates,
     };

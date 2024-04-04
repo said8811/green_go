@@ -1,6 +1,7 @@
 import 'package:green_go/features/core/shared/providers.dart';
 import 'package:green_go/features/map/application/map_notifier.dart';
 import 'package:green_go/features/map/application/rides_notifier.dart';
+import 'package:green_go/features/map/application/timer_notifier.dart';
 import 'package:green_go/features/map/application/transport_notifier.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:green_go/features/map/infrastructure/transport_repository.dart';
@@ -27,4 +28,8 @@ final rideProvider = Provider<RideRepository>((ref) {
 final ridesNotifierProvider =
     StateNotifierProvider<RidesNotifier, RidesState>((ref) {
   return RidesNotifier(ref.watch(rideProvider));
+});
+
+final timerNotifierProvider = StateNotifierProvider<TimerNotifier, int>((ref) {
+  return TimerNotifier();
 });

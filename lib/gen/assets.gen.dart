@@ -55,6 +55,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/change-photo-icon.svg
   String get changePhotoIcon => 'assets/icons/change-photo-icon.svg';
 
+  /// File path: assets/icons/check-green.svg
+  String get checkGreen => 'assets/icons/check-green.svg';
+
   /// File path: assets/icons/close-circle-bold.svg
   String get closeCircleBold => 'assets/icons/close-circle-bold.svg';
 
@@ -293,6 +296,7 @@ class $AssetsIconsGen {
         call,
         cancel,
         changePhotoIcon,
+        checkGreen,
         closeCircleBold,
         closeCircle,
         continueIcon,

@@ -38,7 +38,7 @@ class _MapPageState extends ConsumerState<MapPage> {
       for (var polygon in data.value!.availableCoordinates) {
         ref.read(mapNotifierProvider.notifier).addObjects(PolygonMapObject(
               mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
-              fillColor: Colors.white.withOpacity(0.7),
+              fillColor: Colors.white.withOpacity(0.6),
               strokeColor: Colors.red,
               isGeodesic: true,
               isVisible: true,
@@ -99,15 +99,13 @@ class _MapPageState extends ConsumerState<MapPage> {
                             ref.watch(locationStateProvider)!.latitude,
                             ref.watch(locationStateProvider)!.longitude,
                             transport.qrCode)
-                        .then(
-                          (value) => showModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.white,
-                            builder: (_) {
-                              return const TransportWidget();
-                            },
-                          ),
-                        );
+                        .then((value) => showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.white,
+                              builder: (_) {
+                                return const TransportWidget();
+                              },
+                            ));
                   },
                 ),
               );
@@ -120,7 +118,9 @@ class _MapPageState extends ConsumerState<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(transportStateProvider, (previous, next) {
+    final latlong = ref.watch(locationStateProvider);
+    final qr = ref.watch(transportStateProvider).qrCode;
+    ref.listen(transportStateProvider, (previous, next) async {
       if (next.error != null) {
         showErrorDialog(context, failure: next.error);
       }
@@ -130,6 +130,7 @@ class _MapPageState extends ConsumerState<MapPage> {
         showModalBottomSheet(
           context: context,
           isDismissible: false,
+          enableDrag: false,
           backgroundColor: Colors.white,
           builder: (_) {
             return const TransportActionsView();
@@ -198,7 +199,28 @@ class _MapPageState extends ConsumerState<MapPage> {
             child: PrimaryButton(
               title: context.l10n.scanIt,
               onPress: () {
-                context.go(AppRoute.qr.routePathWithSlash);
+                context
+                    .push(AppRoute.qr.routePathWithSlash)
+                    .then((value) async {
+                  if (qr != null) {
+                    await ref
+                        .read(transportStateProvider.notifier)
+                        .getTransport(
+                          latlong?.latitude ?? 0,
+                          latlong?.longitude ?? 0,
+                          qr,
+                        )
+                        .then((value) {
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.white,
+                        builder: (_) {
+                          return const TransportWidget();
+                        },
+                      );
+                    });
+                  }
+                });
               },
               borderColor: Colors.transparent,
               leading: CommonSvgPicture(Assets.icons.scanner),

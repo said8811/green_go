@@ -70,3 +70,4 @@ class Injection {
     );
   }
 }
+//https://static-maps.yandex.ru/1.x/?pl=69.2401,41.2995,69.2502,41.3006&l=map&pt=69.2401,41.2995,pm2rdm

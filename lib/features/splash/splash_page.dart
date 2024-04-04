@@ -39,7 +39,7 @@ class SplashPage extends HookConsumerWidget {
       if (previous?.value == null && next.value != null) {
         ref.read(mapNotifierProvider.notifier).addObjects(PolygonMapObject(
               mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
-              fillColor: Colors.red.withOpacity(0.2),
+              fillColor: Colors.red.withOpacity(0.18),
               strokeColor: Colors.red,
               isGeodesic: true,
               isVisible: true,

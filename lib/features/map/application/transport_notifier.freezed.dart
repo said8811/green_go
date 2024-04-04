@@ -19,6 +19,7 @@ mixin _$TransportState {
   SingleTransportModel? get transport => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
+  String? get qrCode => throw _privateConstructorUsedError;
   TransportActionEnum get actionState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +37,7 @@ abstract class $TransportStateCopyWith<$Res> {
       {SingleTransportModel? transport,
       bool isLoading,
       Failure? error,
+      String? qrCode,
       TransportActionEnum actionState});
 
   $SingleTransportModelCopyWith<$Res>? get transport;
@@ -58,6 +60,7 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
     Object? transport = freezed,
     Object? isLoading = null,
     Object? error = freezed,
+    Object? qrCode = freezed,
     Object? actionState = null,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +76,10 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      qrCode: freezed == qrCode
+          ? _value.qrCode
+          : qrCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$TransportStateImplCopyWith<$Res>
       {SingleTransportModel? transport,
       bool isLoading,
       Failure? error,
+      String? qrCode,
       TransportActionEnum actionState});
 
   @override
@@ -139,6 +147,7 @@ class __$$TransportStateImplCopyWithImpl<$Res>
     Object? transport = freezed,
     Object? isLoading = null,
     Object? error = freezed,
+    Object? qrCode = freezed,
     Object? actionState = null,
   }) {
     return _then(_$TransportStateImpl(
@@ -154,6 +163,10 @@ class __$$TransportStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      qrCode: freezed == qrCode
+          ? _value.qrCode
+          : qrCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -169,6 +182,7 @@ class _$TransportStateImpl implements _TransportState {
       {required this.transport,
       required this.isLoading,
       this.error,
+      this.qrCode,
       required this.actionState});
 
   @override
@@ -178,11 +192,13 @@ class _$TransportStateImpl implements _TransportState {
   @override
   final Failure? error;
   @override
+  final String? qrCode;
+  @override
   final TransportActionEnum actionState;
 
   @override
   String toString() {
-    return 'TransportState(transport: $transport, isLoading: $isLoading, error: $error, actionState: $actionState)';
+    return 'TransportState(transport: $transport, isLoading: $isLoading, error: $error, qrCode: $qrCode, actionState: $actionState)';
   }
 
   @override
@@ -195,13 +211,14 @@ class _$TransportStateImpl implements _TransportState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.qrCode, qrCode) || other.qrCode == qrCode) &&
             (identical(other.actionState, actionState) ||
                 other.actionState == actionState));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, transport, isLoading, error, actionState);
+  int get hashCode => Object.hash(
+      runtimeType, transport, isLoading, error, qrCode, actionState);
 
   @JsonKey(ignore: true)
   @override
@@ -216,6 +233,7 @@ abstract class _TransportState implements TransportState {
       {required final SingleTransportModel? transport,
       required final bool isLoading,
       final Failure? error,
+      final String? qrCode,
       required final TransportActionEnum actionState}) = _$TransportStateImpl;
 
   @override
@@ -224,6 +242,8 @@ abstract class _TransportState implements TransportState {
   bool get isLoading;
   @override
   Failure? get error;
+  @override
+  String? get qrCode;
   @override
   TransportActionEnum get actionState;
   @override

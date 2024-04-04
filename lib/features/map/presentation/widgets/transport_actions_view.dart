@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
+import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/rides_notifier.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
+import 'package:green_go/services/router/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -18,6 +22,19 @@ class TransportActionsView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
     final state = ref.watch(ridesNotifierProvider);
+    final timer = ref.watch(timerNotifierProvider);
+    final pricePerMin = useState(0);
+    ref.listen(timerNotifierProvider, (previous, next) {
+      if (next % 60 == 0) {
+        pricePerMin.value = next ~/ 60;
+      }
+    });
+    ref.listen(ridesNotifierProvider, (previous, next) {
+      if (previous?.error == null && next.error != null) {
+        showErrorDialog(context, failure: next.error).then(
+            (value) => ref.read(ridesNotifierProvider.notifier).cleanError());
+      }
+    });
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
       child: state.rides.isNotEmpty
@@ -29,14 +46,14 @@ class TransportActionsView extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      context.l10n.productPrice(kPriceFormatter
-                          .format(state.rides[0].pricePerMinute)),
+                      context.l10n.productPrice(kPriceFormatter.format(
+                          state.rides[0].pricePerMinute * pricePerMin.value)),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      "00:00",
+                      getTime(timer),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
                       ),
@@ -95,13 +112,16 @@ class TransportActionsView extends HookConsumerWidget {
                 const Gap(12),
                 Row(
                   children: [
-                    if (state.actionState == RideAction.pause) ...[
+                    if (state.actionState == RideAction.pause ||
+                        state.actionState == RideAction.turningOn) ...[
                       Expanded(
                         child: PrimaryButton(
                           title: "Yoqish",
                           isLoading: state.actionState == RideAction.turningOn,
                           leading: CommonSvgPicture(Assets.icons.continueIcon),
-                          onPress: () {},
+                          onPress: () {
+                            ref.read(ridesNotifierProvider.notifier).turnOn();
+                          },
                           childStyle: textTheme.labelSmall
                               ?.copyWith(fontSize: 16, color: Colors.white),
                         ),
@@ -117,7 +137,7 @@ class TransportActionsView extends HookConsumerWidget {
                           onPress: () {
                             ref.read(ridesNotifierProvider.notifier).pause();
                           },
-                          color: context.colorScheme.grey.withOpacity(0.3),
+                          color: const Color(0xFFF6F6F6),
                           childStyle: textTheme.labelSmall?.copyWith(
                             fontSize: 16,
                           ),
@@ -129,7 +149,9 @@ class TransportActionsView extends HookConsumerWidget {
                     Expanded(
                       child: PrimaryButton(
                         title: "Yakunlash",
-                        onPress: () {},
+                        onPress: () {
+                          context.push(AppRoute.finishPage.routePathWithSlash);
+                        },
                         isLoading: state.actionState == RideAction.stoping,
                         color: context.colorScheme.textColor.withOpacity(0.7),
                         childStyle: textTheme.labelSmall?.copyWith(
@@ -153,5 +175,9 @@ class TransportActionsView extends HookConsumerWidget {
                     )
                   : const SizedBox(),
     );
+  }
+
+  String getTime(int time) {
+    return "${time ~/ 60 < 10 ? "0${time ~/ 60}" : time ~/ 60}:${time % 60 < 10 ? "0${time % 60}" : time % 60}";
   }
 }

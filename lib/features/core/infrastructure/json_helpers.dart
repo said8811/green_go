@@ -14,6 +14,15 @@ class JsonHelpers {
     }
   }
 
+  static List<String> queueToString(List? json) {
+    if (json != null) {
+      return json
+          .map((e) => e.toString().replaceAll("(", "").replaceAll(")", ""))
+          .toList();
+    }
+    return [];
+  }
+
   static int stringToIntAmount(Object? json) {
     if (json != null) {
       return double.parse(json.toString()).toInt();

@@ -107,6 +107,7 @@ dependencies:
   flutter_xlider: ^3.5.0
   device_info_plus: ^9.1.2
   mobile_scanner: ^4.0.1
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:

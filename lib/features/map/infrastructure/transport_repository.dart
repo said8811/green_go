@@ -26,7 +26,7 @@ class TransportRepository {
       if (e.isConnectionError) {
         return left(const Failure.noConnection());
       }
-      return left(Failure.server(e.message));
+      return left(Failure.server(e.response?.data['message']));
     }
   }
 

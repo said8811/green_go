@@ -21,14 +21,18 @@ TarifModel _$TarifModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TarifModel {
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get nameRu => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get nameUz => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get nameEn => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get descriptionRu => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get descriptionUz => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get descriptionEn => throw _privateConstructorUsedError;
-  int get tariffTimeId => throw _privateConstructorUsedError;
-  int get freeTime => throw _privateConstructorUsedError;
   int get startMinute => throw _privateConstructorUsedError;
   int get reservedAmount => throw _privateConstructorUsedError;
   int get activateCount => throw _privateConstructorUsedError;
@@ -50,14 +54,12 @@ abstract class $TarifModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String nameRu,
-      String nameUz,
-      String nameEn,
-      String descriptionRu,
-      String descriptionUz,
-      String descriptionEn,
-      int tariffTimeId,
-      int freeTime,
+      @JsonKey(defaultValue: "") String nameRu,
+      @JsonKey(defaultValue: "") String nameUz,
+      @JsonKey(defaultValue: "") String nameEn,
+      @JsonKey(defaultValue: "") String descriptionRu,
+      @JsonKey(defaultValue: "") String descriptionUz,
+      @JsonKey(defaultValue: "") String descriptionEn,
       int startMinute,
       int reservedAmount,
       int activateCount,
@@ -86,8 +88,6 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
     Object? descriptionRu = null,
     Object? descriptionUz = null,
     Object? descriptionEn = null,
-    Object? tariffTimeId = null,
-    Object? freeTime = null,
     Object? startMinute = null,
     Object? reservedAmount = null,
     Object? activateCount = null,
@@ -124,14 +124,6 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
           ? _value.descriptionEn
           : descriptionEn // ignore: cast_nullable_to_non_nullable
               as String,
-      tariffTimeId: null == tariffTimeId
-          ? _value.tariffTimeId
-          : tariffTimeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      freeTime: null == freeTime
-          ? _value.freeTime
-          : freeTime // ignore: cast_nullable_to_non_nullable
-              as int,
       startMinute: null == startMinute
           ? _value.startMinute
           : startMinute // ignore: cast_nullable_to_non_nullable
@@ -170,14 +162,12 @@ abstract class _$$TarifModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      String nameRu,
-      String nameUz,
-      String nameEn,
-      String descriptionRu,
-      String descriptionUz,
-      String descriptionEn,
-      int tariffTimeId,
-      int freeTime,
+      @JsonKey(defaultValue: "") String nameRu,
+      @JsonKey(defaultValue: "") String nameUz,
+      @JsonKey(defaultValue: "") String nameEn,
+      @JsonKey(defaultValue: "") String descriptionRu,
+      @JsonKey(defaultValue: "") String descriptionUz,
+      @JsonKey(defaultValue: "") String descriptionEn,
       int startMinute,
       int reservedAmount,
       int activateCount,
@@ -204,8 +194,6 @@ class __$$TarifModelImplCopyWithImpl<$Res>
     Object? descriptionRu = null,
     Object? descriptionUz = null,
     Object? descriptionEn = null,
-    Object? tariffTimeId = null,
-    Object? freeTime = null,
     Object? startMinute = null,
     Object? reservedAmount = null,
     Object? activateCount = null,
@@ -242,14 +230,6 @@ class __$$TarifModelImplCopyWithImpl<$Res>
           ? _value.descriptionEn
           : descriptionEn // ignore: cast_nullable_to_non_nullable
               as String,
-      tariffTimeId: null == tariffTimeId
-          ? _value.tariffTimeId
-          : tariffTimeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      freeTime: null == freeTime
-          ? _value.freeTime
-          : freeTime // ignore: cast_nullable_to_non_nullable
-              as int,
       startMinute: null == startMinute
           ? _value.startMinute
           : startMinute // ignore: cast_nullable_to_non_nullable
@@ -283,14 +263,12 @@ class __$$TarifModelImplCopyWithImpl<$Res>
 class _$TarifModelImpl implements _TarifModel {
   _$TarifModelImpl(
       {required this.id,
-      required this.nameRu,
-      required this.nameUz,
-      required this.nameEn,
-      required this.descriptionRu,
-      required this.descriptionUz,
-      required this.descriptionEn,
-      required this.tariffTimeId,
-      required this.freeTime,
+      @JsonKey(defaultValue: "") required this.nameRu,
+      @JsonKey(defaultValue: "") required this.nameUz,
+      @JsonKey(defaultValue: "") required this.nameEn,
+      @JsonKey(defaultValue: "") required this.descriptionRu,
+      @JsonKey(defaultValue: "") required this.descriptionUz,
+      @JsonKey(defaultValue: "") required this.descriptionEn,
       required this.startMinute,
       required this.reservedAmount,
       required this.activateCount,
@@ -304,21 +282,23 @@ class _$TarifModelImpl implements _TarifModel {
   @override
   final int id;
   @override
+  @JsonKey(defaultValue: "")
   final String nameRu;
   @override
+  @JsonKey(defaultValue: "")
   final String nameUz;
   @override
+  @JsonKey(defaultValue: "")
   final String nameEn;
   @override
+  @JsonKey(defaultValue: "")
   final String descriptionRu;
   @override
+  @JsonKey(defaultValue: "")
   final String descriptionUz;
   @override
+  @JsonKey(defaultValue: "")
   final String descriptionEn;
-  @override
-  final int tariffTimeId;
-  @override
-  final int freeTime;
   @override
   final int startMinute;
   @override
@@ -334,7 +314,7 @@ class _$TarifModelImpl implements _TarifModel {
 
   @override
   String toString() {
-    return 'TarifModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, descriptionRu: $descriptionRu, descriptionUz: $descriptionUz, descriptionEn: $descriptionEn, tariffTimeId: $tariffTimeId, freeTime: $freeTime, startMinute: $startMinute, reservedAmount: $reservedAmount, activateCount: $activateCount, price: $price, startPrice: $startPrice, pricePerMinute: $pricePerMinute)';
+    return 'TarifModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, descriptionRu: $descriptionRu, descriptionUz: $descriptionUz, descriptionEn: $descriptionEn, startMinute: $startMinute, reservedAmount: $reservedAmount, activateCount: $activateCount, price: $price, startPrice: $startPrice, pricePerMinute: $pricePerMinute)';
   }
 
   @override
@@ -352,10 +332,6 @@ class _$TarifModelImpl implements _TarifModel {
                 other.descriptionUz == descriptionUz) &&
             (identical(other.descriptionEn, descriptionEn) ||
                 other.descriptionEn == descriptionEn) &&
-            (identical(other.tariffTimeId, tariffTimeId) ||
-                other.tariffTimeId == tariffTimeId) &&
-            (identical(other.freeTime, freeTime) ||
-                other.freeTime == freeTime) &&
             (identical(other.startMinute, startMinute) ||
                 other.startMinute == startMinute) &&
             (identical(other.reservedAmount, reservedAmount) ||
@@ -380,8 +356,6 @@ class _$TarifModelImpl implements _TarifModel {
       descriptionRu,
       descriptionUz,
       descriptionEn,
-      tariffTimeId,
-      freeTime,
       startMinute,
       reservedAmount,
       activateCount,
@@ -406,14 +380,12 @@ class _$TarifModelImpl implements _TarifModel {
 abstract class _TarifModel implements TarifModel {
   factory _TarifModel(
       {required final int id,
-      required final String nameRu,
-      required final String nameUz,
-      required final String nameEn,
-      required final String descriptionRu,
-      required final String descriptionUz,
-      required final String descriptionEn,
-      required final int tariffTimeId,
-      required final int freeTime,
+      @JsonKey(defaultValue: "") required final String nameRu,
+      @JsonKey(defaultValue: "") required final String nameUz,
+      @JsonKey(defaultValue: "") required final String nameEn,
+      @JsonKey(defaultValue: "") required final String descriptionRu,
+      @JsonKey(defaultValue: "") required final String descriptionUz,
+      @JsonKey(defaultValue: "") required final String descriptionEn,
       required final int startMinute,
       required final int reservedAmount,
       required final int activateCount,
@@ -427,21 +399,23 @@ abstract class _TarifModel implements TarifModel {
   @override
   int get id;
   @override
+  @JsonKey(defaultValue: "")
   String get nameRu;
   @override
+  @JsonKey(defaultValue: "")
   String get nameUz;
   @override
+  @JsonKey(defaultValue: "")
   String get nameEn;
   @override
+  @JsonKey(defaultValue: "")
   String get descriptionRu;
   @override
+  @JsonKey(defaultValue: "")
   String get descriptionUz;
   @override
+  @JsonKey(defaultValue: "")
   String get descriptionEn;
-  @override
-  int get tariffTimeId;
-  @override
-  int get freeTime;
   @override
   int get startMinute;
   @override

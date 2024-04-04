@@ -67,20 +67,19 @@ class GetCodePage extends HookConsumerWidget {
               onFieldSubmitted: (phone) =>
                   getCode(context, phoneController.text, selected.value, ref),
               decoration: InputDecoration(
-                label: Row(
-                  children: [
-                    Text('+${selected.value.phoneCode} ',
-                        style: textTheme.headlineMedium),
-                    Text('${selected.value.phoneMaskWithoutCountryCode} ',
-                        style: textTheme.headlineMedium!
-                            .copyWith(color: context.colorScheme.grey)),
-                  ],
-                ),
+                // label: Row(
+                //   children: [
+                //     Text('+${selected.value.phoneCode} ',
+                //         style: textTheme.headlineMedium),
+
+                //   ],
+                // ),
                 prefix: Text(
                   "+998 ",
                   style: textTheme.headlineMedium,
                 ),
                 fillColor: Colors.transparent,
+                hintText: '${selected.value.phoneMaskWithoutCountryCode} ',
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide:
