@@ -8,6 +8,7 @@ class CommonExpandablePanel extends StatelessWidget {
   final String title;
   final String? value;
   final Widget? child;
+
   final IconData? maximizeIcon;
   final IconData? minimizeIcon;
   final bool useDivider;
@@ -28,19 +29,19 @@ class CommonExpandablePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpandablePanel(
       theme: ExpandableThemeData(
-        hasIcon: true,
-        collapseIcon: minimizeIcon,
-        expandIcon: maximizeIcon,
-        tapBodyToCollapse: true,
-        iconPadding: const EdgeInsets.only(right: 16),
-        tapBodyToExpand: true,
-        tapHeaderToExpand: true,
-        useInkWell: true,
-        headerAlignment: ExpandablePanelHeaderAlignment.center,
-        iconPlacement: ExpandablePanelIconPlacement.right,
-        alignment: Alignment.center,
-        iconColor: context.colorScheme.textColor,
-      ),
+          hasIcon: true,
+          collapseIcon: minimizeIcon,
+          expandIcon: maximizeIcon,
+          tapBodyToCollapse: true,
+          iconPadding: const EdgeInsets.only(right: 16),
+          tapBodyToExpand: true,
+          tapHeaderToExpand: true,
+          useInkWell: true,
+          headerAlignment: ExpandablePanelHeaderAlignment.center,
+          iconPlacement: ExpandablePanelIconPlacement.right,
+          alignment: Alignment.center,
+          iconColor: context.colorScheme.textColor,
+          inkWellBorderRadius: BorderRadius.circular(10)),
       header: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListTile(
@@ -49,10 +50,12 @@ class CommonExpandablePanel extends StatelessWidget {
             title,
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w600),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),
-      collapsed: const Divider(indent: 20, endIndent: 20, height: 10),
+      collapsed: const SizedBox(),
       expanded: child ??
           Container(
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 16),

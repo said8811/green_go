@@ -42,7 +42,7 @@ class Injection {
     final sharedPrefs = await SharedPreferences.getInstance();
     const secureStorage = FlutterSecureStorage();
 
-    const timeOutTime = Duration(seconds: 10);
+    const timeOutTime = Duration(minutes: 3);
     final dioBaseOptions = BaseOptions(
       baseUrl: appConfig.baseApiUrl,
       headers: {

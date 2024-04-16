@@ -61,7 +61,10 @@ class RideRepository {
   }
 
   Future<Either<Failure, bool>> finish(
-      int rideId, double? latitude, double? longitude, String imgPath) async {
+      {required int rideId,
+      required double? latitude,
+      required double? longitude,
+      required String imgPath}) async {
     final formData = FormData.fromMap({
       'rideId': rideId,
       'latitude': latitude,

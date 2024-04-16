@@ -6,10 +6,9 @@ import 'package:green_go/features/map/application/transport_notifier.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:green_go/features/map/infrastructure/transport_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 final mapNotifierProvider =
-    StateNotifierProvider<MapNotifierNotifier, List<MapObject>>((ref) {
+    StateNotifierProvider<MapNotifierNotifier, MapNotifierState>((ref) {
   return MapNotifierNotifier();
 });
 

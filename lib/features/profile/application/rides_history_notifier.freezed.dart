@@ -20,6 +20,8 @@ mixin _$RidesHistoryState {
   int get pageSize => throw _privateConstructorUsedError;
   List<RideModel> get rides => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  DateTime? get from => throw _privateConstructorUsedError;
+  DateTime? get to => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,6 +40,8 @@ abstract class $RidesHistoryStateCopyWith<$Res> {
       int pageSize,
       List<RideModel> rides,
       bool isLoading,
+      DateTime? from,
+      DateTime? to,
       Failure? error});
 
   $FailureCopyWith<$Res>? get error;
@@ -60,6 +64,8 @@ class _$RidesHistoryStateCopyWithImpl<$Res, $Val extends RidesHistoryState>
     Object? pageSize = null,
     Object? rides = null,
     Object? isLoading = null,
+    Object? from = freezed,
+    Object? to = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,6 +85,14 @@ class _$RidesHistoryStateCopyWithImpl<$Res, $Val extends RidesHistoryState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      from: freezed == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      to: freezed == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -112,6 +126,8 @@ abstract class _$$RidesHistoryStateImplCopyWith<$Res>
       int pageSize,
       List<RideModel> rides,
       bool isLoading,
+      DateTime? from,
+      DateTime? to,
       Failure? error});
 
   @override
@@ -133,6 +149,8 @@ class __$$RidesHistoryStateImplCopyWithImpl<$Res>
     Object? pageSize = null,
     Object? rides = null,
     Object? isLoading = null,
+    Object? from = freezed,
+    Object? to = freezed,
     Object? error = freezed,
   }) {
     return _then(_$RidesHistoryStateImpl(
@@ -152,6 +170,14 @@ class __$$RidesHistoryStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      from: freezed == from
+          ? _value.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      to: freezed == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -168,6 +194,8 @@ class _$RidesHistoryStateImpl implements _RidesHistoryState {
       required this.pageSize,
       required final List<RideModel> rides,
       required this.isLoading,
+      this.from,
+      this.to,
       this.error})
       : _rides = rides;
 
@@ -186,11 +214,15 @@ class _$RidesHistoryStateImpl implements _RidesHistoryState {
   @override
   final bool isLoading;
   @override
+  final DateTime? from;
+  @override
+  final DateTime? to;
+  @override
   final Failure? error;
 
   @override
   String toString() {
-    return 'RidesHistoryState(page: $page, pageSize: $pageSize, rides: $rides, isLoading: $isLoading, error: $error)';
+    return 'RidesHistoryState(page: $page, pageSize: $pageSize, rides: $rides, isLoading: $isLoading, from: $from, to: $to, error: $error)';
   }
 
   @override
@@ -204,12 +236,14 @@ class _$RidesHistoryStateImpl implements _RidesHistoryState {
             const DeepCollectionEquality().equals(other._rides, _rides) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, page, pageSize,
-      const DeepCollectionEquality().hash(_rides), isLoading, error);
+      const DeepCollectionEquality().hash(_rides), isLoading, from, to, error);
 
   @JsonKey(ignore: true)
   @override
@@ -225,6 +259,8 @@ abstract class _RidesHistoryState implements RidesHistoryState {
       required final int pageSize,
       required final List<RideModel> rides,
       required final bool isLoading,
+      final DateTime? from,
+      final DateTime? to,
       final Failure? error}) = _$RidesHistoryStateImpl;
 
   @override
@@ -235,6 +271,10 @@ abstract class _RidesHistoryState implements RidesHistoryState {
   List<RideModel> get rides;
   @override
   bool get isLoading;
+  @override
+  DateTime? get from;
+  @override
+  DateTime? get to;
   @override
   Failure? get error;
   @override

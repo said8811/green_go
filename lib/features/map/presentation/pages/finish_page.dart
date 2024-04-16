@@ -54,9 +54,8 @@ class _FinishPageState extends ConsumerState<FinishPage> {
             isLoading: state.actionState == RideAction.stoping,
             onPress: () {
               if (state.imgPath != null) {
-                ref
-                    .read(ridesNotifierProvider.notifier)
-                    .finish(latlong?.latitude, latlong?.longitude);
+                ref.read(ridesNotifierProvider.notifier).finish(
+                    latitude: latlong?.latitude, longitude: latlong?.longitude);
               }
             }),
       ),

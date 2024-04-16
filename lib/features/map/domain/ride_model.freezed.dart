@@ -39,6 +39,8 @@ mixin _$RideModel {
   String get startAt => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
   String get finishedAt => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
+  int get pouseTime => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
   double get total => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
@@ -69,6 +71,7 @@ abstract class $RideModelCopyWith<$Res> {
       TarifModel? tariff,
       @JsonKey(defaultValue: "") String startAt,
       @JsonKey(defaultValue: "") String finishedAt,
+      @JsonKey(defaultValue: 0) int pouseTime,
       @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble) double total,
       @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
       List<String> coordinates});
@@ -104,6 +107,7 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
     Object? tariff = freezed,
     Object? startAt = null,
     Object? finishedAt = null,
+    Object? pouseTime = null,
     Object? total = null,
     Object? coordinates = null,
   }) {
@@ -160,6 +164,10 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
           ? _value.finishedAt
           : finishedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      pouseTime: null == pouseTime
+          ? _value.pouseTime
+          : pouseTime // ignore: cast_nullable_to_non_nullable
+              as int,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -222,6 +230,7 @@ abstract class _$$RideModelImplCopyWith<$Res>
       TarifModel? tariff,
       @JsonKey(defaultValue: "") String startAt,
       @JsonKey(defaultValue: "") String finishedAt,
+      @JsonKey(defaultValue: 0) int pouseTime,
       @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble) double total,
       @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
       List<String> coordinates});
@@ -258,6 +267,7 @@ class __$$RideModelImplCopyWithImpl<$Res>
     Object? tariff = freezed,
     Object? startAt = null,
     Object? finishedAt = null,
+    Object? pouseTime = null,
     Object? total = null,
     Object? coordinates = null,
   }) {
@@ -314,6 +324,10 @@ class __$$RideModelImplCopyWithImpl<$Res>
           ? _value.finishedAt
           : finishedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      pouseTime: null == pouseTime
+          ? _value.pouseTime
+          : pouseTime // ignore: cast_nullable_to_non_nullable
+              as int,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -344,6 +358,7 @@ class _$RideModelImpl implements _RideModel {
       required this.tariff,
       @JsonKey(defaultValue: "") required this.startAt,
       @JsonKey(defaultValue: "") required this.finishedAt,
+      @JsonKey(defaultValue: 0) required this.pouseTime,
       @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
       required this.total,
       @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
@@ -386,6 +401,9 @@ class _$RideModelImpl implements _RideModel {
   @JsonKey(defaultValue: "")
   final String finishedAt;
   @override
+  @JsonKey(defaultValue: 0)
+  final int pouseTime;
+  @override
   @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
   final double total;
   final List<String> _coordinates;
@@ -399,7 +417,7 @@ class _$RideModelImpl implements _RideModel {
 
   @override
   String toString() {
-    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, total: $total, coordinates: $coordinates)';
+    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, pouseTime: $pouseTime, total: $total, coordinates: $coordinates)';
   }
 
   @override
@@ -428,6 +446,8 @@ class _$RideModelImpl implements _RideModel {
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
             (identical(other.finishedAt, finishedAt) ||
                 other.finishedAt == finishedAt) &&
+            (identical(other.pouseTime, pouseTime) ||
+                other.pouseTime == pouseTime) &&
             (identical(other.total, total) || other.total == total) &&
             const DeepCollectionEquality()
                 .equals(other._coordinates, _coordinates));
@@ -450,6 +470,7 @@ class _$RideModelImpl implements _RideModel {
       tariff,
       startAt,
       finishedAt,
+      pouseTime,
       total,
       const DeepCollectionEquality().hash(_coordinates));
 
@@ -485,6 +506,7 @@ abstract class _RideModel implements RideModel {
       required final TarifModel? tariff,
       @JsonKey(defaultValue: "") required final String startAt,
       @JsonKey(defaultValue: "") required final String finishedAt,
+      @JsonKey(defaultValue: 0) required final int pouseTime,
       @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
       required final double total,
       @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
@@ -525,6 +547,9 @@ abstract class _RideModel implements RideModel {
   @override
   @JsonKey(defaultValue: "")
   String get finishedAt;
+  @override
+  @JsonKey(defaultValue: 0)
+  int get pouseTime;
   @override
   @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
   double get total;

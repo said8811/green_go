@@ -34,15 +34,17 @@ class TransportNotifier extends StateNotifier<TransportState> {
 
   Future<void> getTransport(
       double latitude, double longitude, String qrCode) async {
-    state = state.copyWith(isLoading: true, qrCode: null);
+    state = state.copyWith(isLoading: true);
     final dataOrFailure =
         await _repository.getTransport(latitude, longitude, qrCode);
     state = dataOrFailure.fold(
-      (l) => state.copyWith(error: l, isLoading: false),
+      (l) => state.copyWith(error: l, isLoading: false, qrCode: null),
       (r) => state.copyWith(
-          transport: r,
-          isLoading: false,
-          actionState: TransportActionEnum.ready),
+        transport: r,
+        isLoading: false,
+        actionState: TransportActionEnum.ready,
+        qrCode: null,
+      ),
     );
   }
 

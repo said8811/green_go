@@ -62,14 +62,17 @@ class RidesNotifier extends StateNotifier<RidesState> {
     );
   }
 
-  Future<void> finish(
+  Future<void> finish({
     double? latitude,
     double? longitude,
-  ) async {
+  }) async {
     final action = state.actionState;
     state = state.copyWith(actionState: RideAction.stoping);
     final succesOrFailure = await _repository.finish(
-        state.rides[0].id, latitude, longitude, state.imgPath!);
+        rideId: state.rides[0].id,
+        latitude: latitude,
+        longitude: longitude,
+        imgPath: state.imgPath!);
     state = succesOrFailure.fold(
       (l) => state.copyWith(error: l, actionState: action),
       (r) => state.copyWith(actionState: RideAction.stop),

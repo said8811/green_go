@@ -25,6 +25,7 @@ class RideModel with _$RideModel {
     required TarifModel? tariff,
     @JsonKey(defaultValue: "") required String startAt,
     @JsonKey(defaultValue: "") required String finishedAt,
+    @JsonKey(defaultValue: 0) required int pouseTime,
     @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
     required double total,
     @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)

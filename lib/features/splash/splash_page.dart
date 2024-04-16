@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_go/features/auth/shared/providers.dart';
 import 'package:green_go/features/core/application/helper_functions.dart';
 import 'package:green_go/features/core/presentation/widgets/common_svg_picture.dart';
 
@@ -36,9 +37,12 @@ class SplashPage extends HookConsumerWidget {
     });
 
     ref.listen(referenceNotifierProvider, (previous, next) {
+      if (next.error != null) {
+        ref.read(authNotifierProvider.notifier).signOut();
+      }
       if (previous?.value == null && next.value != null) {
-        ref.read(mapNotifierProvider.notifier).addObjects(PolygonMapObject(
-              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+        ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
+              mapId: const MapObjectId('polygon_earth'),
               fillColor: Colors.red.withOpacity(0.18),
               strokeColor: Colors.red,
               isGeodesic: true,

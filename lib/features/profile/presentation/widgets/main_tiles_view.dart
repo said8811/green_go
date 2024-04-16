@@ -25,21 +25,11 @@ class MainTilesView extends ConsumerWidget {
           ),
         ),
         ProfileTile(
-          title: l10n.myCards,
-          icon: Assets.icons.creditCard,
-          onTap: () {},
-        ),
-        ProfileTile(
           title: l10n.travelHistory,
           icon: Assets.icons.history,
           onTap: () {
             context.push(AppRoute.history.routePathWithSlash);
           },
-        ),
-        ProfileTile(
-          title: "Kupon kodi",
-          icon: Assets.icons.cupon,
-          onTap: () {},
         ),
         ProfileTile(
           title: l10n.settings,

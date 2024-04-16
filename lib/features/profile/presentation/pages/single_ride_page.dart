@@ -92,6 +92,11 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                 "${DateTime.parse(widget.ride.finishedAt).difference(DateTime.parse(widget.ride.startAt)).inHours} soat ${DateTime.parse(widget.ride.finishedAt).difference(DateTime.parse(widget.ride.startAt)).inMinutes % 60} daqiqa",
                 context),
             const Divider(),
+            tileWithsub(
+                "Pauza davomiligi",
+                "${widget.ride.pouseTime ~/ 60} soat ${widget.ride.pouseTime % 60} daqiqa",
+                context),
+            const Divider(),
             const Gap(10),
             Row(
               children: [
@@ -99,6 +104,24 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                 const Spacer(),
                 Text(context.l10n.productPrice(
                     kPriceFormatter.format(widget.ride.pricePerMinute)))
+              ],
+            ),
+            const Gap(12),
+            Row(
+              children: [
+                const Text("Boshlang'ich narx"),
+                const Spacer(),
+                Text(context.l10n.productPrice(
+                    kPriceFormatter.format(widget.ride.startPrice)))
+              ],
+            ),
+            const Gap(12),
+            Row(
+              children: [
+                const Text("Pauza minutiga"),
+                const Spacer(),
+                Text(context.l10n.productPrice(
+                    kPriceFormatter.format(widget.ride.pausePricePerMinute)))
               ],
             ),
             const Gap(12),

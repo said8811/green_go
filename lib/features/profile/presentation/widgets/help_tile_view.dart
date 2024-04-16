@@ -25,15 +25,17 @@ class HelpTilesView extends ConsumerWidget {
           ),
         ),
         ProfileTile(
-          title: "Qo'llanma",
+          title: "Q&A",
           icon: Assets.icons.book,
-          onTap: () {},
+          onTap: () {
+            context.push(AppRoute.qApage.routePathWithSlash);
+          },
         ),
         ProfileTile(
           title: "Texnik yordam",
           icon: Assets.icons.support,
           onTap: () {},
-          subtitle: "+998 78 888 33 88",
+          subtitle: "+998 99 511 83 61",
         ),
         ProfileTile(
           title: "Ilova haqida",

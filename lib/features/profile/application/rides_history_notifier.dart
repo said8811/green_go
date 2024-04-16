@@ -13,6 +13,8 @@ class RidesHistoryState with _$RidesHistoryState {
     required int pageSize,
     required List<RideModel> rides,
     required bool isLoading,
+    DateTime? from,
+    DateTime? to,
     Failure? error,
   }) = _RidesHistoryState;
 
@@ -23,17 +25,16 @@ class RidesHistoryState with _$RidesHistoryState {
 class HistoryNotifier extends StateNotifier<RidesHistoryState> {
   final ProfileRepository _repository;
   HistoryNotifier(this._repository) : super(RidesHistoryState.initial()) {
-    getHistory(
-        DateTime.now().subtract(const Duration(days: 7)), DateTime.now());
+    getHistory(null, null);
   }
 
   Future<void> getHistory(
-    DateTime from,
-    DateTime to,
+    DateTime? from,
+    DateTime? to,
   ) async {
     state = state.copyWith(isLoading: true);
     final dataOrFailure = await _repository.getHistory(
-        from.toString(), to.toString(), state.page);
+        from?.toString(), to?.toString(), state.page);
 
     state = dataOrFailure.fold(
         (l) => state.copyWith(error: l, isLoading: false),

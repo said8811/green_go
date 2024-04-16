@@ -21,7 +21,7 @@ class TransportWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
-    final selectedTarif = useState(-1);
+    final selectedTarif = useState(1);
     final referemce = ref.watch(referenceNotifierProvider).value!;
     final state = ref.watch(transportStateProvider);
     return Padding(
@@ -79,7 +79,7 @@ class TransportWidget extends HookConsumerWidget {
                 ),
                 const Gap(8),
                 SizedBox(
-                  height: 60,
+                  height: 65,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (_, index) {
@@ -90,34 +90,34 @@ class TransportWidget extends HookConsumerWidget {
                             selectedTarif.value = tarif.id;
                           },
                           child: Ink(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: selectedTarif.value ==
-                                        state.transport!.tariffs[index].id
-                                    ? Border.all()
-                                    : null,
-                                color:
-                                    context.colorScheme.grey.withOpacity(0.3)),
-                            child: Row(
+                              borderRadius: BorderRadius.circular(10),
+                              border: selectedTarif.value ==
+                                      state.transport!.tariffs[index].id
+                                  ? Border.all(
+                                      color: context.colorScheme.primary)
+                                  : null,
+                              color: selectedTarif.value ==
+                                      state.transport!.tariffs[index].id
+                                  ? context.colorScheme.primary.withOpacity(0.3)
+                                  : context.colorScheme.grey.withOpacity(0.3),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      tarif.nameRu,
-                                      style: textTheme.bodyMedium?.copyWith(
-                                          color: context.colorScheme.greyDark,
-                                          fontSize: 12),
-                                    ),
-                                    const Gap(8),
-                                    Text(
-                                      "${kPriceFormatter.format(tarif.price)} so'm/min",
-                                      style: textTheme.bodyMedium
-                                          ?.copyWith(fontSize: 12),
-                                    ),
-                                  ],
-                                )
+                                Text(
+                                  tarif.nameRu,
+                                  style: textTheme.bodyMedium
+                                      ?.copyWith(fontSize: 16),
+                                ),
+                                const Gap(8),
+                                Text(
+                                  "${kPriceFormatter.format(tarif.pricePerMinute)} so'm/min",
+                                  style: textTheme.bodyMedium
+                                      ?.copyWith(fontSize: 12),
+                                ),
                               ],
                             ),
                           ),

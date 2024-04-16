@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
+import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/profile/presentation/widgets/history_widget.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../shared/providers.dart';
+import '../widgets/calendar_range_widget.dart';
 
-class HistoryPage extends ConsumerWidget {
+class HistoryPage extends HookConsumerWidget {
   const HistoryPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rides = ref.watch(ridesHistoryNotifierProvider);
+    final from = useState<DateTime?>(null);
+    final to = useState<DateTime?>(null);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CommonAppBar(
@@ -24,10 +32,61 @@ class HistoryPage extends ConsumerWidget {
                 child: CircularProgressIndicator(),
               )
             : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ExpansionTile(
-                    title: Text("Filter"),
-                    children: [],
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          content: CalendarRangeWidget(
+                            start: DateTime.now(),
+                            end: DateTime.now()
+                                .subtract(const Duration(days: 7)),
+                            onChanged: (args) {
+                              if (args.value is PickerDateRange) {
+                                from.value =
+                                    (args.value as PickerDateRange).startDate ??
+                                        from.value;
+                                to.value =
+                                    (args.value as PickerDateRange).endDate ??
+                                        to.value;
+                              }
+                            },
+                          ),
+                          actions: [
+                            PrimaryButton(
+                              title: 'Отмена',
+                              onPress: () {
+                                from.value = null;
+                                to.value = null;
+                                context.pop();
+                              },
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              borderColor: context.colorScheme.primary,
+                              color: Colors.white,
+                              textColor: context.colorScheme.primary,
+                            ),
+                            PrimaryButton(
+                              title: 'OK',
+                              onPress: () {
+                                ref
+                                    .read(ridesHistoryNotifierProvider.notifier)
+                                    .getHistory(from.value, to.value);
+                                context.pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      title: Text(from.value != null && to.value != null
+                          ? "${filtrDate(from.value!)} - ${filtrDate(to.value!)}"
+                          : "Filtr"),
+                    ),
                   ),
                   const Gap(20),
                   Expanded(
@@ -42,5 +101,9 @@ class HistoryPage extends ConsumerWidget {
               ),
       ),
     );
+  }
+
+  String filtrDate(DateTime date) {
+    return "${date.day < 10 ? "0${date.day}" : date.day}/${date.month < 10 ? "0${date.month}" : date.month}";
   }
 }

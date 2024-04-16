@@ -83,7 +83,7 @@ class OtpPage extends HookConsumerWidget {
                     .copyWith(color: context.colorScheme.surface),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.circle,
-                  selectedColor: context.colorScheme.surface,
+                  selectedColor: context.colorScheme.primary,
                   fieldHeight: 50,
                   fieldWidth: (width - 120) / 6,
                   activeFillColor: context.colorScheme.primary,

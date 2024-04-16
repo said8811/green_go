@@ -384,8 +384,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/bikey.png
   AssetGenImage get bikey => const AssetGenImage('assets/images/bikey.png');
 
+  /// File path: assets/images/blue-Wave.jpeg
+  AssetGenImage get blueWave =>
+      const AssetGenImage('assets/images/blue-Wave.jpeg');
+
   /// File path: assets/images/click.png
   AssetGenImage get click => const AssetGenImage('assets/images/click.png');
+
+  /// File path: assets/images/humo.png
+  AssetGenImage get humo => const AssetGenImage('assets/images/humo.png');
 
   /// File path: assets/images/mark.png
   AssetGenImage get mark => const AssetGenImage('assets/images/mark.png');
@@ -399,12 +406,26 @@ class $AssetsImagesGen {
   /// File path: assets/images/user.jpg
   AssetGenImage get user => const AssetGenImage('assets/images/user.jpg');
 
+  /// File path: assets/images/uzCard.jpeg
+  AssetGenImage get uzCard => const AssetGenImage('assets/images/uzCard.jpeg');
+
   /// File path: assets/images/wallet.png
   AssetGenImage get wallet => const AssetGenImage('assets/images/wallet.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [bike, bikey, click, mark, payme, scooter, user, wallet];
+  List<AssetGenImage> get values => [
+        bike,
+        bikey,
+        blueWave,
+        click,
+        humo,
+        mark,
+        payme,
+        scooter,
+        user,
+        uzCard,
+        wallet
+      ];
 }
 
 class Assets {

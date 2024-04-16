@@ -4,8 +4,10 @@ import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/features/map/presentation/pages/finish_page.dart';
 import 'package:green_go/features/map/presentation/pages/map_page.dart';
 import 'package:green_go/features/profile/presentation/pages/about_page.dart';
+import 'package:green_go/features/profile/presentation/pages/add_card_view.dart';
 import 'package:green_go/features/profile/presentation/pages/balance_page.dart';
 import 'package:green_go/features/profile/presentation/pages/history_page.dart';
+import 'package:green_go/features/profile/presentation/pages/qa_page.dart';
 import 'package:green_go/features/profile/presentation/pages/settings_page.dart';
 import 'package:green_go/features/profile/presentation/pages/single_ride_page.dart';
 import 'package:green_go/features/qr/presentation/qr_camera_page.dart';
@@ -53,6 +55,12 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
         redirect: (_, __) => ref.watch(authRedirectLogicProvider),
       ),
       GoRoute(
+        path: AppRoute.addCardView.routePathWithSlash,
+        name: AppRoute.addCardView.name,
+        pageBuilder: (_, __) => const NoTransitionPage(child: AddCardView()),
+        redirect: (_, __) => ref.watch(authRedirectLogicProvider),
+      ),
+      GoRoute(
         path: AppRoute.qr.routePathWithSlash,
         name: AppRoute.qr.name,
         pageBuilder: (_, __) => const NoTransitionPage(child: QrCameraPage()),
@@ -62,6 +70,12 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
         path: AppRoute.about.routePathWithSlash,
         name: AppRoute.about.name,
         pageBuilder: (_, __) => const NoTransitionPage(child: AboutPage()),
+        redirect: (_, __) => ref.watch(authRedirectLogicProvider),
+      ),
+      GoRoute(
+        path: AppRoute.qApage.routePathWithSlash,
+        name: AppRoute.qApage.name,
+        pageBuilder: (_, __) => const NoTransitionPage(child: QAPage()),
         redirect: (_, __) => ref.watch(authRedirectLogicProvider),
       ),
       GoRoute(

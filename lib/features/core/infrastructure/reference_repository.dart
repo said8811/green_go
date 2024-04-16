@@ -10,7 +10,7 @@ class ReferenceRepository {
   ReferenceRepository(this._dio);
 
   Future<Either<Failure, ReferenceModel>> getData(
-      double latitude, double longitude) async {
+      double? latitude, double? longitude) async {
     try {
       final Response response = await _dio.get("/data/", queryParameters: {
         'latitude': latitude,
@@ -25,7 +25,7 @@ class ReferenceRepository {
       if (e.isConnectionError) {
         return left(const Failure.noConnection());
       }
-      return left(Failure.server(e.message));
+      return left(Failure.server(e.response?.statusCode.toString()));
     }
   }
 }

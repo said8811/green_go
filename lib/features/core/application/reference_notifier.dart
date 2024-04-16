@@ -6,7 +6,7 @@ class ReferenceNotifier extends StateNotifier<AsyncValue<ReferenceModel>> {
   final ReferenceRepository _repository;
   ReferenceNotifier(this._repository) : super(const AsyncLoading());
 
-  Future<void> getData(double latitude, double longitude) async {
+  Future<void> getData(double? latitude, double? longitude) async {
     final dataOrFailure = await _repository.getData(latitude, longitude);
     state = dataOrFailure.fold(
       (l) => AsyncError(l, StackTrace.current),
