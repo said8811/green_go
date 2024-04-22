@@ -45,8 +45,7 @@ class HistoryWidget extends HookConsumerWidget {
                   const Gap(10),
                   Text(ride.tariff?.nameRu ?? ""),
                   const Spacer(),
-                  Text(
-                      "${(DateTime.parse(ride.startAt).hour + 5)}:${(DateTime.parse(ride.startAt).minute)}"),
+                  Text(getDate(DateTime.parse(ride.startAt).toLocal())),
                 ],
               ),
               const Gap(30),
@@ -64,5 +63,9 @@ class HistoryWidget extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  String getDate(DateTime date) {
+    return "${date.hour < 10 ? "0${date.hour}" : date.hour}:${date.minute < 10 ? "0${date.minute}" : date.minute}";
   }
 }

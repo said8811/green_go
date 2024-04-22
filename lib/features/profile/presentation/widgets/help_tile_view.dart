@@ -32,18 +32,18 @@ class HelpTilesView extends ConsumerWidget {
           },
         ),
         ProfileTile(
-          title: "Texnik yordam",
+          title: l10n.techSupport,
           icon: Assets.icons.support,
           onTap: () {},
-          subtitle: "+998 99 511 83 61",
+          subtitle: "+998 99 511 73 61",
         ),
         ProfileTile(
-          title: "Ilova haqida",
+          title: l10n.aboutApp,
           icon: Assets.icons.versionInfo,
           onTap: () {
             context.push(AppRoute.about.routePathWithSlash);
           },
-          subtitle: "Versiya 1.7.6 3759",
+          subtitle: "Versiya 1.0.0",
         ),
       ],
     );

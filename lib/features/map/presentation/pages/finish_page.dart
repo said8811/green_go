@@ -26,7 +26,6 @@ class _FinishPageState extends ConsumerState<FinishPage> {
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (previous?.actionState != RideAction.stop &&
           next.actionState == RideAction.stop) {
-        ref.read(ridesNotifierProvider.notifier).getRides();
         context.pop();
         return;
       }

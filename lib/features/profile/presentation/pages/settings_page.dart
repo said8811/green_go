@@ -8,6 +8,7 @@ import 'package:green_go/features/auth/shared/providers.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/features/profile/presentation/widgets/language_tile.dart';
 import 'package:green_go/features/profile/shared/providers.dart';
 import 'package:green_go/services/localization/application/locale_notifier.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
@@ -73,14 +74,14 @@ class SettingsPage extends HookConsumerWidget {
               ),
               const Gap(60),
               Text(
-                "Bildirishnoma",
+                context.l10n.notifications,
                 style: txtTheme.bodyMedium?.copyWith(fontSize: 20),
               ),
               const Gap(15),
               Row(
                 children: [
                   Text(
-                    "Push-bildirishnomalar yuborish",
+                    context.l10n.sendNotifications,
                     style: txtTheme.labelSmall?.copyWith(fontSize: 16),
                   ),
                   const Spacer(),
@@ -102,58 +103,22 @@ class SettingsPage extends HookConsumerWidget {
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
-                      builder: (context) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
+                      builder: (context) => const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                ListTile(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  onTap: () {
-                                    ref
-                                        .read(localeNotifierProvider.notifier)
-                                        .changeLanguage(AppLocale.uzbek)
-                                        .then(
-                                            (value) => Navigator.pop(context));
-                                  },
-                                  title: Text(AppLocale.uzbek.name),
-                                  trailing: locale.languageCode == "uz"
-                                      ? const Icon(Icons.check)
-                                      : null,
-                                ),
-                                const Gap(5),
-                                ListTile(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  onTap: () {
-                                    ref
-                                        .read(localeNotifierProvider.notifier)
-                                        .changeLanguage(AppLocale.russian)
-                                        .then(
-                                            (value) => Navigator.pop(context));
-                                  },
-                                  title: Text(AppLocale.russian.name),
-                                  trailing: locale.languageCode == "ru"
-                                      ? const Icon(Icons.check)
-                                      : null,
-                                ),
-                                const Gap(5),
-                                ListTile(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  onTap: () {
-                                    ref
-                                        .read(localeNotifierProvider.notifier)
-                                        .changeLanguage(AppLocale.english)
-                                        .then(
-                                            (value) => Navigator.pop(context));
-                                  },
-                                  title: Text(AppLocale.english.name),
-                                  trailing: locale.languageCode == "en"
-                                      ? const Icon(Icons.check)
-                                      : null,
-                                )
+                                LanguageTile(
+                                    locale: AppLocale.uzbek,
+                                    languageCode: "uz"),
+                                Gap(5),
+                                LanguageTile(
+                                    locale: AppLocale.russian,
+                                    languageCode: "ru"),
+                                Gap(5),
+                                LanguageTile(
+                                    locale: AppLocale.english,
+                                    languageCode: "en")
                               ],
                             ),
                           ));
@@ -172,7 +137,7 @@ class SettingsPage extends HookConsumerWidget {
         padding: const EdgeInsets.all(20.0),
         child: PrimaryButton(
             isLoading: ref.watch(updateProfileProvider).isLoading,
-            title: "Davom etish",
+            title: context.l10n.submit,
             onPress: () {
               ref
                   .read(updateProfileProvider.notifier)

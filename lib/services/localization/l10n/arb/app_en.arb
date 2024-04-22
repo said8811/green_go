@@ -89,6 +89,7 @@
   "aboutApp": "About the app",
   "changeProfileDetails": "Change profile details",
   "notifications": "Notifications",
+  "sendNotifications":"Send Notifications",
   "showRooms": "Showrooms",
   "blog": "Blog",
   "exit": "Exit",
@@ -284,6 +285,8 @@
   "thursday":"T",
   "friday":"F",
   "saturday":"S",
+  "submit":"Submit",
   "sunday":"S",
-  "statistics":"Statistics"
+  "statistics":"Statistics",
+  "techSupport":"Tech Support"
 }

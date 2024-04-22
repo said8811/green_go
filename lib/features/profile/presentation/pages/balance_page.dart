@@ -209,11 +209,7 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                     });
                   },
                   title: Text(
-                    selectedType != null
-                        ? selectedType!.number.substring(
-                            selectedType!.number.length - 4,
-                            selectedType!.number.length)
-                        : "Kartalar",
+                    selectedType != null ? selectedType!.number : "Kartalar",
                     style: textTheme.bodyMedium?.copyWith(fontSize: 18),
                   ),
                   leading: selectedType != null

@@ -26,7 +26,6 @@ class CalendarRangeWidget extends StatelessWidget {
           textStyle: context.textTheme.headlineMedium?.copyWith(fontSize: 22),
         ),
         onSelectionChanged: onChanged,
-
         selectionMode: DateRangePickerSelectionMode.range,
         maxDate: DateTime.now(), // Set maxDate to today's date
         initialSelectedRange: PickerDateRange(

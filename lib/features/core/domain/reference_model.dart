@@ -24,4 +24,13 @@ class ReferenceModel with _$ReferenceModel {
 
   factory ReferenceModel.fromJson(Map<String, dynamic> json) =>
       _$ReferenceModelFromJson(json);
+
+  factory ReferenceModel.initail() => ReferenceModel(
+        availableCoordinates: [],
+        categories: [],
+        prohibitedCoordinates: [],
+        regionId: 0,
+        regionName: "",
+        stations: [],
+      );
 }

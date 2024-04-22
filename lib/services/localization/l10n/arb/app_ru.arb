@@ -88,6 +88,7 @@
   "aboutApp": "О Приложении",
   "changeProfileDetails": "Изменить данные профиля",
   "notifications": "Уведомления",
+  "sendNotifications":"Отправляйте push-уведомления",
   "showRooms": "Шорумы",
   "blog": "Блог",
   "exit": "Выйти",
@@ -285,6 +286,8 @@
   "thursday":"Че",
   "friday":"Пт",
   "saturday":"Сб",
+  "submit":"Продолжить",
   "sunday":"Вс",
-  "statistics":"Статистика"
+  "statistics":"Статистика",
+  "techSupport":"Техническая поддержка"
 }

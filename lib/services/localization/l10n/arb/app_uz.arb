@@ -89,6 +89,7 @@
   "aboutApp": "Ilova haqida",
   "changeProfileDetails": "Shaxsiy ma'lumotlarini o'zgartirish",
   "notifications": "Xabarlar",
+  "sendNotifications":"Push-bildirishnomalar yuborish",
   "showRooms": "Shourumlar",
   "blog": "Blog",
   "exit": "Chiqish",
@@ -285,6 +286,8 @@
   "thursday":"Py",
   "friday":"Jm",
   "saturday":"Sh",
+  "submit":"Davom etish",
   "sunday":"Yk",
-  "statistics":"Statistika"
+  "statistics":"Statistika",
+  "techSupport":"Texnik Yordam"
 }

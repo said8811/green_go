@@ -15,7 +15,7 @@ class DioNotifier extends StateNotifier<Dio> {
   }
 
   void setUp() {
-    const timeOutTime = Duration(seconds: 10);
+    const timeOutTime = Duration(minutes: 3);
     final dioBaseOptions = BaseOptions(
       baseUrl: appConfig.baseApiUrl,
       headers: {

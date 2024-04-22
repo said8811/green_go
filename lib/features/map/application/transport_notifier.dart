@@ -11,6 +11,8 @@ enum TransportActionEnum {
   pure,
   starting,
   start,
+  booking,
+  book,
   ready,
   turnOn,
 }
@@ -38,7 +40,11 @@ class TransportNotifier extends StateNotifier<TransportState> {
     final dataOrFailure =
         await _repository.getTransport(latitude, longitude, qrCode);
     state = dataOrFailure.fold(
-      (l) => state.copyWith(error: l, isLoading: false, qrCode: null),
+      (l) => state.copyWith(
+        error: l,
+        isLoading: false,
+        qrCode: null,
+      ),
       (r) => state.copyWith(
         transport: r,
         isLoading: false,
@@ -53,14 +59,32 @@ class TransportNotifier extends StateNotifier<TransportState> {
     state = state.copyWith(actionState: TransportActionEnum.starting);
     final dataOrFailure = await _repository.start(
         latitude, longitude, qrCode, regionId, tariffId);
-    state = dataOrFailure.fold(
-        (l) => state.copyWith(
+    dataOrFailure.fold(
+        (l) => state = state.copyWith(
               error: l,
               actionState: TransportActionEnum.pure,
-            ),
-        (r) => state.copyWith(
-              actionState: TransportActionEnum.start,
-            ));
+            ), (r) {
+      state = state.copyWith(
+        actionState: TransportActionEnum.start,
+      );
+    });
+    return dataOrFailure.fold((l) => false, (r) => true);
+  }
+
+  Future<bool> book(int id) async {
+    state = state.copyWith(actionState: TransportActionEnum.booking);
+    final dataOrFailure = await _repository.book(id);
+    dataOrFailure.fold(
+      (l) => state = state.copyWith(
+        error: l,
+        actionState: TransportActionEnum.pure,
+      ),
+      (r) {
+        state = state.copyWith(
+          actionState: TransportActionEnum.book,
+        );
+      },
+    );
     return dataOrFailure.fold((l) => false, (r) => true);
   }
 
@@ -70,5 +94,9 @@ class TransportNotifier extends StateNotifier<TransportState> {
 
   void setState(TransportActionEnum action) {
     state = state.copyWith(actionState: action);
+  }
+
+  void cleanError() {
+    state = state.copyWith(error: null);
   }
 }

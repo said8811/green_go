@@ -41,4 +41,12 @@ class MapNotifierNotifier extends StateNotifier<MapNotifierState> {
       return element.mapId.value == "polygon_earth";
     }).toList());
   }
+
+  void updateOneObject(String value, MapObject object) {
+    List<MapObject> objects = List.from(state.mainObjects
+        .where((element) => element.mapId.value != value)
+        .toList());
+    objects.add(object);
+    state = state.copyWith(mainObjects: objects);
+  }
 }

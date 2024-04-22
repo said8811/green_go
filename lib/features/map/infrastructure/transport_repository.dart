@@ -54,7 +54,27 @@ class TransportRepository {
       if (e.isConnectionError) {
         return left(const Failure.noConnection());
       }
-      return left(Failure.server(e.message));
+      return left(Failure.server(e.response?.data['message']));
+    }
+  }
+
+  Future<Either<Failure, bool>> book(
+    int id,
+  ) async {
+    try {
+      final Response response = await _dio.post(
+        "/book/$id",
+      );
+      if (response.isSuccessful) {
+        return right(true);
+      } else {
+        return left(Failure.server(response.data?['message']));
+      }
+    } on DioException catch (e) {
+      if (e.isConnectionError) {
+        return left(const Failure.noConnection());
+      }
+      return left(Failure.server(e.response?.data['message']));
     }
   }
 }

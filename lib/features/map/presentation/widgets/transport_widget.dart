@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
+import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/transport_notifier.dart';
@@ -22,8 +23,14 @@ class TransportWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
     final selectedTarif = useState(1);
-    final referemce = ref.watch(referenceNotifierProvider).value!;
+    final referemce = ref.watch(referenceNotifierProvider).data!;
     final state = ref.watch(transportStateProvider);
+    ref.listen(transportStateProvider, (previous, next) {
+      if (previous?.error == null && next.error != null) {
+        showErrorDialog(context, failure: next.error).then(
+            (value) => ref.read(transportStateProvider.notifier).cleanError());
+      }
+    });
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
       child: state.transport != null
@@ -53,7 +60,7 @@ class TransportWidget extends HookConsumerWidget {
                         ),
                         const Gap(10),
                         Text(
-                          "${state.transport!.distance.toInt()} km",
+                          "${state.transport!.distance.toInt() / 1000} km",
                           style: context.textTheme.bodyMedium
                               ?.copyWith(color: Colors.grey, fontSize: 12),
                         )
@@ -129,36 +136,24 @@ class TransportWidget extends HookConsumerWidget {
                 const Gap(12),
                 Row(
                   children: [
-                    // if (state.actionState == TransportActionEnum.pouse) ...[
-                    //   Expanded(
-                    //     child: PrimaryButton(
-                    //       title: "Yoqish",
-                    //       leading: CommonSvgPicture(Assets.icons.continueIcon),
-                    //       onPress: () {},
-                    //       childStyle: textTheme.labelSmall
-                    //           ?.copyWith(fontSize: 16, color: Colors.white),
-                    //     ),
-                    //   ),
-                    //   const Gap(20),
-                    // ],
-                    // if (state.actionState == TransportActionEnum.start) ...[
-                    //   Expanded(
-                    //     child: PrimaryButton(
-                    //       title: "Pauza",
-                    //       onPress: () {},
-                    //       color: context.colorScheme.grey.withOpacity(0.3),
-                    //       childStyle: textTheme.labelSmall?.copyWith(
-                    //         fontSize: 16,
-                    //       ),
-                    //       leading: CommonSvgPicture(Assets.icons.pouse),
-                    //     ),
-                    //   ),
-                    //   const Gap(20),
-                    // ],
                     Expanded(
                         child: PrimaryButton(
                       title: "Band qilish",
-                      onPress: () {},
+                      isLoading:
+                          state.actionState == TransportActionEnum.booking,
+                      onPress: () {
+                        ref
+                            .read(transportStateProvider.notifier)
+                            .book(state.transport!.id)
+                            .then((value) {
+                          if (value) {
+                            ref
+                                .read(ridesNotifierProvider.notifier)
+                                .getRides()
+                                .then((value) => context.pop());
+                          }
+                        });
+                      },
                       color: context.colorScheme.grey.withOpacity(0.3),
                       textColor: Colors.black,
                       childStyle: textTheme.labelSmall?.copyWith(fontSize: 16),
@@ -179,7 +174,10 @@ class TransportWidget extends HookConsumerWidget {
                                     selectedTarif.value)
                                 .then((value) {
                               if (value) {
-                                context.pop();
+                                ref
+                                    .read(ridesNotifierProvider.notifier)
+                                    .getRides()
+                                    .then((value) => context.pop());
                               }
                             });
                           } else {

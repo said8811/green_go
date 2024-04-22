@@ -40,7 +40,7 @@ class SplashPage extends HookConsumerWidget {
       if (next.error != null) {
         ref.read(authNotifierProvider.notifier).signOut();
       }
-      if (previous?.value == null && next.value != null) {
+      if (previous?.data == null && next.data != null) {
         ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
               mapId: const MapObjectId('polygon_earth'),
               fillColor: Colors.red.withOpacity(0.18),

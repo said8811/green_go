@@ -73,10 +73,17 @@ class RidesNotifier extends StateNotifier<RidesState> {
         latitude: latitude,
         longitude: longitude,
         imgPath: state.imgPath!);
-    state = succesOrFailure.fold(
-      (l) => state.copyWith(error: l, actionState: action),
-      (r) => state.copyWith(actionState: RideAction.stop),
-    );
+    succesOrFailure
+        .fold((l) => state = state.copyWith(error: l, actionState: action),
+            (data) async {
+      final dataOrFailure = await _repository.getRides();
+      state = dataOrFailure.fold(
+          (l) => state.copyWith(error: l, actionState: action),
+          (r) => state.copyWith(
+                rides: r,
+                actionState: RideAction.stop,
+              ));
+    });
   }
 
   void cleanError() {

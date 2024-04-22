@@ -17,7 +17,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../features/auth/presentation/screens/sign_in_page.dart';
 import '../../features/auth/shared/providers.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
-import '../../features/splash/shared/providers.dart';
 import 'app_router.dart';
 import 'constants.dart';
 
@@ -119,21 +118,9 @@ final authRedirectLogicProvider = Provider<String?>(
   },
 );
 
-final referenceRedirectLogicProvider = Provider<String?>(
-  (ref) {
-    return ref.watch(referenceNotifierProvider).when(
-          skipLoadingOnRefresh: true,
-          skipLoadingOnReload: true,
-          data: (_) => null,
-          error: (_, __) => AppRoute.error.routePathWithSlash,
-          loading: () => AppRoute.loading.routePathWithSlash,
-        );
-  },
-);
-
-final authAndRefRedirectLogicProvider = Provider((ref) {
-  if (ref.watch(authRedirectLogicProvider) == null) {
-    return ref.watch(referenceRedirectLogicProvider);
-  }
-  return ref.watch(authRedirectLogicProvider);
-});
+// final authAndRefRedirectLogicProvider = Provider((ref) {
+//   if (ref.watch(authRedirectLogicProvider) == null) {
+//     return ref.watch(referenceRedirectLogicProvider);
+//   }
+//   return ref.watch(authRedirectLogicProvider);
+// });

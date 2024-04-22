@@ -24,6 +24,16 @@ class TransportActionsView extends HookConsumerWidget {
     final state = ref.watch(ridesNotifierProvider);
     final timer = ref.watch(timerNotifierProvider);
     final pricePerMin = useState(0);
+    useEffect(() {
+      if (state.rides.isNotEmpty) {
+        ref
+            .read(timerNotifierProvider.notifier)
+            .getTime(DateTime.parse(state.rides[0].startAt).toLocal());
+        pricePerMin.value = timer ~/ 60;
+      }
+      return;
+    });
+
     ref.listen(timerNotifierProvider, (previous, next) {
       if (next % 60 == 0) {
         pricePerMin.value = next ~/ 60;

@@ -37,7 +37,7 @@ class QAPage extends ConsumerWidget {
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: context.colorScheme.grey,
+                              color: context.colorScheme.grey.withOpacity(0.5),
                             ),
                             child: CommonExpandablePanel(
                               title: e.nameRu,

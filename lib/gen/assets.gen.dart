@@ -226,6 +226,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search-zoom-in.svg
   String get searchZoomIn => 'assets/icons/search-zoom-in.svg';
 
+  /// File path: assets/icons/selected-bike.svg
+  String get selectedBike => 'assets/icons/selected-bike.svg';
+
   /// File path: assets/icons/setting-vertical.svg
   String get settingVertical => 'assets/icons/setting-vertical.svg';
 
@@ -353,6 +356,7 @@ class $AssetsIconsGen {
         searchBold,
         searchNormal,
         searchZoomIn,
+        selectedBike,
         settingVertical,
         settings,
         settingsbBold,
@@ -391,6 +395,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/click.png
   AssetGenImage get click => const AssetGenImage('assets/images/click.png');
 
+  /// File path: assets/images/current_location.jpg
+  AssetGenImage get currentLocation =>
+      const AssetGenImage('assets/images/current_location.jpg');
+
   /// File path: assets/images/humo.png
   AssetGenImage get humo => const AssetGenImage('assets/images/humo.png');
 
@@ -402,6 +410,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/scooter.png
   AssetGenImage get scooter => const AssetGenImage('assets/images/scooter.png');
+
+  /// File path: assets/images/selected-bike.png
+  AssetGenImage get selectedBike =>
+      const AssetGenImage('assets/images/selected-bike.png');
 
   /// File path: assets/images/user.jpg
   AssetGenImage get user => const AssetGenImage('assets/images/user.jpg');
@@ -418,10 +430,12 @@ class $AssetsImagesGen {
         bikey,
         blueWave,
         click,
+        currentLocation,
         humo,
         mark,
         payme,
         scooter,
+        selectedBike,
         user,
         uzCard,
         wallet
