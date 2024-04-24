@@ -82,13 +82,13 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
             ),
             const Divider(),
             tileWithsub(
-                "Sayohat vaqt",
+                context.l10n.travelTime,
                 DateFormat("d-MM-yyyy - HH:mm", "tr_TR")
                     .format(DateTime.parse(widget.ride.startAt)),
                 context),
             const Divider(),
             tileWithsub(
-                "Sayohat davomiligi",
+                context.l10n.travelDuration,
                 "${DateTime.parse(widget.ride.finishedAt).difference(DateTime.parse(widget.ride.startAt)).inHours} soat ${DateTime.parse(widget.ride.finishedAt).difference(DateTime.parse(widget.ride.startAt)).inMinutes % 60} daqiqa",
                 context),
             const Divider(),
@@ -100,7 +100,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
             const Gap(10),
             Row(
               children: [
-                const Text("Minutiga"),
+                Text(context.l10n.perMinute),
                 const Spacer(),
                 Text(context.l10n.productPrice(
                     kPriceFormatter.format(widget.ride.pricePerMinute)))
@@ -109,7 +109,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
             const Gap(12),
             Row(
               children: [
-                const Text("Boshlang'ich narx"),
+                Text(context.l10n.startPrice),
                 const Spacer(),
                 Text(context.l10n.productPrice(
                     kPriceFormatter.format(widget.ride.startPrice)))
@@ -127,7 +127,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
             const Gap(12),
             Row(
               children: [
-                const Text("To'lov"),
+                Text(context.l10n.totalPrice),
                 const Spacer(),
                 Text(
                   context.l10n

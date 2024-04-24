@@ -289,5 +289,11 @@
   "submit":"Davom etish",
   "sunday":"Yk",
   "statistics":"Statistika",
-  "techSupport":"Texnik Yordam"
+  "techSupport":"Texnik Yordam",
+  "startPrice":"Boshlang'ich narx",
+  "perMinute":"Minutiga",
+  "travelTime":"Sayohat vaqti",
+  "travelDuration":"Sayohat davomiyligi",
+  "enterNumber":"Raqamni kiriting",
+  "enter":"Kiritish"
 }

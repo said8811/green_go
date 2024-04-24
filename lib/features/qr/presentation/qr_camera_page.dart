@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/qr/presentation/widgets/enter_qr_moddal_view.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -63,7 +64,7 @@ class _QrCameraPageState extends ConsumerState<QrCameraPage> {
               left: 20,
               right: 20,
               child: PrimaryButton(
-                title: "Raqamni kiritish",
+                title: context.l10n.enterNumber,
                 childStyle: context.textTheme.bodyMedium,
                 color: Colors.white,
                 onPress: () async {

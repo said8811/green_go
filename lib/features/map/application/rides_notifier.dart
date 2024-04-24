@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:green_go/features/core/domain/failure.dart';
+import 'package:green_go/features/core/domain/transport_model.dart';
 import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
@@ -23,6 +24,7 @@ class RidesState with _$RidesState {
     required List<RideModel> rides,
     required List<BookModel> books,
     required bool isLoading,
+    TransportModel? transport,
     Failure? error,
     String? imgPath,
     required RideAction actionState,
@@ -33,6 +35,7 @@ class RidesState with _$RidesState {
 
 class RidesNotifier extends StateNotifier<RidesState> {
   final RideRepository _repository;
+
   RidesNotifier(this._repository) : super(RidesState.initial()) {
     getRides();
   }
@@ -40,14 +43,14 @@ class RidesNotifier extends StateNotifier<RidesState> {
   Future<void> getRides() async {
     state = state.copyWith(isLoading: true);
     final dataOrFailure = await _repository.getRides();
-    state = dataOrFailure.fold(
-      (l) => state.copyWith(error: l, isLoading: false),
-      (r) => state.copyWith(
+    dataOrFailure.fold(
+        (l) => state = state.copyWith(error: l, isLoading: false), (r) async {
+      state = state.copyWith(
         rides: r.rides,
         isLoading: false,
         books: r.books,
-      ),
-    );
+      );
+    });
   }
 
   Future<void> pause() async {

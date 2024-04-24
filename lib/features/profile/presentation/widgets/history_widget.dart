@@ -56,7 +56,7 @@ class HistoryWidget extends HookConsumerWidget {
                     'Davomiyligi: ${DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inHours} soat ${(DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inMinutes > 60) ? DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inMinutes % 60 : DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inMinutes} daqiqa'),
               const Gap(20),
               Text(
-                "Jami summa: ${context.l10n.productPrice(kPriceFormatter.format(ride.total))}",
+                "${context.l10n.totalPrice}: ${context.l10n.productPrice(kPriceFormatter.format(ride.total))}",
                 style: context.textTheme.bodyMedium
                     ?.copyWith(color: context.colorScheme.primary),
               )

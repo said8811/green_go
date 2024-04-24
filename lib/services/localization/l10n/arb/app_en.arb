@@ -288,5 +288,11 @@
   "submit":"Submit",
   "sunday":"S",
   "statistics":"Statistics",
-  "techSupport":"Tech Support"
+  "techSupport":"Tech Support",
+  "startPrice":"Start Price",
+  "perMinute":"Per Minute",
+  "travelTime":"Travel time",
+  "travelDuration":"Travel duration",
+  "enterNumber":"Enter number",
+  "enter":"Enter"
 }

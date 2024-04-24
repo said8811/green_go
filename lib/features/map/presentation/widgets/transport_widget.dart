@@ -5,9 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
-import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/transport_notifier.dart';
+import 'package:green_go/features/map/presentation/widgets/tarif_widget.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,7 +23,7 @@ class TransportWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
     final selectedTarif = useState(1);
-    final referemce = ref.watch(referenceNotifierProvider).data!;
+    final reference = ref.watch(referenceNotifierProvider).data!;
     final state = ref.watch(transportStateProvider);
     ref.listen(transportStateProvider, (previous, next) {
       if (previous?.error == null && next.error != null) {
@@ -60,7 +60,7 @@ class TransportWidget extends HookConsumerWidget {
                         ),
                         const Gap(10),
                         Text(
-                          "${state.transport!.distance.toInt() / 1000} km",
+                          "${state.transport!.distance} km",
                           style: context.textTheme.bodyMedium
                               ?.copyWith(color: Colors.grey, fontSize: 12),
                         )
@@ -91,44 +91,12 @@ class TransportWidget extends HookConsumerWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (_, index) {
                         final tarif = state.transport!.tariffs[index];
-                        return InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          onTap: () {
-                            selectedTarif.value = tarif.id;
-                          },
-                          child: Ink(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: selectedTarif.value ==
-                                      state.transport!.tariffs[index].id
-                                  ? Border.all(
-                                      color: context.colorScheme.primary)
-                                  : null,
-                              color: selectedTarif.value ==
-                                      state.transport!.tariffs[index].id
-                                  ? context.colorScheme.primary.withOpacity(0.3)
-                                  : context.colorScheme.grey.withOpacity(0.3),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  tarif.nameRu,
-                                  style: textTheme.bodyMedium
-                                      ?.copyWith(fontSize: 16),
-                                ),
-                                const Gap(8),
-                                Text(
-                                  "${kPriceFormatter.format(tarif.pricePerMinute)} so'm/min",
-                                  style: textTheme.bodyMedium
-                                      ?.copyWith(fontSize: 12),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+                        return TariffWidget(
+                            onTap: () {
+                              selectedTarif.value = tarif.id;
+                            },
+                            tarif: tarif,
+                            selectedTarif: selectedTarif.value);
                       },
                       separatorBuilder: (i, _) => const Gap(8),
                       itemCount: state.transport!.tariffs.length),
@@ -146,10 +114,8 @@ class TransportWidget extends HookConsumerWidget {
                             .read(transportStateProvider.notifier)
                             .book(state.transport!.id)
                             .then((value) {
-                          ref
-                              .read(ridesNotifierProvider.notifier)
-                              .getRides()
-                              .then((value) => context.pop());
+                          context.pop();
+                          ref.read(ridesNotifierProvider.notifier).getRides();
                         });
                       },
                       color: context.colorScheme.grey.withOpacity(0.3),
@@ -168,7 +134,7 @@ class TransportWidget extends HookConsumerWidget {
                                     ref.watch(locationStateProvider)!.latitude,
                                     ref.watch(locationStateProvider)!.longitude,
                                     state.transport!.qrCode,
-                                    referemce.regionId,
+                                    reference.regionId,
                                     selectedTarif.value)
                                 .then((value) {
                               if (value) {

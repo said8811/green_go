@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
+import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/rides_notifier.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,6 +45,28 @@ class _FinishPageState extends ConsumerState<FinishPage> {
               "Kameradan rasmga olish",
               style: context.textTheme.bodyMedium,
             ),
+          ),
+          Row(
+            children: [
+              Text(
+                context.l10n.startPrice,
+                style: context.textTheme.bodyMedium,
+              ),
+              const Spacer(),
+              Text(context.l10n.productPrice(
+                  kPriceFormatter.format(state.rides[0].tariff?.startPrice)))
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                context.l10n.perMinute,
+                style: context.textTheme.bodyMedium,
+              ),
+              const Spacer(),
+              Text(context.l10n.productPrice(kPriceFormatter
+                  .format(state.rides[0].tariff?.pricePerMinute)))
+            ],
           ),
         ],
       ),

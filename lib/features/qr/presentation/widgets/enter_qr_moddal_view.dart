@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -29,7 +30,7 @@ class EnterQrModdal extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Raqamni kiriting",
+              context.l10n.enterNumber,
               style: context.textTheme.bodyMedium,
             ),
             const Gap(50),
@@ -69,7 +70,7 @@ class EnterQrModdal extends ConsumerWidget {
               children: [
                 Expanded(
                   child: PrimaryButton(
-                    title: "Kiritish",
+                    title: context.l10n.enter,
                     onPress: () {
                       Navigator.of(context).pop(textController.text.trim());
                     },

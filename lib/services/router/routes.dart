@@ -86,7 +86,7 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
       GoRoute(
         path: AppRoute.finishPage.routePathWithSlash,
         name: AppRoute.finishPage.name,
-        pageBuilder: (_, __) => const NoTransitionPage(child: FinishPage()),
+        pageBuilder: (_, state) => const NoTransitionPage(child: FinishPage()),
         redirect: (_, __) => ref.watch(authRedirectLogicProvider),
       ),
       GoRoute(

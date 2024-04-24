@@ -38,6 +38,7 @@ class GetCodePage extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Gap(30),
             Text(
@@ -67,13 +68,6 @@ class GetCodePage extends HookConsumerWidget {
               onFieldSubmitted: (phone) =>
                   getCode(context, phoneController.text, selected.value, ref),
               decoration: InputDecoration(
-                // label: Row(
-                //   children: [
-                //     Text('+${selected.value.phoneCode} ',
-                //         style: textTheme.headlineMedium),
-
-                //   ],
-                // ),
                 prefix: Text(
                   "+998 ",
                   style: textTheme.headlineMedium,
@@ -81,16 +75,17 @@ class GetCodePage extends HookConsumerWidget {
                 fillColor: Colors.transparent,
                 hintText: '${selected.value.phoneMaskWithoutCountryCode} ',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide:
-                        BorderSide(color: context.colorScheme.textColor)),
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: context.colorScheme.textColor),
+                ),
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: context.colorScheme.grey)),
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: context.colorScheme.grey),
+                ),
                 focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide:
-                        BorderSide(color: context.colorScheme.textColor)),
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: context.colorScheme.textColor),
+                ),
               ),
             ),
             const Spacer(),

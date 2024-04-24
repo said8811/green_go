@@ -289,5 +289,11 @@
   "submit":"Продолжить",
   "sunday":"Вс",
   "statistics":"Статистика",
-  "techSupport":"Техническая поддержка"
+  "techSupport":"Техническая поддержка",
+  "startPrice":"Начальная цена",
+  "perMinute":"В минуту",
+  "travelTime":"Время в пути",
+  "travelDuration":"Продолжительность путешествия",
+  "enterNumber":"Введите номер",
+  "enter":"Вход"
 }

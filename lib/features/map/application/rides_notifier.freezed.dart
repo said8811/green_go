@@ -19,6 +19,7 @@ mixin _$RidesState {
   List<RideModel> get rides => throw _privateConstructorUsedError;
   List<BookModel> get books => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  TransportModel? get transport => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get imgPath => throw _privateConstructorUsedError;
   RideAction get actionState => throw _privateConstructorUsedError;
@@ -38,10 +39,12 @@ abstract class $RidesStateCopyWith<$Res> {
       {List<RideModel> rides,
       List<BookModel> books,
       bool isLoading,
+      TransportModel? transport,
       Failure? error,
       String? imgPath,
       RideAction actionState});
 
+  $TransportModelCopyWith<$Res>? get transport;
   $FailureCopyWith<$Res>? get error;
 }
 
@@ -61,6 +64,7 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
     Object? rides = null,
     Object? books = null,
     Object? isLoading = null,
+    Object? transport = freezed,
     Object? error = freezed,
     Object? imgPath = freezed,
     Object? actionState = null,
@@ -78,6 +82,10 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      transport: freezed == transport
+          ? _value.transport
+          : transport // ignore: cast_nullable_to_non_nullable
+              as TransportModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -91,6 +99,18 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
           : actionState // ignore: cast_nullable_to_non_nullable
               as RideAction,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TransportModelCopyWith<$Res>? get transport {
+    if (_value.transport == null) {
+      return null;
+    }
+
+    return $TransportModelCopyWith<$Res>(_value.transport!, (value) {
+      return _then(_value.copyWith(transport: value) as $Val);
+    });
   }
 
   @override
@@ -118,10 +138,13 @@ abstract class _$$RidesStateImplCopyWith<$Res>
       {List<RideModel> rides,
       List<BookModel> books,
       bool isLoading,
+      TransportModel? transport,
       Failure? error,
       String? imgPath,
       RideAction actionState});
 
+  @override
+  $TransportModelCopyWith<$Res>? get transport;
   @override
   $FailureCopyWith<$Res>? get error;
 }
@@ -140,6 +163,7 @@ class __$$RidesStateImplCopyWithImpl<$Res>
     Object? rides = null,
     Object? books = null,
     Object? isLoading = null,
+    Object? transport = freezed,
     Object? error = freezed,
     Object? imgPath = freezed,
     Object? actionState = null,
@@ -157,6 +181,10 @@ class __$$RidesStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      transport: freezed == transport
+          ? _value.transport
+          : transport // ignore: cast_nullable_to_non_nullable
+              as TransportModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -180,6 +208,7 @@ class _$RidesStateImpl implements _RidesState {
       {required final List<RideModel> rides,
       required final List<BookModel> books,
       required this.isLoading,
+      this.transport,
       this.error,
       this.imgPath,
       required this.actionState})
@@ -205,6 +234,8 @@ class _$RidesStateImpl implements _RidesState {
   @override
   final bool isLoading;
   @override
+  final TransportModel? transport;
+  @override
   final Failure? error;
   @override
   final String? imgPath;
@@ -213,7 +244,7 @@ class _$RidesStateImpl implements _RidesState {
 
   @override
   String toString() {
-    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, error: $error, imgPath: $imgPath, actionState: $actionState)';
+    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, transport: $transport, error: $error, imgPath: $imgPath, actionState: $actionState)';
   }
 
   @override
@@ -225,6 +256,8 @@ class _$RidesStateImpl implements _RidesState {
             const DeepCollectionEquality().equals(other._books, _books) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.transport, transport) ||
+                other.transport == transport) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.imgPath, imgPath) || other.imgPath == imgPath) &&
             (identical(other.actionState, actionState) ||
@@ -237,6 +270,7 @@ class _$RidesStateImpl implements _RidesState {
       const DeepCollectionEquality().hash(_rides),
       const DeepCollectionEquality().hash(_books),
       isLoading,
+      transport,
       error,
       imgPath,
       actionState);
@@ -253,6 +287,7 @@ abstract class _RidesState implements RidesState {
       {required final List<RideModel> rides,
       required final List<BookModel> books,
       required final bool isLoading,
+      final TransportModel? transport,
       final Failure? error,
       final String? imgPath,
       required final RideAction actionState}) = _$RidesStateImpl;
@@ -263,6 +298,8 @@ abstract class _RidesState implements RidesState {
   List<BookModel> get books;
   @override
   bool get isLoading;
+  @override
+  TransportModel? get transport;
   @override
   Failure? get error;
   @override

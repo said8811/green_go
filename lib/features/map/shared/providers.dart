@@ -30,11 +30,12 @@ final ridesNotifierProvider =
   return RidesNotifier(ref.watch(rideProvider));
 });
 
-final timerNotifierProvider = StateNotifierProvider<TimerNotifier, int>((ref) {
+final timerNotifierProvider =
+    StateNotifierProvider.autoDispose<TimerNotifier, int>((ref) {
   return TimerNotifier();
 });
 
 final booksTimerNotifierProvider =
-    StateNotifierProvider<BooksTimerNotifier, int>((ref) {
+    StateNotifierProvider.autoDispose<BooksTimerNotifier, int>((ref) {
   return BooksTimerNotifier();
 });
