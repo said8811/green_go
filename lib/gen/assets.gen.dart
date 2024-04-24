@@ -395,9 +395,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/click.png
   AssetGenImage get click => const AssetGenImage('assets/images/click.png');
 
-  /// File path: assets/images/current_location.jpg
+  /// File path: assets/images/current_location.png
   AssetGenImage get currentLocation =>
-      const AssetGenImage('assets/images/current_location.jpg');
+      const AssetGenImage('assets/images/current_location.png');
 
   /// File path: assets/images/humo.png
   AssetGenImage get humo => const AssetGenImage('assets/images/humo.png');

@@ -6,6 +6,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/features/map/presentation/widgets/map_view.dart';
+import 'package:green_go/features/map/presentation/widgets/transport_booked_view.dart';
 import 'package:green_go/features/map/presentation/widgets/transport_widget.dart';
 import 'package:green_go/features/map/shared/providers.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
@@ -20,8 +22,6 @@ import '../../../core/presentation/widgets/common_svg_picture.dart';
 import '../../application/rides_notifier.dart';
 import '../widgets/action_buttons_view.dart';
 import '../widgets/transport_actions_view.dart';
-
-const _centralPoint = Point(latitude: 41.311081, longitude: 69.240562);
 
 class MapPage extends ConsumerStatefulWidget {
   const MapPage({super.key});
@@ -41,8 +41,7 @@ class _MapPageState extends ConsumerState<MapPage> {
   void initState() {
     Future.microtask(() {
       _updateMapObjects();
-
-      _updateTimer = Timer.periodic(const Duration(minutes: 2), (timer) {
+      _updateTimer = Timer.periodic(const Duration(minutes: 1), (timer) {
         final latLong = ref.watch(locationStateProvider);
         ref
             .read(referenceNotifierProvider.notifier)
@@ -138,9 +137,17 @@ class _MapPageState extends ConsumerState<MapPage> {
                 ),
               ),
             );
-            ref
-                .read(mapNotifierProvider.notifier)
-                .updateOneObject(mapObject.mapId.value, updatedPlacemark);
+            var intialPlaceMark = mapObject.copyWith(
+              icon: PlacemarkIcon.single(
+                PlacemarkIconStyle(
+                  image:
+                      BitmapDescriptor.fromAssetImage(Assets.images.bike.path),
+                  scale: 1.7,
+                ),
+              ),
+            );
+            ref.read(mapNotifierProvider.notifier).updateOneObject(
+                mapObject.mapId.value, updatedPlacemark, intialPlaceMark);
             if (!ref.watch(transportStateProvider).isLoading) {
               ref
                   .read(transportStateProvider.notifier)
@@ -161,6 +168,7 @@ class _MapPageState extends ConsumerState<MapPage> {
         ref.read(mapNotifierProvider.notifier).addMainObjects(placeMark);
       }
     }
+    setState(() {});
   }
 
   @override
@@ -171,6 +179,9 @@ class _MapPageState extends ConsumerState<MapPage> {
       if (next.rides.isNotEmpty && (previous?.rides ?? []).isEmpty) {
         openActionsView();
       }
+      if (next.books.isNotEmpty && (previous?.books ?? []).isEmpty) {
+        openBooksView();
+      }
       if (previous?.actionState != RideAction.stop &&
           next.actionState == RideAction.stop) {
         context.pop();
@@ -180,24 +191,16 @@ class _MapPageState extends ConsumerState<MapPage> {
       key: _key,
       body: Stack(
         children: [
-          YandexMap(
-            onMapCreated: (YandexMapController controller) async {
+          MapView(
+            onMapCreated: (controller) {
               _controller = controller;
-              await controller.moveCamera(
-                CameraUpdate.newCameraPosition(
-                    const CameraPosition(target: _centralPoint, zoom: 16)),
-              );
             },
-            mapObjects: zoom < 11
-                ? ref.watch(mapNotifierProvider).availableObjects
-                : ref.watch(mapNotifierProvider).mainObjects,
-            onCameraPositionChanged: (cameraPosition, reason, finished) {
-              if (finished) {
-                setState(() {
-                  zoom = cameraPosition.zoom;
-                });
-              }
+            onPositionChanged: (position) {
+              setState(() {
+                zoom = position.zoom;
+              });
             },
+            zoom: zoom,
           ),
           Positioned(
             top: 1,
@@ -342,6 +345,7 @@ class _MapPageState extends ConsumerState<MapPage> {
   @override
   void dispose() {
     _updateTimer?.cancel();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -356,6 +360,17 @@ class _MapPageState extends ConsumerState<MapPage> {
       backgroundColor: Colors.white,
       builder: (_) {
         return const TransportActionsView();
+      },
+    );
+  }
+
+  void openBooksView() {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      backgroundColor: Colors.white,
+      builder: (_) {
+        return const TransportBookWidget();
       },
     );
   }

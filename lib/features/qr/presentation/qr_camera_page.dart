@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
-import 'package:green_go/features/map/shared/providers.dart';
+import 'package:green_go/features/qr/presentation/widgets/enter_qr_moddal_view.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'widgets/qr_camera_overlay.dart';
@@ -37,7 +35,6 @@ class _QrCameraPageState extends ConsumerState<QrCameraPage> {
                   setState(() {
                     isDetected = true;
                   });
-
                   context.pop(capture.barcodes[0].rawValue);
                 }
               },
@@ -73,81 +70,7 @@ class _QrCameraPageState extends ConsumerState<QrCameraPage> {
                   await showModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      // Calculate the bottom padding using MediaQuery to accommodate the keyboard
-                      final bottomPadding =
-                          MediaQuery.of(context).viewInsets.bottom;
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            bottom:
-                                bottomPadding, // Use the calculated bottom padding here
-                            left: 20,
-                            right: 20,
-                            top: 20,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Center(
-                                child: SizedBox(
-                                  width: 148,
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    textInputAction: TextInputAction.next,
-                                    controller: textController,
-                                    style: context.textTheme.bodyMedium
-                                        ?.copyWith(fontSize: 24),
-                                    onChanged: (value) {
-                                      if (value.length == 7) {
-                                        ref
-                                            .read(
-                                                transportStateProvider.notifier)
-                                            .setQr(textController.text.trim());
-                                        Navigator.of(context)
-                                            .pop(textController.text.trim());
-                                      }
-                                    },
-                                    inputFormatters: [
-                                      MaskTextInputFormatter(
-                                        mask: '###-### ',
-                                        filter: {"#": RegExp(r'[0-9]')},
-                                      )
-                                    ],
-                                    decoration: InputDecoration(
-                                        hintText: "000-000",
-                                        hintStyle: context.textTheme.bodyMedium
-                                            ?.copyWith(
-                                                fontSize: 24,
-                                                color: context
-                                                    .colorScheme.greyDark),
-                                        enabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 200),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      title: "Kiritish",
-                                      onPress: () {
-                                        ref
-                                            .read(
-                                                transportStateProvider.notifier)
-                                            .setQr(textController.text.trim());
-                                        Navigator.of(context)
-                                            .pop(textController.text.trim());
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Gap(30),
-                            ],
-                          ),
-                        ),
-                      );
+                      return EnterQrModdal(textController: textController);
                     },
                     isScrollControlled: true,
                   ).then((value) => context.pop(value));

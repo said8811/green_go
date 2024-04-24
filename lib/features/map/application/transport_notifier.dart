@@ -1,4 +1,5 @@
 import 'package:green_go/features/core/domain/failure.dart';
+import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/single_transport_model.dart';
 import 'package:green_go/features/map/infrastructure/transport_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +14,7 @@ enum TransportActionEnum {
   start,
   booking,
   book,
+  cancelingBook,
   ready,
   turnOn,
 }
@@ -21,6 +23,7 @@ enum TransportActionEnum {
 class TransportState with _$TransportState {
   factory TransportState({
     required SingleTransportModel? transport,
+    BookModel? book,
     required bool isLoading,
     Failure? error,
     String? qrCode,
@@ -74,6 +77,24 @@ class TransportNotifier extends StateNotifier<TransportState> {
   Future<bool> book(int id) async {
     state = state.copyWith(actionState: TransportActionEnum.booking);
     final dataOrFailure = await _repository.book(id);
+    dataOrFailure.fold(
+      (l) => state = state.copyWith(
+        error: l,
+        actionState: TransportActionEnum.pure,
+      ),
+      (r) {
+        state = state.copyWith(
+          actionState: TransportActionEnum.book,
+          book: r,
+        );
+      },
+    );
+    return dataOrFailure.fold((l) => false, (r) => true);
+  }
+
+  Future<bool> cancelBook(int id) async {
+    state = state.copyWith(actionState: TransportActionEnum.cancelingBook);
+    final dataOrFailure = await _repository.cancelBook(id);
     dataOrFailure.fold(
       (l) => state = state.copyWith(
         error: l,

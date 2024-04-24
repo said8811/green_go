@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/core/shared/extensions/dio_extensions.dart';
 import 'package:green_go/features/core/shared/extensions/response_extensions.dart';
+import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/single_transport_model.dart';
 
 class TransportRepository {
@@ -58,12 +59,32 @@ class TransportRepository {
     }
   }
 
-  Future<Either<Failure, bool>> book(
+  Future<Either<Failure, BookModel>> book(
     int id,
   ) async {
     try {
       final Response response = await _dio.post(
         "/book/$id",
+      );
+      if (response.isSuccessful) {
+        return right(BookModel.fromJson(response.data));
+      } else {
+        return left(Failure.server(response.data?['message']));
+      }
+    } on DioException catch (e) {
+      if (e.isConnectionError) {
+        return left(const Failure.noConnection());
+      }
+      return left(Failure.server(e.response?.data['message']));
+    }
+  }
+
+  Future<Either<Failure, bool>> cancelBook(
+    int id,
+  ) async {
+    try {
+      final Response response = await _dio.patch(
+        "/book/cancel/$id",
       );
       if (response.isSuccessful) {
         return right(true);

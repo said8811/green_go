@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RidesState {
   List<RideModel> get rides => throw _privateConstructorUsedError;
+  List<BookModel> get books => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get imgPath => throw _privateConstructorUsedError;
@@ -35,6 +36,7 @@ abstract class $RidesStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<RideModel> rides,
+      List<BookModel> books,
       bool isLoading,
       Failure? error,
       String? imgPath,
@@ -57,6 +59,7 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
   @override
   $Res call({
     Object? rides = null,
+    Object? books = null,
     Object? isLoading = null,
     Object? error = freezed,
     Object? imgPath = freezed,
@@ -67,6 +70,10 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
           ? _value.rides
           : rides // ignore: cast_nullable_to_non_nullable
               as List<RideModel>,
+      books: null == books
+          ? _value.books
+          : books // ignore: cast_nullable_to_non_nullable
+              as List<BookModel>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -109,6 +116,7 @@ abstract class _$$RidesStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<RideModel> rides,
+      List<BookModel> books,
       bool isLoading,
       Failure? error,
       String? imgPath,
@@ -130,6 +138,7 @@ class __$$RidesStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? rides = null,
+    Object? books = null,
     Object? isLoading = null,
     Object? error = freezed,
     Object? imgPath = freezed,
@@ -140,6 +149,10 @@ class __$$RidesStateImplCopyWithImpl<$Res>
           ? _value._rides
           : rides // ignore: cast_nullable_to_non_nullable
               as List<RideModel>,
+      books: null == books
+          ? _value._books
+          : books // ignore: cast_nullable_to_non_nullable
+              as List<BookModel>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -165,11 +178,13 @@ class __$$RidesStateImplCopyWithImpl<$Res>
 class _$RidesStateImpl implements _RidesState {
   _$RidesStateImpl(
       {required final List<RideModel> rides,
+      required final List<BookModel> books,
       required this.isLoading,
       this.error,
       this.imgPath,
       required this.actionState})
-      : _rides = rides;
+      : _rides = rides,
+        _books = books;
 
   final List<RideModel> _rides;
   @override
@@ -177,6 +192,14 @@ class _$RidesStateImpl implements _RidesState {
     if (_rides is EqualUnmodifiableListView) return _rides;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rides);
+  }
+
+  final List<BookModel> _books;
+  @override
+  List<BookModel> get books {
+    if (_books is EqualUnmodifiableListView) return _books;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_books);
   }
 
   @override
@@ -190,7 +213,7 @@ class _$RidesStateImpl implements _RidesState {
 
   @override
   String toString() {
-    return 'RidesState(rides: $rides, isLoading: $isLoading, error: $error, imgPath: $imgPath, actionState: $actionState)';
+    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, error: $error, imgPath: $imgPath, actionState: $actionState)';
   }
 
   @override
@@ -199,6 +222,7 @@ class _$RidesStateImpl implements _RidesState {
         (other.runtimeType == runtimeType &&
             other is _$RidesStateImpl &&
             const DeepCollectionEquality().equals(other._rides, _rides) &&
+            const DeepCollectionEquality().equals(other._books, _books) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -211,6 +235,7 @@ class _$RidesStateImpl implements _RidesState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_rides),
+      const DeepCollectionEquality().hash(_books),
       isLoading,
       error,
       imgPath,
@@ -226,6 +251,7 @@ class _$RidesStateImpl implements _RidesState {
 abstract class _RidesState implements RidesState {
   factory _RidesState(
       {required final List<RideModel> rides,
+      required final List<BookModel> books,
       required final bool isLoading,
       final Failure? error,
       final String? imgPath,
@@ -233,6 +259,8 @@ abstract class _RidesState implements RidesState {
 
   @override
   List<RideModel> get rides;
+  @override
+  List<BookModel> get books;
   @override
   bool get isLoading;
   @override

@@ -7,6 +7,7 @@ import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:green_go/services/router/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../core/presentation/widgets/common_svg_picture.dart';
@@ -45,7 +46,8 @@ class HistoryWidget extends HookConsumerWidget {
                   const Gap(10),
                   Text(ride.tariff?.nameRu ?? ""),
                   const Spacer(),
-                  Text(getDate(DateTime.parse(ride.startAt).toLocal())),
+                  Text(DateFormat("HH:mm", "tr_TR")
+                      .format(DateTime.parse(ride.startAt))),
                 ],
               ),
               const Gap(30),
@@ -63,9 +65,5 @@ class HistoryWidget extends HookConsumerWidget {
         ),
       ),
     );
-  }
-
-  String getDate(DateTime date) {
-    return "${date.hour < 10 ? "0${date.hour}" : date.hour}:${date.minute < 10 ? "0${date.minute}" : date.minute}";
   }
 }

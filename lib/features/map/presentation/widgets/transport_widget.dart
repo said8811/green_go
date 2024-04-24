@@ -146,12 +146,10 @@ class TransportWidget extends HookConsumerWidget {
                             .read(transportStateProvider.notifier)
                             .book(state.transport!.id)
                             .then((value) {
-                          if (value) {
-                            ref
-                                .read(ridesNotifierProvider.notifier)
-                                .getRides()
-                                .then((value) => context.pop());
-                          }
+                          ref
+                              .read(ridesNotifierProvider.notifier)
+                              .getRides()
+                              .then((value) => context.pop());
                         });
                       },
                       color: context.colorScheme.grey.withOpacity(0.3),

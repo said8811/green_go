@@ -1,4 +1,5 @@
 import 'package:green_go/features/core/shared/providers.dart';
+import 'package:green_go/features/map/application/books_timer_notifier.dart';
 import 'package:green_go/features/map/application/map_notifier.dart';
 import 'package:green_go/features/map/application/rides_notifier.dart';
 import 'package:green_go/features/map/application/timer_notifier.dart';
@@ -31,4 +32,9 @@ final ridesNotifierProvider =
 
 final timerNotifierProvider = StateNotifierProvider<TimerNotifier, int>((ref) {
   return TimerNotifier();
+});
+
+final booksTimerNotifierProvider =
+    StateNotifierProvider<BooksTimerNotifier, int>((ref) {
+  return BooksTimerNotifier();
 });

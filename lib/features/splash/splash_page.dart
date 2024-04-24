@@ -29,6 +29,23 @@ class SplashPage extends HookConsumerWidget {
     useEffectWithScheduler(action: () async {
       await getCurrentPosition().then((value) {
         if (value != null) {
+          ref.read(mapNotifierProvider.notifier).addMainObjects(
+                PlacemarkMapObject(
+                  mapId: const MapObjectId('polygon_currentLocation'),
+                  opacity: 1,
+                  point: Point(
+                      latitude: value.latitude, longitude: value.longitude),
+                  icon: PlacemarkIcon.single(
+                    PlacemarkIconStyle(
+                      image: BitmapDescriptor.fromAssetImage(
+                        Assets.images.currentLocation.path,
+                      ),
+                      scale: 0.7,
+                    ),
+                  ),
+                  onTap: (mapObject, point) {},
+                ),
+              );
           ref
               .read(referenceNotifierProvider.notifier)
               .getData(value.latitude, value.longitude);
@@ -41,23 +58,25 @@ class SplashPage extends HookConsumerWidget {
         ref.read(authNotifierProvider.notifier).signOut();
       }
       if (previous?.data == null && next.data != null) {
-        ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
-              mapId: const MapObjectId('polygon_earth'),
-              fillColor: Colors.red.withOpacity(0.18),
-              strokeColor: Colors.red,
-              isGeodesic: true,
-              isVisible: true,
-              strokeWidth: 1,
-              polygon: const Polygon(
-                  outerRing: LinearRing(points: [
-                    Point(latitude: 85, longitude: -180),
-                    Point(latitude: 85, longitude: 180),
-                    Point(latitude: -85, longitude: 180),
-                    Point(latitude: -85, longitude: -180),
-                  ]),
-                  innerRings: []),
-              onTap: (PolygonMapObject self, Point point) {},
-            ));
+        ref.read(mapNotifierProvider.notifier).addMainObjects(
+              PolygonMapObject(
+                mapId: const MapObjectId('polygon_earth'),
+                fillColor: Colors.red.withOpacity(0.18),
+                strokeColor: Colors.red,
+                isGeodesic: true,
+                isVisible: true,
+                strokeWidth: 1,
+                polygon: const Polygon(
+                    outerRing: LinearRing(points: [
+                      Point(latitude: 85, longitude: -180),
+                      Point(latitude: 85, longitude: 180),
+                      Point(latitude: -85, longitude: 180),
+                      Point(latitude: -85, longitude: -180),
+                    ]),
+                    innerRings: []),
+                onTap: (PolygonMapObject self, Point point) {},
+              ),
+            );
 
         context.go(AppRoute.map.routePathWithSlash);
       }

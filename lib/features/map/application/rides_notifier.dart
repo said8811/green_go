@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:green_go/features/core/domain/failure.dart';
+import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,13 +21,14 @@ enum RideAction {
 class RidesState with _$RidesState {
   factory RidesState({
     required List<RideModel> rides,
+    required List<BookModel> books,
     required bool isLoading,
     Failure? error,
     String? imgPath,
     required RideAction actionState,
   }) = _RidesState;
-  factory RidesState.initial() =>
-      RidesState(rides: [], isLoading: false, actionState: RideAction.pure);
+  factory RidesState.initial() => RidesState(
+      rides: [], isLoading: false, actionState: RideAction.pure, books: []);
 }
 
 class RidesNotifier extends StateNotifier<RidesState> {
@@ -40,7 +42,11 @@ class RidesNotifier extends StateNotifier<RidesState> {
     final dataOrFailure = await _repository.getRides();
     state = dataOrFailure.fold(
       (l) => state.copyWith(error: l, isLoading: false),
-      (r) => state.copyWith(rides: r, isLoading: false),
+      (r) => state.copyWith(
+        rides: r.rides,
+        isLoading: false,
+        books: r.books,
+      ),
     );
   }
 
@@ -80,7 +86,8 @@ class RidesNotifier extends StateNotifier<RidesState> {
       state = dataOrFailure.fold(
           (l) => state.copyWith(error: l, actionState: action),
           (r) => state.copyWith(
-                rides: r,
+                rides: r.rides,
+                books: r.books,
                 actionState: RideAction.stop,
               ));
     });

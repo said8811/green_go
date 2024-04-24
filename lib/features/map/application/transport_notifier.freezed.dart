@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransportState {
   SingleTransportModel? get transport => throw _privateConstructorUsedError;
+  BookModel? get book => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get qrCode => throw _privateConstructorUsedError;
@@ -35,12 +36,14 @@ abstract class $TransportStateCopyWith<$Res> {
   @useResult
   $Res call(
       {SingleTransportModel? transport,
+      BookModel? book,
       bool isLoading,
       Failure? error,
       String? qrCode,
       TransportActionEnum actionState});
 
   $SingleTransportModelCopyWith<$Res>? get transport;
+  $BookModelCopyWith<$Res>? get book;
   $FailureCopyWith<$Res>? get error;
 }
 
@@ -58,6 +61,7 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
   @override
   $Res call({
     Object? transport = freezed,
+    Object? book = freezed,
     Object? isLoading = null,
     Object? error = freezed,
     Object? qrCode = freezed,
@@ -68,6 +72,10 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
               as SingleTransportModel?,
+      book: freezed == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as BookModel?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -101,6 +109,18 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
 
   @override
   @pragma('vm:prefer-inline')
+  $BookModelCopyWith<$Res>? get book {
+    if (_value.book == null) {
+      return null;
+    }
+
+    return $BookModelCopyWith<$Res>(_value.book!, (value) {
+      return _then(_value.copyWith(book: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res>? get error {
     if (_value.error == null) {
       return null;
@@ -122,6 +142,7 @@ abstract class _$$TransportStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {SingleTransportModel? transport,
+      BookModel? book,
       bool isLoading,
       Failure? error,
       String? qrCode,
@@ -129,6 +150,8 @@ abstract class _$$TransportStateImplCopyWith<$Res>
 
   @override
   $SingleTransportModelCopyWith<$Res>? get transport;
+  @override
+  $BookModelCopyWith<$Res>? get book;
   @override
   $FailureCopyWith<$Res>? get error;
 }
@@ -145,6 +168,7 @@ class __$$TransportStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transport = freezed,
+    Object? book = freezed,
     Object? isLoading = null,
     Object? error = freezed,
     Object? qrCode = freezed,
@@ -155,6 +179,10 @@ class __$$TransportStateImplCopyWithImpl<$Res>
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
               as SingleTransportModel?,
+      book: freezed == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as BookModel?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -180,6 +208,7 @@ class __$$TransportStateImplCopyWithImpl<$Res>
 class _$TransportStateImpl implements _TransportState {
   _$TransportStateImpl(
       {required this.transport,
+      this.book,
       required this.isLoading,
       this.error,
       this.qrCode,
@@ -187,6 +216,8 @@ class _$TransportStateImpl implements _TransportState {
 
   @override
   final SingleTransportModel? transport;
+  @override
+  final BookModel? book;
   @override
   final bool isLoading;
   @override
@@ -198,7 +229,7 @@ class _$TransportStateImpl implements _TransportState {
 
   @override
   String toString() {
-    return 'TransportState(transport: $transport, isLoading: $isLoading, error: $error, qrCode: $qrCode, actionState: $actionState)';
+    return 'TransportState(transport: $transport, book: $book, isLoading: $isLoading, error: $error, qrCode: $qrCode, actionState: $actionState)';
   }
 
   @override
@@ -208,6 +239,7 @@ class _$TransportStateImpl implements _TransportState {
             other is _$TransportStateImpl &&
             (identical(other.transport, transport) ||
                 other.transport == transport) &&
+            (identical(other.book, book) || other.book == book) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
@@ -218,7 +250,7 @@ class _$TransportStateImpl implements _TransportState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, transport, isLoading, error, qrCode, actionState);
+      runtimeType, transport, book, isLoading, error, qrCode, actionState);
 
   @JsonKey(ignore: true)
   @override
@@ -231,6 +263,7 @@ class _$TransportStateImpl implements _TransportState {
 abstract class _TransportState implements TransportState {
   factory _TransportState(
       {required final SingleTransportModel? transport,
+      final BookModel? book,
       required final bool isLoading,
       final Failure? error,
       final String? qrCode,
@@ -238,6 +271,8 @@ abstract class _TransportState implements TransportState {
 
   @override
   SingleTransportModel? get transport;
+  @override
+  BookModel? get book;
   @override
   bool get isLoading;
   @override

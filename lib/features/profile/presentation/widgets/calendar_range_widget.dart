@@ -16,8 +16,8 @@ class CalendarRangeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
-      width: 400,
+      height: 350,
+      width: 500,
       child: SfDateRangePicker(
         headerStyle: DateRangePickerHeaderStyle(
           textStyle: context.textTheme.bodyLarge,

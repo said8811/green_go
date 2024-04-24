@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_go/features/core/infrastructure/url_launch_service.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:green_go/services/router/constants.dart';
@@ -34,7 +35,9 @@ class HelpTilesView extends ConsumerWidget {
         ProfileTile(
           title: l10n.techSupport,
           icon: Assets.icons.support,
-          onTap: () {},
+          onTap: () {
+            UrlLaunchService.launchPhone("+998995117361");
+          },
           subtitle: "+998 99 511 73 61",
         ),
         ProfileTile(

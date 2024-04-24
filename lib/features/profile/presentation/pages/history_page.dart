@@ -39,6 +39,8 @@ class HistoryPage extends HookConsumerWidget {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 10),
                           content: CalendarRangeWidget(
                             start: DateTime.now(),
                             end: DateTime.now()
@@ -86,6 +88,7 @@ class HistoryPage extends HookConsumerWidget {
                       title: Text(from.value != null && to.value != null
                           ? "${filtrDate(from.value!)} - ${filtrDate(to.value!)}"
                           : "Filtr"),
+                      trailing: const Icon(Icons.calendar_month),
                     ),
                   ),
                   const Gap(20),

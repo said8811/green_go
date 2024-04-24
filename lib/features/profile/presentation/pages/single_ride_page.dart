@@ -83,7 +83,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
             const Divider(),
             tileWithsub(
                 "Sayohat vaqt",
-                DateFormat("d MMM yyyy - HH:mm", "tr_TR")
+                DateFormat("d-MM-yyyy - HH:mm", "tr_TR")
                     .format(DateTime.parse(widget.ride.startAt)),
                 context),
             const Divider(),

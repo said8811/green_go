@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:green_go/features/core/shared/extensions/dio_extensions.dart';
 import 'package:green_go/features/core/shared/extensions/response_extensions.dart';
-import 'package:green_go/features/map/domain/ride_model.dart';
+import 'package:green_go/features/map/domain/rides_books_model.dart';
 
 import '../../core/domain/failure.dart';
 
@@ -10,13 +10,11 @@ class RideRepository {
   final Dio _dio;
   RideRepository(this._dio);
 
-  Future<Either<Failure, List<RideModel>>> getRides() async {
+  Future<Either<Failure, RidesBooksModel>> getRides() async {
     try {
       final Response response = await _dio.get("/ride/");
       if (response.isSuccessful) {
-        return right((response.data['rides'] as List)
-            .map((e) => RideModel.fromJson(e))
-            .toList());
+        return right(RidesBooksModel.fromJson(response.data));
       } else {
         return left(Failure.server(response.data?['message']));
       }
