@@ -15,6 +15,7 @@ class LanguageTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localeCode = ref.watch(localeNotifierProvider).languageCode;
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       onTap: () {
@@ -24,7 +25,7 @@ class LanguageTile extends ConsumerWidget {
             .then((value) => Navigator.pop(context));
       },
       title: Text(locale.name),
-      trailing: languageCode == languageCode ? const Icon(Icons.check) : null,
+      trailing: languageCode == localeCode ? const Icon(Icons.check) : null,
     );
   }
 }

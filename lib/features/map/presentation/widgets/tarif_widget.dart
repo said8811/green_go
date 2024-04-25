@@ -9,12 +9,15 @@ import '../../../core/presentation/helpers/ui_utils.dart';
 class TariffWidget extends ConsumerWidget {
   final VoidCallback onTap;
   final TarifModel tarif;
-  final int selectedTarif;
-  const TariffWidget(
-      {super.key,
-      required this.onTap,
-      required this.tarif,
-      required this.selectedTarif});
+  final bool isSelected;
+  final VoidCallback onTarifTap;
+  const TariffWidget({
+    super.key,
+    required this.onTap,
+    required this.tarif,
+    required this.isSelected,
+    required this.onTarifTap,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,10 +28,10 @@ class TariffWidget extends ConsumerWidget {
         padding: const EdgeInsets.only(left: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: selectedTarif == tarif.id
+          border: isSelected
               ? Border.all(color: context.colorScheme.primary)
               : null,
-          color: selectedTarif == tarif.id
+          color: isSelected
               ? context.colorScheme.primary.withOpacity(0.3)
               : context.colorScheme.grey.withOpacity(0.3),
         ),
@@ -50,8 +53,20 @@ class TariffWidget extends ConsumerWidget {
               ],
             ),
             const Gap(12),
-            IconButton(
-                onPressed: () {}, icon: const Icon(Icons.more_vert_outlined))
+            InkWell(
+              onTap: onTarifTap,
+              borderRadius: BorderRadius.circular(40),
+              child: Ink(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: const Text("!"),
+              ),
+            ),
+            const Gap(10),
           ],
         ),
       ),

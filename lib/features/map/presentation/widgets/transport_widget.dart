@@ -7,8 +7,10 @@ import 'package:green_go/features/core/presentation/buttons/primary_button.dart'
 import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/transport_notifier.dart';
+import 'package:green_go/features/map/presentation/widgets/expanded_tarif_widget.dart';
 import 'package:green_go/features/map/presentation/widgets/tarif_widget.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -22,7 +24,8 @@ class TransportWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
-    final selectedTarif = useState(1);
+    final selectedTarif = useState(0);
+    final isTarif = useState(true);
     final reference = ref.watch(referenceNotifierProvider).data!;
     final state = ref.watch(transportStateProvider);
     ref.listen(transportStateProvider, (previous, next) {
@@ -81,26 +84,44 @@ class TransportWidget extends HookConsumerWidget {
                 const Divider(),
                 const Gap(10),
                 Text(
-                  "Tariflardan birini tanlang",
+                  context.l10n.chooseTariff,
                   style: textTheme.bodyMedium,
                 ),
                 const Gap(8),
-                SizedBox(
-                  height: 65,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_, index) {
-                        final tarif = state.transport!.tariffs[index];
-                        return TariffWidget(
-                            onTap: () {
-                              selectedTarif.value = tarif.id;
+                isTarif.value
+                    ? SizedBox(
+                        height: !isTarif.value ? 185 : 65,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (_, index) {
+                              final tarif = state.transport!.tariffs[index];
+                              return isTarif.value
+                                  ? TariffWidget(
+                                      onTap: () {
+                                        selectedTarif.value = index;
+                                      },
+                                      tarif: tarif,
+                                      isSelected: selectedTarif.value == index,
+                                      onTarifTap: () {
+                                        isTarif.value = false;
+                                      },
+                                    )
+                                  : ExpandedTarifWidget(
+                                      tarif: tarif,
+                                      onClose: () {
+                                        isTarif.value = true;
+                                      },
+                                    );
                             },
-                            tarif: tarif,
-                            selectedTarif: selectedTarif.value);
-                      },
-                      separatorBuilder: (i, _) => const Gap(8),
-                      itemCount: state.transport!.tariffs.length),
-                ),
+                            separatorBuilder: (i, _) => const Gap(8),
+                            itemCount: state.transport!.tariffs.length),
+                      )
+                    : ExpandedTarifWidget(
+                        tarif: state.transport!.tariffs[selectedTarif.value],
+                        onClose: () {
+                          isTarif.value = true;
+                        },
+                      ),
                 const Gap(12),
                 Row(
                   children: [

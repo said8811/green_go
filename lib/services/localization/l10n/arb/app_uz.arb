@@ -295,5 +295,7 @@
   "travelTime":"Sayohat vaqti",
   "travelDuration":"Sayohat davomiyligi",
   "enterNumber":"Raqamni kiriting",
-  "enter":"Kiritish"
+  "enter":"Kiritish",
+  "endImage":"Tugatgandan so'ng fotosurat",
+  "chooseTariff":"Tarifflardan birini tanlang"
 }

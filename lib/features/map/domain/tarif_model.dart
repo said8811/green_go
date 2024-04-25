@@ -21,6 +21,7 @@ class TarifModel with _$TarifModel {
     required int price,
     required int startPrice,
     required int pricePerMinute,
+    required int pausePricePerMinute,
   }) = _TarifModel;
 
   factory TarifModel.fromJson(Map<String, dynamic> json) =>

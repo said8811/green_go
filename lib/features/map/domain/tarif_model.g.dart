@@ -21,6 +21,7 @@ _$TarifModelImpl _$$TarifModelImplFromJson(Map<String, dynamic> json) =>
       price: json['price'] as int,
       startPrice: json['startPrice'] as int,
       pricePerMinute: json['pricePerMinute'] as int,
+      pausePricePerMinute: json['pausePricePerMinute'] as int,
     );
 
 Map<String, dynamic> _$$TarifModelImplToJson(_$TarifModelImpl instance) =>
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$TarifModelImplToJson(_$TarifModelImpl instance) =>
       'price': instance.price,
       'startPrice': instance.startPrice,
       'pricePerMinute': instance.pricePerMinute,
+      'pausePricePerMinute': instance.pausePricePerMinute,
     };

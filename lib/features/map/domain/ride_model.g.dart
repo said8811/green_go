@@ -24,6 +24,7 @@ _$RideModelImpl _$$RideModelImplFromJson(Map<String, dynamic> json) =>
           : TarifModel.fromJson(json['tariff'] as Map<String, dynamic>),
       startAt: json['startAt'] as String? ?? '',
       finishedAt: json['finishedAt'] as String? ?? '',
+      image: json['image'] as String? ?? '',
       pouseTime: json['pouseTime'] as int? ?? 0,
       total: json['total'] == null ? 0 : JsonHelpers.intToDouble(json['total']),
       coordinates: json['coordinates'] == null
@@ -46,6 +47,7 @@ Map<String, dynamic> _$$RideModelImplToJson(_$RideModelImpl instance) =>
       'tariff': instance.tariff,
       'startAt': instance.startAt,
       'finishedAt': instance.finishedAt,
+      'image': instance.image,
       'pouseTime': instance.pouseTime,
       'total': instance.total,
       'coordinates': instance.coordinates,

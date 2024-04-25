@@ -11,7 +11,7 @@ const kAppTitle = 'Dafna';
 
 const kTokenKey = 'token';
 
-const kCDNUrl = 'https://safiabakery.uz/uploads';
+const kCDNUrl = 'http://80.90.188.12:9000/public';
 
 const kInstallmentPercent = 1.44;
 const kCashbackPercent = 0.02;

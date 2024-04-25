@@ -40,7 +40,7 @@ class SplashPage extends HookConsumerWidget {
                       image: BitmapDescriptor.fromAssetImage(
                         Assets.images.currentLocation.path,
                       ),
-                      scale: 0.7,
+                      scale: 0.6,
                     ),
                   ),
                   onTap: (mapObject, point) {},

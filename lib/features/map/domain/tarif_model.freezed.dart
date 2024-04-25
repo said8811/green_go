@@ -39,6 +39,7 @@ mixin _$TarifModel {
   int get price => throw _privateConstructorUsedError;
   int get startPrice => throw _privateConstructorUsedError;
   int get pricePerMinute => throw _privateConstructorUsedError;
+  int get pausePricePerMinute => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,7 +66,8 @@ abstract class $TarifModelCopyWith<$Res> {
       int activateCount,
       int price,
       int startPrice,
-      int pricePerMinute});
+      int pricePerMinute,
+      int pausePricePerMinute});
 }
 
 /// @nodoc
@@ -94,6 +96,7 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
     Object? price = null,
     Object? startPrice = null,
     Object? pricePerMinute = null,
+    Object? pausePricePerMinute = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -148,6 +151,10 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
           ? _value.pricePerMinute
           : pricePerMinute // ignore: cast_nullable_to_non_nullable
               as int,
+      pausePricePerMinute: null == pausePricePerMinute
+          ? _value.pausePricePerMinute
+          : pausePricePerMinute // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -173,7 +180,8 @@ abstract class _$$TarifModelImplCopyWith<$Res>
       int activateCount,
       int price,
       int startPrice,
-      int pricePerMinute});
+      int pricePerMinute,
+      int pausePricePerMinute});
 }
 
 /// @nodoc
@@ -200,6 +208,7 @@ class __$$TarifModelImplCopyWithImpl<$Res>
     Object? price = null,
     Object? startPrice = null,
     Object? pricePerMinute = null,
+    Object? pausePricePerMinute = null,
   }) {
     return _then(_$TarifModelImpl(
       id: null == id
@@ -254,6 +263,10 @@ class __$$TarifModelImplCopyWithImpl<$Res>
           ? _value.pricePerMinute
           : pricePerMinute // ignore: cast_nullable_to_non_nullable
               as int,
+      pausePricePerMinute: null == pausePricePerMinute
+          ? _value.pausePricePerMinute
+          : pausePricePerMinute // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -274,7 +287,8 @@ class _$TarifModelImpl implements _TarifModel {
       required this.activateCount,
       required this.price,
       required this.startPrice,
-      required this.pricePerMinute});
+      required this.pricePerMinute,
+      required this.pausePricePerMinute});
 
   factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TarifModelImplFromJson(json);
@@ -311,10 +325,12 @@ class _$TarifModelImpl implements _TarifModel {
   final int startPrice;
   @override
   final int pricePerMinute;
+  @override
+  final int pausePricePerMinute;
 
   @override
   String toString() {
-    return 'TarifModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, descriptionRu: $descriptionRu, descriptionUz: $descriptionUz, descriptionEn: $descriptionEn, startMinute: $startMinute, reservedAmount: $reservedAmount, activateCount: $activateCount, price: $price, startPrice: $startPrice, pricePerMinute: $pricePerMinute)';
+    return 'TarifModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, descriptionRu: $descriptionRu, descriptionUz: $descriptionUz, descriptionEn: $descriptionEn, startMinute: $startMinute, reservedAmount: $reservedAmount, activateCount: $activateCount, price: $price, startPrice: $startPrice, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute)';
   }
 
   @override
@@ -342,7 +358,9 @@ class _$TarifModelImpl implements _TarifModel {
             (identical(other.startPrice, startPrice) ||
                 other.startPrice == startPrice) &&
             (identical(other.pricePerMinute, pricePerMinute) ||
-                other.pricePerMinute == pricePerMinute));
+                other.pricePerMinute == pricePerMinute) &&
+            (identical(other.pausePricePerMinute, pausePricePerMinute) ||
+                other.pausePricePerMinute == pausePricePerMinute));
   }
 
   @JsonKey(ignore: true)
@@ -361,7 +379,8 @@ class _$TarifModelImpl implements _TarifModel {
       activateCount,
       price,
       startPrice,
-      pricePerMinute);
+      pricePerMinute,
+      pausePricePerMinute);
 
   @JsonKey(ignore: true)
   @override
@@ -391,7 +410,8 @@ abstract class _TarifModel implements TarifModel {
       required final int activateCount,
       required final int price,
       required final int startPrice,
-      required final int pricePerMinute}) = _$TarifModelImpl;
+      required final int pricePerMinute,
+      required final int pausePricePerMinute}) = _$TarifModelImpl;
 
   factory _TarifModel.fromJson(Map<String, dynamic> json) =
       _$TarifModelImpl.fromJson;
@@ -428,6 +448,8 @@ abstract class _TarifModel implements TarifModel {
   int get startPrice;
   @override
   int get pricePerMinute;
+  @override
+  int get pausePricePerMinute;
   @override
   @JsonKey(ignore: true)
   _$$TarifModelImplCopyWith<_$TarifModelImpl> get copyWith =>

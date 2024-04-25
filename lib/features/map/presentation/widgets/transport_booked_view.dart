@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/features/map/presentation/widgets/expanded_tarif_widget.dart';
 import 'package:green_go/features/map/presentation/widgets/tarif_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../gen/assets.gen.dart';
@@ -22,6 +23,7 @@ class TransportBookWidget extends HookConsumerWidget {
     final textTheme = context.textTheme;
     final state = ref.watch(ridesNotifierProvider);
     final selectedTarif = useState(1);
+    final isTarif = useState(true);
     final transport = ref.watch(transportStateProvider);
     final timer = ref.watch(booksTimerNotifierProvider);
     final reference = ref.watch(referenceNotifierProvider).data!;
@@ -102,17 +104,28 @@ class TransportBookWidget extends HookConsumerWidget {
                 ),
                 const Gap(20),
                 SizedBox(
-                  height: 65,
+                  height: isTarif.value ? 65 : 185,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (_, index) {
                         final tarif = transport.transport!.tariffs[index];
-                        return TariffWidget(
-                            onTap: () {
-                              selectedTarif.value = tarif.id;
-                            },
-                            tarif: tarif,
-                            selectedTarif: selectedTarif.value);
+                        return isTarif.value
+                            ? TariffWidget(
+                                onTap: () {
+                                  selectedTarif.value = tarif.id;
+                                },
+                                tarif: tarif,
+                                onTarifTap: () {
+                                  isTarif.value = false;
+                                },
+                                isSelected: selectedTarif.value == index,
+                              )
+                            : ExpandedTarifWidget(
+                                tarif: tarif,
+                                onClose: () {
+                                  isTarif.value = true;
+                                },
+                              );
                       },
                       separatorBuilder: (i, _) => const Gap(8),
                       itemCount: transport.transport!.tariffs.length),

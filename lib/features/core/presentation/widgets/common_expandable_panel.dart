@@ -8,6 +8,7 @@ class CommonExpandablePanel extends StatelessWidget {
   final String title;
   final String? value;
   final Widget? child;
+  final double? symPadding;
 
   final IconData? maximizeIcon;
   final IconData? minimizeIcon;
@@ -23,6 +24,7 @@ class CommonExpandablePanel extends StatelessWidget {
     this.minimizeIcon,
     this.useDivider = true,
     this.childPadded = false,
+    this.symPadding,
   });
 
   @override
@@ -43,7 +45,7 @@ class CommonExpandablePanel extends StatelessWidget {
           iconColor: context.colorScheme.textColor,
           inkWellBorderRadius: BorderRadius.circular(10)),
       header: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: symPadding ?? 20),
         child: ListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(

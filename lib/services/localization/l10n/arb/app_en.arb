@@ -294,5 +294,7 @@
   "travelTime":"Travel time",
   "travelDuration":"Travel duration",
   "enterNumber":"Enter number",
-  "enter":"Enter"
+  "enter":"Enter",
+  "endImage":"Фото после завершения",
+  "chooseTariff":"Choose one of the tariffs"
 }
