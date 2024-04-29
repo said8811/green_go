@@ -1,4 +1,4 @@
-package com.example.green_go
+package uz.green.go
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
