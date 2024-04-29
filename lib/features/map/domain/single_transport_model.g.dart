@@ -19,6 +19,9 @@ _$SingleTransportModelImpl _$$SingleTransportModelImplFromJson(
           .map((e) => TarifModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       distance: (json['distance'] as num?)?.toDouble() ?? 0.0,
+      book: json['book'] == null
+          ? null
+          : BookModel.fromJson(json['book'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SingleTransportModelImplToJson(
@@ -32,4 +35,5 @@ Map<String, dynamic> _$$SingleTransportModelImplToJson(
       'qrCode': instance.qrCode,
       'tariffs': instance.tariffs,
       'distance': instance.distance,
+      'book': instance.book,
     };

@@ -32,6 +32,7 @@ mixin _$SingleTransportModel {
   List<TarifModel> get tariffs => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 0.0)
   double get distance => throw _privateConstructorUsedError;
+  BookModel? get book => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +54,10 @@ abstract class $SingleTransportModelCopyWith<$Res> {
       String number,
       String qrCode,
       List<TarifModel> tariffs,
-      @JsonKey(defaultValue: 0.0) double distance});
+      @JsonKey(defaultValue: 0.0) double distance,
+      BookModel? book});
+
+  $BookModelCopyWith<$Res>? get book;
 }
 
 /// @nodoc
@@ -78,6 +82,7 @@ class _$SingleTransportModelCopyWithImpl<$Res,
     Object? qrCode = null,
     Object? tariffs = null,
     Object? distance = null,
+    Object? book = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -112,7 +117,23 @@ class _$SingleTransportModelCopyWithImpl<$Res,
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as double,
+      book: freezed == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as BookModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookModelCopyWith<$Res>? get book {
+    if (_value.book == null) {
+      return null;
+    }
+
+    return $BookModelCopyWith<$Res>(_value.book!, (value) {
+      return _then(_value.copyWith(book: value) as $Val);
+    });
   }
 }
 
@@ -132,7 +153,11 @@ abstract class _$$SingleTransportModelImplCopyWith<$Res>
       String number,
       String qrCode,
       List<TarifModel> tariffs,
-      @JsonKey(defaultValue: 0.0) double distance});
+      @JsonKey(defaultValue: 0.0) double distance,
+      BookModel? book});
+
+  @override
+  $BookModelCopyWith<$Res>? get book;
 }
 
 /// @nodoc
@@ -154,6 +179,7 @@ class __$$SingleTransportModelImplCopyWithImpl<$Res>
     Object? qrCode = null,
     Object? tariffs = null,
     Object? distance = null,
+    Object? book = freezed,
   }) {
     return _then(_$SingleTransportModelImpl(
       id: null == id
@@ -188,6 +214,10 @@ class __$$SingleTransportModelImplCopyWithImpl<$Res>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as double,
+      book: freezed == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as BookModel?,
     ));
   }
 }
@@ -203,7 +233,8 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
       required this.number,
       required this.qrCode,
       required final List<TarifModel> tariffs,
-      @JsonKey(defaultValue: 0.0) required this.distance})
+      @JsonKey(defaultValue: 0.0) required this.distance,
+      required this.book})
       : _tariffs = tariffs;
 
   factory _$SingleTransportModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -235,10 +266,12 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
   @override
   @JsonKey(defaultValue: 0.0)
   final double distance;
+  @override
+  final BookModel? book;
 
   @override
   String toString() {
-    return 'SingleTransportModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, number: $number, qrCode: $qrCode, tariffs: $tariffs, distance: $distance)';
+    return 'SingleTransportModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, number: $number, qrCode: $qrCode, tariffs: $tariffs, distance: $distance, book: $book)';
   }
 
   @override
@@ -254,13 +287,23 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
             (identical(other.qrCode, qrCode) || other.qrCode == qrCode) &&
             const DeepCollectionEquality().equals(other._tariffs, _tariffs) &&
             (identical(other.distance, distance) ||
-                other.distance == distance));
+                other.distance == distance) &&
+            (identical(other.book, book) || other.book == book));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nameRu, nameUz, nameEn,
-      number, qrCode, const DeepCollectionEquality().hash(_tariffs), distance);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      nameRu,
+      nameUz,
+      nameEn,
+      number,
+      qrCode,
+      const DeepCollectionEquality().hash(_tariffs),
+      distance,
+      book);
 
   @JsonKey(ignore: true)
   @override
@@ -280,15 +323,15 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
 
 abstract class _SingleTransportModel implements SingleTransportModel {
   factory _SingleTransportModel(
-          {required final int id,
-          @JsonKey(defaultValue: "") required final String nameRu,
-          @JsonKey(defaultValue: "") required final String nameUz,
-          @JsonKey(defaultValue: "") required final String nameEn,
-          required final String number,
-          required final String qrCode,
-          required final List<TarifModel> tariffs,
-          @JsonKey(defaultValue: 0.0) required final double distance}) =
-      _$SingleTransportModelImpl;
+      {required final int id,
+      @JsonKey(defaultValue: "") required final String nameRu,
+      @JsonKey(defaultValue: "") required final String nameUz,
+      @JsonKey(defaultValue: "") required final String nameEn,
+      required final String number,
+      required final String qrCode,
+      required final List<TarifModel> tariffs,
+      @JsonKey(defaultValue: 0.0) required final double distance,
+      required final BookModel? book}) = _$SingleTransportModelImpl;
 
   factory _SingleTransportModel.fromJson(Map<String, dynamic> json) =
       _$SingleTransportModelImpl.fromJson;
@@ -313,6 +356,8 @@ abstract class _SingleTransportModel implements SingleTransportModel {
   @override
   @JsonKey(defaultValue: 0.0)
   double get distance;
+  @override
+  BookModel? get book;
   @override
   @JsonKey(ignore: true)
   _$$SingleTransportModelImplCopyWith<_$SingleTransportModelImpl>

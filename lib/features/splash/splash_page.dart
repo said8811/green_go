@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/auth/shared/providers.dart';
 import 'package:green_go/features/core/application/helper_functions.dart';
@@ -8,6 +7,7 @@ import 'package:green_go/features/core/presentation/widgets/common_svg_picture.d
 import 'package:green_go/features/map/shared/providers.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
 import 'package:green_go/gen/assets.gen.dart';
+import 'package:green_go/services/location/shared/providers.dart';
 import 'package:green_go/services/router/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -17,40 +17,13 @@ class SplashPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<Position?> getCurrentPosition() async {
-      final permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) return null;
-      return Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
+    Future<void> getCurrentPosition() async {
+      await ref.read(locationStateProvider.notifier).getCurrentPosition();
     }
 
     useEffectWithScheduler(action: () async {
-      await getCurrentPosition().then((value) {
-        if (value != null) {
-          ref.read(mapNotifierProvider.notifier).addMainObjects(
-                PlacemarkMapObject(
-                  mapId: const MapObjectId('polygon_currentLocation'),
-                  opacity: 1,
-                  point: Point(
-                      latitude: value.latitude, longitude: value.longitude),
-                  icon: PlacemarkIcon.single(
-                    PlacemarkIconStyle(
-                      image: BitmapDescriptor.fromAssetImage(
-                        Assets.images.currentLocation.path,
-                      ),
-                      scale: 0.6,
-                    ),
-                  ),
-                  onTap: (mapObject, point) {},
-                ),
-              );
-          ref
-              .read(referenceNotifierProvider.notifier)
-              .getData(value.latitude, value.longitude);
-        }
-      });
+      await getCurrentPosition().then(
+          (value) => ref.read(referenceNotifierProvider.notifier).getData());
     });
 
     ref.listen(referenceNotifierProvider, (previous, next) {

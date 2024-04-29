@@ -87,18 +87,25 @@ class HistoryPage extends HookConsumerWidget {
                     child: ListTile(
                       title: Text(from.value != null && to.value != null
                           ? "${filtrDate(from.value!)} - ${filtrDate(to.value!)}"
-                          : "Filtr"),
+                          : context.l10n.filter),
                       trailing: const Icon(Icons.calendar_month),
                     ),
                   ),
                   const Gap(20),
                   Expanded(
-                    child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return HistoryWidget(ride: rides.rides[index]);
-                        },
-                        separatorBuilder: (_, __) => const Gap(20),
-                        itemCount: rides.rides.length),
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        ref
+                            .read(ridesHistoryNotifierProvider.notifier)
+                            .getHistory(from.value, to.value);
+                      },
+                      child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            return HistoryWidget(ride: rides.rides[index]);
+                          },
+                          separatorBuilder: (_, __) => const Gap(20),
+                          itemCount: rides.rides.length),
+                    ),
                   ),
                 ],
               ),

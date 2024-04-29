@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/tarif_model.dart';
 
 part 'single_transport_model.freezed.dart';
@@ -17,6 +18,7 @@ class SingleTransportModel with _$SingleTransportModel {
     required String qrCode,
     required List<TarifModel> tariffs,
     @JsonKey(defaultValue: 0.0) required double distance,
+    required BookModel? book,
   }) = _SingleTransportModel;
 
   factory SingleTransportModel.fromJson(Map<String, dynamic> json) =>

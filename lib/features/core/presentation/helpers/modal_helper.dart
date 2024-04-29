@@ -4,6 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 
+import '../../../map/presentation/widgets/transport_actions_view.dart';
+import '../../../map/presentation/widgets/transport_booked_view.dart';
 import '../buttons/primary_button.dart';
 import '../widgets/common_svg_picture.dart';
 import '/theme/colors.dart';
@@ -17,6 +19,28 @@ Future<void> showAppToast(AppMessage? failure) async {
     backgroundColor: AppColors.accent,
     textColor: AppColors.white,
     fontSize: 16.0,
+  );
+}
+
+void openActionsView(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    enableDrag: false,
+    backgroundColor: Colors.white,
+    builder: (_) {
+      return const TransportActionsView();
+    },
+  );
+}
+
+void openBooksView(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    enableDrag: false,
+    backgroundColor: Colors.white,
+    builder: (_) {
+      return const TransportBookWidget();
+    },
   );
 }
 

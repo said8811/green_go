@@ -27,10 +27,15 @@ class TransportState with _$TransportState {
     required bool isLoading,
     Failure? error,
     String? qrCode,
+    required int selectedTarif,
     required TransportActionEnum actionState,
   }) = _TransportState;
   factory TransportState.initial() => TransportState(
-      transport: null, isLoading: false, actionState: TransportActionEnum.pure);
+        transport: null,
+        isLoading: false,
+        actionState: TransportActionEnum.pure,
+        selectedTarif: 1,
+      );
 }
 
 class TransportNotifier extends StateNotifier<TransportState> {
@@ -111,6 +116,10 @@ class TransportNotifier extends StateNotifier<TransportState> {
 
   void setQr(String? qrcode) {
     state = state.copyWith(qrCode: qrcode);
+  }
+
+  void setTarif(int id) {
+    state = state.copyWith(selectedTarif: id);
   }
 
   void setState(TransportActionEnum action) {

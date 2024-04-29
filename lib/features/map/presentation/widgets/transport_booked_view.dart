@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
-import 'package:green_go/features/map/presentation/widgets/expanded_tarif_widget.dart';
-import 'package:green_go/features/map/presentation/widgets/tarif_widget.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../services/location/shared/providers.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
+import '../../../core/presentation/helpers/modal_helper.dart';
+import '../../../core/presentation/helpers/ui_utils.dart';
 import '../../../core/presentation/widgets/common_svg_picture.dart';
 import '../../../splash/shared/providers.dart';
 import '../../shared/providers.dart';
+import 'tarif_widget.dart';
 
 class TransportBookWidget extends HookConsumerWidget {
   const TransportBookWidget({super.key});
@@ -22,14 +22,10 @@ class TransportBookWidget extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final textTheme = context.textTheme;
     final state = ref.watch(ridesNotifierProvider);
-    final selectedTarif = useState(1);
-    final isTarif = useState(true);
-    final transport = ref.watch(transportStateProvider);
     final timer = ref.watch(booksTimerNotifierProvider);
     final reference = ref.watch(referenceNotifierProvider).data!;
-
     useEffect(() {
-      if (state.books.isNotEmpty) {
+      if (state.books.isNotEmpty && timer == 0) {
         ref
             .read(booksTimerNotifierProvider.notifier)
             .getTime(DateTime.parse(state.books[0].finishAt).toLocal());
@@ -52,7 +48,7 @@ class TransportBookWidget extends HookConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      "Bron qilish vaqti:",
+                      context.l10n.bookingTime,
                       style: textTheme.bodyMedium,
                     ),
                     const Spacer(),
@@ -81,7 +77,7 @@ class TransportBookWidget extends HookConsumerWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Sizning velosipedingiz"),
+                          Text(context.l10n.yourBicyle),
                           const Gap(12),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,43 +99,30 @@ class TransportBookWidget extends HookConsumerWidget {
                   ),
                 ),
                 const Gap(20),
-                SizedBox(
-                  height: isTarif.value ? 65 : 185,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_, index) {
-                        final tarif = transport.transport!.tariffs[index];
-                        return isTarif.value
-                            ? TariffWidget(
-                                onTap: () {
-                                  selectedTarif.value = tarif.id;
-                                },
-                                tarif: tarif,
-                                onTarifTap: () {
-                                  isTarif.value = false;
-                                },
-                                isSelected: selectedTarif.value == index,
-                              )
-                            : ExpandedTarifWidget(
-                                tarif: tarif,
-                                onClose: () {
-                                  isTarif.value = true;
-                                },
-                              );
-                      },
-                      separatorBuilder: (i, _) => const Gap(8),
-                      itemCount: transport.transport!.tariffs.length),
-                ),
+                if (state.transport?.tariffs.isNotEmpty ?? false)
+                  SizedBox(
+                    height: 65,
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (_, index) {
+                          final tarif = state.transport!.tariffs[index];
+                          return TariffWidget(
+                            tarif: tarif,
+                          );
+                        },
+                        separatorBuilder: (i, _) => const Gap(8),
+                        itemCount: state.transport!.tariffs.length),
+                  ),
                 const Gap(20),
                 Row(
                   children: [
                     Expanded(
                         child: PrimaryButton(
-                      title: "Bekor qilish",
+                      title: context.l10n.cancel,
                       onPress: () {
                         ref
                             .read(transportStateProvider.notifier)
-                            .cancelBook(transport.transport!.id)
+                            .cancelBook(state.transport!.id)
                             .then((value) {
                           ref
                               .read(ridesNotifierProvider.notifier)
@@ -154,28 +137,26 @@ class TransportBookWidget extends HookConsumerWidget {
                     const Gap(20),
                     Expanded(
                       child: PrimaryButton(
-                        title: "Ijaraga olish",
+                        title: context.l10n.rent,
                         onPress: () {
-                          if (selectedTarif.value != -1) {
-                            ref
-                                .read(transportStateProvider.notifier)
-                                .start(
-                                    ref.watch(locationStateProvider)!.latitude,
-                                    ref.watch(locationStateProvider)!.longitude,
-                                    state.transport!.qrCode,
-                                    reference.regionId,
-                                    selectedTarif.value)
-                                .then((value) {
-                              if (value) {
-                                ref
-                                    .read(ridesNotifierProvider.notifier)
-                                    .getRides()
-                                    .then((value) => context.pop());
-                              }
-                            });
-                          } else {
-                            Fluttertoast.showToast(msg: "Tarifni tanlang");
-                          }
+                          ref
+                              .read(transportStateProvider.notifier)
+                              .start(
+                                  ref.watch(locationStateProvider)!.latitude,
+                                  ref.watch(locationStateProvider)!.longitude,
+                                  state.transport!.qrCode,
+                                  reference.regionId,
+                                  ref
+                                      .watch(transportStateProvider)
+                                      .selectedTarif)
+                              .then((value) {
+                            if (value) {
+                              ref
+                                  .read(ridesNotifierProvider.notifier)
+                                  .getRides()
+                                  .then((value) => context.pop());
+                            }
+                          });
                         },
                       ),
                     )
@@ -187,9 +168,5 @@ class TransportBookWidget extends HookConsumerWidget {
               child: CircularProgressIndicator(),
             ),
     );
-  }
-
-  String getTime(int time) {
-    return "${time ~/ 60 < 10 ? "0${time ~/ 60}" : time ~/ 60}:${time % 60 < 10 ? "0${time % 60}" : time % 60}";
   }
 }

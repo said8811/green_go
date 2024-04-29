@@ -6,6 +6,7 @@ import 'package:green_go/features/map/application/timer_notifier.dart';
 import 'package:green_go/features/map/application/transport_notifier.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:green_go/features/map/infrastructure/transport_repository.dart';
+import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final mapNotifierProvider =
@@ -17,16 +18,16 @@ final transportRepository = Provider<TransportRepository>(
     (ref) => TransportRepository(ref.watch(dioProvider)));
 
 final transportStateProvider =
-    StateNotifierProvider<TransportNotifier, TransportState>((ref) {
+    StateNotifierProvider.autoDispose<TransportNotifier, TransportState>((ref) {
   return TransportNotifier(ref.watch(transportRepository));
 });
 
 final rideProvider = Provider<RideRepository>((ref) {
-  return RideRepository(ref.watch(dioProvider));
+  return RideRepository(ref.watch(dioProvider), ref.watch(locationProvider));
 });
 
 final ridesNotifierProvider =
-    StateNotifierProvider<RidesNotifier, RidesState>((ref) {
+    StateNotifierProvider.autoDispose<RidesNotifier, RidesState>((ref) {
   return RidesNotifier(ref.watch(rideProvider));
 });
 

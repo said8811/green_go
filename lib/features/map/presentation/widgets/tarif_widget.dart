@@ -2,36 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/domain/tarif_model.dart';
+import 'package:green_go/features/map/shared/providers.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/presentation/helpers/ui_utils.dart';
 
 class TariffWidget extends ConsumerWidget {
-  final VoidCallback onTap;
   final TarifModel tarif;
-  final bool isSelected;
-  final VoidCallback onTarifTap;
   const TariffWidget({
     super.key,
-    required this.onTap,
     required this.tarif,
-    required this.isSelected,
-    required this.onTarifTap,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedTarif = ref.watch(transportStateProvider).selectedTarif;
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      onTap: onTap,
+      onTap: () {
+        ref.read(transportStateProvider.notifier).setTarif(tarif.id);
+      },
       child: Ink(
         padding: const EdgeInsets.only(left: 20),
+        width: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: isSelected
+          border: selectedTarif == tarif.id
               ? Border.all(color: context.colorScheme.primary)
               : null,
-          color: isSelected
+          color: selectedTarif == tarif.id
               ? context.colorScheme.primary.withOpacity(0.3)
               : context.colorScheme.grey.withOpacity(0.3),
         ),
@@ -42,7 +42,7 @@ class TariffWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  tarif.nameRu,
+                  tarif.getTitle(context.l10n.localeName),
                   style: context.textTheme.bodyMedium?.copyWith(fontSize: 16),
                 ),
                 const Gap(8),
@@ -51,20 +51,6 @@ class TariffWidget extends ConsumerWidget {
                   style: context.textTheme.bodyMedium?.copyWith(fontSize: 12),
                 ),
               ],
-            ),
-            const Gap(12),
-            InkWell(
-              onTap: onTarifTap,
-              borderRadius: BorderRadius.circular(40),
-              child: Ink(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                child: const Text("!"),
-              ),
             ),
             const Gap(10),
           ],

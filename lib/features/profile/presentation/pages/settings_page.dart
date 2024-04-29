@@ -22,11 +22,10 @@ class SettingsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authNotifierProvider.notifier).user;
     final locale = ref.watch(localeNotifierProvider);
-
     final state = ref.watch(profileNotifierProvider);
     final txtTheme = context.textTheme;
     final isNotify = useState(false);
-    final controller = useTextEditingController();
+    final nameValue = useState("");
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CommonAppBar(
@@ -64,6 +63,9 @@ class SettingsPage extends HookConsumerWidget {
               TextFormField(
                 initialValue: state.value?.name,
                 style: txtTheme.bodyMedium,
+                onChanged: (value) {
+                  nameValue.value = value;
+                },
                 decoration: InputDecoration(
                   label: Text(
                     context.l10n.yourName,
@@ -141,7 +143,7 @@ class SettingsPage extends HookConsumerWidget {
             onPress: () {
               ref
                   .read(updateProfileProvider.notifier)
-                  .updateProfile(controller.text.trim(), locale.languageCode)
+                  .updateProfile(nameValue.value.trim(), locale.languageCode)
                   .then(
                     (value) => ref
                         .read(profileNotifierProvider.notifier)

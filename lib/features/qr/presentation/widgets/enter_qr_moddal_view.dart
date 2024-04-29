@@ -72,7 +72,8 @@ class EnterQrModdal extends ConsumerWidget {
                   child: PrimaryButton(
                     title: context.l10n.enter,
                     onPress: () {
-                      Navigator.of(context).pop(textController.text.trim());
+                      Navigator.of(context)
+                          .pop(textController.text.replaceAll("-", "").trim());
                     },
                   ),
                 ),

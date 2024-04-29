@@ -114,8 +114,8 @@ class BorderPainter extends CustomPainter {
 }
 
 class BarReaderSize {
-  static double width = 200;
-  static double height = 200;
+  static double width = 250;
+  static double height = 250;
 }
 
 class OverlayWithHolePainter extends CustomPainter {

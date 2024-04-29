@@ -395,12 +395,16 @@ class $AssetsImagesGen {
   /// File path: assets/images/click.png
   AssetGenImage get click => const AssetGenImage('assets/images/click.png');
 
-  /// File path: assets/images/current_location.png
-  AssetGenImage get currentLocation =>
-      const AssetGenImage('assets/images/current_location.png');
-
   /// File path: assets/images/humo.png
   AssetGenImage get humo => const AssetGenImage('assets/images/humo.png');
+
+  /// File path: assets/images/locationDot.png
+  AssetGenImage get locationDot =>
+      const AssetGenImage('assets/images/locationDot.png');
+
+  /// File path: assets/images/locationMark.png
+  AssetGenImage get locationMark =>
+      const AssetGenImage('assets/images/locationMark.png');
 
   /// File path: assets/images/mark.png
   AssetGenImage get mark => const AssetGenImage('assets/images/mark.png');
@@ -430,8 +434,9 @@ class $AssetsImagesGen {
         bikey,
         blueWave,
         click,
-        currentLocation,
         humo,
+        locationDot,
+        locationMark,
         mark,
         payme,
         scooter,

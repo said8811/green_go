@@ -11,8 +11,9 @@ _$BookModelImpl _$$BookModelImplFromJson(Map<String, dynamic> json) =>
       bicycleId: json['bicycleId'] as int,
       finishAt: json['finishAt'] as String,
       qrCode: json['qrCode'] as String,
-      coordinate:
-          LatLongModel.fromJson(json['coordinate'] as Map<String, dynamic>),
+      coordinate: json['coordinate'] == null
+          ? null
+          : LatLongModel.fromJson(json['coordinate'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BookModelImplToJson(_$BookModelImpl instance) =>

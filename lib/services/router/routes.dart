@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/features/map/presentation/pages/finish_page.dart';
@@ -38,7 +37,9 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
         parentNavigatorKey: rootNavigatorKey,
         path: '/profile',
         name: AppRoute.profile.name,
-        pageBuilder: (_, __) => const CupertinoPage(child: ProfilePage()),
+        pageBuilder: (_, __) => const NoTransitionPage(
+          child: ProfilePage(),
+        ),
         redirect: (_, __) => ref.watch(authRedirectLogicProvider),
       ),
       GoRoute(

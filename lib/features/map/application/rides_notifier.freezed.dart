@@ -19,7 +19,7 @@ mixin _$RidesState {
   List<RideModel> get rides => throw _privateConstructorUsedError;
   List<BookModel> get books => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  TransportModel? get transport => throw _privateConstructorUsedError;
+  SingleTransportModel? get transport => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get imgPath => throw _privateConstructorUsedError;
   RideAction get actionState => throw _privateConstructorUsedError;
@@ -39,12 +39,12 @@ abstract class $RidesStateCopyWith<$Res> {
       {List<RideModel> rides,
       List<BookModel> books,
       bool isLoading,
-      TransportModel? transport,
+      SingleTransportModel? transport,
       Failure? error,
       String? imgPath,
       RideAction actionState});
 
-  $TransportModelCopyWith<$Res>? get transport;
+  $SingleTransportModelCopyWith<$Res>? get transport;
   $FailureCopyWith<$Res>? get error;
 }
 
@@ -85,7 +85,7 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
       transport: freezed == transport
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
-              as TransportModel?,
+              as SingleTransportModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -103,12 +103,12 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
 
   @override
   @pragma('vm:prefer-inline')
-  $TransportModelCopyWith<$Res>? get transport {
+  $SingleTransportModelCopyWith<$Res>? get transport {
     if (_value.transport == null) {
       return null;
     }
 
-    return $TransportModelCopyWith<$Res>(_value.transport!, (value) {
+    return $SingleTransportModelCopyWith<$Res>(_value.transport!, (value) {
       return _then(_value.copyWith(transport: value) as $Val);
     });
   }
@@ -138,13 +138,13 @@ abstract class _$$RidesStateImplCopyWith<$Res>
       {List<RideModel> rides,
       List<BookModel> books,
       bool isLoading,
-      TransportModel? transport,
+      SingleTransportModel? transport,
       Failure? error,
       String? imgPath,
       RideAction actionState});
 
   @override
-  $TransportModelCopyWith<$Res>? get transport;
+  $SingleTransportModelCopyWith<$Res>? get transport;
   @override
   $FailureCopyWith<$Res>? get error;
 }
@@ -184,7 +184,7 @@ class __$$RidesStateImplCopyWithImpl<$Res>
       transport: freezed == transport
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
-              as TransportModel?,
+              as SingleTransportModel?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -234,7 +234,7 @@ class _$RidesStateImpl implements _RidesState {
   @override
   final bool isLoading;
   @override
-  final TransportModel? transport;
+  final SingleTransportModel? transport;
   @override
   final Failure? error;
   @override
@@ -287,7 +287,7 @@ abstract class _RidesState implements RidesState {
       {required final List<RideModel> rides,
       required final List<BookModel> books,
       required final bool isLoading,
-      final TransportModel? transport,
+      final SingleTransportModel? transport,
       final Failure? error,
       final String? imgPath,
       required final RideAction actionState}) = _$RidesStateImpl;
@@ -299,7 +299,7 @@ abstract class _RidesState implements RidesState {
   @override
   bool get isLoading;
   @override
-  TransportModel? get transport;
+  SingleTransportModel? get transport;
   @override
   Failure? get error;
   @override

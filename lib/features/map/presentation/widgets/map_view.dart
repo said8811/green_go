@@ -3,11 +3,12 @@ import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
+import '../../../../gen/assets.gen.dart';
 import '../../shared/providers.dart';
 
 const _centralPoint = Point(latitude: 41.311081, longitude: 69.240562);
 
-class MapView extends ConsumerWidget {
+class MapView extends ConsumerStatefulWidget {
   final Function(YandexMapController) onMapCreated;
   final Function(CameraPosition) onPositionChanged;
   final double zoom;
@@ -19,11 +20,30 @@ class MapView extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MapView> createState() => _MapViewState();
+}
+
+class _MapViewState extends ConsumerState<MapView> {
+  @override
+  Widget build(BuildContext context) {
     final latLong = ref.watch(locationStateProvider);
     return YandexMap(
+      onUserLocationAdded: (UserLocationView view) async {
+        return view.copyWith(
+          arrow: view.arrow.copyWith(
+            icon: PlacemarkIcon.single(
+              PlacemarkIconStyle(
+                  image: BitmapDescriptor.fromAssetImage(
+                      Assets.images.locationMark.path),
+                  scale: 0.7),
+            ),
+            opacity: 1,
+          ),
+        );
+      },
       onMapCreated: (YandexMapController controller) async {
-        onMapCreated(controller);
+        await controller.toggleUserLayer(visible: true);
+        widget.onMapCreated(controller);
         await controller.moveCamera(
           CameraUpdate.newCameraPosition(CameraPosition(
               target: Point(
@@ -33,12 +53,12 @@ class MapView extends ConsumerWidget {
               zoom: 16)),
         );
       },
-      mapObjects: zoom < 11
+      mapObjects: widget.zoom < 11
           ? ref.watch(mapNotifierProvider).availableObjects
           : ref.watch(mapNotifierProvider).mainObjects,
       onCameraPositionChanged: (cameraPosition, reason, finished) {
         if (finished) {
-          onPositionChanged(cameraPosition);
+          widget.onPositionChanged(cameraPosition);
         }
       },
     );

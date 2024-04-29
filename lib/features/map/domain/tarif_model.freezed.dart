@@ -394,6 +394,20 @@ class _$TarifModelImpl implements _TarifModel {
       this,
     );
   }
+
+  @override
+  String getTitle(String languageCode) {
+    switch (languageCode) {
+      case 'ru':
+        return nameRu;
+      case 'uz':
+        return nameUz.isEmpty ? nameRu : nameUz;
+      case 'en':
+        return nameEn.isEmpty ? nameRu : nameEn;
+      default:
+        return nameRu;
+    }
+  }
 }
 
 abstract class _TarifModel implements TarifModel {

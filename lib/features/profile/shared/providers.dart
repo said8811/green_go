@@ -8,6 +8,7 @@ import 'package:green_go/features/profile/application/map_image_notifier.dart';
 import 'package:green_go/features/profile/application/profile_notifier.dart';
 import 'package:green_go/features/profile/application/qa_notifier.dart';
 import 'package:green_go/features/profile/application/rides_history_notifier.dart';
+import 'package:green_go/features/profile/application/selected_card_notifier.dart';
 import 'package:green_go/features/profile/application/update_profile_notifier.dart';
 import 'package:green_go/features/profile/domain/card_model.dart';
 import 'package:green_go/features/profile/domain/profile_model.dart';
@@ -61,12 +62,17 @@ final addCardProvider =
   return AddCardNotifier(ref.watch(cardsRepoProvider));
 });
 
-final qaNotifierProvider =
-    StateNotifierProvider<QaNotifier, AsyncValue<List<QACategoryModel>>>((ref) {
+final qaNotifierProvider = StateNotifierProvider.autoDispose<QaNotifier,
+    AsyncValue<List<QACategoryModel>>>((ref) {
   return QaNotifier(ref.watch(profileRepositoryProvider));
 });
 
 final updateProfileProvider =
     StateNotifierProvider<UpdateProfileNotifier, AsyncValue<bool>>((ref) {
   return UpdateProfileNotifier(ref.watch(profileRepositoryProvider));
+});
+
+final selectedCardProvider =
+    StateNotifierProvider.autoDispose<SelectedCardNotifier, int?>((ref) {
+  return SelectedCardNotifier(ref.watch(sharedPrefsProvider));
 });

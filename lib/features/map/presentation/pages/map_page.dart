@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/features/map/presentation/widgets/book_timer_widget.dart';
 import 'package:green_go/features/map/presentation/widgets/map_view.dart';
-import 'package:green_go/features/map/presentation/widgets/transport_booked_view.dart';
+import 'package:green_go/features/map/presentation/widgets/ride_timer_widget.dart';
 import 'package:green_go/features/map/presentation/widgets/transport_widget.dart';
 import 'package:green_go/features/map/shared/providers.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
@@ -18,10 +18,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../../../services/router/constants.dart';
+import '../../../core/presentation/helpers/modal_helper.dart';
 import '../../../core/presentation/widgets/common_svg_picture.dart';
-import '../../application/rides_notifier.dart';
 import '../widgets/action_buttons_view.dart';
-import '../widgets/transport_actions_view.dart';
 
 class MapPage extends ConsumerStatefulWidget {
   const MapPage({super.key});
@@ -35,17 +34,12 @@ class _MapPageState extends ConsumerState<MapPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   Timer? _updateTimer;
   double zoom = 16;
-  int? selectedBikeId;
 
   @override
   void initState() {
     Future.microtask(() {
       _updateMapObjects();
       _updateTimer = Timer.periodic(const Duration(minutes: 1), (timer) {
-        final latLong = ref.watch(locationStateProvider);
-        ref
-            .read(referenceNotifierProvider.notifier)
-            .getData(latLong?.latitude, latLong?.longitude);
         ref.read(mapNotifierProvider.notifier).clearObjects();
         _updateMapObjects();
       });
@@ -146,23 +140,25 @@ class _MapPageState extends ConsumerState<MapPage> {
                 ),
               ),
             );
-            ref.read(mapNotifierProvider.notifier).updateOneObject(
-                mapObject.mapId.value, updatedPlacemark, intialPlaceMark);
-            if (!ref.watch(transportStateProvider).isLoading) {
-              ref
-                  .read(transportStateProvider.notifier)
-                  .getTransport(
-                      ref.watch(locationStateProvider)!.latitude,
-                      ref.watch(locationStateProvider)!.longitude,
-                      transport.qrCode)
-                  .then((value) => showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.white,
-                        builder: (_) {
-                          return const TransportWidget();
-                        },
-                      ));
-            }
+            ref
+                .read(mapNotifierProvider.notifier)
+                .updateOneObject(mapObject.mapId.value, updatedPlacemark);
+
+            showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.white,
+              builder: (_) {
+                return TransportWidget(
+                  onDispose: () {
+                    Future.microtask(() {
+                      ref.read(mapNotifierProvider.notifier).initialPlaceMark(
+                          mapObject.mapId.value, intialPlaceMark);
+                    });
+                  },
+                  qrCode: transport.qrCode,
+                );
+              },
+            );
           },
         );
         ref.read(mapNotifierProvider.notifier).addMainObjects(placeMark);
@@ -173,18 +169,13 @@ class _MapPageState extends ConsumerState<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final latlong = ref.watch(locationStateProvider);
     final rides = ref.watch(ridesNotifierProvider);
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (next.rides.isNotEmpty && (previous?.rides ?? []).isEmpty) {
-        openActionsView();
+        openActionsView(context);
       }
       if (next.books.isNotEmpty && (previous?.books ?? []).isEmpty) {
-        openBooksView();
-      }
-      if (previous?.actionState != RideAction.stop &&
-          next.actionState == RideAction.stop) {
-        context.pop();
+        openBooksView(context);
       }
     });
     return Scaffold(
@@ -230,44 +221,8 @@ class _MapPageState extends ConsumerState<MapPage> {
               },
             ),
           ),
-          if (rides.rides.isNotEmpty)
-            Positioned(
-                left: 100,
-                top: 60,
-                child: InkWell(
-                  onTap: () {
-                    openActionsView();
-                  },
-                  child: Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 1,
-                              offset: const Offset(4, 4),
-                              color: context.colorScheme.grey)
-                        ]),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 11, horizontal: 8),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 114, 114, 114),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: CommonSvgPicture(Assets.icons.selectedBike),
-                        ),
-                        const Gap(10),
-                        Text(getTime(DateTime.now()
-                            .difference(DateTime.parse(rides.rides[0].startAt))
-                            .inSeconds))
-                      ],
-                    ),
-                  ),
-                )),
+          if (rides.rides.isNotEmpty) const RideTimerWidget(),
+          if (rides.books.isNotEmpty) const BookTimerWidget(),
           Positioned(
             top: 60,
             left: 20,
@@ -291,22 +246,16 @@ class _MapPageState extends ConsumerState<MapPage> {
                     .push(AppRoute.qr.routePathWithSlash)
                     .then((value) async {
                   if (value != null) {
-                    await ref
-                        .read(transportStateProvider.notifier)
-                        .getTransport(
-                          latlong?.latitude ?? 0,
-                          latlong?.longitude ?? 0,
-                          value.toString(),
-                        )
-                        .then((value) {
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.white,
-                        builder: (_) {
-                          return const TransportWidget();
-                        },
-                      );
-                    });
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.white,
+                      builder: (_) {
+                        return TransportWidget(
+                          onDispose: () {},
+                          qrCode: value.toString(),
+                        );
+                      },
+                    );
                   }
                 });
               },
@@ -324,12 +273,7 @@ class _MapPageState extends ConsumerState<MapPage> {
   }
 
   Future<Position?> _getCurrentPosition() async {
-    final permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) return null;
-    return Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
+    return ref.watch(locationStateProvider);
   }
 
   void setZoom(double zoomLevel) async {
@@ -339,6 +283,7 @@ class _MapPageState extends ConsumerState<MapPage> {
       CameraUpdate.newCameraPosition(
           CameraPosition(target: point.target, zoom: point.zoom + zoomLevel)),
     );
+    zoom = point.zoom + zoomLevel;
     setState(() {});
   }
 
@@ -347,31 +292,5 @@ class _MapPageState extends ConsumerState<MapPage> {
     _updateTimer?.cancel();
     _controller.dispose();
     super.dispose();
-  }
-
-  String getTime(int time) {
-    return "${time ~/ 60 < 10 ? "0${time ~/ 60}" : time ~/ 60}:${time % 60 < 10 ? "0${time % 60}" : time % 60}";
-  }
-
-  void openActionsView() {
-    showModalBottomSheet(
-      context: context,
-      enableDrag: false,
-      backgroundColor: Colors.white,
-      builder: (_) {
-        return const TransportActionsView();
-      },
-    );
-  }
-
-  void openBooksView() {
-    showModalBottomSheet(
-      context: context,
-      enableDrag: false,
-      backgroundColor: Colors.white,
-      builder: (_) {
-        return const TransportBookWidget();
-      },
-    );
   }
 }

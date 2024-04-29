@@ -4,17 +4,19 @@ import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/core/domain/reference_model.dart';
 import 'package:green_go/features/core/shared/extensions/dio_extensions.dart';
 import 'package:green_go/features/core/shared/extensions/response_extensions.dart';
+import 'package:green_go/services/location/infrastructure/location_service.dart';
 
 class ReferenceRepository {
   final Dio _dio;
-  ReferenceRepository(this._dio);
+  final LocationService _service;
+  ReferenceRepository(this._dio, this._service);
 
-  Future<Either<Failure, ReferenceModel>> getData(
-      double? latitude, double? longitude) async {
+  Future<Either<Failure, ReferenceModel>> getData() async {
     try {
+      final latLong = await _service.getCurrentPosition();
       final Response response = await _dio.get("/data/", queryParameters: {
-        'latitude': latitude,
-        'longitude': longitude,
+        'latitude': latLong?.latitude,
+        'longitude': latLong?.longitude,
       });
       if (response.isSuccessful) {
         return right(ReferenceModel.fromJson(response.data));

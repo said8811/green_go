@@ -23,7 +23,7 @@ mixin _$BookModel {
   int get bicycleId => throw _privateConstructorUsedError;
   String get finishAt => throw _privateConstructorUsedError;
   String get qrCode => throw _privateConstructorUsedError;
-  LatLongModel get coordinate => throw _privateConstructorUsedError;
+  LatLongModel? get coordinate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,9 +37,12 @@ abstract class $BookModelCopyWith<$Res> {
       _$BookModelCopyWithImpl<$Res, BookModel>;
   @useResult
   $Res call(
-      {int bicycleId, String finishAt, String qrCode, LatLongModel coordinate});
+      {int bicycleId,
+      String finishAt,
+      String qrCode,
+      LatLongModel? coordinate});
 
-  $LatLongModelCopyWith<$Res> get coordinate;
+  $LatLongModelCopyWith<$Res>? get coordinate;
 }
 
 /// @nodoc
@@ -58,7 +61,7 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
     Object? bicycleId = null,
     Object? finishAt = null,
     Object? qrCode = null,
-    Object? coordinate = null,
+    Object? coordinate = freezed,
   }) {
     return _then(_value.copyWith(
       bicycleId: null == bicycleId
@@ -73,17 +76,21 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
               as String,
-      coordinate: null == coordinate
+      coordinate: freezed == coordinate
           ? _value.coordinate
           : coordinate // ignore: cast_nullable_to_non_nullable
-              as LatLongModel,
+              as LatLongModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $LatLongModelCopyWith<$Res> get coordinate {
-    return $LatLongModelCopyWith<$Res>(_value.coordinate, (value) {
+  $LatLongModelCopyWith<$Res>? get coordinate {
+    if (_value.coordinate == null) {
+      return null;
+    }
+
+    return $LatLongModelCopyWith<$Res>(_value.coordinate!, (value) {
       return _then(_value.copyWith(coordinate: value) as $Val);
     });
   }
@@ -98,10 +105,13 @@ abstract class _$$BookModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int bicycleId, String finishAt, String qrCode, LatLongModel coordinate});
+      {int bicycleId,
+      String finishAt,
+      String qrCode,
+      LatLongModel? coordinate});
 
   @override
-  $LatLongModelCopyWith<$Res> get coordinate;
+  $LatLongModelCopyWith<$Res>? get coordinate;
 }
 
 /// @nodoc
@@ -118,7 +128,7 @@ class __$$BookModelImplCopyWithImpl<$Res>
     Object? bicycleId = null,
     Object? finishAt = null,
     Object? qrCode = null,
-    Object? coordinate = null,
+    Object? coordinate = freezed,
   }) {
     return _then(_$BookModelImpl(
       bicycleId: null == bicycleId
@@ -133,10 +143,10 @@ class __$$BookModelImplCopyWithImpl<$Res>
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
               as String,
-      coordinate: null == coordinate
+      coordinate: freezed == coordinate
           ? _value.coordinate
           : coordinate // ignore: cast_nullable_to_non_nullable
-              as LatLongModel,
+              as LatLongModel?,
     ));
   }
 }
@@ -160,7 +170,7 @@ class _$BookModelImpl implements _BookModel {
   @override
   final String qrCode;
   @override
-  final LatLongModel coordinate;
+  final LatLongModel? coordinate;
 
   @override
   String toString() {
@@ -205,7 +215,7 @@ abstract class _BookModel implements BookModel {
       {required final int bicycleId,
       required final String finishAt,
       required final String qrCode,
-      required final LatLongModel coordinate}) = _$BookModelImpl;
+      required final LatLongModel? coordinate}) = _$BookModelImpl;
 
   factory _BookModel.fromJson(Map<String, dynamic> json) =
       _$BookModelImpl.fromJson;
@@ -217,7 +227,7 @@ abstract class _BookModel implements BookModel {
   @override
   String get qrCode;
   @override
-  LatLongModel get coordinate;
+  LatLongModel? get coordinate;
   @override
   @JsonKey(ignore: true)
   _$$BookModelImplCopyWith<_$BookModelImpl> get copyWith =>

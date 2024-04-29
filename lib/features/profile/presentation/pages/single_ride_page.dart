@@ -70,16 +70,17 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
               const Divider(),
               const Gap(20),
               Text(
-                "Qo'shimcha ma'lumotlar",
+                context.l10n.extraInfoDialog,
                 style: context.textTheme.bodyMedium
                     ?.copyWith(color: context.colorScheme.grey),
               ),
               const Gap(20),
               Row(
                 children: [
-                  const Text("Tarif"),
+                  Text(context.l10n.tariff),
                   const Spacer(),
-                  Text(widget.ride.tariff?.nameUz ?? ""),
+                  Text(widget.ride.tariff?.getTitle(context.l10n.localeName) ??
+                      ""),
                   const Gap(5),
                   CommonSvgPicture(Assets.icons.checkGreen)
                 ],
@@ -97,7 +98,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                   context),
               const Divider(),
               tileWithsub(
-                  "Pauza davomiligi",
+                  context.l10n.pouseDuration,
                   "${widget.ride.pouseTime ~/ 60} soat ${widget.ride.pouseTime % 60} daqiqa",
                   context),
               const Divider(),
@@ -122,7 +123,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
               const Gap(12),
               Row(
                 children: [
-                  const Text("Pauza minutiga"),
+                  Text(context.l10n.pousePricePerMinute),
                   const Spacer(),
                   Text(context.l10n.productPrice(
                       kPriceFormatter.format(widget.ride.pausePricePerMinute)))

@@ -43,14 +43,19 @@ class MapNotifierNotifier extends StateNotifier<MapNotifierState> {
     }).toList());
   }
 
-  void updateOneObject(
-      String value, MapObject object, MapObject initialObject) {
+  void updateOneObject(String value, MapObject object) {
     List<MapObject> objects = List.from(state.mainObjects
         .where((element) => element.mapId.value != value)
         .toList());
-    objects = objects
-        .map((e) => e.mapId.value.startsWith("placeMark") ? initialObject : e)
-        .toList();
+
+    objects.add(object);
+    state = state.copyWith(mainObjects: objects);
+  }
+
+  void initialPlaceMark(String value, MapObject object) {
+    List<MapObject> objects = List.from(state.mainObjects
+        .where((element) => element.mapId.value != value)
+        .toList());
     objects.add(object);
     state = state.copyWith(mainObjects: objects);
   }

@@ -5,6 +5,7 @@ import 'package:green_go/features/core/presentation/components/common_appbar.dar
 import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/rides_notifier.dart';
+import 'package:green_go/features/splash/shared/providers.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,13 +29,16 @@ class _FinishPageState extends ConsumerState<FinishPage> {
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (previous?.actionState != RideAction.stop &&
           next.actionState == RideAction.stop) {
-        context.pop();
+        ref
+            .read(referenceNotifierProvider.notifier)
+            .getData()
+            .then((value) => context.pop(true));
         return;
       }
     });
     return Scaffold(
-      appBar: const CommonAppBar(
-        title: "Yakunlash",
+      appBar: CommonAppBar(
+        title: context.l10n.finish,
       ),
       body: Column(
         children: [
@@ -42,38 +46,60 @@ class _FinishPageState extends ConsumerState<FinishPage> {
             leading: const Icon(Icons.camera),
             onTap: _getFromCamera,
             title: Text(
-              "Kameradan rasmga olish",
+              context.l10n.takeApicDialog,
               style: context.textTheme.bodyMedium,
             ),
           ),
-          Row(
-            children: [
-              Text(
-                context.l10n.startPrice,
-                style: context.textTheme.bodyMedium,
-              ),
-              const Spacer(),
-              Text(context.l10n.productPrice(
-                  kPriceFormatter.format(state.rides[0].tariff?.startPrice)))
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              children: [
+                Text(
+                  context.l10n.startPrice,
+                  style: context.textTheme.bodyMedium,
+                ),
+                const Spacer(),
+                Text(
+                  context.l10n.productPrice(
+                      kPriceFormatter.format(state.rides[0].startPrice)),
+                )
+              ],
+            ),
           ),
-          Row(
-            children: [
-              Text(
-                context.l10n.perMinute,
-                style: context.textTheme.bodyMedium,
-              ),
-              const Spacer(),
-              Text(context.l10n.productPrice(kPriceFormatter
-                  .format(state.rides[0].tariff?.pricePerMinute)))
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              children: [
+                Text(
+                  context.l10n.perMinute,
+                  style: context.textTheme.bodyMedium,
+                ),
+                const Spacer(),
+                Text(context.l10n.productPrice(
+                    kPriceFormatter.format(state.rides[0].pricePerMinute)))
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Text(
+                  context.l10n.pousePricePerMinute,
+                  style: context.textTheme.bodyMedium,
+                ),
+                const Spacer(),
+                Text(context.l10n.productPrice(
+                    kPriceFormatter.format(state.rides[0].pausePricePerMinute)))
+              ],
+            ),
           ),
         ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: PrimaryButton(
-            title: "Yakunlash",
+            title: context.l10n.finish,
             isLoading: state.actionState == RideAction.stoping,
             onPress: () {
               if (state.imgPath != null) {

@@ -22,11 +22,13 @@ class ReferenceState with _$ReferenceState {
 
 class ReferenceNotifier extends StateNotifier<ReferenceState> {
   final ReferenceRepository _repository;
-  ReferenceNotifier(this._repository) : super(ReferenceState.initial());
+  ReferenceNotifier(this._repository) : super(ReferenceState.initial()) {
+    getData();
+  }
 
-  Future<void> getData(double? latitude, double? longitude) async {
+  Future<void> getData() async {
     state = state.copyWith(isLoading: true);
-    final dataOrFailure = await _repository.getData(latitude, longitude);
+    final dataOrFailure = await _repository.getData();
     state = dataOrFailure.fold(
       (l) => state.copyWith(error: l, isLoading: false),
       (r) => state.copyWith(data: r, isLoading: false),

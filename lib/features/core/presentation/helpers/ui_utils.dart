@@ -21,6 +21,10 @@ String getFormattedRange(DateTimeRange range) {
   return '${DateFormat(DateFormat.ABBR_MONTH_DAY).format(range.start)} - ${DateFormat(DateFormat.ABBR_MONTH_DAY).format(range.end)}';
 }
 
+String getTime(int time) {
+  return "${time ~/ 60 < 10 ? "0${time ~/ 60}" : time ~/ 60}:${time % 60 < 10 ? "0${time % 60}" : time % 60}";
+}
+
 bool isValidEmail(String email) => RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     ).hasMatch(email);

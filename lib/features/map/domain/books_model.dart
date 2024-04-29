@@ -10,7 +10,7 @@ class BookModel with _$BookModel {
     required int bicycleId,
     required String finishAt,
     required String qrCode,
-    required LatLongModel coordinate,
+    required LatLongModel? coordinate,
   }) = _BookModel;
 
   factory BookModel.fromJson(Map<String, dynamic> json) =>

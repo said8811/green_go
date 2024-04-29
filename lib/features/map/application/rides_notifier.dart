@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:green_go/features/core/domain/failure.dart';
-import 'package:green_go/features/core/domain/transport_model.dart';
 import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/ride_model.dart';
+import 'package:green_go/features/map/domain/single_transport_model.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,7 +24,7 @@ class RidesState with _$RidesState {
     required List<RideModel> rides,
     required List<BookModel> books,
     required bool isLoading,
-    TransportModel? transport,
+    SingleTransportModel? transport,
     Failure? error,
     String? imgPath,
     required RideAction actionState,
@@ -43,13 +43,29 @@ class RidesNotifier extends StateNotifier<RidesState> {
   Future<void> getRides() async {
     state = state.copyWith(isLoading: true);
     final dataOrFailure = await _repository.getRides();
-    dataOrFailure.fold(
-        (l) => state = state.copyWith(error: l, isLoading: false), (r) async {
-      state = state.copyWith(
-        rides: r.rides,
-        isLoading: false,
-        books: r.books,
-      );
+    dataOrFailure
+        .fold((l) => state = state.copyWith(error: l, isLoading: false),
+            (data) async {
+      if (data.books.isNotEmpty) {
+        final dataOrFailure =
+            await _repository.getTransport(data.books[0].qrCode);
+        state = dataOrFailure.fold(
+            (l) => state.copyWith(
+                  error: l,
+                ),
+            (r) => state.copyWith(
+                  rides: data.rides,
+                  isLoading: false,
+                  transport: r,
+                  books: data.books,
+                ));
+      } else {
+        state = state.copyWith(
+          rides: data.rides,
+          isLoading: false,
+          books: data.books,
+        );
+      }
     });
   }
 

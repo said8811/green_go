@@ -36,6 +36,7 @@ class _BalancePageState extends ConsumerState<BalancePage> {
     final textTheme = context.textTheme;
     final state = ref.watch(profileNotifierProvider);
     final cards = ref.watch(cardsNotifierProvider);
+    final selectedType = ref.watch(selectedCardProvider);
     ref.listen(invoiceNotifier, (previous, next) {
       if (next.error != null) {
         showErrorDialog(context, failure: next.error as Failure);
@@ -61,7 +62,7 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                   ),
                   const Gap(10),
                   Text(
-                    "so'm",
+                    context.l10n.sum,
                     style: context.textTheme.bodyMedium
                         ?.copyWith(color: context.colorScheme.greyDark),
                   )
@@ -73,7 +74,7 @@ class _BalancePageState extends ConsumerState<BalancePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "To‘lov miqdori",
+                context.l10n.paymentSum,
                 style: context.textTheme.bodyMedium?.copyWith(),
               ),
             ),
@@ -86,13 +87,13 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                   controller: controller,
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return "Miqdorni kiriting";
+                      return context.l10n.enterSumDialog;
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero,
-                    hintText: "Miqdorni kiriting",
+                    hintText: context.l10n.enterSumDialog,
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
@@ -109,7 +110,7 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Karta tanlang",
+                    context.l10n.chooseCard,
                     style: textTheme.bodyMedium?.copyWith(fontSize: 20),
                   ),
                 ),
@@ -135,7 +136,7 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                                                     Navigator.pop(context));
                                           },
                                           title: Text(
-                                            "Karta qo'shish",
+                                            context.l10n.addCard,
                                             style: context.textTheme.bodyMedium,
                                           ),
                                         )
@@ -154,7 +155,11 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                                               ref
                                                   .read(cardsNotifierProvider
                                                       .notifier)
-                                                  .removeCard(data[index].id);
+                                                  .removeCard(data[index].id)
+                                                  .then((value) => ref
+                                                      .read(selectedCardProvider
+                                                          .notifier)
+                                                      .clear());
                                             }
                                           },
                                           direction:
@@ -162,16 +167,16 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                                           child: ListTile(
                                             onTap: () {
                                               Navigator.pop(
-                                                  context, data[index]);
+                                                  context, data[index].id);
                                             },
                                             title: Text(data[index].number),
-                                            trailing: selectedType?.number ==
-                                                    data[index].number
-                                                ? const Icon(
-                                                    Icons.check,
-                                                    color: Colors.black,
-                                                  )
-                                                : null,
+                                            trailing:
+                                                selectedType == data[index].id
+                                                    ? const Icon(
+                                                        Icons.check,
+                                                        color: Colors.black,
+                                                      )
+                                                    : null,
                                             leading: data[index]
                                                     .number
                                                     .startsWith("8600")
@@ -201,19 +206,26 @@ class _BalancePageState extends ConsumerState<BalancePage> {
                                         .getCards()),
                                 loading: () => const LoadingWidget(),
                               ),
-                            )).then((value) {
+                            )).then((value) async {
                       if (value == null || value.toString().isEmpty) return;
-                      setState(() {
-                        selectedType = value;
-                      });
+                      await ref
+                          .read(selectedCardProvider.notifier)
+                          .setCard(value);
                     });
                   },
                   title: Text(
-                    selectedType != null ? selectedType!.number : "Kartalar",
+                    selectedType != null && cards.value != null
+                        ? cards.value!
+                            .firstWhere((e) => e.id == selectedType)
+                            .number
+                        : context.l10n.cards,
                     style: textTheme.bodyMedium?.copyWith(fontSize: 18),
                   ),
-                  leading: selectedType != null
-                      ? selectedType!.number.startsWith("8600")
+                  leading: selectedType != null && cards.value != null
+                      ? cards.value!
+                              .firstWhere((e) => e.id == selectedType)
+                              .number
+                              .startsWith("8600")
                           ? Assets.images.uzCard.image(height: 60)
                           : Assets.images.humo.image(height: 60)
                       : null,
@@ -230,13 +242,12 @@ class _BalancePageState extends ConsumerState<BalancePage> {
             minimum: const EdgeInsets.all(20),
             child: PrimaryButton(
               isLoading: ref.watch(invoiceNotifier).isLoading,
-              title: "Balansi to'ldirish",
+              title: context.l10n.fillBalance,
               onPress: () {
-                if (_formKey.currentState!.validate() &&
-                    selectedType?.id != null) {
+                if (_formKey.currentState!.validate() && selectedType != null) {
                   ref
                       .read(invoiceNotifier.notifier)
-                      .fillBalance(selectedType!.id, int.parse(controller.text))
+                      .fillBalance(selectedType, int.parse(controller.text))
                       .then((value) {
                     if (value) {
                       ref.read(profileNotifierProvider.notifier).getProfile();

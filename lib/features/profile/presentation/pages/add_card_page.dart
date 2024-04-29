@@ -7,6 +7,7 @@ import 'package:green_go/features/core/presentation/components/common_appbar.dar
 import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/profile/shared/providers.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -26,8 +27,8 @@ class AddCardPage extends HookConsumerWidget {
     });
     return KeyboardDismisser(
       child: Scaffold(
-        appBar: const CommonAppBar(
-          title: "Karta Qo'shish",
+        appBar: CommonAppBar(
+          title: context.l10n.addCard,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -36,17 +37,17 @@ class AddCardPage extends HookConsumerWidget {
             children: [
               const Gap(40),
               Text(
-                "Bank karta qo'shish",
+                context.l10n.addBankCard,
                 style: context.textTheme.bodyMedium?.copyWith(fontSize: 24),
               ),
               const Gap(20),
               Text(
-                "Sayohatni boshlash avval karta raqamni qo‘shish tavsiya qilinadi",
+                "Sayohatni boshlashdan avval karta raqamni qo‘shish tavsiya qilinadi",
                 style: context.textTheme.labelSmall?.copyWith(fontSize: 14),
               ),
               const Gap(40),
               Text(
-                "Karta raqami",
+                context.l10n.cardNumber,
                 style: context.textTheme.bodySmall,
               ),
               const Gap(6),
@@ -77,7 +78,7 @@ class AddCardPage extends HookConsumerWidget {
                     ),
                     const Gap(20),
                     Text(
-                      "Amal qilish muddati",
+                      context.l10n.validityPeriod,
                       style: context.textTheme.bodySmall,
                     ),
                     const Gap(6),
@@ -112,7 +113,7 @@ class AddCardPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(20.0),
           child: PrimaryButton(
             isLoading: ref.watch(addCardProvider).isLoading,
-            title: "Kartani qoshish",
+            title: context.l10n.addCard,
             onPress: () {
               if (formKey.value.currentState!.validate()) {
                 ref

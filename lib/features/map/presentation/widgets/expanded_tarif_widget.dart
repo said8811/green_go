@@ -26,7 +26,7 @@ class ExpandedTarifWidget extends ConsumerWidget {
             Row(
               children: [
                 Text(
-                  tarif.nameRu,
+                  tarif.getTitle(context.l10n.localeName),
                   style: context.textTheme.bodyMedium,
                 ),
                 const Spacer(),
@@ -71,7 +71,7 @@ class ExpandedTarifWidget extends ConsumerWidget {
             Row(
               children: [
                 Text(
-                  "Pauza minutiga",
+                  context.l10n.pousePricePerMinute,
                   style: context.textTheme.bodyMedium,
                 ),
                 const Spacer(),

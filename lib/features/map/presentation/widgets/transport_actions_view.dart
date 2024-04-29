@@ -68,12 +68,6 @@ class TransportActionsView extends HookConsumerWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Text(
-                      "0 km",
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontSize: 16,
-                      ),
-                    ),
                   ],
                 ),
                 const Gap(10),
@@ -99,7 +93,7 @@ class TransportActionsView extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Velosaped yoqilgan",
+                            context.l10n.bicycleTurnedOn,
                             style: textTheme.bodyMedium,
                           ),
                           const Gap(10),
@@ -126,7 +120,7 @@ class TransportActionsView extends HookConsumerWidget {
                         state.actionState == RideAction.turningOn) ...[
                       Expanded(
                         child: PrimaryButton(
-                          title: "Yoqish",
+                          title: context.l10n.turnOn,
                           isLoading: state.actionState == RideAction.turningOn,
                           leading: CommonSvgPicture(Assets.icons.continueIcon),
                           onPress: () {
@@ -142,7 +136,7 @@ class TransportActionsView extends HookConsumerWidget {
                         state.actionState == RideAction.pausing) ...[
                       Expanded(
                         child: PrimaryButton(
-                          title: "Pauza",
+                          title: context.l10n.pouse,
                           isLoading: state.actionState == RideAction.pausing,
                           onPress: () {
                             ref.read(ridesNotifierProvider.notifier).pause();
@@ -158,9 +152,15 @@ class TransportActionsView extends HookConsumerWidget {
                     ],
                     Expanded(
                       child: PrimaryButton(
-                        title: "Yakunlash",
+                        title: context.l10n.finish,
                         onPress: () {
-                          context.push(AppRoute.finishPage.routePathWithSlash);
+                          context
+                              .push(AppRoute.finishPage.routePathWithSlash)
+                              .then((value) {
+                            if (value as bool) {
+                              Navigator.pop(context);
+                            }
+                          });
                         },
                         isLoading: state.actionState == RideAction.stoping,
                         color: context.colorScheme.textColor.withOpacity(0.7),
@@ -185,9 +185,5 @@ class TransportActionsView extends HookConsumerWidget {
                     )
                   : const SizedBox(),
     );
-  }
-
-  String getTime(int time) {
-    return "${time ~/ 60 < 10 ? "0${time ~/ 60}" : time ~/ 60}:${time % 60 < 10 ? "0${time % 60}" : time % 60}";
   }
 }
