@@ -6,6 +6,7 @@ import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 
 import '../../../map/presentation/widgets/transport_actions_view.dart';
 import '../../../map/presentation/widgets/transport_booked_view.dart';
+import '../../../map/presentation/widgets/transport_widget.dart';
 import '../buttons/primary_button.dart';
 import '../widgets/common_svg_picture.dart';
 import '/theme/colors.dart';
@@ -29,6 +30,19 @@ void openActionsView(BuildContext context) {
     backgroundColor: Colors.white,
     builder: (_) {
       return const TransportActionsView();
+    },
+  );
+}
+
+void openTransportView(BuildContext context, VoidCallback onDispose, String qr) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.white,
+    builder: (_) {
+      return TransportWidget(
+        onDispose: onDispose,
+        qrCode: qr,
+      );
     },
   );
 }
@@ -110,8 +124,7 @@ Future<dynamic> showAppDialog({
                   Text(
                     title!,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight:
-                              isBoldTitle ? FontWeight.bold : FontWeight.w500,
+                          fontWeight: isBoldTitle ? FontWeight.bold : FontWeight.w500,
                           fontSize: titleFontSize,
                         ),
                     textAlign: TextAlign.center,
@@ -143,8 +156,7 @@ Future<dynamic> showAppDialog({
                         },
                       ),
                     ),
-                    if ((cancellable && showCancel) || secondAction != null)
-                      const Gap(32),
+                    if ((cancellable && showCancel) || secondAction != null) const Gap(32),
                     if (cancellable && showCancel)
                       Expanded(
                         child: SecondaryButton(
@@ -160,9 +172,7 @@ Future<dynamic> showAppDialog({
                             secondAction();
                             if (shouldPop) Navigator.pop(context);
                           },
-                          borderColor: secondaryType == ButtonType.bordered
-                              ? context.colorScheme.primary
-                              : null,
+                          borderColor: secondaryType == ButtonType.bordered ? context.colorScheme.primary : null,
                           textColor: secondaryType == ButtonType.bordered
                               ? context.colorScheme.textColor
                               : context.colorScheme.background,

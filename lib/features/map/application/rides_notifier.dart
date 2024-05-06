@@ -3,6 +3,7 @@ import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/features/map/domain/single_transport_model.dart';
+import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -27,10 +28,10 @@ class RidesState with _$RidesState {
     SingleTransportModel? transport,
     Failure? error,
     String? imgPath,
+    TarifModel? tarif,
     required RideAction actionState,
   }) = _RidesState;
-  factory RidesState.initial() => RidesState(
-      rides: [], isLoading: false, actionState: RideAction.pure, books: []);
+  factory RidesState.initial() => RidesState(rides: [], isLoading: false, actionState: RideAction.pure, books: []);
 }
 
 class RidesNotifier extends StateNotifier<RidesState> {
@@ -43,28 +44,17 @@ class RidesNotifier extends StateNotifier<RidesState> {
   Future<void> getRides() async {
     state = state.copyWith(isLoading: true);
     final dataOrFailure = await _repository.getRides();
-    dataOrFailure
-        .fold((l) => state = state.copyWith(error: l, isLoading: false),
-            (data) async {
+    dataOrFailure.fold((l) => state = state.copyWith(error: l, isLoading: false), (data) async {
       if (data.books.isNotEmpty) {
-        final dataOrFailure =
-            await _repository.getTransport(data.books[0].qrCode);
+        final dataOrFailure = await _repository.getTransport(data.books[0].qrCode);
         state = dataOrFailure.fold(
             (l) => state.copyWith(
                   error: l,
                 ),
             (r) => state.copyWith(
-                  rides: data.rides,
-                  isLoading: false,
-                  transport: r,
-                  books: data.books,
-                ));
+                rides: data.rides, isLoading: false, transport: r, books: data.books, actionState: RideAction.pure));
       } else {
-        state = state.copyWith(
-          rides: data.rides,
-          isLoading: false,
-          books: data.books,
-        );
+        state = state.copyWith(rides: data.rides, isLoading: false, books: data.books, actionState: RideAction.pure);
       }
     });
   }
@@ -94,13 +84,8 @@ class RidesNotifier extends StateNotifier<RidesState> {
     final action = state.actionState;
     state = state.copyWith(actionState: RideAction.stoping);
     final succesOrFailure = await _repository.finish(
-        rideId: state.rides[0].id,
-        latitude: latitude,
-        longitude: longitude,
-        imgPath: state.imgPath!);
-    succesOrFailure
-        .fold((l) => state = state.copyWith(error: l, actionState: action),
-            (data) async {
+        rideId: state.rides[0].id, latitude: latitude, longitude: longitude, imgPath: state.imgPath!);
+    succesOrFailure.fold((l) => state = state.copyWith(error: l, actionState: action), (data) async {
       final dataOrFailure = await _repository.getRides();
       state = dataOrFailure.fold(
           (l) => state.copyWith(error: l, actionState: action),

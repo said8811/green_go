@@ -8,7 +8,6 @@ import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/presentation/widgets/book_timer_widget.dart';
 import 'package:green_go/features/map/presentation/widgets/map_view.dart';
 import 'package:green_go/features/map/presentation/widgets/ride_timer_widget.dart';
-import 'package:green_go/features/map/presentation/widgets/transport_widget.dart';
 import 'package:green_go/features/map/shared/providers.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
 import 'package:green_go/gen/assets.gen.dart';
@@ -31,7 +30,6 @@ class MapPage extends ConsumerStatefulWidget {
 
 class _MapPageState extends ConsumerState<MapPage> {
   late YandexMapController _controller;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
   Timer? _updateTimer;
   double zoom = 16;
 
@@ -48,128 +46,107 @@ class _MapPageState extends ConsumerState<MapPage> {
   }
 
   Future<void> _updateMapObjects() async {
-    final data = ref.watch(referenceNotifierProvider);
-    for (var polygon in data.data!.availableCoordinates) {
-      ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
-            mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
-            fillColor: Colors.white.withOpacity(0.6),
-            strokeColor: Colors.red,
-            isGeodesic: true,
-            isVisible: true,
-            strokeWidth: 1,
-            polygon: Polygon(
-                outerRing: LinearRing(
-                  points: polygon
-                      .map((e) =>
-                          Point(latitude: e.latitude, longitude: e.longitude))
-                      .toList(),
-                ),
-                innerRings: const []),
-          ));
-      ref
-          .read(mapNotifierProvider.notifier)
-          .addAvailableObjects(PolygonMapObject(
-            mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
-            fillColor: Colors.green.withOpacity(0.3),
-            strokeColor: Colors.green,
-            isGeodesic: true,
-            isVisible: true,
-            strokeWidth: 1,
-            polygon: Polygon(
-                outerRing: LinearRing(
-                  points: polygon
-                      .map((e) =>
-                          Point(latitude: e.latitude, longitude: e.longitude))
-                      .toList(),
-                ),
-                innerRings: const []),
-          ));
-    }
-    for (var polygon in data.data!.prohibitedCoordinates) {
-      ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
-            zIndex: 1,
-            mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
-            fillColor: Colors.red.withOpacity(0.2),
-            strokeColor: Colors.red,
-            polygon: Polygon(
-              outerRing: LinearRing(
-                points: polygon
-                    .map((e) =>
-                        Point(latitude: e.latitude, longitude: e.longitude))
-                    .toList(),
-              ),
-              innerRings: const [],
-            ),
-            onTap: (PolygonMapObject self, Point point) {},
-          ));
-    }
-    for (var cat in data.data!.categories) {
-      for (var transport in cat.transports) {
-        MapObject placeMark = PlacemarkMapObject(
-          zIndex: 10,
-          opacity: 1,
-          mapId: MapObjectId('placeMark_${transport.id}'),
-          point: Point(
-              latitude: transport.latitude, longitude: transport.longitude),
-          icon: PlacemarkIcon.single(
-            PlacemarkIconStyle(
-              image: BitmapDescriptor.fromAssetImage(
-                cat.type == "bicycle"
-                    ? Assets.images.bike.path
-                    : Assets.images.scooter.path,
-              ),
-              scale: 1.7,
-            ),
-          ),
-          onTap: (mapObject, point) {
-            var updatedPlacemark = mapObject.copyWith(
-              icon: PlacemarkIcon.single(
-                PlacemarkIconStyle(
-                  image: BitmapDescriptor.fromAssetImage(
-                      Assets.images.selectedBike.path),
-                  scale: 1.7,
-                ),
-              ),
-            );
-            var intialPlaceMark = mapObject.copyWith(
-              icon: PlacemarkIcon.single(
-                PlacemarkIconStyle(
-                  image:
-                      BitmapDescriptor.fromAssetImage(Assets.images.bike.path),
-                  scale: 1.7,
-                ),
-              ),
-            );
-            ref
-                .read(mapNotifierProvider.notifier)
-                .updateOneObject(mapObject.mapId.value, updatedPlacemark);
-
-            showModalBottomSheet(
-              context: context,
-              backgroundColor: Colors.white,
-              builder: (_) {
-                return TransportWidget(
-                  onDispose: () {
-                    Future.microtask(() {
-                      ref.read(mapNotifierProvider.notifier).initialPlaceMark(
-                          mapObject.mapId.value, intialPlaceMark);
-                    });
-                  },
-                  qrCode: transport.qrCode,
-                );
-              },
-            );
-          },
-        );
-        ref.read(mapNotifierProvider.notifier).addMainObjects(placeMark);
+    ref.read(referenceNotifierProvider.notifier).getData().then((value) {
+      final data = ref.watch(referenceNotifierProvider);
+      for (var polygon in data.data!.availableCoordinates) {
+        ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
+              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+              fillColor: Colors.white.withOpacity(0.6),
+              strokeColor: Colors.red,
+              isGeodesic: true,
+              isVisible: true,
+              strokeWidth: 1,
+              polygon: Polygon(
+                  outerRing: LinearRing(
+                    points: polygon.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
+                  ),
+                  innerRings: const []),
+            ));
+        ref.read(mapNotifierProvider.notifier).addAvailableObjects(PolygonMapObject(
+              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+              fillColor: Colors.green.withOpacity(0.3),
+              strokeColor: Colors.green,
+              isGeodesic: true,
+              isVisible: true,
+              strokeWidth: 1,
+              polygon: Polygon(
+                  outerRing: LinearRing(
+                    points: polygon.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
+                  ),
+                  innerRings: const []),
+            ));
       }
-    }
-    setState(() {});
+      for (var polygon in data.data!.prohibitedCoordinates) {
+        ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
+              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+              fillColor: Colors.red.withOpacity(0.2),
+              strokeColor: Colors.red,
+              polygon: Polygon(
+                outerRing: LinearRing(
+                  points: polygon.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
+                ),
+                innerRings: const [],
+              ),
+              onTap: (PolygonMapObject self, Point point) {},
+            ));
+      }
+      for (var cat in data.data!.categories) {
+        for (var transport in cat.transports) {
+          MapObject placeMark = PlacemarkMapObject(
+            opacity: 1,
+            mapId: MapObjectId('placeMark_${transport.id}'),
+            point: Point(latitude: transport.latitude, longitude: transport.longitude),
+            icon: PlacemarkIcon.single(
+              PlacemarkIconStyle(
+                image: BitmapDescriptor.fromAssetImage(
+                  cat.type == "bicycle" ? Assets.images.bike.path : Assets.images.scooter.path,
+                ),
+                scale: 0.7,
+              ),
+            ),
+            onTap: (mapObject, point) {
+              var updatedPlacemark = mapObject.copyWith(
+                icon: PlacemarkIcon.single(
+                  PlacemarkIconStyle(
+                    image: BitmapDescriptor.fromAssetImage(Assets.images.bicyle.path),
+                    scale: 0.8,
+                  ),
+                ),
+              );
+              var intialPlaceMark = mapObject.copyWith(
+                icon: PlacemarkIcon.single(
+                  PlacemarkIconStyle(
+                    image: BitmapDescriptor.fromAssetImage(Assets.images.bike.path),
+                    scale: 0.7,
+                  ),
+                ),
+              );
+              ref.read(mapNotifierProvider.notifier).updateOneObject(mapObject.mapId.value, updatedPlacemark);
+              ref
+                  .read(transportStateProvider.notifier)
+                  .getTransport(ref.watch(locationStateProvider)!.latitude, ref.watch(locationStateProvider)!.longitude,
+                      transport.qrCode)
+                  .then((value) {
+                if (value) {
+                  openTransportView(context, () {
+                    Future.microtask(() {
+                      ref.read(mapNotifierProvider.notifier).initialPlaceMark(mapObject.mapId.value, intialPlaceMark);
+                    });
+                  }, transport.qrCode);
+                }
+              });
+            },
+          );
+          ref.read(mapNotifierProvider.notifier).addMainObjects(placeMark);
+        }
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final rides = ref.watch(ridesNotifierProvider);
+    final transport = ref.watch(transportStateProvider);
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (next.rides.isNotEmpty && (previous?.rides ?? []).isEmpty) {
         openActionsView(context);
@@ -178,8 +155,21 @@ class _MapPageState extends ConsumerState<MapPage> {
         openBooksView(context);
       }
     });
+    ref.listen(transportStateProvider, (previous, next) {
+      if (next.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Center(child: Text(next.error.toString())),
+          behavior: SnackBarBehavior.floating,
+          duration: const Duration(seconds: 2),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 100, right: 50, left: 50),
+        ));
+      }
+    });
+
     return Scaffold(
-      key: _key,
       body: Stack(
         children: [
           MapView(
@@ -221,6 +211,41 @@ class _MapPageState extends ConsumerState<MapPage> {
               },
             ),
           ),
+          if (transport.isLoading)
+            Positioned(
+              top: 80,
+              right: 110,
+              left: 110,
+              child: AnimatedOpacity(
+                opacity: 1,
+                duration: const Duration(milliseconds: 500),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      color: context.colorScheme.textColor.withOpacity(0.8), borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Text(
+                          "Соединенные",
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colorScheme.surface,
+                          ),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: CircularProgressIndicator(
+                            color: context.colorScheme.surface,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           if (rides.rides.isNotEmpty) const RideTimerWidget(),
           if (rides.books.isNotEmpty) const BookTimerWidget(),
           Positioned(
@@ -231,8 +256,7 @@ class _MapPageState extends ConsumerState<MapPage> {
                   context.push(AppRoute.profile.routePathWithSlash);
                 },
                 padding: const EdgeInsets.all(12),
-                shape:
-                    const CircleBorder(side: BorderSide(color: Colors.white)),
+                shape: const CircleBorder(side: BorderSide(color: Colors.white)),
                 label: CommonSvgPicture(Assets.icons.user)),
           ),
           Positioned(
@@ -242,20 +266,17 @@ class _MapPageState extends ConsumerState<MapPage> {
             child: PrimaryButton(
               title: context.l10n.scanIt,
               onPress: () {
-                context
-                    .push(AppRoute.qr.routePathWithSlash)
-                    .then((value) async {
-                  if (value != null) {
-                    showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.white,
-                      builder: (_) {
-                        return TransportWidget(
-                          onDispose: () {},
-                          qrCode: value.toString(),
-                        );
-                      },
-                    );
+                context.push(AppRoute.qr.routePathWithSlash).then((qr) async {
+                  if (qr != null) {
+                    ref
+                        .read(transportStateProvider.notifier)
+                        .getTransport(ref.watch(locationStateProvider)!.latitude,
+                            ref.watch(locationStateProvider)!.longitude, qr.toString())
+                        .then((value) {
+                      if (value) {
+                        openTransportView(context, () {}, qr.toString());
+                      }
+                    });
                   }
                 });
               },
@@ -280,8 +301,7 @@ class _MapPageState extends ConsumerState<MapPage> {
     final CameraPosition point = await _controller.getCameraPosition();
 
     await _controller.moveCamera(
-      CameraUpdate.newCameraPosition(
-          CameraPosition(target: point.target, zoom: point.zoom + zoomLevel)),
+      CameraUpdate.newCameraPosition(CameraPosition(target: point.target, zoom: point.zoom + zoomLevel)),
     );
     zoom = point.zoom + zoomLevel;
     setState(() {});

@@ -10,30 +10,27 @@ import '../../../core/presentation/helpers/ui_utils.dart';
 
 class TariffWidget extends ConsumerWidget {
   final TarifModel tarif;
+  final VoidCallback onTap;
   const TariffWidget({
     super.key,
     required this.tarif,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedTarif = ref.watch(transportStateProvider).selectedTarif;
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: () {
-        ref.read(transportStateProvider.notifier).setTarif(tarif.id);
+        ref.read(transportStateProvider.notifier).setTarif(tarif);
+        onTap.call();
       },
       child: Ink(
         padding: const EdgeInsets.only(left: 20),
         width: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: selectedTarif == tarif.id
-              ? Border.all(color: context.colorScheme.primary)
-              : null,
-          color: selectedTarif == tarif.id
-              ? context.colorScheme.primary.withOpacity(0.3)
-              : context.colorScheme.grey.withOpacity(0.3),
+          color: context.colorScheme.grey.withOpacity(0.3),
         ),
         child: Row(
           children: [

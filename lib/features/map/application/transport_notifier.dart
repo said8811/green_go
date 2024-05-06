@@ -1,6 +1,7 @@
 import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/single_transport_model.dart';
+import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/features/map/infrastructure/transport_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -27,14 +28,19 @@ class TransportState with _$TransportState {
     required bool isLoading,
     Failure? error,
     String? qrCode,
-    required int selectedTarif,
+    TarifModel? selectedTarif,
     required TransportActionEnum actionState,
   }) = _TransportState;
   factory TransportState.initial() => TransportState(
         transport: null,
         isLoading: false,
         actionState: TransportActionEnum.pure,
-        selectedTarif: 1,
+      );
+  factory TransportState.loading() => TransportState(
+        transport: null,
+        isLoading: true,
+        actionState: TransportActionEnum.pure,
+        error: null,
       );
 }
 
@@ -42,11 +48,12 @@ class TransportNotifier extends StateNotifier<TransportState> {
   final TransportRepository _repository;
   TransportNotifier(this._repository) : super(TransportState.initial());
 
-  Future<void> getTransport(
-      double latitude, double longitude, String qrCode) async {
-    state = state.copyWith(isLoading: true);
-    final dataOrFailure =
-        await _repository.getTransport(latitude, longitude, qrCode);
+  Future<bool> getTransport(double latitude, double longitude, String qrCode) async {
+    if (state.isLoading) {
+      return false;
+    }
+    state = TransportState.loading();
+    final dataOrFailure = await _repository.getTransport(latitude, longitude, qrCode);
     state = dataOrFailure.fold(
       (l) => state.copyWith(
         error: l,
@@ -56,17 +63,17 @@ class TransportNotifier extends StateNotifier<TransportState> {
       (r) => state.copyWith(
         transport: r,
         isLoading: false,
+        error: null,
         actionState: TransportActionEnum.ready,
         qrCode: null,
       ),
     );
+    return dataOrFailure.fold((l) => false, (r) => true);
   }
 
-  Future<bool> start(double latitude, double longitude, String qrCode,
-      int regionId, int tariffId) async {
+  Future<bool> start(double latitude, double longitude, String qrCode, int regionId) async {
     state = state.copyWith(actionState: TransportActionEnum.starting);
-    final dataOrFailure = await _repository.start(
-        latitude, longitude, qrCode, regionId, tariffId);
+    final dataOrFailure = await _repository.start(latitude, longitude, qrCode, regionId, state.selectedTarif!.id);
     dataOrFailure.fold(
         (l) => state = state.copyWith(
               error: l,
@@ -118,7 +125,7 @@ class TransportNotifier extends StateNotifier<TransportState> {
     state = state.copyWith(qrCode: qrcode);
   }
 
-  void setTarif(int id) {
+  void setTarif(TarifModel id) {
     state = state.copyWith(selectedTarif: id);
   }
 

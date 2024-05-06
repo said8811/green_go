@@ -10,6 +10,7 @@ _$SingleTransportModelImpl _$$SingleTransportModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SingleTransportModelImpl(
       id: json['id'] as int,
+      image: json['image'] as String? ?? '',
       nameRu: json['nameRu'] as String? ?? '',
       nameUz: json['nameUz'] as String? ?? '',
       nameEn: json['nameEn'] as String? ?? '',
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$SingleTransportModelImplToJson(
         _$SingleTransportModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'image': instance.image,
       'nameRu': instance.nameRu,
       'nameUz': instance.nameUz,
       'nameEn': instance.nameEn,

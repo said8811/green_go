@@ -11,6 +11,7 @@ part 'single_transport_model.g.dart';
 class SingleTransportModel with _$SingleTransportModel {
   factory SingleTransportModel({
     required int id,
+    @JsonKey(defaultValue: "") required String image,
     @JsonKey(defaultValue: "") required String nameRu,
     @JsonKey(defaultValue: "") required String nameUz,
     @JsonKey(defaultValue: "") required String nameEn,
@@ -21,6 +22,5 @@ class SingleTransportModel with _$SingleTransportModel {
     required BookModel? book,
   }) = _SingleTransportModel;
 
-  factory SingleTransportModel.fromJson(Map<String, dynamic> json) =>
-      _$SingleTransportModelFromJson(json);
+  factory SingleTransportModel.fromJson(Map<String, dynamic> json) => _$SingleTransportModelFromJson(json);
 }

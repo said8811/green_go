@@ -71,44 +71,34 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
               const Gap(20),
               Text(
                 context.l10n.extraInfoDialog,
-                style: context.textTheme.bodyMedium
-                    ?.copyWith(color: context.colorScheme.grey),
+                style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.grey),
               ),
               const Gap(20),
               Row(
                 children: [
                   Text(context.l10n.tariff),
                   const Spacer(),
-                  Text(widget.ride.tariff?.getTitle(context.l10n.localeName) ??
-                      ""),
+                  Text(widget.ride.tariff?.getTitle(context.l10n.localeName) ?? ""),
                   const Gap(5),
                   CommonSvgPicture(Assets.icons.checkGreen)
                 ],
               ),
               const Divider(),
-              tileWithsub(
-                  context.l10n.travelTime,
-                  DateFormat("d-MM-yyyy - HH:mm", "tr_TR")
-                      .format(DateTime.parse(widget.ride.startAt)),
-                  context),
+              tileWithsub(context.l10n.travelTime,
+                  DateFormat("d-MM-yyyy - HH:mm", "tr_TR").format(DateTime.parse(widget.ride.startAt)), context),
               const Divider(),
-              tileWithsub(
-                  context.l10n.travelDuration,
-                  "${DateTime.parse(widget.ride.finishedAt).difference(DateTime.parse(widget.ride.startAt)).inHours} soat ${DateTime.parse(widget.ride.finishedAt).difference(DateTime.parse(widget.ride.startAt)).inMinutes % 60} daqiqa",
-                  context),
+              tileWithsub(context.l10n.travelDuration,
+                  "${widget.ride.ridingTime ~/ 60} soat ${widget.ride.ridingTime % 60} daqiqa", context),
               const Divider(),
-              tileWithsub(
-                  context.l10n.pouseDuration,
-                  "${widget.ride.pouseTime ~/ 60} soat ${widget.ride.pouseTime % 60} daqiqa",
-                  context),
+              tileWithsub(context.l10n.pouseDuration,
+                  "${widget.ride.pouseTime ~/ 60} soat ${widget.ride.pouseTime % 60} daqiqa", context),
               const Divider(),
               const Gap(10),
               Row(
                 children: [
                   Text(context.l10n.perMinute),
                   const Spacer(),
-                  Text(context.l10n.productPrice(
-                      kPriceFormatter.format(widget.ride.pricePerMinute)))
+                  Text(context.l10n.productPrice(kPriceFormatter.format(widget.ride.pricePerMinute)))
                 ],
               ),
               const Gap(12),
@@ -116,8 +106,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                 children: [
                   Text(context.l10n.startPrice),
                   const Spacer(),
-                  Text(context.l10n.productPrice(
-                      kPriceFormatter.format(widget.ride.startPrice)))
+                  Text(context.l10n.productPrice(kPriceFormatter.format(widget.ride.startPrice)))
                 ],
               ),
               const Gap(12),
@@ -125,8 +114,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                 children: [
                   Text(context.l10n.pousePricePerMinute),
                   const Spacer(),
-                  Text(context.l10n.productPrice(
-                      kPriceFormatter.format(widget.ride.pausePricePerMinute)))
+                  Text(context.l10n.productPrice(kPriceFormatter.format(widget.ride.pausePricePerMinute)))
                 ],
               ),
               const Gap(12),
@@ -135,10 +123,8 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                   Text(context.l10n.totalPrice),
                   const Spacer(),
                   Text(
-                    context.l10n.productPrice(
-                        kPriceFormatter.format(widget.ride.total)),
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(color: context.colorScheme.primary),
+                    context.l10n.productPrice(kPriceFormatter.format(widget.ride.total)),
+                    style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.primary),
                   )
                 ],
               ),
@@ -147,8 +133,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                 CommonExpandablePanel(
                     symPadding: 0,
                     title: context.l10n.endImage,
-                    child: CachedNetworkImage(
-                        imageUrl: "$kCDNUrl/rides/${widget.ride.image}"))
+                    child: CachedNetworkImage(imageUrl: "$kCDNUrl/rides/${widget.ride.image}"))
             ],
           ),
         ),
@@ -165,8 +150,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
       ),
       subtitle: Text(
         subTitle,
-        style: context.textTheme.labelSmall
-            ?.copyWith(fontSize: 14, color: context.colorScheme.greyDark),
+        style: context.textTheme.labelSmall?.copyWith(fontSize: 14, color: context.colorScheme.greyDark),
       ),
     );
   }

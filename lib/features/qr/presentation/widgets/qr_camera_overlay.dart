@@ -8,21 +8,17 @@ class QRScannerOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // // Changing the size of scanner cutout dependent on the device size.
-    double scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 330.0;
+    double scanArea =
+        (MediaQuery.of(context).size.width < 400 || MediaQuery.of(context).size.height < 400) ? 180.0 : 330.0;
     return Stack(children: [
       ColorFiltered(
-        colorFilter: ColorFilter.mode(
-            overlayColour, BlendMode.srcOut), // This one will create the magic
+        colorFilter: ColorFilter.mode(overlayColour, BlendMode.srcOut), // This one will create the magic
         child: Stack(
           children: [
             Container(
               decoration: const BoxDecoration(
                   color: Colors.red,
-                  backgroundBlendMode: BlendMode
-                      .dstOut), // This one will handle background + difference out
+                  backgroundBlendMode: BlendMode.dstOut), // This one will handle background + difference out
             ),
             Align(
               alignment: Alignment.center,
@@ -127,8 +123,7 @@ class OverlayWithHolePainter extends CustomPainter {
           PathOperation.difference,
           Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height)),
           Path()
-            ..addOval(Rect.fromCircle(
-                center: Offset(size.width - 44, size.height - 44), radius: 40))
+            ..addOval(Rect.fromCircle(center: Offset(size.width - 44, size.height - 44), radius: 40))
             ..close(),
         ),
         paint);

@@ -21,7 +21,7 @@ mixin _$TransportState {
   bool get isLoading => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get qrCode => throw _privateConstructorUsedError;
-  int get selectedTarif => throw _privateConstructorUsedError;
+  TarifModel? get selectedTarif => throw _privateConstructorUsedError;
   TransportActionEnum get actionState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -41,12 +41,13 @@ abstract class $TransportStateCopyWith<$Res> {
       bool isLoading,
       Failure? error,
       String? qrCode,
-      int selectedTarif,
+      TarifModel? selectedTarif,
       TransportActionEnum actionState});
 
   $SingleTransportModelCopyWith<$Res>? get transport;
   $BookModelCopyWith<$Res>? get book;
   $FailureCopyWith<$Res>? get error;
+  $TarifModelCopyWith<$Res>? get selectedTarif;
 }
 
 /// @nodoc
@@ -67,7 +68,7 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
     Object? isLoading = null,
     Object? error = freezed,
     Object? qrCode = freezed,
-    Object? selectedTarif = null,
+    Object? selectedTarif = freezed,
     Object? actionState = null,
   }) {
     return _then(_value.copyWith(
@@ -91,10 +92,10 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      selectedTarif: null == selectedTarif
+      selectedTarif: freezed == selectedTarif
           ? _value.selectedTarif
           : selectedTarif // ignore: cast_nullable_to_non_nullable
-              as int,
+              as TarifModel?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -137,6 +138,18 @@ class _$TransportStateCopyWithImpl<$Res, $Val extends TransportState>
       return _then(_value.copyWith(error: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TarifModelCopyWith<$Res>? get selectedTarif {
+    if (_value.selectedTarif == null) {
+      return null;
+    }
+
+    return $TarifModelCopyWith<$Res>(_value.selectedTarif!, (value) {
+      return _then(_value.copyWith(selectedTarif: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -153,7 +166,7 @@ abstract class _$$TransportStateImplCopyWith<$Res>
       bool isLoading,
       Failure? error,
       String? qrCode,
-      int selectedTarif,
+      TarifModel? selectedTarif,
       TransportActionEnum actionState});
 
   @override
@@ -162,6 +175,8 @@ abstract class _$$TransportStateImplCopyWith<$Res>
   $BookModelCopyWith<$Res>? get book;
   @override
   $FailureCopyWith<$Res>? get error;
+  @override
+  $TarifModelCopyWith<$Res>? get selectedTarif;
 }
 
 /// @nodoc
@@ -180,7 +195,7 @@ class __$$TransportStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
     Object? qrCode = freezed,
-    Object? selectedTarif = null,
+    Object? selectedTarif = freezed,
     Object? actionState = null,
   }) {
     return _then(_$TransportStateImpl(
@@ -204,10 +219,10 @@ class __$$TransportStateImplCopyWithImpl<$Res>
           ? _value.qrCode
           : qrCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      selectedTarif: null == selectedTarif
+      selectedTarif: freezed == selectedTarif
           ? _value.selectedTarif
           : selectedTarif // ignore: cast_nullable_to_non_nullable
-              as int,
+              as TarifModel?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -225,7 +240,7 @@ class _$TransportStateImpl implements _TransportState {
       required this.isLoading,
       this.error,
       this.qrCode,
-      required this.selectedTarif,
+      this.selectedTarif,
       required this.actionState});
 
   @override
@@ -239,7 +254,7 @@ class _$TransportStateImpl implements _TransportState {
   @override
   final String? qrCode;
   @override
-  final int selectedTarif;
+  final TarifModel? selectedTarif;
   @override
   final TransportActionEnum actionState;
 
@@ -285,7 +300,7 @@ abstract class _TransportState implements TransportState {
       required final bool isLoading,
       final Failure? error,
       final String? qrCode,
-      required final int selectedTarif,
+      final TarifModel? selectedTarif,
       required final TransportActionEnum actionState}) = _$TransportStateImpl;
 
   @override
@@ -299,7 +314,7 @@ abstract class _TransportState implements TransportState {
   @override
   String? get qrCode;
   @override
-  int get selectedTarif;
+  TarifModel? get selectedTarif;
   @override
   TransportActionEnum get actionState;
   @override

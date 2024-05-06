@@ -43,14 +43,12 @@ mixin _$TarifModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TarifModelCopyWith<TarifModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TarifModelCopyWith<TarifModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TarifModelCopyWith<$Res> {
-  factory $TarifModelCopyWith(
-          TarifModel value, $Res Function(TarifModel) then) =
+  factory $TarifModelCopyWith(TarifModel value, $Res Function(TarifModel) then) =
       _$TarifModelCopyWithImpl<$Res, TarifModel>;
   @useResult
   $Res call(
@@ -71,8 +69,7 @@ abstract class $TarifModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
-    implements $TarifModelCopyWith<$Res> {
+class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel> implements $TarifModelCopyWith<$Res> {
   _$TarifModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -160,10 +157,8 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
 }
 
 /// @nodoc
-abstract class _$$TarifModelImplCopyWith<$Res>
-    implements $TarifModelCopyWith<$Res> {
-  factory _$$TarifModelImplCopyWith(
-          _$TarifModelImpl value, $Res Function(_$TarifModelImpl) then) =
+abstract class _$$TarifModelImplCopyWith<$Res> implements $TarifModelCopyWith<$Res> {
+  factory _$$TarifModelImplCopyWith(_$TarifModelImpl value, $Res Function(_$TarifModelImpl) then) =
       __$$TarifModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -185,12 +180,9 @@ abstract class _$$TarifModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TarifModelImplCopyWithImpl<$Res>
-    extends _$TarifModelCopyWithImpl<$Res, _$TarifModelImpl>
+class __$$TarifModelImplCopyWithImpl<$Res> extends _$TarifModelCopyWithImpl<$Res, _$TarifModelImpl>
     implements _$$TarifModelImplCopyWith<$Res> {
-  __$$TarifModelImplCopyWithImpl(
-      _$TarifModelImpl _value, $Res Function(_$TarifModelImpl) _then)
-      : super(_value, _then);
+  __$$TarifModelImplCopyWithImpl(_$TarifModelImpl _value, $Res Function(_$TarifModelImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -290,8 +282,7 @@ class _$TarifModelImpl implements _TarifModel {
       required this.pricePerMinute,
       required this.pausePricePerMinute});
 
-  factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TarifModelImplFromJson(json);
+  factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) => _$$TarifModelImplFromJson(json);
 
   @override
   final int id;
@@ -342,45 +333,23 @@ class _$TarifModelImpl implements _TarifModel {
             (identical(other.nameRu, nameRu) || other.nameRu == nameRu) &&
             (identical(other.nameUz, nameUz) || other.nameUz == nameUz) &&
             (identical(other.nameEn, nameEn) || other.nameEn == nameEn) &&
-            (identical(other.descriptionRu, descriptionRu) ||
-                other.descriptionRu == descriptionRu) &&
-            (identical(other.descriptionUz, descriptionUz) ||
-                other.descriptionUz == descriptionUz) &&
-            (identical(other.descriptionEn, descriptionEn) ||
-                other.descriptionEn == descriptionEn) &&
-            (identical(other.startMinute, startMinute) ||
-                other.startMinute == startMinute) &&
-            (identical(other.reservedAmount, reservedAmount) ||
-                other.reservedAmount == reservedAmount) &&
-            (identical(other.activateCount, activateCount) ||
-                other.activateCount == activateCount) &&
+            (identical(other.descriptionRu, descriptionRu) || other.descriptionRu == descriptionRu) &&
+            (identical(other.descriptionUz, descriptionUz) || other.descriptionUz == descriptionUz) &&
+            (identical(other.descriptionEn, descriptionEn) || other.descriptionEn == descriptionEn) &&
+            (identical(other.startMinute, startMinute) || other.startMinute == startMinute) &&
+            (identical(other.reservedAmount, reservedAmount) || other.reservedAmount == reservedAmount) &&
+            (identical(other.activateCount, activateCount) || other.activateCount == activateCount) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.startPrice, startPrice) ||
-                other.startPrice == startPrice) &&
-            (identical(other.pricePerMinute, pricePerMinute) ||
-                other.pricePerMinute == pricePerMinute) &&
+            (identical(other.startPrice, startPrice) || other.startPrice == startPrice) &&
+            (identical(other.pricePerMinute, pricePerMinute) || other.pricePerMinute == pricePerMinute) &&
             (identical(other.pausePricePerMinute, pausePricePerMinute) ||
                 other.pausePricePerMinute == pausePricePerMinute));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      nameRu,
-      nameUz,
-      nameEn,
-      descriptionRu,
-      descriptionUz,
-      descriptionEn,
-      startMinute,
-      reservedAmount,
-      activateCount,
-      price,
-      startPrice,
-      pricePerMinute,
-      pausePricePerMinute);
+  int get hashCode => Object.hash(runtimeType, id, nameRu, nameUz, nameEn, descriptionRu, descriptionUz, descriptionEn,
+      startMinute, reservedAmount, activateCount, price, startPrice, pricePerMinute, pausePricePerMinute);
 
   @JsonKey(ignore: true)
   @override
@@ -427,8 +396,7 @@ abstract class _TarifModel implements TarifModel {
       required final int pricePerMinute,
       required final int pausePricePerMinute}) = _$TarifModelImpl;
 
-  factory _TarifModel.fromJson(Map<String, dynamic> json) =
-      _$TarifModelImpl.fromJson;
+  factory _TarifModel.fromJson(Map<String, dynamic> json) = _$TarifModelImpl.fromJson;
 
   @override
   int get id;
@@ -466,6 +434,5 @@ abstract class _TarifModel implements TarifModel {
   int get pausePricePerMinute;
   @override
   @JsonKey(ignore: true)
-  _$$TarifModelImplCopyWith<_$TarifModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TarifModelImplCopyWith<_$TarifModelImpl> get copyWith => throw _privateConstructorUsedError;
 }

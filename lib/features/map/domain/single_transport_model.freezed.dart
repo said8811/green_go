@@ -22,6 +22,8 @@ SingleTransportModel _$SingleTransportModelFromJson(Map<String, dynamic> json) {
 mixin _$SingleTransportModel {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
+  String get image => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
   String get nameRu => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
   String get nameUz => throw _privateConstructorUsedError;
@@ -48,6 +50,7 @@ abstract class $SingleTransportModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      @JsonKey(defaultValue: "") String image,
       @JsonKey(defaultValue: "") String nameRu,
       @JsonKey(defaultValue: "") String nameUz,
       @JsonKey(defaultValue: "") String nameEn,
@@ -75,6 +78,7 @@ class _$SingleTransportModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
+    Object? image = null,
     Object? nameRu = null,
     Object? nameUz = null,
     Object? nameEn = null,
@@ -89,6 +93,10 @@ class _$SingleTransportModelCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
       nameRu: null == nameRu
           ? _value.nameRu
           : nameRu // ignore: cast_nullable_to_non_nullable
@@ -147,6 +155,7 @@ abstract class _$$SingleTransportModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
+      @JsonKey(defaultValue: "") String image,
       @JsonKey(defaultValue: "") String nameRu,
       @JsonKey(defaultValue: "") String nameUz,
       @JsonKey(defaultValue: "") String nameEn,
@@ -172,6 +181,7 @@ class __$$SingleTransportModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? image = null,
     Object? nameRu = null,
     Object? nameUz = null,
     Object? nameEn = null,
@@ -186,6 +196,10 @@ class __$$SingleTransportModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
       nameRu: null == nameRu
           ? _value.nameRu
           : nameRu // ignore: cast_nullable_to_non_nullable
@@ -227,6 +241,7 @@ class __$$SingleTransportModelImplCopyWithImpl<$Res>
 class _$SingleTransportModelImpl implements _SingleTransportModel {
   _$SingleTransportModelImpl(
       {required this.id,
+      @JsonKey(defaultValue: "") required this.image,
       @JsonKey(defaultValue: "") required this.nameRu,
       @JsonKey(defaultValue: "") required this.nameUz,
       @JsonKey(defaultValue: "") required this.nameEn,
@@ -242,6 +257,9 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
 
   @override
   final int id;
+  @override
+  @JsonKey(defaultValue: "")
+  final String image;
   @override
   @JsonKey(defaultValue: "")
   final String nameRu;
@@ -271,7 +289,7 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
 
   @override
   String toString() {
-    return 'SingleTransportModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, number: $number, qrCode: $qrCode, tariffs: $tariffs, distance: $distance, book: $book)';
+    return 'SingleTransportModel(id: $id, image: $image, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, number: $number, qrCode: $qrCode, tariffs: $tariffs, distance: $distance, book: $book)';
   }
 
   @override
@@ -280,6 +298,7 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
         (other.runtimeType == runtimeType &&
             other is _$SingleTransportModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.nameRu, nameRu) || other.nameRu == nameRu) &&
             (identical(other.nameUz, nameUz) || other.nameUz == nameUz) &&
             (identical(other.nameEn, nameEn) || other.nameEn == nameEn) &&
@@ -296,6 +315,7 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      image,
       nameRu,
       nameUz,
       nameEn,
@@ -324,6 +344,7 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
 abstract class _SingleTransportModel implements SingleTransportModel {
   factory _SingleTransportModel(
       {required final int id,
+      @JsonKey(defaultValue: "") required final String image,
       @JsonKey(defaultValue: "") required final String nameRu,
       @JsonKey(defaultValue: "") required final String nameUz,
       @JsonKey(defaultValue: "") required final String nameEn,
@@ -338,6 +359,9 @@ abstract class _SingleTransportModel implements SingleTransportModel {
 
   @override
   int get id;
+  @override
+  @JsonKey(defaultValue: "")
+  String get image;
   @override
   @JsonKey(defaultValue: "")
   String get nameRu;

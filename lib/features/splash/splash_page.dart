@@ -22,8 +22,7 @@ class SplashPage extends HookConsumerWidget {
     }
 
     useEffectWithScheduler(action: () async {
-      await getCurrentPosition().then(
-          (value) => ref.read(referenceNotifierProvider.notifier).getData());
+      await getCurrentPosition().then((value) => ref.read(referenceNotifierProvider.notifier).getData());
     });
 
     ref.listen(referenceNotifierProvider, (previous, next) {
@@ -61,13 +60,19 @@ class SplashPage extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                child: CommonSvgPicture(Assets.icons.logo),
+                child: CommonSvgPicture(
+                  Assets.icons.logo,
+                  size: 150,
+                ),
               ),
             ],
           ),
         ),
         bottomNavigationBar: SafeArea(
             minimum: const EdgeInsets.symmetric(vertical: 40),
-            child: CommonSvgPicture(Assets.icons.splashText)));
+            child: CommonSvgPicture(
+              Assets.icons.splashText,
+              size: 35,
+            )));
   }
 }

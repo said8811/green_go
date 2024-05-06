@@ -22,6 +22,7 @@ mixin _$RidesState {
   SingleTransportModel? get transport => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get imgPath => throw _privateConstructorUsedError;
+  TarifModel? get tarif => throw _privateConstructorUsedError;
   RideAction get actionState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,10 +43,12 @@ abstract class $RidesStateCopyWith<$Res> {
       SingleTransportModel? transport,
       Failure? error,
       String? imgPath,
+      TarifModel? tarif,
       RideAction actionState});
 
   $SingleTransportModelCopyWith<$Res>? get transport;
   $FailureCopyWith<$Res>? get error;
+  $TarifModelCopyWith<$Res>? get tarif;
 }
 
 /// @nodoc
@@ -67,6 +70,7 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
     Object? transport = freezed,
     Object? error = freezed,
     Object? imgPath = freezed,
+    Object? tarif = freezed,
     Object? actionState = null,
   }) {
     return _then(_value.copyWith(
@@ -94,6 +98,10 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
           ? _value.imgPath
           : imgPath // ignore: cast_nullable_to_non_nullable
               as String?,
+      tarif: freezed == tarif
+          ? _value.tarif
+          : tarif // ignore: cast_nullable_to_non_nullable
+              as TarifModel?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -124,6 +132,18 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
       return _then(_value.copyWith(error: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TarifModelCopyWith<$Res>? get tarif {
+    if (_value.tarif == null) {
+      return null;
+    }
+
+    return $TarifModelCopyWith<$Res>(_value.tarif!, (value) {
+      return _then(_value.copyWith(tarif: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -141,12 +161,15 @@ abstract class _$$RidesStateImplCopyWith<$Res>
       SingleTransportModel? transport,
       Failure? error,
       String? imgPath,
+      TarifModel? tarif,
       RideAction actionState});
 
   @override
   $SingleTransportModelCopyWith<$Res>? get transport;
   @override
   $FailureCopyWith<$Res>? get error;
+  @override
+  $TarifModelCopyWith<$Res>? get tarif;
 }
 
 /// @nodoc
@@ -166,6 +189,7 @@ class __$$RidesStateImplCopyWithImpl<$Res>
     Object? transport = freezed,
     Object? error = freezed,
     Object? imgPath = freezed,
+    Object? tarif = freezed,
     Object? actionState = null,
   }) {
     return _then(_$RidesStateImpl(
@@ -193,6 +217,10 @@ class __$$RidesStateImplCopyWithImpl<$Res>
           ? _value.imgPath
           : imgPath // ignore: cast_nullable_to_non_nullable
               as String?,
+      tarif: freezed == tarif
+          ? _value.tarif
+          : tarif // ignore: cast_nullable_to_non_nullable
+              as TarifModel?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -211,6 +239,7 @@ class _$RidesStateImpl implements _RidesState {
       this.transport,
       this.error,
       this.imgPath,
+      this.tarif,
       required this.actionState})
       : _rides = rides,
         _books = books;
@@ -240,11 +269,13 @@ class _$RidesStateImpl implements _RidesState {
   @override
   final String? imgPath;
   @override
+  final TarifModel? tarif;
+  @override
   final RideAction actionState;
 
   @override
   String toString() {
-    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, transport: $transport, error: $error, imgPath: $imgPath, actionState: $actionState)';
+    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, transport: $transport, error: $error, imgPath: $imgPath, tarif: $tarif, actionState: $actionState)';
   }
 
   @override
@@ -260,6 +291,7 @@ class _$RidesStateImpl implements _RidesState {
                 other.transport == transport) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.imgPath, imgPath) || other.imgPath == imgPath) &&
+            (identical(other.tarif, tarif) || other.tarif == tarif) &&
             (identical(other.actionState, actionState) ||
                 other.actionState == actionState));
   }
@@ -273,6 +305,7 @@ class _$RidesStateImpl implements _RidesState {
       transport,
       error,
       imgPath,
+      tarif,
       actionState);
 
   @JsonKey(ignore: true)
@@ -290,6 +323,7 @@ abstract class _RidesState implements RidesState {
       final SingleTransportModel? transport,
       final Failure? error,
       final String? imgPath,
+      final TarifModel? tarif,
       required final RideAction actionState}) = _$RidesStateImpl;
 
   @override
@@ -304,6 +338,8 @@ abstract class _RidesState implements RidesState {
   Failure? get error;
   @override
   String? get imgPath;
+  @override
+  TarifModel? get tarif;
   @override
   RideAction get actionState;
   @override

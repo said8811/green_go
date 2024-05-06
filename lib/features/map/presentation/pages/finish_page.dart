@@ -27,12 +27,8 @@ class _FinishPageState extends ConsumerState<FinishPage> {
     final latlong = ref.watch(locationStateProvider);
     final state = ref.watch(ridesNotifierProvider);
     ref.listen(ridesNotifierProvider, (previous, next) {
-      if (previous?.actionState != RideAction.stop &&
-          next.actionState == RideAction.stop) {
-        ref
-            .read(referenceNotifierProvider.notifier)
-            .getData()
-            .then((value) => context.pop(true));
+      if (previous?.actionState != RideAction.stop && next.actionState == RideAction.stop) {
+        ref.read(referenceNotifierProvider.notifier).getData().then((value) => context.pop(true));
         return;
       }
     });
@@ -40,62 +36,61 @@ class _FinishPageState extends ConsumerState<FinishPage> {
       appBar: CommonAppBar(
         title: context.l10n.finish,
       ),
-      body: Column(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.camera),
-            onTap: _getFromCamera,
-            title: Text(
-              context.l10n.takeApicDialog,
-              style: context.textTheme.bodyMedium,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
+      body: state.rides.isNotEmpty
+          ? Column(
               children: [
-                Text(
-                  context.l10n.startPrice,
-                  style: context.textTheme.bodyMedium,
+                ListTile(
+                  leading: const Icon(Icons.camera),
+                  onTap: _getFromCamera,
+                  title: Text(
+                    context.l10n.takeApicDialog,
+                    style: context.textTheme.bodyMedium,
+                  ),
                 ),
-                const Spacer(),
-                Text(
-                  context.l10n.productPrice(
-                      kPriceFormatter.format(state.rides[0].startPrice)),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                Text(
-                  context.l10n.perMinute,
-                  style: context.textTheme.bodyMedium,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        context.l10n.startPrice,
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      const Spacer(),
+                      Text(
+                        context.l10n.productPrice(kPriceFormatter.format(state.rides[0].startPrice)),
+                      )
+                    ],
+                  ),
                 ),
-                const Spacer(),
-                Text(context.l10n.productPrice(
-                    kPriceFormatter.format(state.rides[0].pricePerMinute)))
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Text(
-                  context.l10n.pousePricePerMinute,
-                  style: context.textTheme.bodyMedium,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        context.l10n.perMinute,
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      const Spacer(),
+                      Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pricePerMinute)))
+                    ],
+                  ),
                 ),
-                const Spacer(),
-                Text(context.l10n.productPrice(
-                    kPriceFormatter.format(state.rides[0].pausePricePerMinute)))
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        context.l10n.pousePricePerMinute,
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      const Spacer(),
+                      Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pausePricePerMinute)))
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
-        ],
-      ),
+            )
+          : const SizedBox(),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: PrimaryButton(
@@ -103,8 +98,9 @@ class _FinishPageState extends ConsumerState<FinishPage> {
             isLoading: state.actionState == RideAction.stoping,
             onPress: () {
               if (state.imgPath != null) {
-                ref.read(ridesNotifierProvider.notifier).finish(
-                    latitude: latlong?.latitude, longitude: latlong?.longitude);
+                ref
+                    .read(ridesNotifierProvider.notifier)
+                    .finish(latitude: latlong?.latitude, longitude: latlong?.longitude);
               }
             }),
       ),

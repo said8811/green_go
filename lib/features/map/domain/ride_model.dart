@@ -17,8 +17,7 @@ class RideModel with _$RideModel {
     required int userId,
     @JsonKey(defaultValue: "") required String qrCode,
     @JsonKey(fromJson: JsonHelpers.intToDouble) required double pricePerMinute,
-    @JsonKey(fromJson: JsonHelpers.intToDouble)
-    required double pausePricePerMinute,
+    @JsonKey(fromJson: JsonHelpers.intToDouble) required double pausePricePerMinute,
     @JsonKey(fromJson: JsonHelpers.intToDouble) required double startPrice,
     required LatLongModel startPoint,
     required LatLongModel endPoint,
@@ -27,12 +26,10 @@ class RideModel with _$RideModel {
     @JsonKey(defaultValue: "") required String finishedAt,
     @JsonKey(defaultValue: "") required String image,
     @JsonKey(defaultValue: 0) required int pouseTime,
-    @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble)
-    required double total,
-    @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
-    required List<String> coordinates,
+    @JsonKey(defaultValue: 0) required int ridingTime,
+    @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble) required double total,
+    @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString) required List<String> coordinates,
   }) = _RideModel;
 
-  factory RideModel.fromJson(Map<String, dynamic> json) =>
-      _$RideModelFromJson(json);
+  factory RideModel.fromJson(Map<String, dynamic> json) => _$RideModelFromJson(json);
 }

@@ -26,9 +26,7 @@ class TransportActionsView extends HookConsumerWidget {
     final pricePerMin = useState(0);
     useEffect(() {
       if (state.rides.isNotEmpty) {
-        ref
-            .read(timerNotifierProvider.notifier)
-            .getTime(DateTime.parse(state.rides[0].startAt).toLocal());
+        ref.read(timerNotifierProvider.notifier).getTime(DateTime.parse(state.rides[0].startAt).toLocal());
         pricePerMin.value = timer ~/ 60;
       }
       return;
@@ -41,8 +39,8 @@ class TransportActionsView extends HookConsumerWidget {
     });
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (previous?.error == null && next.error != null) {
-        showErrorDialog(context, failure: next.error).then(
-            (value) => ref.read(ridesNotifierProvider.notifier).cleanError());
+        showErrorDialog(context, failure: next.error)
+            .then((value) => ref.read(ridesNotifierProvider.notifier).cleanError());
       }
     });
     return Padding(
@@ -56,8 +54,8 @@ class TransportActionsView extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      context.l10n.productPrice(kPriceFormatter.format(
-                          state.rides[0].pricePerMinute * pricePerMin.value)),
+                      context.l10n
+                          .productPrice(kPriceFormatter.format(state.rides[0].pricePerMinute * pricePerMin.value)),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
                       ),
@@ -72,21 +70,18 @@ class TransportActionsView extends HookConsumerWidget {
                 ),
                 const Gap(10),
                 Container(
-                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      color: context.colorScheme.grey.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(15)),
+                      color: context.colorScheme.grey.withOpacity(0.2), borderRadius: BorderRadius.circular(15)),
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: Assets.images.bikey.image(width: 70),
+                        child: Assets.images.examplePic1.image(width: 70),
                       ),
                       const Gap(20),
                       Column(
@@ -103,8 +98,7 @@ class TransportActionsView extends HookConsumerWidget {
                               const Gap(8),
                               Text(
                                 state.rides[0].qrCode,
-                                style: textTheme.bodyMedium?.copyWith(
-                                    color: context.colorScheme.primary),
+                                style: textTheme.bodyMedium?.copyWith(color: context.colorScheme.primary),
                               )
                             ],
                           )
@@ -116,8 +110,7 @@ class TransportActionsView extends HookConsumerWidget {
                 const Gap(12),
                 Row(
                   children: [
-                    if (state.actionState == RideAction.pause ||
-                        state.actionState == RideAction.turningOn) ...[
+                    if (state.actionState == RideAction.pause || state.actionState == RideAction.turningOn) ...[
                       Expanded(
                         child: PrimaryButton(
                           title: context.l10n.turnOn,
@@ -126,14 +119,12 @@ class TransportActionsView extends HookConsumerWidget {
                           onPress: () {
                             ref.read(ridesNotifierProvider.notifier).turnOn();
                           },
-                          childStyle: textTheme.labelSmall
-                              ?.copyWith(fontSize: 16, color: Colors.white),
+                          childStyle: textTheme.labelSmall?.copyWith(fontSize: 16, color: Colors.white),
                         ),
                       ),
                       const Gap(20),
                     ],
-                    if (state.actionState == RideAction.pure ||
-                        state.actionState == RideAction.pausing) ...[
+                    if (state.actionState == RideAction.pure || state.actionState == RideAction.pausing) ...[
                       Expanded(
                         child: PrimaryButton(
                           title: context.l10n.pouse,
@@ -154,10 +145,9 @@ class TransportActionsView extends HookConsumerWidget {
                       child: PrimaryButton(
                         title: context.l10n.finish,
                         onPress: () {
-                          context
-                              .push(AppRoute.finishPage.routePathWithSlash)
-                              .then((value) {
-                            if (value as bool) {
+                          context.push(AppRoute.finishPage.routePathWithSlash).then((value) {
+                            if (value == true) {
+                              ref.read(timerNotifierProvider.notifier).dispose();
                               Navigator.pop(context);
                             }
                           });

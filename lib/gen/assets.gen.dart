@@ -382,6 +382,9 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/bicyle.png
+  AssetGenImage get bicyle => const AssetGenImage('assets/images/bicyle.png');
+
   /// File path: assets/images/bike.png
   AssetGenImage get bike => const AssetGenImage('assets/images/bike.png');
 
@@ -394,6 +397,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/click.png
   AssetGenImage get click => const AssetGenImage('assets/images/click.png');
+
+  /// File path: assets/images/examplePic1.png
+  AssetGenImage get examplePic1 =>
+      const AssetGenImage('assets/images/examplePic1.png');
 
   /// File path: assets/images/humo.png
   AssetGenImage get humo => const AssetGenImage('assets/images/humo.png');
@@ -415,10 +422,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/scooter.png
   AssetGenImage get scooter => const AssetGenImage('assets/images/scooter.png');
 
-  /// File path: assets/images/selected-bike.png
-  AssetGenImage get selectedBike =>
-      const AssetGenImage('assets/images/selected-bike.png');
-
   /// File path: assets/images/user.jpg
   AssetGenImage get user => const AssetGenImage('assets/images/user.jpg');
 
@@ -430,17 +433,18 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        bicyle,
         bike,
         bikey,
         blueWave,
         click,
+        examplePic1,
         humo,
         locationDot,
         locationMark,
         mark,
         payme,
         scooter,
-        selectedBike,
         user,
         uzCard,
         wallet

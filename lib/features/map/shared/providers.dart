@@ -9,16 +9,13 @@ import 'package:green_go/features/map/infrastructure/transport_repository.dart';
 import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final mapNotifierProvider =
-    StateNotifierProvider<MapNotifierNotifier, MapNotifierState>((ref) {
+final mapNotifierProvider = StateNotifierProvider<MapNotifierNotifier, MapNotifierState>((ref) {
   return MapNotifierNotifier();
 });
 
-final transportRepository = Provider<TransportRepository>(
-    (ref) => TransportRepository(ref.watch(dioProvider)));
+final transportRepository = Provider<TransportRepository>((ref) => TransportRepository(ref.watch(dioProvider)));
 
-final transportStateProvider =
-    StateNotifierProvider.autoDispose<TransportNotifier, TransportState>((ref) {
+final transportStateProvider = StateNotifierProvider<TransportNotifier, TransportState>((ref) {
   return TransportNotifier(ref.watch(transportRepository));
 });
 
@@ -26,17 +23,14 @@ final rideProvider = Provider<RideRepository>((ref) {
   return RideRepository(ref.watch(dioProvider), ref.watch(locationProvider));
 });
 
-final ridesNotifierProvider =
-    StateNotifierProvider.autoDispose<RidesNotifier, RidesState>((ref) {
+final ridesNotifierProvider = StateNotifierProvider<RidesNotifier, RidesState>((ref) {
   return RidesNotifier(ref.watch(rideProvider));
 });
 
-final timerNotifierProvider =
-    StateNotifierProvider.autoDispose<TimerNotifier, int>((ref) {
+final timerNotifierProvider = StateNotifierProvider.autoDispose<TimerNotifier, int>((ref) {
   return TimerNotifier();
 });
 
-final booksTimerNotifierProvider =
-    StateNotifierProvider.autoDispose<BooksTimerNotifier, int>((ref) {
+final booksTimerNotifierProvider = StateNotifierProvider.autoDispose<BooksTimerNotifier, int>((ref) {
   return BooksTimerNotifier();
 });

@@ -15,7 +15,9 @@ class BookTimerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bookTimer = ref.watch(booksTimerNotifierProvider);
-
+    if (bookTimer < 0) {
+      return const SizedBox();
+    }
     return Positioned(
         left: 100,
         top: 60,
@@ -29,21 +31,14 @@ class BookTimerWidget extends ConsumerWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 1,
-                    offset: const Offset(4, 4),
-                    color: context.colorScheme.grey)
-              ],
+              boxShadow: [BoxShadow(blurRadius: 1, offset: const Offset(4, 4), color: context.colorScheme.grey)],
             ),
             child: Row(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 11, horizontal: 8),
-                  decoration: BoxDecoration(
-                      color: context.colorScheme.primary,
-                      borderRadius: BorderRadius.circular(20)),
+                  padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 8),
+                  decoration:
+                      BoxDecoration(color: context.colorScheme.primary, borderRadius: BorderRadius.circular(20)),
                   child: CommonSvgPicture(Assets.icons.selectedBike),
                 ),
                 const Gap(10),

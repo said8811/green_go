@@ -74,7 +74,7 @@ class _QrCameraPageState extends ConsumerState<QrCameraPage> {
                       return EnterQrModdal(textController: textController);
                     },
                     isScrollControlled: true,
-                  ).then((value) => context.pop(value));
+                  ).then((value) => context.pop(value.toString().replaceAll("-", "")));
                 },
               ),
             )

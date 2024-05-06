@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:green_go/features/core/shared/extensions/dio_extensions.dart';
 import 'package:green_go/features/core/shared/extensions/response_extensions.dart';
 import 'package:green_go/features/map/domain/rides_books_model.dart';
+import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/services/location/infrastructure/location_service.dart';
 
 import '../../core/domain/failure.dart';
@@ -29,13 +30,11 @@ class RideRepository {
     }
   }
 
-  Future<Either<Failure, SingleTransportModel>> getTransport(
-      String qrCode) async {
+  Future<Either<Failure, SingleTransportModel>> getTransport(String qrCode) async {
     try {
       final latlong = await _service.getCurrentPosition();
       if (latlong != null) {
-        final Response response =
-            await _dio.get("/transport/$qrCode", queryParameters: {
+        final Response response = await _dio.get("/transport/$qrCode", queryParameters: {
           'latitude': latlong.latitude,
           'longitude': latlong.longitude,
         });
@@ -87,11 +86,8 @@ class RideRepository {
     }
   }
 
-  Future<Either<Failure, bool>> finish(
-      {required int rideId,
-      required double? latitude,
-      required double? longitude,
-      required String imgPath}) async {
+  Future<Either<Failure, TarifModel?>> finish(
+      {required int rideId, required double? latitude, required double? longitude, required String imgPath}) async {
     final formData = FormData.fromMap({
       'rideId': rideId,
       'latitude': latitude,
@@ -101,7 +97,7 @@ class RideRepository {
     try {
       final Response response = await _dio.post("/finish/", data: formData);
       if (response.isSuccessful) {
-        return right(true);
+        return right(null);
       } else {
         return left(Failure.server(response.data?['message']));
       }
