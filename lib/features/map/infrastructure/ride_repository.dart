@@ -97,7 +97,7 @@ class RideRepository {
     try {
       final Response response = await _dio.post("/finish/", data: formData);
       if (response.isSuccessful) {
-        return right(null);
+        return right(TarifModel.fromJson(response.data['tariff']));
       } else {
         return left(Failure.server(response.data?['message']));
       }

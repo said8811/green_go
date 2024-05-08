@@ -33,12 +33,19 @@ mixin _$TarifModel {
   String get descriptionUz => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
   String get descriptionEn => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get startMinute => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get reservedAmount => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get activateCount => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get price => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get startPrice => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get pricePerMinute => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: 0)
   int get pausePricePerMinute => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,13 +66,13 @@ abstract class $TarifModelCopyWith<$Res> {
       @JsonKey(defaultValue: "") String descriptionRu,
       @JsonKey(defaultValue: "") String descriptionUz,
       @JsonKey(defaultValue: "") String descriptionEn,
-      int startMinute,
-      int reservedAmount,
-      int activateCount,
-      int price,
-      int startPrice,
-      int pricePerMinute,
-      int pausePricePerMinute});
+      @JsonKey(defaultValue: 0) int startMinute,
+      @JsonKey(defaultValue: 0) int reservedAmount,
+      @JsonKey(defaultValue: 0) int activateCount,
+      @JsonKey(defaultValue: 0) int price,
+      @JsonKey(defaultValue: 0) int startPrice,
+      @JsonKey(defaultValue: 0) int pricePerMinute,
+      @JsonKey(defaultValue: 0) int pausePricePerMinute});
 }
 
 /// @nodoc
@@ -170,13 +177,13 @@ abstract class _$$TarifModelImplCopyWith<$Res> implements $TarifModelCopyWith<$R
       @JsonKey(defaultValue: "") String descriptionRu,
       @JsonKey(defaultValue: "") String descriptionUz,
       @JsonKey(defaultValue: "") String descriptionEn,
-      int startMinute,
-      int reservedAmount,
-      int activateCount,
-      int price,
-      int startPrice,
-      int pricePerMinute,
-      int pausePricePerMinute});
+      @JsonKey(defaultValue: 0) int startMinute,
+      @JsonKey(defaultValue: 0) int reservedAmount,
+      @JsonKey(defaultValue: 0) int activateCount,
+      @JsonKey(defaultValue: 0) int price,
+      @JsonKey(defaultValue: 0) int startPrice,
+      @JsonKey(defaultValue: 0) int pricePerMinute,
+      @JsonKey(defaultValue: 0) int pausePricePerMinute});
 }
 
 /// @nodoc
@@ -274,13 +281,13 @@ class _$TarifModelImpl implements _TarifModel {
       @JsonKey(defaultValue: "") required this.descriptionRu,
       @JsonKey(defaultValue: "") required this.descriptionUz,
       @JsonKey(defaultValue: "") required this.descriptionEn,
-      required this.startMinute,
-      required this.reservedAmount,
-      required this.activateCount,
-      required this.price,
-      required this.startPrice,
-      required this.pricePerMinute,
-      required this.pausePricePerMinute});
+      @JsonKey(defaultValue: 0) required this.startMinute,
+      @JsonKey(defaultValue: 0) required this.reservedAmount,
+      @JsonKey(defaultValue: 0) required this.activateCount,
+      @JsonKey(defaultValue: 0) required this.price,
+      @JsonKey(defaultValue: 0) required this.startPrice,
+      @JsonKey(defaultValue: 0) required this.pricePerMinute,
+      @JsonKey(defaultValue: 0) required this.pausePricePerMinute});
 
   factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) => _$$TarifModelImplFromJson(json);
 
@@ -305,18 +312,25 @@ class _$TarifModelImpl implements _TarifModel {
   @JsonKey(defaultValue: "")
   final String descriptionEn;
   @override
+  @JsonKey(defaultValue: 0)
   final int startMinute;
   @override
+  @JsonKey(defaultValue: 0)
   final int reservedAmount;
   @override
+  @JsonKey(defaultValue: 0)
   final int activateCount;
   @override
+  @JsonKey(defaultValue: 0)
   final int price;
   @override
+  @JsonKey(defaultValue: 0)
   final int startPrice;
   @override
+  @JsonKey(defaultValue: 0)
   final int pricePerMinute;
   @override
+  @JsonKey(defaultValue: 0)
   final int pausePricePerMinute;
 
   @override
@@ -388,13 +402,13 @@ abstract class _TarifModel implements TarifModel {
       @JsonKey(defaultValue: "") required final String descriptionRu,
       @JsonKey(defaultValue: "") required final String descriptionUz,
       @JsonKey(defaultValue: "") required final String descriptionEn,
-      required final int startMinute,
-      required final int reservedAmount,
-      required final int activateCount,
-      required final int price,
-      required final int startPrice,
-      required final int pricePerMinute,
-      required final int pausePricePerMinute}) = _$TarifModelImpl;
+      @JsonKey(defaultValue: 0) required final int startMinute,
+      @JsonKey(defaultValue: 0) required final int reservedAmount,
+      @JsonKey(defaultValue: 0) required final int activateCount,
+      @JsonKey(defaultValue: 0) required final int price,
+      @JsonKey(defaultValue: 0) required final int startPrice,
+      @JsonKey(defaultValue: 0) required final int pricePerMinute,
+      @JsonKey(defaultValue: 0) required final int pausePricePerMinute}) = _$TarifModelImpl;
 
   factory _TarifModel.fromJson(Map<String, dynamic> json) = _$TarifModelImpl.fromJson;
 
@@ -419,18 +433,25 @@ abstract class _TarifModel implements TarifModel {
   @JsonKey(defaultValue: "")
   String get descriptionEn;
   @override
+  @JsonKey(defaultValue: 0)
   int get startMinute;
   @override
+  @JsonKey(defaultValue: 0)
   int get reservedAmount;
   @override
+  @JsonKey(defaultValue: 0)
   int get activateCount;
   @override
+  @JsonKey(defaultValue: 0)
   int get price;
   @override
+  @JsonKey(defaultValue: 0)
   int get startPrice;
   @override
+  @JsonKey(defaultValue: 0)
   int get pricePerMinute;
   @override
+  @JsonKey(defaultValue: 0)
   int get pausePricePerMinute;
   @override
   @JsonKey(ignore: true)

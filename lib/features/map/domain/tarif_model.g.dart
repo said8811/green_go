@@ -15,13 +15,13 @@ _$TarifModelImpl _$$TarifModelImplFromJson(Map<String, dynamic> json) =>
       descriptionRu: json['descriptionRu'] as String? ?? '',
       descriptionUz: json['descriptionUz'] as String? ?? '',
       descriptionEn: json['descriptionEn'] as String? ?? '',
-      startMinute: json['startMinute'] as int,
-      reservedAmount: json['reservedAmount'] as int,
-      activateCount: json['activateCount'] as int,
-      price: json['price'] as int,
-      startPrice: json['startPrice'] as int,
-      pricePerMinute: json['pricePerMinute'] as int,
-      pausePricePerMinute: json['pausePricePerMinute'] as int,
+      startMinute: json['startMinute'] as int? ?? 0,
+      reservedAmount: json['reservedAmount'] as int? ?? 0,
+      activateCount: json['activateCount'] as int? ?? 0,
+      price: json['price'] as int? ?? 0,
+      startPrice: json['startPrice'] as int? ?? 0,
+      pricePerMinute: json['pricePerMinute'] as int? ?? 0,
+      pausePricePerMinute: json['pausePricePerMinute'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$TarifModelImplToJson(_$TarifModelImpl instance) =>

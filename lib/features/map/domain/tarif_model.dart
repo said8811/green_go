@@ -15,17 +15,16 @@ class TarifModel with _$TarifModel {
     @JsonKey(defaultValue: "") required String descriptionRu,
     @JsonKey(defaultValue: "") required String descriptionUz,
     @JsonKey(defaultValue: "") required String descriptionEn,
-    required int startMinute,
-    required int reservedAmount,
-    required int activateCount,
-    required int price,
-    required int startPrice,
-    required int pricePerMinute,
-    required int pausePricePerMinute,
+    @JsonKey(defaultValue: 0) required int startMinute,
+    @JsonKey(defaultValue: 0) required int reservedAmount,
+    @JsonKey(defaultValue: 0) required int activateCount,
+    @JsonKey(defaultValue: 0) required int price,
+    @JsonKey(defaultValue: 0) required int startPrice,
+    @JsonKey(defaultValue: 0) required int pricePerMinute,
+    @JsonKey(defaultValue: 0) required int pausePricePerMinute,
   }) = _TarifModel;
 
-  factory TarifModel.fromJson(Map<String, dynamic> json) =>
-      _$TarifModelFromJson(json);
+  factory TarifModel.fromJson(Map<String, dynamic> json) => _$TarifModelFromJson(json);
 
   String getTitle(String languageCode) {
     switch (languageCode) {

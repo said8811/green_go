@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
@@ -11,6 +13,7 @@ import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/presentation/widgets/common_expandable_panel.dart';
 import '../../shared/providers.dart';
 
 class FinishPage extends ConsumerStatefulWidget {
@@ -37,58 +40,74 @@ class _FinishPageState extends ConsumerState<FinishPage> {
         title: context.l10n.finish,
       ),
       body: state.rides.isNotEmpty
-          ? Column(
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.camera),
-                  onTap: _getFromCamera,
-                  title: Text(
-                    context.l10n.takeApicDialog,
-                    style: context.textTheme.bodyMedium,
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.camera),
+                    onTap: _getFromCamera,
+                    title: Text(
+                      context.l10n.takeApicDialog,
+                      style: context.textTheme.bodyMedium,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        context.l10n.startPrice,
-                        style: context.textTheme.bodyMedium,
-                      ),
-                      const Spacer(),
-                      Text(
-                        context.l10n.productPrice(kPriceFormatter.format(state.rides[0].startPrice)),
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          context.l10n.startPrice,
+                          style: context.textTheme.bodyMedium,
+                        ),
+                        const Spacer(),
+                        Text(
+                          context.l10n.productPrice(kPriceFormatter.format(state.rides[0].startPrice)),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        context.l10n.perMinute,
-                        style: context.textTheme.bodyMedium,
-                      ),
-                      const Spacer(),
-                      Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pricePerMinute)))
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          context.l10n.perMinute,
+                          style: context.textTheme.bodyMedium,
+                        ),
+                        const Spacer(),
+                        Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pricePerMinute)))
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Text(
-                        context.l10n.pousePricePerMinute,
-                        style: context.textTheme.bodyMedium,
-                      ),
-                      const Spacer(),
-                      Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pausePricePerMinute)))
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Text(
+                          context.l10n.pousePricePerMinute,
+                          style: context.textTheme.bodyMedium,
+                        ),
+                        const Spacer(),
+                        Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pausePricePerMinute)))
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  if (state.imgPath != null && state.imgPath!.isNotEmpty)
+                    CommonExpandablePanel(
+                        symPadding: 20,
+                        title: "Suratni ko'rish",
+                        inkWellBorderRadius: 0,
+                        child: SizedBox(
+                          height: 500,
+                          child: Center(
+                            child: Image.file(
+                              File(state.imgPath!),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ))
+                ],
+              ),
             )
           : const SizedBox(),
       bottomNavigationBar: Padding(

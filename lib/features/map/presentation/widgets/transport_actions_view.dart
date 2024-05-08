@@ -70,18 +70,20 @@ class TransportActionsView extends HookConsumerWidget {
                 ),
                 const Gap(10),
                 Container(
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                       color: context.colorScheme.grey.withOpacity(0.2), borderRadius: BorderRadius.circular(15)),
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                        width: 80,
+                        height: 70,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(image: AssetImage(Assets.images.examplePic1.path), fit: BoxFit.cover),
                           border: Border.all(color: Colors.grey[300]!),
                         ),
-                        child: Assets.images.examplePic1.image(width: 70),
                       ),
                       const Gap(20),
                       Column(
@@ -147,7 +149,7 @@ class TransportActionsView extends HookConsumerWidget {
                         onPress: () {
                           context.push(AppRoute.finishPage.routePathWithSlash).then((value) {
                             if (value == true) {
-                              ref.read(timerNotifierProvider.notifier).dispose();
+                              ref.read(timerNotifierProvider.notifier).cancel();
                               Navigator.pop(context);
                             }
                           });

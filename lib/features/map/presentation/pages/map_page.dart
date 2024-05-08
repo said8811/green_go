@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -141,6 +142,7 @@ class _MapPageState extends ConsumerState<MapPage> {
         }
       }
     });
+    setState(() {});
   }
 
   @override
@@ -156,7 +158,7 @@ class _MapPageState extends ConsumerState<MapPage> {
       }
     });
     ref.listen(transportStateProvider, (previous, next) {
-      if (next.error != null) {
+      if (next.error != null && previous?.error == null) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Center(child: Text(next.error.toString())),
           behavior: SnackBarBehavior.floating,
@@ -164,7 +166,8 @@ class _MapPageState extends ConsumerState<MapPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 100, right: 50, left: 50),
+          margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height - (Platform.isAndroid ? 100 : 150), right: 50, left: 50),
         ));
       }
     });

@@ -14,8 +14,10 @@ class RideTimerWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final timer = ref.watch(timerNotifierProvider);
-
+    final rides = ref.watch(ridesNotifierProvider);
+    if (rides.rides.isEmpty) {
+      return const SizedBox();
+    }
     return Positioned(
         left: 100,
         top: 60,
@@ -39,7 +41,7 @@ class RideTimerWidget extends ConsumerWidget {
                   child: CommonSvgPicture(Assets.icons.selectedBike),
                 ),
                 const Gap(10),
-                Text(getTime(timer))
+                Text(getTime(ref.watch(timerNotifierProvider)))
               ],
             ),
           ),

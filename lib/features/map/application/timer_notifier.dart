@@ -15,6 +15,10 @@ class TimerNotifier extends StateNotifier<int> {
     });
   }
 
+  void cancel() {
+    _timer?.cancel();
+  }
+
   @override
   void dispose() {
     _timer?.cancel();

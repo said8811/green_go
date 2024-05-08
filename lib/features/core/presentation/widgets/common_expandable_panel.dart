@@ -9,7 +9,7 @@ class CommonExpandablePanel extends StatelessWidget {
   final String? value;
   final Widget? child;
   final double? symPadding;
-
+  final double? inkWellBorderRadius;
   final IconData? maximizeIcon;
   final IconData? minimizeIcon;
   final bool useDivider;
@@ -22,6 +22,7 @@ class CommonExpandablePanel extends StatelessWidget {
     this.child,
     this.maximizeIcon,
     this.minimizeIcon,
+    this.inkWellBorderRadius,
     this.useDivider = true,
     this.childPadded = false,
     this.symPadding,
@@ -43,15 +44,14 @@ class CommonExpandablePanel extends StatelessWidget {
           iconPlacement: ExpandablePanelIconPlacement.right,
           alignment: Alignment.center,
           iconColor: context.colorScheme.textColor,
-          inkWellBorderRadius: BorderRadius.circular(10)),
+          inkWellBorderRadius: BorderRadius.circular(inkWellBorderRadius ?? 10)),
       header: Padding(
         padding: EdgeInsets.symmetric(horizontal: symPadding ?? 20),
         child: ListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(
             title,
-            style: context.textTheme.bodyMedium
-                ?.copyWith(fontWeight: FontWeight.w600),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
           ),
@@ -62,10 +62,7 @@ class CommonExpandablePanel extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 16),
             padding: EdgeInsets.only(bottom: 16, left: childPadded ? 16 : 0),
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom:
-                        BorderSide(color: context.colorScheme.dividerColor))),
+            decoration: BoxDecoration(border: Border(bottom: BorderSide(color: context.colorScheme.dividerColor))),
             child: Text(value!),
           ),
     );

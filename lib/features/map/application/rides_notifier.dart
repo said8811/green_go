@@ -50,6 +50,8 @@ class RidesNotifier extends StateNotifier<RidesState> {
         state = dataOrFailure.fold(
             (l) => state.copyWith(
                   error: l,
+                  books: data.books,
+                  rides: data.rides,
                 ),
             (r) => state.copyWith(
                 rides: data.rides, isLoading: false, transport: r, books: data.books, actionState: RideAction.pure));
@@ -86,14 +88,12 @@ class RidesNotifier extends StateNotifier<RidesState> {
     final succesOrFailure = await _repository.finish(
         rideId: state.rides[0].id, latitude: latitude, longitude: longitude, imgPath: state.imgPath!);
     succesOrFailure.fold((l) => state = state.copyWith(error: l, actionState: action), (data) async {
-      final dataOrFailure = await _repository.getRides();
-      state = dataOrFailure.fold(
-          (l) => state.copyWith(error: l, actionState: action),
-          (r) => state.copyWith(
-                rides: r.rides,
-                books: r.books,
-                actionState: RideAction.stop,
-              ));
+      state = state.copyWith(
+        rides: [],
+        books: [],
+        tarif: data,
+        actionState: RideAction.stop,
+      );
     });
   }
 
