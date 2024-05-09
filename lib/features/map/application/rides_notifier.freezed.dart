@@ -22,7 +22,7 @@ mixin _$RidesState {
   SingleTransportModel? get transport => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
   String? get imgPath => throw _privateConstructorUsedError;
-  TarifModel? get tarif => throw _privateConstructorUsedError;
+  FinishModel? get finish => throw _privateConstructorUsedError;
   RideAction get actionState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -43,12 +43,12 @@ abstract class $RidesStateCopyWith<$Res> {
       SingleTransportModel? transport,
       Failure? error,
       String? imgPath,
-      TarifModel? tarif,
+      FinishModel? finish,
       RideAction actionState});
 
   $SingleTransportModelCopyWith<$Res>? get transport;
   $FailureCopyWith<$Res>? get error;
-  $TarifModelCopyWith<$Res>? get tarif;
+  $FinishModelCopyWith<$Res>? get finish;
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
     Object? transport = freezed,
     Object? error = freezed,
     Object? imgPath = freezed,
-    Object? tarif = freezed,
+    Object? finish = freezed,
     Object? actionState = null,
   }) {
     return _then(_value.copyWith(
@@ -98,10 +98,10 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
           ? _value.imgPath
           : imgPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      tarif: freezed == tarif
-          ? _value.tarif
-          : tarif // ignore: cast_nullable_to_non_nullable
-              as TarifModel?,
+      finish: freezed == finish
+          ? _value.finish
+          : finish // ignore: cast_nullable_to_non_nullable
+              as FinishModel?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -135,13 +135,13 @@ class _$RidesStateCopyWithImpl<$Res, $Val extends RidesState>
 
   @override
   @pragma('vm:prefer-inline')
-  $TarifModelCopyWith<$Res>? get tarif {
-    if (_value.tarif == null) {
+  $FinishModelCopyWith<$Res>? get finish {
+    if (_value.finish == null) {
       return null;
     }
 
-    return $TarifModelCopyWith<$Res>(_value.tarif!, (value) {
-      return _then(_value.copyWith(tarif: value) as $Val);
+    return $FinishModelCopyWith<$Res>(_value.finish!, (value) {
+      return _then(_value.copyWith(finish: value) as $Val);
     });
   }
 }
@@ -161,7 +161,7 @@ abstract class _$$RidesStateImplCopyWith<$Res>
       SingleTransportModel? transport,
       Failure? error,
       String? imgPath,
-      TarifModel? tarif,
+      FinishModel? finish,
       RideAction actionState});
 
   @override
@@ -169,7 +169,7 @@ abstract class _$$RidesStateImplCopyWith<$Res>
   @override
   $FailureCopyWith<$Res>? get error;
   @override
-  $TarifModelCopyWith<$Res>? get tarif;
+  $FinishModelCopyWith<$Res>? get finish;
 }
 
 /// @nodoc
@@ -189,7 +189,7 @@ class __$$RidesStateImplCopyWithImpl<$Res>
     Object? transport = freezed,
     Object? error = freezed,
     Object? imgPath = freezed,
-    Object? tarif = freezed,
+    Object? finish = freezed,
     Object? actionState = null,
   }) {
     return _then(_$RidesStateImpl(
@@ -217,10 +217,10 @@ class __$$RidesStateImplCopyWithImpl<$Res>
           ? _value.imgPath
           : imgPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      tarif: freezed == tarif
-          ? _value.tarif
-          : tarif // ignore: cast_nullable_to_non_nullable
-              as TarifModel?,
+      finish: freezed == finish
+          ? _value.finish
+          : finish // ignore: cast_nullable_to_non_nullable
+              as FinishModel?,
       actionState: null == actionState
           ? _value.actionState
           : actionState // ignore: cast_nullable_to_non_nullable
@@ -239,7 +239,7 @@ class _$RidesStateImpl implements _RidesState {
       this.transport,
       this.error,
       this.imgPath,
-      this.tarif,
+      this.finish,
       required this.actionState})
       : _rides = rides,
         _books = books;
@@ -269,13 +269,13 @@ class _$RidesStateImpl implements _RidesState {
   @override
   final String? imgPath;
   @override
-  final TarifModel? tarif;
+  final FinishModel? finish;
   @override
   final RideAction actionState;
 
   @override
   String toString() {
-    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, transport: $transport, error: $error, imgPath: $imgPath, tarif: $tarif, actionState: $actionState)';
+    return 'RidesState(rides: $rides, books: $books, isLoading: $isLoading, transport: $transport, error: $error, imgPath: $imgPath, finish: $finish, actionState: $actionState)';
   }
 
   @override
@@ -291,7 +291,7 @@ class _$RidesStateImpl implements _RidesState {
                 other.transport == transport) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.imgPath, imgPath) || other.imgPath == imgPath) &&
-            (identical(other.tarif, tarif) || other.tarif == tarif) &&
+            (identical(other.finish, finish) || other.finish == finish) &&
             (identical(other.actionState, actionState) ||
                 other.actionState == actionState));
   }
@@ -305,7 +305,7 @@ class _$RidesStateImpl implements _RidesState {
       transport,
       error,
       imgPath,
-      tarif,
+      finish,
       actionState);
 
   @JsonKey(ignore: true)
@@ -323,7 +323,7 @@ abstract class _RidesState implements RidesState {
       final SingleTransportModel? transport,
       final Failure? error,
       final String? imgPath,
-      final TarifModel? tarif,
+      final FinishModel? finish,
       required final RideAction actionState}) = _$RidesStateImpl;
 
   @override
@@ -339,7 +339,7 @@ abstract class _RidesState implements RidesState {
   @override
   String? get imgPath;
   @override
-  TarifModel? get tarif;
+  FinishModel? get finish;
   @override
   RideAction get actionState;
   @override

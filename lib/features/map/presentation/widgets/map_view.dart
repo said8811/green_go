@@ -41,20 +41,14 @@ class _MapViewState extends ConsumerState<MapView> {
           arrow: view.arrow.copyWith(
             zIndex: 20,
             icon: PlacemarkIcon.single(
-              PlacemarkIconStyle(
-                  image: BitmapDescriptor.fromAssetImage(
-                      Assets.images.locationMark.path),
-                  scale: 0.7),
+              PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(Assets.images.locationMark.path), scale: 0.7),
             ),
             opacity: 1,
           ),
           pin: view.pin.copyWith(
             zIndex: 21,
             icon: PlacemarkIcon.single(
-              PlacemarkIconStyle(
-                  image: BitmapDescriptor.fromAssetImage(
-                      Assets.images.locationMark.path),
-                  scale: 0.7),
+              PlacemarkIconStyle(image: BitmapDescriptor.fromAssetImage(Assets.images.locationMark.path), scale: 0.7),
             ),
             opacity: 1,
           ),

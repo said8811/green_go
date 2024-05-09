@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/features/map/presentation/widgets/feed_back_view.dart';
 
 import '../../../map/presentation/widgets/transport_actions_view.dart';
 import '../../../map/presentation/widgets/transport_booked_view.dart';
@@ -31,7 +34,21 @@ void openActionsView(BuildContext context) {
     builder: (_) {
       return const TransportActionsView();
     },
-  );
+  ).then((value) {
+    if (value == true) {
+      openFeedbackView(context);
+    }
+  });
+}
+
+void openFeedbackView(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
+      builder: (context) {
+        return const FeedBackView();
+      });
 }
 
 void openTransportView(BuildContext context, VoidCallback onDispose, String qr) {

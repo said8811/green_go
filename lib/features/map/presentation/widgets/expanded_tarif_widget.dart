@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ExpandedTarifWidget extends ConsumerWidget {
   final TarifModel? tarif;
-  final VoidCallback onClose;
+  final VoidCallback? onClose;
   const ExpandedTarifWidget({
     super.key,
     required this.tarif,
@@ -34,10 +34,12 @@ class ExpandedTarifWidget extends ConsumerWidget {
                     ),
                   ),
                 ),
-                leading: const Icon(
-                  Icons.arrow_back_ios,
-                  size: 18,
-                ),
+                leading: onClose != null
+                    ? const Icon(
+                        Icons.arrow_back_ios,
+                        size: 18,
+                      )
+                    : null,
               ),
               const Gap(10),
               if (tarif!.descriptionRu.isNotEmpty)

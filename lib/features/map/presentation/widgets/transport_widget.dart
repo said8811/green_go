@@ -109,7 +109,7 @@ class _TransportWidgetState extends ConsumerState<TransportWidget> {
                     style: textTheme.bodyMedium,
                   ),
                 ),
-              const Gap(8),
+              const Gap(15),
               SizedBox(
                 height: isTarif ? null : 65,
                 child: isTarif
@@ -145,7 +145,7 @@ class _TransportWidgetState extends ConsumerState<TransportWidget> {
                             ),
                           ),
               ),
-              const Gap(12),
+              const Gap(22),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(

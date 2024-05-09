@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:green_go/features/core/domain/failure.dart';
 import 'package:green_go/features/map/domain/books_model.dart';
+import 'package:green_go/features/map/domain/finish_model.dart';
 import 'package:green_go/features/map/domain/ride_model.dart';
 import 'package:green_go/features/map/domain/single_transport_model.dart';
-import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/features/map/infrastructure/ride_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,6 +17,7 @@ enum RideAction {
   turningOn,
   stop,
   stoping,
+  feedback,
 }
 
 @freezed
@@ -28,7 +29,7 @@ class RidesState with _$RidesState {
     SingleTransportModel? transport,
     Failure? error,
     String? imgPath,
-    TarifModel? tarif,
+    FinishModel? finish,
     required RideAction actionState,
   }) = _RidesState;
   factory RidesState.initial() => RidesState(rides: [], isLoading: false, actionState: RideAction.pure, books: []);
@@ -91,10 +92,15 @@ class RidesNotifier extends StateNotifier<RidesState> {
       state = state.copyWith(
         rides: [],
         books: [],
-        tarif: data,
+        finish: data,
         actionState: RideAction.stop,
       );
     });
+  }
+
+  Future<bool> feedBack({required String message, required int rate}) async {
+    final dataOrFailure = await _repository.feedBack(rideId: state.finish?.id ?? 0, message: message, rate: rate);
+    return dataOrFailure.fold((l) => false, (r) => true);
   }
 
   void cleanError() {
@@ -103,5 +109,9 @@ class RidesNotifier extends StateNotifier<RidesState> {
 
   void setImagePath(String path) {
     state = state.copyWith(imgPath: path);
+  }
+
+  void changeState(RideAction action) {
+    state = state.copyWith(actionState: action);
   }
 }

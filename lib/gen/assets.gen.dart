@@ -22,6 +22,9 @@ class $AssetsConfigGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/appLogo.svg
+  String get appLogo => 'assets/icons/appLogo.svg';
+
   /// File path: assets/icons/arrow-down-bold.svg
   String get arrowDownBold => 'assets/icons/arrow-down-bold.svg';
 
@@ -288,6 +291,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
+        appLogo,
         arrowDownBold,
         arrowDown,
         bagBold,
@@ -382,6 +386,9 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/appLogo.png
+  AssetGenImage get appLogo => const AssetGenImage('assets/images/appLogo.png');
+
   /// File path: assets/images/bicyle.png
   AssetGenImage get bicyle => const AssetGenImage('assets/images/bicyle.png');
 
@@ -413,6 +420,9 @@ class $AssetsImagesGen {
   AssetGenImage get locationMark =>
       const AssetGenImage('assets/images/locationMark.png');
 
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
   /// File path: assets/images/mark.png
   AssetGenImage get mark => const AssetGenImage('assets/images/mark.png');
 
@@ -433,6 +443,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        appLogo,
         bicyle,
         bike,
         bikey,
@@ -442,6 +453,7 @@ class $AssetsImagesGen {
         humo,
         locationDot,
         locationMark,
+        logo,
         mark,
         payme,
         scooter,

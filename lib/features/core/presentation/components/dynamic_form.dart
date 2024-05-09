@@ -22,31 +22,19 @@ import '../widgets/selected_circle_widget.dart';
 class DynamicForm {
   DynamicForm._();
 
-  static OutlineInputBorder inputBorder(
-          {bool hasBorder = true, BorderRadius? borderRadius}) =>
-      OutlineInputBorder(
+  static OutlineInputBorder inputBorder({bool hasBorder = true, BorderRadius? borderRadius}) => OutlineInputBorder(
         borderRadius: borderRadius ?? BorderRadius.circular(10),
-        borderSide: hasBorder
-            ? const BorderSide(color: AppColors.grey)
-            : BorderSide.none,
+        borderSide: hasBorder ? const BorderSide(color: AppColors.grey) : BorderSide.none,
       );
 
-  static OutlineInputBorder focusBorder(
-          {bool hasBorder = true, BorderRadius? borderRadius}) =>
-      OutlineInputBorder(
+  static OutlineInputBorder focusBorder({bool hasBorder = true, BorderRadius? borderRadius}) => OutlineInputBorder(
         borderRadius: borderRadius ?? BorderRadius.circular(10),
-        borderSide: hasBorder
-            ? const BorderSide(color: AppColors.grey)
-            : BorderSide.none,
+        borderSide: hasBorder ? const BorderSide(color: AppColors.grey) : BorderSide.none,
       );
 
-  static OutlineInputBorder errorBorder(
-          {bool hasBorder = true, BorderRadius? borderRadius}) =>
-      OutlineInputBorder(
+  static OutlineInputBorder errorBorder({bool hasBorder = true, BorderRadius? borderRadius}) => OutlineInputBorder(
         borderRadius: borderRadius ?? BorderRadius.circular(10),
-        borderSide: hasBorder
-            ? const BorderSide(color: AppColors.error)
-            : BorderSide.none,
+        borderSide: hasBorder ? const BorderSide(color: AppColors.error) : BorderSide.none,
       );
 
   static Widget makePhoneNumberInputField(
@@ -103,18 +91,13 @@ class DynamicForm {
             fillColor: fillColor,
             suffixIcon: FittedBox(
               fit: BoxFit.scaleDown,
-              child: CommonSvgPicture(Assets.icons.call,
-                  color: context.colorScheme.primary, size: 20),
+              child: CommonSvgPicture(Assets.icons.call, color: context.colorScheme.primary, size: 20),
             ),
             label: Text(
               '+$countryCode 000 00 00',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: context.colorScheme.secondaryText),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: context.colorScheme.secondaryText),
             ),
-            prefix: Text('+$countryCode ',
-                style: Theme.of(context).textTheme.bodyMedium),
+            prefix: Text('+$countryCode ', style: Theme.of(context).textTheme.bodyMedium),
           ),
         ),
       ],
@@ -137,6 +120,7 @@ class DynamicForm {
     String? extraLabel,
     int? maxLength,
     int? maxLines,
+    int? minLines,
     String? initialValue,
     Widget? leading,
     List<TextInputFormatter> formatters = const [],
@@ -160,10 +144,7 @@ class DynamicForm {
               if (extraLabel != null)
                 Text(
                   extraLabel,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: AppColors.text1),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.text1),
                 ),
             ],
           ),
@@ -191,11 +172,11 @@ class DynamicForm {
                   onChanged: onChanged,
                   onEditingComplete: onEditingComplete,
                   maxLength: maxLength,
+                  minLines: minLines,
                   style: context.textTheme.bodyMedium,
                   onFieldSubmitted: onSubmitted,
                   decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     border: inputBorder(borderRadius: borderRadius),
                     focusedBorder: focusBorder(borderRadius: borderRadius),
                     focusedErrorBorder: focusBorder(borderRadius: borderRadius),
@@ -219,11 +200,8 @@ class DynamicForm {
                             child: Padding(
                               padding: const EdgeInsets.all(4),
                               child: Align(
-                                alignment: (maxLines ?? 0) > 1
-                                    ? Alignment.bottomRight
-                                    : Alignment.center,
-                                child: CommonSvgPicture(iconPath,
-                                    size: 20, color: iconColor),
+                                alignment: (maxLines ?? 0) > 1 ? Alignment.bottomRight : Alignment.center,
+                                child: CommonSvgPicture(iconPath, size: 20, color: iconColor),
                               ),
                             ),
                           )
@@ -231,8 +209,7 @@ class DynamicForm {
                   ),
                   textInputAction: textInputAction ?? TextInputAction.done,
                   keyboardType: keyboardType,
-                  textCapitalization:
-                      textCapitalization ?? TextCapitalization.none,
+                  textCapitalization: textCapitalization ?? TextCapitalization.none,
                 ),
               ),
             ],
@@ -260,8 +237,7 @@ class DynamicForm {
         InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: () async {
-            await selectDate(context, initialDate: initialDate)
-                .then((pickedTime) {
+            await selectDate(context, initialDate: initialDate).then((pickedTime) {
               if (pickedTime != null) {
                 onPicked(pickedTime);
               }
@@ -278,17 +254,14 @@ class DynamicForm {
             child: Row(
               children: [
                 Text(
-                  selectedDate != null
-                      ? kDateFormatter.format(selectedDate)
-                      : hintText,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: selectedDate != null
-                          ? AppColors.black
-                          : AppColors.text2),
+                  selectedDate != null ? kDateFormatter.format(selectedDate) : hintText,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: selectedDate != null ? AppColors.black : AppColors.text2),
                 ),
                 const Spacer(),
-                Center(
-                    child: CommonSvgPicture(iconPath, color: AppColors.text2)),
+                Center(child: CommonSvgPicture(iconPath, color: AppColors.text2)),
               ],
             ),
           ),
@@ -316,8 +289,7 @@ class DynamicForm {
           onTap: !enabled
               ? null
               : () async {
-                  await selectTime(context, initialTime: initialTime)
-                      .then((pickedTime) {
+                  await selectTime(context, initialTime: initialTime).then((pickedTime) {
                     if (pickedTime != null) {
                       onPicked(pickedTime);
                     }
@@ -335,10 +307,10 @@ class DynamicForm {
               children: [
                 Text(
                   selectedTime != null ? selectedTime.to24HourFormat : hintText,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: selectedTime != null
-                          ? AppColors.black
-                          : AppColors.text2),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: selectedTime != null ? AppColors.black : AppColors.text2),
                 ),
                 const Spacer(),
                 Center(
@@ -379,8 +351,7 @@ class DynamicForm {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: fillColor,
-              border: Border.all(
-                  color: borderColor ?? context.colorScheme.dividerColor),
+              border: Border.all(color: borderColor ?? context.colorScheme.dividerColor),
             ),
             child: Row(
               children: [
@@ -430,10 +401,10 @@ class DynamicForm {
               children: [
                 Text(
                   selectedtext ?? hintText,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: selectedtext != null
-                          ? AppColors.black
-                          : AppColors.text2),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: selectedtext != null ? AppColors.black : AppColors.text2),
                 ),
                 const Spacer(),
                 // const PlusIcon(),
@@ -470,10 +441,7 @@ class DynamicForm {
             TextSpan(
               text: context.l10n.ofPublicOffer,
               recognizer: TapGestureRecognizer()..onTap = onNavigate,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: Colors.blue),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blue),
             ),
           ],
         ),

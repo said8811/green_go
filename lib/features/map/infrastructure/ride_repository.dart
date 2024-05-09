@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:green_go/features/core/shared/extensions/dio_extensions.dart';
 import 'package:green_go/features/core/shared/extensions/response_extensions.dart';
+import 'package:green_go/features/map/domain/finish_model.dart';
 import 'package:green_go/features/map/domain/rides_books_model.dart';
-import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/services/location/infrastructure/location_service.dart';
 
 import '../../core/domain/failure.dart';
@@ -86,7 +86,7 @@ class RideRepository {
     }
   }
 
-  Future<Either<Failure, TarifModel?>> finish(
+  Future<Either<Failure, FinishModel>> finish(
       {required int rideId, required double? latitude, required double? longitude, required String imgPath}) async {
     final formData = FormData.fromMap({
       'rideId': rideId,
@@ -97,7 +97,7 @@ class RideRepository {
     try {
       final Response response = await _dio.post("/finish/", data: formData);
       if (response.isSuccessful) {
-        return right(TarifModel.fromJson(response.data['tariff']));
+        return right(FinishModel.fromJson(response.data));
       } else {
         return left(Failure.server(response.data?['message']));
       }
@@ -106,6 +106,27 @@ class RideRepository {
         return left(const Failure.noConnection());
       }
       return left(Failure.server(e.response?.data['message']));
+    }
+  }
+
+  Future<Either<Failure, bool>> feedBack({
+    required int rideId,
+    required String message,
+    required int rate,
+  }) async {
+    final data = {'message': message, 'rate': rate, "id": rideId};
+    try {
+      final Response response = await _dio.patch("/ride/feedback/", data: data);
+      if (response.isSuccessful) {
+        return right(true);
+      } else {
+        return left(Failure.server(response.data?['message']));
+      }
+    } on DioException catch (e) {
+      if (e.isConnectionError) {
+        return left(const Failure.noConnection());
+      }
+      return left(const Failure.local());
     }
   }
 }

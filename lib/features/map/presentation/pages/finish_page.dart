@@ -109,7 +109,14 @@ class _FinishPageState extends ConsumerState<FinishPage> {
                 ],
               ),
             )
-          : const SizedBox(),
+          : SizedBox(
+              child: Center(
+                child: Text(
+                  "Ijara Yakunlandi",
+                  style: context.textTheme.bodyMedium?.copyWith(fontSize: 20),
+                ),
+              ),
+            ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: PrimaryButton(

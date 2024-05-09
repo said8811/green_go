@@ -56,16 +56,19 @@ class SplashPage extends HookConsumerWidget {
 
     return Scaffold(
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: CommonSvgPicture(
-                  Assets.icons.logo,
-                  size: 150,
-                ),
-              ),
-            ],
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 80),
+                  child: Assets.images.appLogo.image(
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: SafeArea(

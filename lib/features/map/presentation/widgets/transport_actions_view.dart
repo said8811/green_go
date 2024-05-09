@@ -24,6 +24,7 @@ class TransportActionsView extends HookConsumerWidget {
     final state = ref.watch(ridesNotifierProvider);
     final timer = ref.watch(timerNotifierProvider);
     final pricePerMin = useState(0);
+
     useEffect(() {
       if (state.rides.isNotEmpty) {
         ref.read(timerNotifierProvider.notifier).getTime(DateTime.parse(state.rides[0].startAt).toLocal());
@@ -43,6 +44,7 @@ class TransportActionsView extends HookConsumerWidget {
             .then((value) => ref.read(ridesNotifierProvider.notifier).cleanError());
       }
     });
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
       child: state.rides.isNotEmpty
@@ -150,7 +152,7 @@ class TransportActionsView extends HookConsumerWidget {
                           context.push(AppRoute.finishPage.routePathWithSlash).then((value) {
                             if (value == true) {
                               ref.read(timerNotifierProvider.notifier).cancel();
-                              Navigator.pop(context);
+                              Navigator.pop(context, true);
                             }
                           });
                         },
