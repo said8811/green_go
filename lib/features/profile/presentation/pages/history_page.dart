@@ -39,26 +39,20 @@ class HistoryPage extends HookConsumerWidget {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 10),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                           content: CalendarRangeWidget(
                             start: DateTime.now(),
-                            end: DateTime.now()
-                                .subtract(const Duration(days: 7)),
+                            end: DateTime.now().subtract(const Duration(days: 7)),
                             onChanged: (args) {
                               if (args.value is PickerDateRange) {
-                                from.value =
-                                    (args.value as PickerDateRange).startDate ??
-                                        from.value;
-                                to.value =
-                                    (args.value as PickerDateRange).endDate ??
-                                        to.value;
+                                from.value = (args.value as PickerDateRange).startDate ?? from.value;
+                                to.value = (args.value as PickerDateRange).endDate ?? to.value;
                               }
                             },
                           ),
                           actions: [
                             PrimaryButton(
-                              title: 'Отмена',
+                              title: context.l10n.cancel,
                               onPress: () {
                                 from.value = null;
                                 to.value = null;
@@ -72,11 +66,9 @@ class HistoryPage extends HookConsumerWidget {
                               textColor: context.colorScheme.primary,
                             ),
                             PrimaryButton(
-                              title: 'OK',
+                              title: context.l10n.ok,
                               onPress: () {
-                                ref
-                                    .read(ridesHistoryNotifierProvider.notifier)
-                                    .getHistory(from.value, to.value);
+                                ref.read(ridesHistoryNotifierProvider.notifier).getHistory(from.value, to.value);
                                 context.pop();
                               },
                             ),
@@ -95,9 +87,7 @@ class HistoryPage extends HookConsumerWidget {
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh: () async {
-                        ref
-                            .read(ridesHistoryNotifierProvider.notifier)
-                            .getHistory(from.value, to.value);
+                        ref.read(ridesHistoryNotifierProvider.notifier).getHistory(from.value, to.value);
                       },
                       child: ListView.separated(
                           itemBuilder: (context, index) {

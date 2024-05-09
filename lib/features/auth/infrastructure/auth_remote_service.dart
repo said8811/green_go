@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -39,8 +38,7 @@ class AuthRemoteService {
     final formData = params;
 
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.post('/auth', data: formData);
+      final Response<Map<String, dynamic>> response = await _dio.post('/auth', data: formData);
       if (response.statusCode == 200) {
         final responseData = (response.data as Map).cast<String, dynamic>();
         _pref.setString(kTokenKey, responseData['accessToken']);
@@ -61,15 +59,13 @@ class AuthRemoteService {
   Future<Either<Failure, UserModel>> register({
     required String phone,
     required String name,
-    required String code,
-    required String birthday,
+    required int code,
   }) async {
     final params = {
       "phone": phone,
       "code": code,
       "name": name,
-      "birthday": birthday,
-      "deviceId": _details?.deviceId,
+      "device": _details?.deviceId,
       "system": _details?.system,
       "systemVersion": _details?.systemVersion,
       "systemName": _details?.systemName,
@@ -77,20 +73,17 @@ class AuthRemoteService {
       "deviceName": _details?.deviceName,
     };
 
-    final formData = FormData.fromMap(params);
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.post('/register', data: formData);
+      final Response<Map<String, dynamic>> response = await _dio.post('/register', data: params);
       if (response.statusCode == 200) {
-        final responseData =
-            (response.data?['data'] as Map).cast<String, dynamic>();
+        final responseData = (response.data as Map).cast<String, dynamic>();
         final user = UserModel.fromJson(responseData);
+        _pref.setString(kTokenKey, responseData['accessToken']);
         return right(user);
       } else {
         return left(Failure.server(response.data?['message'] as String?));
       }
     } on DioException catch (e) {
-      log(e.response.toString());
       if (e.isConnectionError) {
         return left(const Failure.noConnection());
       } else {
@@ -108,8 +101,7 @@ class AuthRemoteService {
       // 'resend': isRequestForRestor ? '1' : '0',
     };
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.post('/send-code', data: formData);
+      final Response<Map<String, dynamic>> response = await _dio.post('/send-code', data: formData);
       if (response.statusCode == 200) {
         final responseData = response.data as Map<String, dynamic>;
 
@@ -130,7 +122,7 @@ class AuthRemoteService {
   }
 
   Future<bool> checkCode({
-    required String code,
+    required int code,
     required String phone,
   }) async {
     try {
@@ -160,11 +152,9 @@ class AuthRemoteService {
     };
     final formData = FormData.fromMap(params);
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.post('/update-personal-data', data: formData);
+      final Response<Map<String, dynamic>> response = await _dio.post('/update-personal-data', data: formData);
       if (response.statusCode == 200) {
-        final responseData =
-            (response.data?['data'] as Map).cast<String, dynamic>();
+        final responseData = (response.data?['data'] as Map).cast<String, dynamic>();
         final user = UserModel.fromJson(responseData);
         return user;
       } else {
@@ -188,8 +178,7 @@ class AuthRemoteService {
     };
     final formData = FormData.fromMap(params);
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.post('/deactivate', data: formData);
+      final Response<Map<String, dynamic>> response = await _dio.post('/deactivate', data: formData);
 
       if (response.statusCode == 200) {
         return right(unit);

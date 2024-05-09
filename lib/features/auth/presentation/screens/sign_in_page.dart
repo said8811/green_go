@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:green_go/features/auth/presentation/screens/register_page.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/core/shared/providers.dart';
@@ -17,20 +18,18 @@ class SignInPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activeIndex = useState(0);
 
-    const pages = [
-      GetCodePage(),
-      OtpPage(),
-    ];
+    const pages = [GetCodePage(), OtpPage(), RegisterPage()];
 
-    ref.listen<SignInFormState>(signInFormNotifierProvider,
-        (previous, current) async {
+    ref.listen<SignInFormState>(signInFormNotifierProvider, (previous, current) async {
       if (current.user != null) {
         ref.read(authNotifierProvider.notifier).signIn(current.user!);
         ref.read(dioProvider.notifier).setUp();
         return;
       }
 
-      if (current.hasCodeSent) {
+      if (current.hasCodeSent && current.sentCodeIsTrue && !current.isRegistered) {
+        activeIndex.value = 2;
+      } else if (current.hasCodeSent) {
         activeIndex.value = 1;
       }
     });

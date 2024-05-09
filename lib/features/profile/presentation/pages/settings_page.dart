@@ -44,8 +44,7 @@ class SettingsPage extends HookConsumerWidget {
               const Gap(15),
               TextFormField(
                 initialValue: user?.phone,
-                style:
-                    txtTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
+                style: txtTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
                 inputFormatters: [
                   PhoneInputFormatter(
                     defaultCountryCode: 'uz',
@@ -54,8 +53,7 @@ class SettingsPage extends HookConsumerWidget {
                 decoration: InputDecoration(
                     label: Text(
                   context.l10n.phoneNumber,
-                  style: txtTheme.labelSmall?.copyWith(
-                      fontSize: 16, color: context.colorScheme.greyDark),
+                  style: txtTheme.labelSmall?.copyWith(fontSize: 16, color: context.colorScheme.greyDark),
                 )),
                 enabled: false,
               ),
@@ -69,8 +67,7 @@ class SettingsPage extends HookConsumerWidget {
                 decoration: InputDecoration(
                   label: Text(
                     context.l10n.yourName,
-                    style: txtTheme.labelSmall?.copyWith(
-                        color: context.colorScheme.greyDark, fontSize: 16),
+                    style: txtTheme.labelSmall?.copyWith(color: context.colorScheme.greyDark, fontSize: 16),
                   ),
                 ),
               ),
@@ -110,17 +107,11 @@ class SettingsPage extends HookConsumerWidget {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                LanguageTile(
-                                    locale: AppLocale.uzbek,
-                                    languageCode: "uz"),
+                                LanguageTile(locale: AppLocale.uzbek, languageCode: "uz"),
                                 Gap(5),
-                                LanguageTile(
-                                    locale: AppLocale.russian,
-                                    languageCode: "ru"),
+                                LanguageTile(locale: AppLocale.russian, languageCode: "ru"),
                                 Gap(5),
-                                LanguageTile(
-                                    locale: AppLocale.english,
-                                    languageCode: "en")
+                                LanguageTile(locale: AppLocale.english, languageCode: "en")
                               ],
                             ),
                           ));
@@ -143,12 +134,9 @@ class SettingsPage extends HookConsumerWidget {
             onPress: () {
               ref
                   .read(updateProfileProvider.notifier)
-                  .updateProfile(nameValue.value.trim(), locale.languageCode)
+                  .updateProfile(nameValue.value.isEmpty ? user!.name : nameValue.value, locale.languageCode)
                   .then(
-                    (value) => ref
-                        .read(profileNotifierProvider.notifier)
-                        .getProfile()
-                        .then((value) => context.pop()),
+                    (value) => ref.read(profileNotifierProvider.notifier).getProfile().then((value) => context.pop()),
                   );
             }),
       ),

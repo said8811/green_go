@@ -44,7 +44,7 @@ class TariffWidget extends ConsumerWidget {
                 ),
                 const Gap(8),
                 Text(
-                  "${kPriceFormatter.format(tarif.pricePerMinute)} so'm/min",
+                  context.l10n.sumPerMin(kPriceFormatter.format(tarif.pricePerMinute)),
                   style: context.textTheme.bodyMedium?.copyWith(fontSize: 12),
                 ),
               ],

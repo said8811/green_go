@@ -26,9 +26,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void checkAndUpdateStatus() {
     final user = _repository.isSignedIn();
-    state = user != null
-        ? AuthState.authenticated(user)
-        : const AuthState.unAuthenticated();
+    state = user != null ? AuthState.authenticated(user) : const AuthState.unAuthenticated();
   }
 
   UserModel? get user => _repository.user;
@@ -40,7 +38,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> register({
     required String phone,
     required String name,
-    required String code,
+    required int code,
     required String birthday,
     required String gender,
   }) async {
@@ -49,7 +47,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
       phone: phone,
       code: code,
       name: name,
-      birthday: birthday,
     );
 
     state = failureOrSuccess.fold(

@@ -126,7 +126,7 @@
   "landmark": "Landmark",
   "enterLandmark": "Enter landmark",
   "comment": "Comment",
-  "common":"Umumiy",
+  "common":"Common",
   "help":"Help",
   "commentOrder": "Comment",
   "delivery": "Delivery",
@@ -173,6 +173,12 @@
   "@productPrice": {
     "placeholders": {
       "price": {}
+    }
+  },
+  "sumPerMin": "{sum} sum/min",
+  "@sumPerMin": {
+  "placeholders": {
+      "sum": {}
     }
   },
   "orderStatus": "Order status",
@@ -280,6 +286,13 @@
       "fromDate": {}
     }
   },
+  "fromToDate": "{fromDate} hour {toDate} minute",
+  "@fromToDate": {
+    "placeholders": {
+      "fromDate": {},
+      "toDate":{}
+    }
+  },
   "monday":"M",
   "tuesday":"T",
   "wednesday":"W",
@@ -296,7 +309,7 @@
   "travelDuration":"Travel duration",
   "enterNumber":"Enter number",
   "enter":"Enter",
-  "endImage":"Фото после завершения",
+  "endImage":"Image after finish",
   "chooseTariff":"Choose one of the tariffs",
   "finish":"Finish",
   "pouse":"Pouse",

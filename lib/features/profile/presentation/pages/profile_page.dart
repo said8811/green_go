@@ -31,9 +31,7 @@ class ProfilePage extends ConsumerWidget {
         child: state.when(
             data: (data) => RefreshIndicator(
                   onRefresh: () async {
-                    await ref
-                        .read(profileNotifierProvider.notifier)
-                        .getProfile();
+                    await ref.read(profileNotifierProvider.notifier).getProfile();
                   },
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
@@ -56,14 +54,12 @@ class ProfilePage extends ConsumerWidget {
                         const Gap(15),
                         Text(
                           data.name,
-                          style: context.textTheme.bodyMedium
-                              ?.copyWith(fontSize: 20),
+                          style: context.textTheme.bodyMedium?.copyWith(fontSize: 20),
                         ),
                         const Gap(10),
                         Text(
                           formatAsPhoneNumber(data.phone)!,
-                          style: context.textTheme.labelSmall
-                              ?.copyWith(fontSize: 14),
+                          style: context.textTheme.labelSmall?.copyWith(fontSize: 14),
                         ),
                         const Gap(20),
                         Padding(
@@ -77,37 +73,32 @@ class ProfilePage extends ConsumerWidget {
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(colors: [
-                                    const Color.fromARGB(255, 84, 175, 76)
-                                        .withOpacity(0.7),
+                                    const Color.fromARGB(255, 84, 175, 76).withOpacity(0.7),
                                     Colors.green,
                                   ]),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 children: [
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         context.l10n.myBalance,
-                                        style: context.textTheme.bodySmall
-                                            ?.copyWith(color: Colors.white),
+                                        style: context.textTheme.bodySmall?.copyWith(color: Colors.white),
                                       ),
                                       const Gap(15),
                                       Text(
                                         context.l10n.productPrice(
                                           kPriceFormatter.format(data.balance),
                                         ),
-                                        style: context.textTheme.bodyMedium
-                                            ?.copyWith(color: Colors.white),
+                                        style: context.textTheme.bodyMedium?.copyWith(color: Colors.white),
                                       )
                                     ],
                                   ),
                                   const Spacer(),
                                   Text(
-                                    "To‘ldirish",
-                                    style: textTheme.labelSmall?.copyWith(
-                                        color: Colors.white, fontSize: 16),
+                                    context.l10n.fillBalance,
+                                    style: textTheme.labelSmall?.copyWith(color: Colors.white, fontSize: 16),
                                   ),
                                   const Gap(5),
                                   CommonSvgPicture(Assets.icons.profileAdd)
@@ -126,9 +117,9 @@ class ProfilePage extends ConsumerWidget {
                           },
                           leading: CommonSvgPicture(Assets.icons.logOut),
                           title: Text(
-                            "Chiqish",
-                            style: context.textTheme.labelSmall!.copyWith(
-                                color: context.colorScheme.error, fontSize: 18),
+                            context.l10n.exit,
+                            style:
+                                context.textTheme.labelSmall!.copyWith(color: context.colorScheme.error, fontSize: 18),
                           ),
                         )
                       ],
@@ -138,8 +129,7 @@ class ProfilePage extends ConsumerWidget {
             error: (error, s) => Center(
                   child: Text(
                     error.toString(),
-                    style: textTheme.bodyLarge
-                        ?.copyWith(color: context.colorScheme.error),
+                    style: textTheme.bodyLarge?.copyWith(color: context.colorScheme.error),
                   ),
                 ),
             loading: () => const Center(

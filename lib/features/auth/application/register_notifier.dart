@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/domain/failure.dart';
 import '../../core/domain/user_model.dart';
-import '../../core/presentation/helpers/ui_utils.dart';
 import '../infrastructure/auth_repository.dart';
 
 part 'register_notifier.freezed.dart';
@@ -33,12 +32,10 @@ class _PersonalDetails with _$PersonalDetails {
   const _PersonalDetails._();
   const factory _PersonalDetails({
     required String firstName,
-    required DateTime? birthday,
   }) = __PersonalDetails;
 
   factory _PersonalDetails.initial() => const _PersonalDetails(
         firstName: '',
-        birthday: null,
       );
 }
 
@@ -53,16 +50,13 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
   }) {
     state = state.copyWith(
       personalDetails: _PersonalDetails(
-        birthday: birthday ?? state.personalDetails?.birthday,
         firstName: name ?? state.personalDetails?.firstName ?? '',
       ),
     );
   }
 
   bool isValid() {
-    return state.personalDetails != null &&
-        state.personalDetails?.birthday != null &&
-        (state.personalDetails?.firstName.isNotEmpty ?? false);
+    return state.personalDetails != null && (state.personalDetails?.firstName.isNotEmpty ?? false);
   }
 
   void changeAgreeToTerms({required bool isAgree}) {
@@ -71,14 +65,13 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
 
   Future<void> register({
     required String phone,
-    required String code,
+    required int code,
   }) async {
     state = state.copyWith(isLoading: true, failure: null);
     final userOrFailure = await _repository.register(
       phone: phone,
       name: state.personalDetails!.firstName,
       code: code,
-      birthday: kDateFormatterForApi.format(state.personalDetails!.birthday!),
     );
     state = userOrFailure.fold(
       (l) => state.copyWith(

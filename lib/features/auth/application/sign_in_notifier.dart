@@ -61,7 +61,7 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
 
   Future<void> checkCode({
     required String phone,
-    required String code,
+    required int code,
   }) async {
     state = state.copyWith(error: null, isLoading: true, phone: phone);
     final failureOrIsRegistered = await _repository.checkCode(
@@ -74,7 +74,7 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
         isLoading: false,
         error: null,
         sentCodeIsTrue: r,
-        code: r ? code : '',
+        code: r ? code.toString() : '',
       ),
     );
   }
@@ -84,8 +84,7 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
     required String code,
   }) async {
     state = state.copyWith(error: null, isLoading: true, phone: phone);
-    final failureOrIsRegistered =
-        await _repository.signIn(code: code, phone: phone);
+    final failureOrIsRegistered = await _repository.signIn(code: code, phone: phone);
     state = failureOrIsRegistered.fold(
       (l) => state.copyWith(error: l, isLoading: false),
       (r) => state.copyWith(error: null, isLoading: false, user: r),

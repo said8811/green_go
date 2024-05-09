@@ -29,8 +29,7 @@ class OtpPage extends HookConsumerWidget {
       DateTime.now().difference(DateTime.now()) + const Duration(seconds: 60),
     );
 
-    ref.listen<SignInFormState>(signInFormNotifierProvider,
-        (previous, current) async {
+    ref.listen<SignInFormState>(signInFormNotifierProvider, (previous, current) async {
       if (previous?.error == null && current.error != null) {
         showErrorDialog(context, failure: current.error);
         controller.clear();
@@ -38,8 +37,7 @@ class OtpPage extends HookConsumerWidget {
       if (previous?.user == null && current.user != null) {}
     });
 
-    final isValid =
-        useState(controller.text.isNotEmpty && controller.text.length == 6);
+    final isValid = useState(controller.text.isNotEmpty && controller.text.length == 6);
     final canRequestNewCode = useState(false);
 
     return SafeArea(
@@ -79,8 +77,7 @@ class OtpPage extends HookConsumerWidget {
                 enableActiveFill: true,
                 autoFocus: true,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                textStyle: context.textTheme.headlineMedium!
-                    .copyWith(color: context.colorScheme.surface),
+                textStyle: context.textTheme.headlineMedium!.copyWith(color: context.colorScheme.surface),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.circle,
                   selectedColor: context.colorScheme.primary,
@@ -144,8 +141,7 @@ class OtpPage extends HookConsumerWidget {
                   AppTextButton(
                     enabled: canRequestNewCode.value,
                     title: l10n.sendNewCode,
-                    textColor: context.colorScheme.primary
-                        .withOpacity(canRequestNewCode.value ? 1 : 0.6),
+                    textColor: context.colorScheme.primary.withOpacity(canRequestNewCode.value ? 1 : 0.6),
                     onPress: () {
                       ref
                           .read(signInFormNotifierProvider.notifier)
@@ -153,9 +149,7 @@ class OtpPage extends HookConsumerWidget {
                           .then((_) {
                         controller.clear();
                         canRequestNewCode.value = false;
-                        timerDuration.value =
-                            DateTime.now().difference(DateTime.now()) +
-                                const Duration(seconds: 60);
+                        timerDuration.value = DateTime.now().difference(DateTime.now()) + const Duration(seconds: 60);
                       });
                     },
                     isLarge: true,
@@ -175,8 +169,10 @@ class OtpPage extends HookConsumerWidget {
     required String phone,
     required String code,
   }) {
-    ref
-        .read(signInFormNotifierProvider.notifier)
-        .signIn(phone: phone, code: code);
+    if (registered) {
+      ref.read(signInFormNotifierProvider.notifier).signIn(phone: phone, code: code);
+    } else {
+      ref.read(signInFormNotifierProvider.notifier).checkCode(phone: phone, code: int.parse(code));
+    }
   }
 }

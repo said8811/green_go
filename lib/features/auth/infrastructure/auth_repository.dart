@@ -24,8 +24,7 @@ class AuthRepository {
     required String code,
   }) async {
     try {
-      final failureOrSuccess =
-          await _remoteService.signIn(phone: phone, code: code);
+      final failureOrSuccess = await _remoteService.signIn(phone: phone, code: code);
       return failureOrSuccess.fold(
         (failure) => left(failure),
         (user) async {
@@ -41,15 +40,13 @@ class AuthRepository {
   Future<Either<Failure, UserModel>> register({
     required String phone,
     required String name,
-    required String code,
-    required String birthday,
+    required int code,
   }) async {
     try {
       final failureOrSuccess = await _remoteService.register(
         phone: phone,
         code: code,
         name: name,
-        birthday: birthday,
       );
       return failureOrSuccess.fold(
         (failure) => left(failure),
@@ -67,18 +64,16 @@ class AuthRepository {
     String phone, {
     required bool isRequestForRestor,
   }) async {
-    final isSigned = await _remoteService.getCode(phone,
-        isRequestForRestor: isRequestForRestor);
+    final isSigned = await _remoteService.getCode(phone, isRequestForRestor: isRequestForRestor);
     return isSigned.fold((l) => left(l), (r) => right(r));
   }
 
   Future<Either<Failure, bool>> checkCode({
     required String phone,
-    required String code,
+    required int code,
   }) async {
     try {
-      final isCodeTrue =
-          await _remoteService.checkCode(code: code, phone: phone);
+      final isCodeTrue = await _remoteService.checkCode(code: code, phone: phone);
       return right(isCodeTrue);
     } on RestApiException catch (e) {
       if (e == RestApiException.connection()) {
@@ -95,8 +90,7 @@ class AuthRepository {
   Future<Either<Failure, Unit>> deleteAccount() async {
     try {
       final user = _localService.setUser();
-      final unitOrFailure =
-          await _remoteService.deleteAccount(userId: user!.id.toString());
+      final unitOrFailure = await _remoteService.deleteAccount(userId: user!.id.toString());
       return unitOrFailure.fold(
         (l) => left(l),
         (r) async {

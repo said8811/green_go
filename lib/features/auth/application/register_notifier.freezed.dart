@@ -271,7 +271,6 @@ abstract class _RegisterState extends RegisterState {
 /// @nodoc
 mixin _$PersonalDetails {
   String get firstName => throw _privateConstructorUsedError;
-  DateTime? get birthday => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   _$PersonalDetailsCopyWith<_PersonalDetails> get copyWith =>
@@ -284,7 +283,7 @@ abstract class _$PersonalDetailsCopyWith<$Res> {
           _PersonalDetails value, $Res Function(_PersonalDetails) then) =
       __$PersonalDetailsCopyWithImpl<$Res, _PersonalDetails>;
   @useResult
-  $Res call({String firstName, DateTime? birthday});
+  $Res call({String firstName});
 }
 
 /// @nodoc
@@ -301,17 +300,12 @@ class __$PersonalDetailsCopyWithImpl<$Res, $Val extends _PersonalDetails>
   @override
   $Res call({
     Object? firstName = null,
-    Object? birthday = freezed,
   }) {
     return _then(_value.copyWith(
       firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: freezed == birthday
-          ? _value.birthday
-          : birthday // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -324,7 +318,7 @@ abstract class _$$_PersonalDetailsImplCopyWith<$Res>
       __$$_PersonalDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String firstName, DateTime? birthday});
+  $Res call({String firstName});
 }
 
 /// @nodoc
@@ -339,17 +333,12 @@ class __$$_PersonalDetailsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? firstName = null,
-    Object? birthday = freezed,
   }) {
     return _then(_$_PersonalDetailsImpl(
       firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: freezed == birthday
-          ? _value.birthday
-          : birthday // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -357,18 +346,14 @@ class __$$_PersonalDetailsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PersonalDetailsImpl extends __PersonalDetails {
-  const _$_PersonalDetailsImpl(
-      {required this.firstName, required this.birthday})
-      : super._();
+  const _$_PersonalDetailsImpl({required this.firstName}) : super._();
 
   @override
   final String firstName;
-  @override
-  final DateTime? birthday;
 
   @override
   String toString() {
-    return '_PersonalDetails(firstName: $firstName, birthday: $birthday)';
+    return '_PersonalDetails(firstName: $firstName)';
   }
 
   @override
@@ -377,13 +362,11 @@ class _$_PersonalDetailsImpl extends __PersonalDetails {
         (other.runtimeType == runtimeType &&
             other is _$_PersonalDetailsImpl &&
             (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.birthday, birthday) ||
-                other.birthday == birthday));
+                other.firstName == firstName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, birthday);
+  int get hashCode => Object.hash(runtimeType, firstName);
 
   @JsonKey(ignore: true)
   @override
@@ -394,15 +377,12 @@ class _$_PersonalDetailsImpl extends __PersonalDetails {
 }
 
 abstract class __PersonalDetails extends _PersonalDetails {
-  const factory __PersonalDetails(
-      {required final String firstName,
-      required final DateTime? birthday}) = _$_PersonalDetailsImpl;
+  const factory __PersonalDetails({required final String firstName}) =
+      _$_PersonalDetailsImpl;
   const __PersonalDetails._() : super._();
 
   @override
   String get firstName;
-  @override
-  DateTime? get birthday;
   @override
   @JsonKey(ignore: true)
   _$$_PersonalDetailsImplCopyWith<_$_PersonalDetailsImpl> get copyWith =>

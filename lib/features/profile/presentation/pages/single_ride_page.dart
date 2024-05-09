@@ -88,10 +88,10 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                   DateFormat("d-MM-yyyy - HH:mm", "tr_TR").format(DateTime.parse(widget.ride.startAt)), context),
               const Divider(),
               tileWithsub(context.l10n.travelDuration,
-                  "${widget.ride.ridingTime ~/ 60} soat ${widget.ride.ridingTime % 60} daqiqa", context),
+                  context.l10n.fromToDate(widget.ride.ridingTime ~/ 60, widget.ride.ridingTime % 60), context),
               const Divider(),
               tileWithsub(context.l10n.pouseDuration,
-                  "${widget.ride.pouseTime ~/ 60} soat ${widget.ride.pouseTime % 60} daqiqa", context),
+                  context.l10n.fromToDate(widget.ride.pouseTime ~/ 60, widget.ride.pouseTime % 60), context),
               const Divider(),
               const Gap(10),
               Row(

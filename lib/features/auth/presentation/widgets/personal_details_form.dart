@@ -7,8 +7,6 @@ import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../theme/colors.dart';
-import '../../../core/presentation/helpers/modal_helper.dart';
-import '../../../core/presentation/helpers/ui_utils.dart';
 import '../../../core/presentation/widgets/custom_label.dart';
 import '../../shared/providers.dart';
 import '/gen/assets.gen.dart';
@@ -19,8 +17,6 @@ class PersonalDetailsForm extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = useTextEditingController();
-    final dateController = useTextEditingController();
-    final userBirthday = useState<DateTime?>(null);
     final l10n = context.l10n;
     final signInState = ref.watch(signInFormNotifierProvider);
     final state = ref.watch(registerNotifierProvider);
@@ -29,176 +25,103 @@ class PersonalDetailsForm extends HookConsumerWidget {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Gap(20),
-            CustomLabel(label: l10n.name),
-            TextFormField(
-              autocorrect: false,
-              controller: nameController,
-              autofillHints: const [AutofillHints.name],
-              enableSuggestions: false,
-              onChanged: (value) => ref
-                  .read(registerNotifierProvider.notifier)
-                  .changePersonalDetails(name: value),
-              onEditingComplete: () => FocusScope.of(context).unfocus(),
-              decoration: InputDecoration(
-                labelText: l10n.name,
-                suffixIcon: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Center(
-                    child: SvgPicture.asset(
-                      Assets.icons.user,
-                      colorFilter: ColorFilter.mode(
-                          context.colorScheme.grey, BlendMode.srcIn),
-                    ),
-                  ),
-                ),
-              ),
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.words,
-            ),
-            const Gap(10),
-            CustomLabel(label: l10n.birthday),
-            GestureDetector(
-              onTap: () async {
-                await selectDate(context).then((pickedTime) {
-                  if (pickedTime != null) {
-                    userBirthday.value = pickedTime;
-                    dateController.text = kDateFormatter.format(pickedTime);
-                    ref
-                        .read(registerNotifierProvider.notifier)
-                        .changePersonalDetails(birthday: pickedTime);
-                  }
-                });
-              },
-              behavior: HitTestBehavior.opaque,
-              child: TextFormField(
-                style: context.textTheme.bodyMedium,
-                controller: dateController,
-                enabled: false,
-                decoration: const InputDecoration(
-                  hintText: 'Дата рождения',
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                autocorrect: false,
+                controller: nameController,
+                autofillHints: const [AutofillHints.name],
+                enableSuggestions: false,
+                onChanged: (value) => ref.read(registerNotifierProvider.notifier).changePersonalDetails(name: value),
+                onEditingComplete: () => FocusScope.of(context).unfocus(),
+                decoration: InputDecoration(
+                  labelText: l10n.name,
+                  labelStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
                   suffixIcon: SizedBox(
                     width: 50,
                     height: 50,
-                    // child: Center(child: SvgPicture.asset(Assets.icons.calendar, color: context.colorScheme.grey2)),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Assets.icons.user,
+                        colorFilter: ColorFilter.mode(context.colorScheme.grey, BlendMode.srcIn),
+                      ),
+                    ),
                   ),
                 ),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
               ),
-            ),
-            const Gap(10),
-            CustomLabel(label: l10n.phoneNumber),
-            Container(
-              width: double.infinity,
-              height: 50,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.white,
-                border: Border.all(color: AppColors.grey),
+              const Gap(10),
+              CustomLabel(label: l10n.phoneNumber),
+              Container(
+                width: double.infinity,
+                height: 50,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.white,
+                  border: Border.all(color: AppColors.grey),
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      signInState.phone,
+                      style: context.textTheme.bodyMedium,
+                    ),
+                    const Spacer(),
+                    Center(
+                      child: SvgPicture.asset(
+                        Assets.icons.call,
+                        colorFilter: ColorFilter.mode(context.colorScheme.grey, BlendMode.srcIn),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
+              const Gap(20),
+              const Gap(10),
+              Row(
                 children: [
-                  Text(
-                    signInState.phone,
-                    style: context.textTheme.bodyMedium,
+                  Transform.translate(
+                    offset: const Offset(-8, 0),
+                    child: Checkbox(
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      onChanged: (value) {
+                        if (value == null) return;
+                        ref.read(registerNotifierProvider.notifier).changeAgreeToTerms(isAgree: value);
+                      },
+                      value: state.agreeToTerms,
+                      activeColor: context.colorScheme.primary,
+                      checkColor: context.colorScheme.surface,
+                    ),
                   ),
-                  const Spacer(),
-                  Center(
-                    child: SvgPicture.asset(
-                      Assets.icons.call,
-                      colorFilter: ColorFilter.mode(
-                          context.colorScheme.grey, BlendMode.srcIn),
+                  InkWell(
+                    onTap: () {},
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Я принимаю условия ',
+                        style: context.textTheme.bodySmall,
+                        children: [
+                          TextSpan(
+                            text: 'публичной оферты',
+                            style: context.textTheme.bodySmall!.copyWith(
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            const Gap(20),
-            CustomLabel(label: l10n.gender),
-            Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          const Gap(10),
-                          Text(l10n.man),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const Gap(20),
-                Expanded(
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          // SelectedCircleWidget(
-                          //   isSelected:
-                          //       state.personalDetails?.gender == Gender.female,
-                          // ),
-                          // const Gap(10),
-                          // Text(l10n.woman),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const Gap(10),
-            Row(
-              children: [
-                Transform.translate(
-                  offset: const Offset(-8, 0),
-                  child: Checkbox(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    onChanged: (value) {
-                      if (value == null) return;
-                      ref
-                          .read(registerNotifierProvider.notifier)
-                          .changeAgreeToTerms(isAgree: value);
-                    },
-                    value: state.agreeToTerms,
-                    activeColor: context.colorScheme.primary,
-                    checkColor: context.colorScheme.surface,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Я принимаю условия ',
-                      style: context.textTheme.bodySmall,
-                      children: [
-                        TextSpan(
-                          text: 'публичной оферты',
-                          style: context.textTheme.bodySmall!.copyWith(
-                            decoration: TextDecoration.underline,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
