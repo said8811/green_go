@@ -49,7 +49,7 @@ class OtpPage extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "Kodni kiriting",
+                l10n.enterTheCode,
                 style: context.textTheme.bodyLarge!.copyWith(fontSize: 32),
               ),
             ),

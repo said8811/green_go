@@ -104,11 +104,11 @@ class PersonalDetailsForm extends HookConsumerWidget {
                     onTap: () {},
                     child: RichText(
                       text: TextSpan(
-                        text: 'Я принимаю условия ',
+                        text: context.l10n.agreeAndAccept,
                         style: context.textTheme.bodySmall,
                         children: [
                           TextSpan(
-                            text: 'публичной оферты',
+                            text: context.l10n.publicOffer,
                             style: context.textTheme.bodySmall!.copyWith(
                               decoration: TextDecoration.underline,
                               color: Colors.blue,

@@ -25,7 +25,7 @@ class SplashPage extends HookConsumerWidget {
       await getCurrentPosition().then((value) => ref.read(referenceNotifierProvider.notifier).getData());
     });
 
-    ref.listen(referenceNotifierProvider, (previous, next) {
+    ref.listen(referenceNotifierProvider, (previous, next) async {
       if (next.error != null) {
         ref.read(authNotifierProvider.notifier).signOut();
       }
@@ -49,8 +49,7 @@ class SplashPage extends HookConsumerWidget {
                 onTap: (PolygonMapObject self, Point point) {},
               ),
             );
-
-        context.go(AppRoute.map.routePathWithSlash);
+        await Future.delayed(const Duration(seconds: 1)).then((value) => context.go(AppRoute.map.routePathWithSlash));
       }
     });
 
@@ -63,7 +62,7 @@ class SplashPage extends HookConsumerWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80),
-                  child: Assets.images.appLogo.image(
+                  child: Assets.images.logo.image(
                     fit: BoxFit.cover,
                   ),
                 )

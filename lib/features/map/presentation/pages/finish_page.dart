@@ -95,7 +95,7 @@ class _FinishPageState extends ConsumerState<FinishPage> {
                   if (state.imgPath != null && state.imgPath!.isNotEmpty)
                     CommonExpandablePanel(
                         symPadding: 20,
-                        title: "Suratni ko'rish",
+                        title: context.l10n.viewPhoto,
                         inkWellBorderRadius: 0,
                         child: SizedBox(
                           height: 500,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:green_go/features/auth/presentation/screens/language_choose_page.dart';
 import 'package:green_go/features/auth/presentation/screens/register_page.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
@@ -18,7 +19,14 @@ class SignInPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activeIndex = useState(0);
 
-    const pages = [GetCodePage(), OtpPage(), RegisterPage()];
+    List pages = [
+      LanguageChoosePage(
+        onTap: () => activeIndex.value = 1,
+      ),
+      const GetCodePage(),
+      const OtpPage(),
+      const RegisterPage()
+    ];
 
     ref.listen<SignInFormState>(signInFormNotifierProvider, (previous, current) async {
       if (current.user != null) {
@@ -28,9 +36,9 @@ class SignInPage extends HookConsumerWidget {
       }
 
       if (current.hasCodeSent && current.sentCodeIsTrue && !current.isRegistered) {
-        activeIndex.value = 2;
+        activeIndex.value = 3;
       } else if (current.hasCodeSent) {
-        activeIndex.value = 1;
+        activeIndex.value = 2;
       }
     });
 

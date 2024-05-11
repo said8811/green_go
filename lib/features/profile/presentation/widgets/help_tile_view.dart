@@ -46,7 +46,6 @@ class HelpTilesView extends ConsumerWidget {
           onTap: () {
             context.push(AppRoute.about.routePathWithSlash);
           },
-          subtitle: "Versiya 1.0.0",
         ),
       ],
     );

@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/shared/extensions/string_extensions.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/domain/failure.dart';
@@ -24,8 +25,7 @@ class GetCodePage extends HookConsumerWidget {
 
     final selected = useState(countries.first);
     final textTheme = context.textTheme;
-    ref.listen<SignInFormState>(signInFormNotifierProvider,
-        (previous, current) async {
+    ref.listen<SignInFormState>(signInFormNotifierProvider, (previous, current) async {
       if (previous?.error == null && current.error != null) {
         showErrorDialog(context, failure: current.error);
         phoneController.clear();
@@ -42,14 +42,13 @@ class GetCodePage extends HookConsumerWidget {
           children: [
             const Gap(30),
             Text(
-              "Telefon raqamini kiriting",
+              context.l10n.enterPhoneNumber,
               style: textTheme.bodyLarge!.copyWith(fontSize: 32),
             ),
             const Gap(15),
             Text(
-              "Kiritilgan telefon raqamiga tasdiqlash kodini yuboramiz",
-              style: textTheme.bodyMedium!
-                  .copyWith(color: context.colorScheme.greyDark),
+              context.l10n.getCodeDialog,
+              style: textTheme.bodyMedium!.copyWith(color: context.colorScheme.greyDark),
             ),
             const Gap(20),
             TextFormField(
@@ -65,8 +64,7 @@ class GetCodePage extends HookConsumerWidget {
                 ),
               ],
               keyboardType: TextInputType.number,
-              onFieldSubmitted: (phone) =>
-                  getCode(context, phoneController.text, selected.value, ref),
+              onFieldSubmitted: (phone) => getCode(context, phoneController.text, selected.value, ref),
               decoration: InputDecoration(
                 prefix: Text(
                   "+998 ",
@@ -93,9 +91,8 @@ class GetCodePage extends HookConsumerWidget {
               width: double.infinity,
               child: PrimaryButton(
                 isLoading: ref.watch(signInFormNotifierProvider).isLoading,
-                title: 'Kodni olish',
-                onPress: () =>
-                    getCode(context, phoneController.text, selected.value, ref),
+                title: context.l10n.getCode,
+                onPress: () => getCode(context, phoneController.text, selected.value, ref),
               ),
             ),
             const Gap(20)
@@ -105,10 +102,8 @@ class GetCodePage extends HookConsumerWidget {
     );
   }
 
-  Future<void> getCode(BuildContext context, String text, PhoneCountryData data,
-      WidgetRef ref) async {
-    if (text.clearSymbols.length ==
-        data.phoneMaskWithoutCountryCode.clearSymbols.length) {
+  Future<void> getCode(BuildContext context, String text, PhoneCountryData data, WidgetRef ref) async {
+    if (text.clearSymbols.length == data.phoneMaskWithoutCountryCode.clearSymbols.length) {
       final phone = '${data.phoneCode}${text.clearSymbols}';
       ref.read(signInFormNotifierProvider.notifier).getCode(
             phone,

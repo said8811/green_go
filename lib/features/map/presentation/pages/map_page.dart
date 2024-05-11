@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_go/features/core/domain/coordinate_model.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/presentation/widgets/book_timer_widget.dart';
@@ -50,45 +51,22 @@ class _MapPageState extends ConsumerState<MapPage> {
     ref.read(referenceNotifierProvider.notifier).getData().then((value) {
       final data = ref.watch(referenceNotifierProvider);
       for (var polygon in data.data!.availableCoordinates) {
-        ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
-              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+        ref.read(mapNotifierProvider.notifier).addMainObjects(getPolygon(
+              polygon,
               fillColor: Colors.white.withOpacity(0.6),
               strokeColor: Colors.red,
-              isGeodesic: true,
-              isVisible: true,
-              strokeWidth: 1,
-              polygon: Polygon(
-                  outerRing: LinearRing(
-                    points: polygon.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
-                  ),
-                  innerRings: const []),
             ));
-        ref.read(mapNotifierProvider.notifier).addAvailableObjects(PolygonMapObject(
-              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+        ref.read(mapNotifierProvider.notifier).addAvailableObjects(getPolygon(
+              polygon,
               fillColor: Colors.green.withOpacity(0.3),
               strokeColor: Colors.green,
-              isGeodesic: true,
-              isVisible: true,
-              strokeWidth: 1,
-              polygon: Polygon(
-                  outerRing: LinearRing(
-                    points: polygon.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
-                  ),
-                  innerRings: const []),
             ));
       }
       for (var polygon in data.data!.prohibitedCoordinates) {
-        ref.read(mapNotifierProvider.notifier).addMainObjects(PolygonMapObject(
-              mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+        ref.read(mapNotifierProvider.notifier).addMainObjects(getPolygon(
+              polygon,
               fillColor: Colors.red.withOpacity(0.2),
               strokeColor: Colors.red,
-              polygon: Polygon(
-                outerRing: LinearRing(
-                  points: polygon.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
-                ),
-                innerRings: const [],
-              ),
-              onTap: (PolygonMapObject self, Point point) {},
             ));
       }
       for (var cat in data.data!.categories) {
@@ -308,6 +286,20 @@ class _MapPageState extends ConsumerState<MapPage> {
     );
     zoom = point.zoom + zoomLevel;
     setState(() {});
+  }
+
+  PolygonMapObject getPolygon(List<CordinateModel> polygons, {required Color fillColor, required Color strokeColor}) {
+    return PolygonMapObject(
+      mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
+      fillColor: fillColor,
+      strokeColor: strokeColor,
+      polygon: Polygon(
+        outerRing: LinearRing(
+          points: polygons.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList(),
+        ),
+        innerRings: const [],
+      ),
+    );
   }
 
   @override

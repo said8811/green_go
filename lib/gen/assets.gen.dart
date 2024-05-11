@@ -103,6 +103,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/driving.svg
   String get driving => 'assets/icons/driving.svg';
 
+  /// File path: assets/icons/english-icon.svg
+  String get englishIcon => 'assets/icons/english-icon.svg';
+
   /// File path: assets/icons/facebook.svg
   String get facebook => 'assets/icons/facebook.svg';
 
@@ -217,6 +220,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/red-dot.svg
   String get redDot => 'assets/icons/red-dot.svg';
 
+  /// File path: assets/icons/russian-icon.svg
+  String get russianIcon => 'assets/icons/russian-icon.svg';
+
   /// File path: assets/icons/scanner.svg
   String get scanner => 'assets/icons/scanner.svg';
 
@@ -283,6 +289,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/user.svg
   String get user => 'assets/icons/user.svg';
 
+  /// File path: assets/icons/uzb-icon.svg
+  String get uzbIcon => 'assets/icons/uzb-icon.svg';
+
   /// File path: assets/icons/version-info.svg
   String get versionInfo => 'assets/icons/version-info.svg';
 
@@ -318,6 +327,7 @@ class $AssetsIconsGen {
         drawerIcon,
         drivingBold,
         driving,
+        englishIcon,
         facebook,
         filter,
         global,
@@ -356,6 +366,7 @@ class $AssetsIconsGen {
         qrCode,
         receiptItem,
         redDot,
+        russianIcon,
         scanner,
         searchBold,
         searchNormal,
@@ -378,6 +389,7 @@ class $AssetsIconsGen {
         timer,
         userBold,
         user,
+        uzbIcon,
         versionInfo,
         wallet
       ];
