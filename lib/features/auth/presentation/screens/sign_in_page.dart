@@ -5,6 +5,7 @@ import 'package:green_go/features/auth/presentation/screens/register_page.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/core/shared/providers.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../application/sign_in_notifier.dart';
 import '../../shared/providers.dart';
@@ -55,8 +56,8 @@ class SignInPage extends HookConsumerWidget {
       child: Scaffold(
         backgroundColor: context.colorScheme.surface,
         resizeToAvoidBottomInset: false,
-        appBar: const CommonAppBar(
-          title: "Tizimga kirish",
+        appBar: CommonAppBar(
+          title: context.l10n.signIn,
           canPop: false,
         ),
         body: pages[activeIndex.value],

@@ -139,7 +139,7 @@ class AuthRemoteService {
       if (e.isConnectionError) {
         throw RestApiException.connection();
       }
-      throw RestApiException(e.message);
+      throw RestApiException(e.response?.data['message']);
     }
   }
 

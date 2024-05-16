@@ -16,9 +16,7 @@ class JsonHelpers {
 
   static List<String> queueToString(List? json) {
     if (json != null) {
-      return json
-          .map((e) => e.toString().replaceAll("(", "").replaceAll(")", ""))
-          .toList();
+      return json.map((e) => e.toString().replaceAll("(", "").replaceAll(")", "")).toList();
     }
     return [];
   }
@@ -37,7 +35,7 @@ class JsonHelpers {
 
   static DateTime? stringToDateTime(Object? json) {
     if (json != null) {
-      return DateTime.parse(json.toString());
+      return DateTime.parse(json.toString()).toLocal();
     } else {
       return null;
     }

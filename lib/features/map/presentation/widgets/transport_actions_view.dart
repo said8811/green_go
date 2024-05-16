@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/application/helper_functions.dart';
@@ -22,17 +23,28 @@ class TransportActionsView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
     final state = ref.watch(ridesNotifierProvider);
+    final priceChanged = useState(false);
     final timer = ref.watch(timerNotifierProvider);
-
+    final price = ref.watch(priceNotifierProvider);
     useEffectWithScheduler(
       action: () {
         if (state.rides.isNotEmpty) {
-          Future.microtask(() => ref
-              .read(timerNotifierProvider.notifier)
-              .getTime(DateTime.parse(state.rides[0].startAt).toLocal(), state));
+          Future.microtask(() {
+            ref.read(timerNotifierProvider.notifier).getTime(DateTime.parse(state.rides[0].startAt).toLocal());
+            ref
+                .read(priceNotifierProvider.notifier)
+                .setInitialPrice(DateTime.parse(state.rides[0].startAt).toLocal(), state);
+          });
         }
       },
     );
+    ref.listen(timerNotifierProvider, (prev, next) async {
+      if (next.time % 60 == 0 && !priceChanged.value) {
+        priceChanged.value = true;
+        ref.read(priceNotifierProvider.notifier).getPrice(state);
+        await Future.delayed(const Duration(seconds: 1)).then((v) => priceChanged.value = false);
+      }
+    });
 
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (previous?.error == null && next.error != null) {
@@ -52,7 +64,7 @@ class TransportActionsView extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      context.l10n.productPrice(kPriceFormatter.format(timer.price)),
+                      context.l10n.productPrice(kPriceFormatter.format(price)),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
                       ),
@@ -87,8 +99,11 @@ class TransportActionsView extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            context.l10n.bicycleTurnedOn,
+                            !(state.actionState == RideAction.pause)
+                                ? context.l10n.bicycleTurnedOn
+                                : context.l10n.bicycleonPause,
                             style: textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const Gap(10),
                           Row(

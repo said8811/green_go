@@ -9,6 +9,8 @@ import 'package:green_go/features/map/infrastructure/transport_repository.dart';
 import 'package:green_go/services/location/shared/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../application/price_notifier.dart';
+
 final mapNotifierProvider = StateNotifierProvider<MapNotifierNotifier, MapNotifierState>((ref) {
   return MapNotifierNotifier();
 });
@@ -29,6 +31,10 @@ final ridesNotifierProvider = StateNotifierProvider<RidesNotifier, RidesState>((
 
 final timerNotifierProvider = StateNotifierProvider.autoDispose<TimerNotifier, TimerState>((ref) {
   return TimerNotifier();
+});
+
+final priceNotifierProvider = StateNotifierProvider.autoDispose<PriceNotifier, double>((ref) {
+  return PriceNotifier();
 });
 
 final booksTimerNotifierProvider = StateNotifierProvider.autoDispose<BooksTimerNotifier, int>((ref) {

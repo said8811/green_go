@@ -3,6 +3,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:green_go/features/core/domain/lat_long_model.dart';
 import 'package:green_go/features/core/infrastructure/json_helpers.dart';
+import 'package:green_go/features/map/domain/pouse_model.dart';
 import 'package:green_go/features/map/domain/tarif_model.dart';
 
 part 'ride_model.freezed.dart';
@@ -26,7 +27,9 @@ class RideModel with _$RideModel {
     @JsonKey(defaultValue: "") required String finishedAt,
     @JsonKey(defaultValue: "") required String image,
     @JsonKey(defaultValue: 0) required int pouseTime,
+    @JsonKey(defaultValue: 0) required int status,
     @JsonKey(defaultValue: 0) required int ridingTime,
+    required PauseModel? pause,
     @JsonKey(defaultValue: 0, fromJson: JsonHelpers.intToDouble) required double total,
     @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString) required List<String> coordinates,
   }) = _RideModel;

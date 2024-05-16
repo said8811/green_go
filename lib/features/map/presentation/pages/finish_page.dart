@@ -112,7 +112,7 @@ class _FinishPageState extends ConsumerState<FinishPage> {
           : SizedBox(
               child: Center(
                 child: Text(
-                  "Ijara Yakunlandi",
+                  context.l10n.rideFinished,
                   style: context.textTheme.bodyMedium?.copyWith(fontSize: 20),
                 ),
               ),

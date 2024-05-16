@@ -55,9 +55,28 @@ class RidesNotifier extends StateNotifier<RidesState> {
                   rides: data.rides,
                 ),
             (r) => state.copyWith(
-                rides: data.rides, isLoading: false, transport: r, books: data.books, actionState: RideAction.pure));
+                  rides: data.rides,
+                  isLoading: false,
+                  transport: r,
+                  books: data.books,
+                  actionState: data.rides[0].status == 0
+                      ? RideAction.pure
+                      : data.rides[0].status == 1
+                          ? RideAction.pause
+                          : RideAction.stop,
+                ));
       } else {
-        state = state.copyWith(rides: data.rides, isLoading: false, books: data.books, actionState: RideAction.pure);
+        final status = data.rides[0].status;
+        state = state.copyWith(
+          rides: data.rides,
+          isLoading: false,
+          books: data.books,
+          actionState: status == 0
+              ? RideAction.pure
+              : status == 1
+                  ? RideAction.pause
+                  : RideAction.stop,
+        );
       }
     });
   }

@@ -26,7 +26,11 @@ _$RideModelImpl _$$RideModelImplFromJson(Map<String, dynamic> json) =>
       finishedAt: json['finishedAt'] as String? ?? '',
       image: json['image'] as String? ?? '',
       pouseTime: json['pouseTime'] as int? ?? 0,
+      status: json['status'] as int? ?? 0,
       ridingTime: json['ridingTime'] as int? ?? 0,
+      pause: json['pause'] == null
+          ? null
+          : PauseModel.fromJson(json['pause'] as Map<String, dynamic>),
       total: json['total'] == null ? 0 : JsonHelpers.intToDouble(json['total']),
       coordinates: json['coordinates'] == null
           ? []
@@ -50,7 +54,9 @@ Map<String, dynamic> _$$RideModelImplToJson(_$RideModelImpl instance) =>
       'finishedAt': instance.finishedAt,
       'image': instance.image,
       'pouseTime': instance.pouseTime,
+      'status': instance.status,
       'ridingTime': instance.ridingTime,
+      'pause': instance.pause,
       'total': instance.total,
       'coordinates': instance.coordinates,
     };

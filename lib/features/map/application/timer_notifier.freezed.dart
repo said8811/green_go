@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TimerState {
   int get time => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TimerStateCopyWith<TimerState> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $TimerStateCopyWith<$Res> {
           TimerState value, $Res Function(TimerState) then) =
       _$TimerStateCopyWithImpl<$Res, TimerState>;
   @useResult
-  $Res call({int time, double price});
+  $Res call({int time});
 }
 
 /// @nodoc
@@ -47,17 +46,12 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
   @override
   $Res call({
     Object? time = null,
-    Object? price = null,
   }) {
     return _then(_value.copyWith(
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
     ) as $Val);
   }
 }
@@ -70,7 +64,7 @@ abstract class _$$TimerStateImplCopyWith<$Res>
       __$$TimerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int time, double price});
+  $Res call({int time});
 }
 
 /// @nodoc
@@ -85,17 +79,12 @@ class __$$TimerStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? time = null,
-    Object? price = null,
   }) {
     return _then(_$TimerStateImpl(
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
@@ -103,16 +92,14 @@ class __$$TimerStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerStateImpl implements _TimerState {
-  _$TimerStateImpl({required this.time, required this.price});
+  _$TimerStateImpl({required this.time});
 
   @override
   final int time;
-  @override
-  final double price;
 
   @override
   String toString() {
-    return 'TimerState(time: $time, price: $price)';
+    return 'TimerState(time: $time)';
   }
 
   @override
@@ -120,12 +107,11 @@ class _$TimerStateImpl implements _TimerState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimerStateImpl &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.price, price) || other.price == price));
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, time, price);
+  int get hashCode => Object.hash(runtimeType, time);
 
   @JsonKey(ignore: true)
   @override
@@ -135,13 +121,10 @@ class _$TimerStateImpl implements _TimerState {
 }
 
 abstract class _TimerState implements TimerState {
-  factory _TimerState({required final int time, required final double price}) =
-      _$TimerStateImpl;
+  factory _TimerState({required final int time}) = _$TimerStateImpl;
 
   @override
   int get time;
-  @override
-  double get price;
   @override
   @JsonKey(ignore: true)
   _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
