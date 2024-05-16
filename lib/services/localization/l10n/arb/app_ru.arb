@@ -72,6 +72,7 @@
   "profile": "Профиль",
   "personalData": "Личные данные",
   "callSuport":"Позвоните в центр поддержки",
+  "versionDialog":"Версия 1.0.0",
   "ourSocials":"Наши социальные сети",
   "addToCart": "в корзину",
   "notAvailable": "Нет в наличии",
@@ -149,6 +150,11 @@
   "qr": "QR",
   "back": "Назад",
   "agreeAndAccept": "Ознакомился (лась) и подтверждаю принятие ",
+  "acceptTheTerms":"Вам необходимо принять условия",
+  "chooseLanguageDialog":"Для удобного использования приложения, выберите язык",
+  "loginDialog":"Авторизоваться",
+  "wrongTypeNumber":"Неверный формат номера телефона",
+  "rateTheProgram":"Оценка программы",
   "ofPublicOffer": "публичной оферты",
   "selectGender": "Выберите пол",
   "yourBalance": "Ваш баланс",
@@ -174,7 +180,7 @@
       "price": {}
     }
   },
-  "sumPerMin": "{sum} sum/min",
+  "sumPerMin": "{sum} сум/мин",
   "@sumPerMin": {
   "placeholders": {
       "sum": {}
@@ -337,7 +343,8 @@
   "enterSumDialog":"Введите сумму",
   "chooseCard":"Выберите карту",
   "paymentSum":"К оплате",
-  "fillBalance":"Пополните баланс",
+  "fillBalance":"Пополнить",
+  "addCardDialog":"Рекомендуется добавить номер карты перед началом поездки",
   "addBankCard":"Добавить банковскую карту",
   "cardNumber":"Номер карты",
   "validityPeriod":"Срок годности"

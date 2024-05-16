@@ -36,10 +36,8 @@ class OtpPage extends HookConsumerWidget {
       }
       if (previous?.user == null && current.user != null) {}
     });
-
     final isValid = useState(controller.text.isNotEmpty && controller.text.length == 6);
     final canRequestNewCode = useState(false);
-
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(

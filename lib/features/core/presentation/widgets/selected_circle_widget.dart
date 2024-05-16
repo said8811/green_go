@@ -26,9 +26,7 @@ class SelectedCircleWidget extends StatelessWidget {
               key: const ValueKey('selected'),
               height: 20,
               width: 20,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: AppColors.primary),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: AppColors.primary),
               child: const Icon(
                 Icons.done,
                 color: AppColors.white,
@@ -39,9 +37,7 @@ class SelectedCircleWidget extends StatelessWidget {
               key: const ValueKey('notSelected'),
               height: 20,
               width: 20,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: AppColors.white),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: AppColors.white),
             ),
     );
   }
@@ -73,7 +69,7 @@ class SelectedBoxWidget extends StatelessWidget {
                 title: text ?? '',
                 onPress: onPress,
                 color: context.colorScheme.primary,
-                textColor: context.colorScheme.background,
+                textColor: context.colorScheme.surface,
               ),
             )
           : SizedBox(
@@ -83,7 +79,7 @@ class SelectedBoxWidget extends StatelessWidget {
                 title: text ?? '',
                 onPress: onPress,
                 borderColor: context.colorScheme.primary,
-                color: context.colorScheme.background,
+                color: context.colorScheme.surface,
                 textColor: context.textTheme.bodyLarge?.color,
                 splashColor: context.colorScheme.primary,
               ),

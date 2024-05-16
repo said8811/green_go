@@ -41,9 +41,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      padding: padding != null || useDefaultPadding
-          ? const EdgeInsets.symmetric(vertical: 12)
-          : padding,
+      padding: padding != null || useDefaultPadding ? const EdgeInsets.symmetric(vertical: 12) : padding,
       elevation: 0,
       onPressed: isLoading
           ? () {}
@@ -52,13 +50,9 @@ class PrimaryButton extends StatelessWidget {
               : null,
       splashColor: splashColor,
       color: color ?? context.colorScheme.primary,
-      shape: shape ??
-          (borderColor != null
-              ? StadiumBorder(side: BorderSide(color: borderColor!))
-              : const StadiumBorder()),
-      disabledColor: color != null
-          ? color!.withOpacity(0.5)
-          : context.colorScheme.primary.withOpacity(0.5),
+      shape:
+          shape ?? (borderColor != null ? StadiumBorder(side: BorderSide(color: borderColor!)) : const StadiumBorder()),
+      disabledColor: color != null ? color!.withOpacity(0.5) : context.colorScheme.primary.withOpacity(0.5),
       child: isLoading
           ? const SizedBox(
               width: 24,
@@ -122,10 +116,7 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      padding: padding ??
-          (useDefaultPadding
-              ? const EdgeInsets.symmetric(vertical: 10)
-              : padding),
+      padding: padding ?? (useDefaultPadding ? const EdgeInsets.symmetric(vertical: 10) : padding),
       elevation: 0,
       onPressed: isLoading
           ? () {}
@@ -133,14 +124,12 @@ class SecondaryButton extends StatelessWidget {
               ? onPress
               : null,
       splashColor: context.colorScheme.primary,
-      color: color ?? context.colorScheme.background,
+      color: color ?? context.colorScheme.surface,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: borderColor ?? context.colorScheme.primary),
         borderRadius: BorderRadius.circular(10),
       ),
-      disabledColor: color != null
-          ? color!.withOpacity(0.5)
-          : context.colorScheme.primary.withOpacity(0.5),
+      disabledColor: color != null ? color!.withOpacity(0.5) : context.colorScheme.primary.withOpacity(0.5),
       child: isLoading
           ? const SizedBox(
               width: 24,
@@ -150,8 +139,7 @@ class SecondaryButton extends StatelessWidget {
           : Text(
               title,
               style: context.textTheme.bodyMedium?.copyWith(
-                color:
-                    textColor ?? borderColor ?? context.colorScheme.textColor,
+                color: textColor ?? borderColor ?? context.colorScheme.textColor,
                 fontWeight: FontWeight.w600,
               ),
             ),

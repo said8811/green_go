@@ -43,7 +43,7 @@ class RegisterPage extends HookConsumerWidget {
             if (!state.agreeToTerms) {
               showErrorDialog(
                 context,
-                failure: const Failure.local('Вам необходимо принять условия'),
+                failure: Failure.local(context.l10n.acceptTheTerms),
               );
               return;
             }

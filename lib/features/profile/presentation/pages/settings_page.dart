@@ -24,7 +24,7 @@ class SettingsPage extends HookConsumerWidget {
     final locale = ref.watch(localeNotifierProvider);
     final state = ref.watch(profileNotifierProvider);
     final txtTheme = context.textTheme;
-    final isNotify = useState(false);
+    final isNotify = ref.watch(notificationProvider);
     final nameValue = useState("");
     return Scaffold(
       backgroundColor: Colors.white,
@@ -85,9 +85,9 @@ class SettingsPage extends HookConsumerWidget {
                   ),
                   const Spacer(),
                   CupertinoSwitch(
-                    value: isNotify.value,
+                    value: isNotify,
                     onChanged: (v) {
-                      isNotify.value = v;
+                      ref.read(notificationProvider.notifier).setNotitfy(v);
                     },
                   )
                 ],
@@ -134,7 +134,7 @@ class SettingsPage extends HookConsumerWidget {
             onPress: () {
               ref
                   .read(updateProfileProvider.notifier)
-                  .updateProfile(nameValue.value.isEmpty ? user!.name : nameValue.value, locale.languageCode)
+                  .updateProfile(nameValue.value.isEmpty ? state.value!.name : nameValue.value, locale.languageCode)
                   .then(
                     (value) => ref.read(profileNotifierProvider.notifier).getProfile().then((value) => context.pop()),
                   );

@@ -116,15 +116,15 @@ Future<dynamic> showAppDialog({
     context: context,
     builder: (context) {
       return Dialog(
-        surfaceTintColor: context.colorScheme.background,
-        backgroundColor: context.colorScheme.background,
+        surfaceTintColor: context.colorScheme.surface,
+        backgroundColor: context.colorScheme.surface,
         insetPadding: padding ?? const EdgeInsets.all(20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: PopScope(
           onPopInvoked: (_) async => barrierDismissible,
           child: Container(
             decoration: BoxDecoration(
-              color: context.colorScheme.background,
+              color: context.colorScheme.surface,
               borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.all(14),
@@ -192,7 +192,7 @@ Future<dynamic> showAppDialog({
                           borderColor: secondaryType == ButtonType.bordered ? context.colorScheme.primary : null,
                           textColor: secondaryType == ButtonType.bordered
                               ? context.colorScheme.textColor
-                              : context.colorScheme.background,
+                              : context.colorScheme.surface,
                           color: context.colorScheme.inputFillColor,
                         ),
                       ),

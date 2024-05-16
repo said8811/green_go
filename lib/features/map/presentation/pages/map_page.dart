@@ -40,7 +40,6 @@ class _MapPageState extends ConsumerState<MapPage> {
     Future.microtask(() {
       _updateMapObjects();
       _updateTimer = Timer.periodic(const Duration(minutes: 1), (timer) {
-        ref.read(mapNotifierProvider.notifier).clearObjects();
         _updateMapObjects();
       });
     });
@@ -48,7 +47,8 @@ class _MapPageState extends ConsumerState<MapPage> {
   }
 
   Future<void> _updateMapObjects() async {
-    ref.read(referenceNotifierProvider.notifier).getData().then((value) {
+    await ref.read(referenceNotifierProvider.notifier).getData().then((value) {
+      ref.read(mapNotifierProvider.notifier).clearObjects();
       final data = ref.watch(referenceNotifierProvider);
       for (var polygon in data.data!.availableCoordinates) {
         ref.read(mapNotifierProvider.notifier).addMainObjects(getPolygon(

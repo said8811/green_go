@@ -18,6 +18,7 @@ class AddCardPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useState(GlobalKey<FormState>());
+    final l10n = context.l10n;
     final numberController = useTextEditingController();
     final expireController = useTextEditingController();
     ref.listen(addCardProvider, (previous, next) {
@@ -37,17 +38,17 @@ class AddCardPage extends HookConsumerWidget {
             children: [
               const Gap(40),
               Text(
-                context.l10n.addBankCard,
+                l10n.addBankCard,
                 style: context.textTheme.bodyMedium?.copyWith(fontSize: 24),
               ),
               const Gap(20),
               Text(
-                "Sayohatni boshlashdan avval karta raqamni qo‘shish tavsiya qilinadi",
+                l10n.addCardDialog,
                 style: context.textTheme.labelSmall?.copyWith(fontSize: 14),
               ),
               const Gap(40),
               Text(
-                context.l10n.cardNumber,
+                l10n.cardNumber,
                 style: context.textTheme.bodySmall,
               ),
               const Gap(6),
@@ -116,9 +117,7 @@ class AddCardPage extends HookConsumerWidget {
             title: context.l10n.addCard,
             onPress: () {
               if (formKey.value.currentState!.validate()) {
-                ref
-                    .read(addCardProvider.notifier)
-                    .addCard(numberController.text, expireController.text);
+                ref.read(addCardProvider.notifier).addCard(numberController.text, expireController.text);
               }
             },
           ),

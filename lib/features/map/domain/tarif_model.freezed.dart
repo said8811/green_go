@@ -50,12 +50,14 @@ mixin _$TarifModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TarifModelCopyWith<TarifModel> get copyWith => throw _privateConstructorUsedError;
+  $TarifModelCopyWith<TarifModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TarifModelCopyWith<$Res> {
-  factory $TarifModelCopyWith(TarifModel value, $Res Function(TarifModel) then) =
+  factory $TarifModelCopyWith(
+          TarifModel value, $Res Function(TarifModel) then) =
       _$TarifModelCopyWithImpl<$Res, TarifModel>;
   @useResult
   $Res call(
@@ -76,7 +78,8 @@ abstract class $TarifModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel> implements $TarifModelCopyWith<$Res> {
+class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
+    implements $TarifModelCopyWith<$Res> {
   _$TarifModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -164,8 +167,10 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel> implements $TarifM
 }
 
 /// @nodoc
-abstract class _$$TarifModelImplCopyWith<$Res> implements $TarifModelCopyWith<$Res> {
-  factory _$$TarifModelImplCopyWith(_$TarifModelImpl value, $Res Function(_$TarifModelImpl) then) =
+abstract class _$$TarifModelImplCopyWith<$Res>
+    implements $TarifModelCopyWith<$Res> {
+  factory _$$TarifModelImplCopyWith(
+          _$TarifModelImpl value, $Res Function(_$TarifModelImpl) then) =
       __$$TarifModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -187,9 +192,12 @@ abstract class _$$TarifModelImplCopyWith<$Res> implements $TarifModelCopyWith<$R
 }
 
 /// @nodoc
-class __$$TarifModelImplCopyWithImpl<$Res> extends _$TarifModelCopyWithImpl<$Res, _$TarifModelImpl>
+class __$$TarifModelImplCopyWithImpl<$Res>
+    extends _$TarifModelCopyWithImpl<$Res, _$TarifModelImpl>
     implements _$$TarifModelImplCopyWith<$Res> {
-  __$$TarifModelImplCopyWithImpl(_$TarifModelImpl _value, $Res Function(_$TarifModelImpl) _then) : super(_value, _then);
+  __$$TarifModelImplCopyWithImpl(
+      _$TarifModelImpl _value, $Res Function(_$TarifModelImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -272,7 +280,7 @@ class __$$TarifModelImplCopyWithImpl<$Res> extends _$TarifModelCopyWithImpl<$Res
 
 /// @nodoc
 @JsonSerializable()
-class _$TarifModelImpl implements _TarifModel {
+class _$TarifModelImpl extends _TarifModel {
   _$TarifModelImpl(
       {required this.id,
       @JsonKey(defaultValue: "") required this.nameRu,
@@ -287,9 +295,11 @@ class _$TarifModelImpl implements _TarifModel {
       @JsonKey(defaultValue: 0) required this.price,
       @JsonKey(defaultValue: 0) required this.startPrice,
       @JsonKey(defaultValue: 0) required this.pricePerMinute,
-      @JsonKey(defaultValue: 0) required this.pausePricePerMinute});
+      @JsonKey(defaultValue: 0) required this.pausePricePerMinute})
+      : super._();
 
-  factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) => _$$TarifModelImplFromJson(json);
+  factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TarifModelImplFromJson(json);
 
   @override
   final int id;
@@ -347,23 +357,45 @@ class _$TarifModelImpl implements _TarifModel {
             (identical(other.nameRu, nameRu) || other.nameRu == nameRu) &&
             (identical(other.nameUz, nameUz) || other.nameUz == nameUz) &&
             (identical(other.nameEn, nameEn) || other.nameEn == nameEn) &&
-            (identical(other.descriptionRu, descriptionRu) || other.descriptionRu == descriptionRu) &&
-            (identical(other.descriptionUz, descriptionUz) || other.descriptionUz == descriptionUz) &&
-            (identical(other.descriptionEn, descriptionEn) || other.descriptionEn == descriptionEn) &&
-            (identical(other.startMinute, startMinute) || other.startMinute == startMinute) &&
-            (identical(other.reservedAmount, reservedAmount) || other.reservedAmount == reservedAmount) &&
-            (identical(other.activateCount, activateCount) || other.activateCount == activateCount) &&
+            (identical(other.descriptionRu, descriptionRu) ||
+                other.descriptionRu == descriptionRu) &&
+            (identical(other.descriptionUz, descriptionUz) ||
+                other.descriptionUz == descriptionUz) &&
+            (identical(other.descriptionEn, descriptionEn) ||
+                other.descriptionEn == descriptionEn) &&
+            (identical(other.startMinute, startMinute) ||
+                other.startMinute == startMinute) &&
+            (identical(other.reservedAmount, reservedAmount) ||
+                other.reservedAmount == reservedAmount) &&
+            (identical(other.activateCount, activateCount) ||
+                other.activateCount == activateCount) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.startPrice, startPrice) || other.startPrice == startPrice) &&
-            (identical(other.pricePerMinute, pricePerMinute) || other.pricePerMinute == pricePerMinute) &&
+            (identical(other.startPrice, startPrice) ||
+                other.startPrice == startPrice) &&
+            (identical(other.pricePerMinute, pricePerMinute) ||
+                other.pricePerMinute == pricePerMinute) &&
             (identical(other.pausePricePerMinute, pausePricePerMinute) ||
                 other.pausePricePerMinute == pausePricePerMinute));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nameRu, nameUz, nameEn, descriptionRu, descriptionUz, descriptionEn,
-      startMinute, reservedAmount, activateCount, price, startPrice, pricePerMinute, pausePricePerMinute);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      nameRu,
+      nameUz,
+      nameEn,
+      descriptionRu,
+      descriptionUz,
+      descriptionEn,
+      startMinute,
+      reservedAmount,
+      activateCount,
+      price,
+      startPrice,
+      pricePerMinute,
+      pausePricePerMinute);
 
   @JsonKey(ignore: true)
   @override
@@ -377,40 +409,29 @@ class _$TarifModelImpl implements _TarifModel {
       this,
     );
   }
-
-  @override
-  String getTitle(String languageCode) {
-    switch (languageCode) {
-      case 'ru':
-        return nameRu;
-      case 'uz':
-        return nameUz.isEmpty ? nameRu : nameUz;
-      case 'en':
-        return nameEn.isEmpty ? nameRu : nameEn;
-      default:
-        return nameRu;
-    }
-  }
 }
 
-abstract class _TarifModel implements TarifModel {
+abstract class _TarifModel extends TarifModel {
   factory _TarifModel(
-      {required final int id,
-      @JsonKey(defaultValue: "") required final String nameRu,
-      @JsonKey(defaultValue: "") required final String nameUz,
-      @JsonKey(defaultValue: "") required final String nameEn,
-      @JsonKey(defaultValue: "") required final String descriptionRu,
-      @JsonKey(defaultValue: "") required final String descriptionUz,
-      @JsonKey(defaultValue: "") required final String descriptionEn,
-      @JsonKey(defaultValue: 0) required final int startMinute,
-      @JsonKey(defaultValue: 0) required final int reservedAmount,
-      @JsonKey(defaultValue: 0) required final int activateCount,
-      @JsonKey(defaultValue: 0) required final int price,
-      @JsonKey(defaultValue: 0) required final int startPrice,
-      @JsonKey(defaultValue: 0) required final int pricePerMinute,
-      @JsonKey(defaultValue: 0) required final int pausePricePerMinute}) = _$TarifModelImpl;
+          {required final int id,
+          @JsonKey(defaultValue: "") required final String nameRu,
+          @JsonKey(defaultValue: "") required final String nameUz,
+          @JsonKey(defaultValue: "") required final String nameEn,
+          @JsonKey(defaultValue: "") required final String descriptionRu,
+          @JsonKey(defaultValue: "") required final String descriptionUz,
+          @JsonKey(defaultValue: "") required final String descriptionEn,
+          @JsonKey(defaultValue: 0) required final int startMinute,
+          @JsonKey(defaultValue: 0) required final int reservedAmount,
+          @JsonKey(defaultValue: 0) required final int activateCount,
+          @JsonKey(defaultValue: 0) required final int price,
+          @JsonKey(defaultValue: 0) required final int startPrice,
+          @JsonKey(defaultValue: 0) required final int pricePerMinute,
+          @JsonKey(defaultValue: 0) required final int pausePricePerMinute}) =
+      _$TarifModelImpl;
+  _TarifModel._() : super._();
 
-  factory _TarifModel.fromJson(Map<String, dynamic> json) = _$TarifModelImpl.fromJson;
+  factory _TarifModel.fromJson(Map<String, dynamic> json) =
+      _$TarifModelImpl.fromJson;
 
   @override
   int get id;
@@ -455,5 +476,6 @@ abstract class _TarifModel implements TarifModel {
   int get pausePricePerMinute;
   @override
   @JsonKey(ignore: true)
-  _$$TarifModelImplCopyWith<_$TarifModelImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$TarifModelImplCopyWith<_$TarifModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

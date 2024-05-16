@@ -112,7 +112,7 @@ class GetCodePage extends HookConsumerWidget {
     } else {
       showErrorDialog(
         context,
-        failure: const Failure.local('Неверный формат номера телефона'),
+        failure: Failure.local(context.l10n.wrongTypeNumber),
       );
     }
   }

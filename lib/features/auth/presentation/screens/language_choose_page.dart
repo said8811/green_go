@@ -27,7 +27,7 @@ class LanguageChoosePage extends ConsumerWidget {
         children: [
           const Spacer(),
           Text(
-            "Для удобного использования приложения, выберите язык",
+            context.l10n.chooseLanguageDialog,
             style: context.textTheme.bodyMedium?.copyWith(fontSize: 18),
             textAlign: TextAlign.center,
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_go/features/core/application/helper_functions.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/helpers/modal_helper.dart';
 import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
@@ -23,21 +23,17 @@ class TransportActionsView extends HookConsumerWidget {
     final textTheme = context.textTheme;
     final state = ref.watch(ridesNotifierProvider);
     final timer = ref.watch(timerNotifierProvider);
-    final pricePerMin = useState(0);
 
-    useEffect(() {
-      if (state.rides.isNotEmpty) {
-        ref.read(timerNotifierProvider.notifier).getTime(DateTime.parse(state.rides[0].startAt).toLocal());
-        pricePerMin.value = timer ~/ 60;
-      }
-      return;
-    });
+    useEffectWithScheduler(
+      action: () {
+        if (state.rides.isNotEmpty) {
+          Future.microtask(() => ref
+              .read(timerNotifierProvider.notifier)
+              .getTime(DateTime.parse(state.rides[0].startAt).toLocal(), state));
+        }
+      },
+    );
 
-    ref.listen(timerNotifierProvider, (previous, next) {
-      if (next % 60 == 0) {
-        pricePerMin.value = next ~/ 60;
-      }
-    });
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (previous?.error == null && next.error != null) {
         showErrorDialog(context, failure: next.error)
@@ -56,14 +52,13 @@ class TransportActionsView extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      context.l10n
-                          .productPrice(kPriceFormatter.format(state.rides[0].pricePerMinute * pricePerMin.value)),
+                      context.l10n.productPrice(kPriceFormatter.format(timer.price)),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      getTime(timer),
+                      getTime(timer.time),
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 16,
                       ),

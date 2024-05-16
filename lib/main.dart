@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:green_go/bootstrap.dart';
 import 'package:green_go/services/localization/shared/providers.dart';
 import 'package:green_go/services/router/app_router.dart';
@@ -8,6 +9,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'services/localization/l10n/l10n.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   bootstrap(() => const MyApp());
 }
 

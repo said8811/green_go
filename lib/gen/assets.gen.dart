@@ -398,9 +398,6 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/appLogo.png
-  AssetGenImage get appLogo => const AssetGenImage('assets/images/appLogo.png');
-
   /// File path: assets/images/bicyle.png
   AssetGenImage get bicyle => const AssetGenImage('assets/images/bicyle.png');
 
@@ -455,7 +452,6 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        appLogo,
         bicyle,
         bike,
         bikey,

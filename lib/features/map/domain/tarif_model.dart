@@ -7,6 +7,7 @@ part 'tarif_model.g.dart';
 
 @freezed
 class TarifModel with _$TarifModel {
+  const TarifModel._();
   factory TarifModel({
     required int id,
     @JsonKey(defaultValue: "") required String nameRu,

@@ -23,20 +23,14 @@ class HistoryWidget extends HookConsumerWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {
-          context.pushNamed(AppRoute.singleRideHistory.routePathNoSlash,
-              extra: ride);
+          context.pushNamed(AppRoute.singleRideHistory.routePathNoSlash, extra: ride);
         },
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 2,
-                    offset: const Offset(4, 2),
-                    color: context.colorScheme.grey)
-              ]),
+              boxShadow: [BoxShadow(blurRadius: 2, offset: const Offset(4, 2), color: context.colorScheme.grey)]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -44,21 +38,19 @@ class HistoryWidget extends HookConsumerWidget {
                 children: [
                   CommonSvgPicture(Assets.icons.bike),
                   const Gap(10),
-                  Text(ride.tariff?.nameRu ?? ""),
+                  Text(ride.tariff?.getTitle(context.l10n.localeName) ?? ""),
                   const Spacer(),
-                  Text(DateFormat("HH:mm", "tr_TR")
-                      .format(DateTime.parse(ride.startAt))),
+                  Text(DateFormat("HH:mm", "tr_TR").format(DateTime.parse(ride.startAt))),
                 ],
               ),
               const Gap(30),
               if (ride.finishedAt.isNotEmpty)
                 Text(
-                    '${context.l10n.duration} ${DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inHours} soat ${(DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inMinutes > 60) ? DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inMinutes % 60 : DateTime.parse(ride.finishedAt).difference((DateTime.parse(ride.startAt))).inMinutes} daqiqa'),
+                    '${context.l10n.duration} ${context.l10n.fromToDate(ride.ridingTime ~/ 60, ride.ridingTime % 60)}'),
               const Gap(20),
               Text(
                 "${context.l10n.totalPrice}: ${context.l10n.productPrice(kPriceFormatter.format(ride.total))}",
-                style: context.textTheme.bodyMedium
-                    ?.copyWith(color: context.colorScheme.primary),
+                style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.primary),
               )
             ],
           ),

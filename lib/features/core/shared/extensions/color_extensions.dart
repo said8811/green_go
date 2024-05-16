@@ -8,5 +8,5 @@ extension ColorExtension on Color {
     return Color.fromARGB(alpha, (red * value).round(), (green * value).round(), (blue * value).round());
   }
 
-  MaterialStateProperty<Color> get materialStateColor => MaterialStateProperty.resolveWith<Color>((_) => this);
+  WidgetStateProperty<Color> get materialStateColor => WidgetStateProperty.resolveWith<Color>((_) => this);
 }

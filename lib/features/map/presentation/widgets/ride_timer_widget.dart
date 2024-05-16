@@ -41,7 +41,7 @@ class RideTimerWidget extends ConsumerWidget {
                   child: CommonSvgPicture(Assets.icons.selectedBike),
                 ),
                 const Gap(10),
-                Text(getTime(ref.watch(timerNotifierProvider)))
+                Text(getTime(ref.watch(timerNotifierProvider).time))
               ],
             ),
           ),

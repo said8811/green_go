@@ -100,15 +100,14 @@ class PersonalDetailsForm extends HookConsumerWidget {
                       checkColor: context.colorScheme.surface,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
+                  Expanded(
                     child: RichText(
                       text: TextSpan(
                         text: context.l10n.agreeAndAccept,
                         style: context.textTheme.bodySmall,
                         children: [
                           TextSpan(
-                            text: context.l10n.publicOffer,
+                            text: " ${context.l10n.publicOffer}",
                             style: context.textTheme.bodySmall!.copyWith(
                               decoration: TextDecoration.underline,
                               color: Colors.blue,

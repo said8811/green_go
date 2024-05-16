@@ -13,6 +13,7 @@ import '../../../../services/location/shared/providers.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/helpers/modal_helper.dart';
 import '../../../core/presentation/helpers/ui_utils.dart';
+import '../../../core/presentation/widgets/cached_image.dart';
 import '../../../core/presentation/widgets/common_svg_picture.dart';
 import '../../../splash/shared/providers.dart';
 import '../../shared/providers.dart';
@@ -78,7 +79,15 @@ class TransportBookWidget extends HookConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey),
                       ),
-                      child: Assets.images.bikey.image(width: 70),
+                      child: state.transport!.image.isEmpty
+                          ? Assets.images.examplePic1.image(width: 90)
+                          : CachedImage(
+                              state.transport!.image,
+                              width: 70,
+                              usePlaceHolder: true,
+                              placeHolderWidth: 70,
+                              placeHolderHeight: 70,
+                            ),
                     ),
                     const Gap(14),
                     Column(

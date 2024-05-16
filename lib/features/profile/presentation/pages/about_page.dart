@@ -23,12 +23,17 @@ class AboutPage extends ConsumerWidget {
       body: SafeArea(
           child: Column(
         children: [
-          CommonSvgPicture(Assets.icons.logo),
+          const Gap(20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 80),
+            child: Assets.images.logo.image(
+              fit: BoxFit.cover,
+            ),
+          ),
           const Gap(40),
           Text(
-            "Versiya 1.0.0",
-            style: context.textTheme.labelSmall
-                ?.copyWith(color: context.colorScheme.greyDark, fontSize: 14),
+            l10n.versionDialog,
+            style: context.textTheme.labelSmall?.copyWith(color: context.colorScheme.greyDark, fontSize: 14),
           ),
           const Divider(),
           ListTile(
@@ -58,9 +63,7 @@ class AboutPage extends ConsumerWidget {
             padding: const EdgeInsets.all(20),
             child: Row(
               children: [
-                Expanded(
-                    child: PrimaryButton(
-                        title: "Dasturga baho berish", onPress: () {})),
+                Expanded(child: PrimaryButton(title: context.l10n.rateTheProgram, onPress: () {})),
               ],
             ),
           )
