@@ -22,10 +22,10 @@ _$RideModelImpl _$$RideModelImplFromJson(Map<String, dynamic> json) =>
       tariff: json['tariff'] == null
           ? null
           : TarifModel.fromJson(json['tariff'] as Map<String, dynamic>),
-      startAt: json['startAt'] as String? ?? '',
-      finishedAt: json['finishedAt'] as String? ?? '',
+      startAt: JsonHelpers.stringToDateTime(json['startAt']),
+      finishedAt: JsonHelpers.stringToDateTime(json['finishedAt']),
       image: json['image'] as String? ?? '',
-      pouseTime: json['pouseTime'] as int? ?? 0,
+      pauseTime: json['pauseTime'] as int? ?? 0,
       status: json['status'] as int? ?? 0,
       ridingTime: json['ridingTime'] as int? ?? 0,
       pause: json['pause'] == null
@@ -50,10 +50,10 @@ Map<String, dynamic> _$$RideModelImplToJson(_$RideModelImpl instance) =>
       'startPoint': instance.startPoint,
       'endPoint': instance.endPoint,
       'tariff': instance.tariff,
-      'startAt': instance.startAt,
-      'finishedAt': instance.finishedAt,
+      'startAt': instance.startAt?.toIso8601String(),
+      'finishedAt': instance.finishedAt?.toIso8601String(),
       'image': instance.image,
-      'pouseTime': instance.pouseTime,
+      'pauseTime': instance.pauseTime,
       'status': instance.status,
       'ridingTime': instance.ridingTime,
       'pause': instance.pause,

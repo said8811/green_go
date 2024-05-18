@@ -40,11 +40,11 @@ class HistoryWidget extends HookConsumerWidget {
                   const Gap(10),
                   Text(ride.tariff?.getTitle(context.l10n.localeName) ?? ""),
                   const Spacer(),
-                  Text(DateFormat("HH:mm", "tr_TR").format(DateTime.parse(ride.startAt))),
+                  Text(DateFormat("HH:mm", "tr_TR").format(ride.startAt ?? DateTime.now())),
                 ],
               ),
               const Gap(30),
-              if (ride.finishedAt.isNotEmpty)
+              if (ride.finishedAt != null)
                 Text(
                     '${context.l10n.duration} ${context.l10n.fromToDate(ride.ridingTime ~/ 60, ride.ridingTime % 60)}'),
               const Gap(20),

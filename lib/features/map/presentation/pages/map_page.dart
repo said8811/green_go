@@ -67,6 +67,16 @@ class _MapPageState extends ConsumerState<MapPage> {
               polygon,
               fillColor: Colors.red.withOpacity(0.2),
               strokeColor: Colors.red,
+              onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Center(child: Text(context.l10n.prohibitedArea)),
+                behavior: SnackBarBehavior.floating,
+                duration: const Duration(seconds: 2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height - (Platform.isAndroid ? 100 : 150), right: 50, left: 50),
+              )),
             ));
       }
       for (var cat in data.data!.categories) {
@@ -207,13 +217,14 @@ class _MapPageState extends ConsumerState<MapPage> {
                   child: Center(
                     child: Row(
                       children: [
-                        Text(
-                          "Соединенные",
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: context.colorScheme.surface,
+                        Expanded(
+                          child: Text(
+                            "Соединенные",
+                            style: context.textTheme.bodyMedium?.copyWith(
+                              color: context.colorScheme.surface,
+                            ),
                           ),
                         ),
-                        const Spacer(),
                         SizedBox(
                           width: 30,
                           height: 30,
@@ -288,7 +299,12 @@ class _MapPageState extends ConsumerState<MapPage> {
     setState(() {});
   }
 
-  PolygonMapObject getPolygon(List<CordinateModel> polygons, {required Color fillColor, required Color strokeColor}) {
+  PolygonMapObject getPolygon(
+    List<CordinateModel> polygons, {
+    required Color fillColor,
+    required Color strokeColor,
+    VoidCallback? onTap,
+  }) {
     return PolygonMapObject(
       mapId: MapObjectId('polygon_${UniqueKey().toString()}'),
       fillColor: fillColor,
@@ -299,6 +315,10 @@ class _MapPageState extends ConsumerState<MapPage> {
         ),
         innerRings: const [],
       ),
+      onTap: (mapObject, point) {
+        onTap?.call();
+        return;
+      },
     );
   }
 

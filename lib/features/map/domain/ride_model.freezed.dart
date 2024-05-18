@@ -35,14 +35,14 @@ mixin _$RideModel {
   LatLongModel get startPoint => throw _privateConstructorUsedError;
   LatLongModel get endPoint => throw _privateConstructorUsedError;
   TarifModel? get tariff => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: "")
-  String get startAt => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: "")
-  String get finishedAt => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+  DateTime? get startAt => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+  DateTime? get finishedAt => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
   String get image => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 0)
-  int get pouseTime => throw _privateConstructorUsedError;
+  int get pauseTime => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 0)
   int get status => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 0)
@@ -76,10 +76,10 @@ abstract class $RideModelCopyWith<$Res> {
       LatLongModel startPoint,
       LatLongModel endPoint,
       TarifModel? tariff,
-      @JsonKey(defaultValue: "") String startAt,
-      @JsonKey(defaultValue: "") String finishedAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? startAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? finishedAt,
       @JsonKey(defaultValue: "") String image,
-      @JsonKey(defaultValue: 0) int pouseTime,
+      @JsonKey(defaultValue: 0) int pauseTime,
       @JsonKey(defaultValue: 0) int status,
       @JsonKey(defaultValue: 0) int ridingTime,
       PauseModel? pause,
@@ -117,10 +117,10 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
     Object? startPoint = null,
     Object? endPoint = null,
     Object? tariff = freezed,
-    Object? startAt = null,
-    Object? finishedAt = null,
+    Object? startAt = freezed,
+    Object? finishedAt = freezed,
     Object? image = null,
-    Object? pouseTime = null,
+    Object? pauseTime = null,
     Object? status = null,
     Object? ridingTime = null,
     Object? pause = freezed,
@@ -172,21 +172,21 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
           ? _value.tariff
           : tariff // ignore: cast_nullable_to_non_nullable
               as TarifModel?,
-      startAt: null == startAt
+      startAt: freezed == startAt
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      finishedAt: null == finishedAt
+              as DateTime?,
+      finishedAt: freezed == finishedAt
           ? _value.finishedAt
           : finishedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      pouseTime: null == pouseTime
-          ? _value.pouseTime
-          : pouseTime // ignore: cast_nullable_to_non_nullable
+      pauseTime: null == pauseTime
+          ? _value.pauseTime
+          : pauseTime // ignore: cast_nullable_to_non_nullable
               as int,
       status: null == status
           ? _value.status
@@ -272,10 +272,10 @@ abstract class _$$RideModelImplCopyWith<$Res>
       LatLongModel startPoint,
       LatLongModel endPoint,
       TarifModel? tariff,
-      @JsonKey(defaultValue: "") String startAt,
-      @JsonKey(defaultValue: "") String finishedAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? startAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? finishedAt,
       @JsonKey(defaultValue: "") String image,
-      @JsonKey(defaultValue: 0) int pouseTime,
+      @JsonKey(defaultValue: 0) int pauseTime,
       @JsonKey(defaultValue: 0) int status,
       @JsonKey(defaultValue: 0) int ridingTime,
       PauseModel? pause,
@@ -315,10 +315,10 @@ class __$$RideModelImplCopyWithImpl<$Res>
     Object? startPoint = null,
     Object? endPoint = null,
     Object? tariff = freezed,
-    Object? startAt = null,
-    Object? finishedAt = null,
+    Object? startAt = freezed,
+    Object? finishedAt = freezed,
     Object? image = null,
-    Object? pouseTime = null,
+    Object? pauseTime = null,
     Object? status = null,
     Object? ridingTime = null,
     Object? pause = freezed,
@@ -370,21 +370,21 @@ class __$$RideModelImplCopyWithImpl<$Res>
           ? _value.tariff
           : tariff // ignore: cast_nullable_to_non_nullable
               as TarifModel?,
-      startAt: null == startAt
+      startAt: freezed == startAt
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      finishedAt: null == finishedAt
+              as DateTime?,
+      finishedAt: freezed == finishedAt
           ? _value.finishedAt
           : finishedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      pouseTime: null == pouseTime
-          ? _value.pouseTime
-          : pouseTime // ignore: cast_nullable_to_non_nullable
+      pauseTime: null == pauseTime
+          ? _value.pauseTime
+          : pauseTime // ignore: cast_nullable_to_non_nullable
               as int,
       status: null == status
           ? _value.status
@@ -426,10 +426,10 @@ class _$RideModelImpl implements _RideModel {
       required this.startPoint,
       required this.endPoint,
       required this.tariff,
-      @JsonKey(defaultValue: "") required this.startAt,
-      @JsonKey(defaultValue: "") required this.finishedAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) this.startAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) this.finishedAt,
       @JsonKey(defaultValue: "") required this.image,
-      @JsonKey(defaultValue: 0) required this.pouseTime,
+      @JsonKey(defaultValue: 0) required this.pauseTime,
       @JsonKey(defaultValue: 0) required this.status,
       @JsonKey(defaultValue: 0) required this.ridingTime,
       required this.pause,
@@ -469,17 +469,17 @@ class _$RideModelImpl implements _RideModel {
   @override
   final TarifModel? tariff;
   @override
-  @JsonKey(defaultValue: "")
-  final String startAt;
+  @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+  final DateTime? startAt;
   @override
-  @JsonKey(defaultValue: "")
-  final String finishedAt;
+  @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+  final DateTime? finishedAt;
   @override
   @JsonKey(defaultValue: "")
   final String image;
   @override
   @JsonKey(defaultValue: 0)
-  final int pouseTime;
+  final int pauseTime;
   @override
   @JsonKey(defaultValue: 0)
   final int status;
@@ -502,7 +502,7 @@ class _$RideModelImpl implements _RideModel {
 
   @override
   String toString() {
-    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, image: $image, pouseTime: $pouseTime, status: $status, ridingTime: $ridingTime, pause: $pause, total: $total, coordinates: $coordinates)';
+    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, image: $image, pauseTime: $pauseTime, status: $status, ridingTime: $ridingTime, pause: $pause, total: $total, coordinates: $coordinates)';
   }
 
   @override
@@ -532,8 +532,8 @@ class _$RideModelImpl implements _RideModel {
             (identical(other.finishedAt, finishedAt) ||
                 other.finishedAt == finishedAt) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.pouseTime, pouseTime) ||
-                other.pouseTime == pouseTime) &&
+            (identical(other.pauseTime, pauseTime) ||
+                other.pauseTime == pauseTime) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.ridingTime, ridingTime) ||
                 other.ridingTime == ridingTime) &&
@@ -561,7 +561,7 @@ class _$RideModelImpl implements _RideModel {
         startAt,
         finishedAt,
         image,
-        pouseTime,
+        pauseTime,
         status,
         ridingTime,
         pause,
@@ -599,10 +599,11 @@ abstract class _RideModel implements RideModel {
       required final LatLongModel startPoint,
       required final LatLongModel endPoint,
       required final TarifModel? tariff,
-      @JsonKey(defaultValue: "") required final String startAt,
-      @JsonKey(defaultValue: "") required final String finishedAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime) final DateTime? startAt,
+      @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+      final DateTime? finishedAt,
       @JsonKey(defaultValue: "") required final String image,
-      @JsonKey(defaultValue: 0) required final int pouseTime,
+      @JsonKey(defaultValue: 0) required final int pauseTime,
       @JsonKey(defaultValue: 0) required final int status,
       @JsonKey(defaultValue: 0) required final int ridingTime,
       required final PauseModel? pause,
@@ -641,17 +642,17 @@ abstract class _RideModel implements RideModel {
   @override
   TarifModel? get tariff;
   @override
-  @JsonKey(defaultValue: "")
-  String get startAt;
+  @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+  DateTime? get startAt;
   @override
-  @JsonKey(defaultValue: "")
-  String get finishedAt;
+  @JsonKey(fromJson: JsonHelpers.stringToDateTime)
+  DateTime? get finishedAt;
   @override
   @JsonKey(defaultValue: "")
   String get image;
   @override
   @JsonKey(defaultValue: 0)
-  int get pouseTime;
+  int get pauseTime;
   @override
   @JsonKey(defaultValue: 0)
   int get status;

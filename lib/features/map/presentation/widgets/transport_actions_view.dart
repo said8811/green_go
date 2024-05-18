@@ -30,10 +30,10 @@ class TransportActionsView extends HookConsumerWidget {
       action: () {
         if (state.rides.isNotEmpty) {
           Future.microtask(() {
-            ref.read(timerNotifierProvider.notifier).getTime(DateTime.parse(state.rides[0].startAt).toLocal());
+            ref.read(timerNotifierProvider.notifier).getTime((state.rides[0].startAt ?? DateTime.now()).toLocal());
             ref
                 .read(priceNotifierProvider.notifier)
-                .setInitialPrice(DateTime.parse(state.rides[0].startAt).toLocal(), state);
+                .setInitialPrice((state.rides[0].startAt ?? DateTime.now()).toLocal(), state);
           });
         }
       },
