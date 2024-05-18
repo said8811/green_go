@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
+import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/profile/presentation/widgets/history_widget.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
@@ -91,7 +92,22 @@ class HistoryPage extends HookConsumerWidget {
                       },
                       child: ListView.separated(
                           itemBuilder: (context, index) {
-                            return HistoryWidget(ride: rides.rides[index]);
+                            final date = rides.rides[index].startAt;
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (index == 0 || date?.day != rides.rides[index - 1].startAt?.day)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    child: Text(
+                                      kDateFormatter.format(date ?? DateTime.now()).toString(),
+                                      style:
+                                          context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.greyDark),
+                                    ),
+                                  ),
+                                HistoryWidget(ride: rides.rides[index]),
+                              ],
+                            );
                           },
                           separatorBuilder: (_, __) => const Gap(20),
                           itemCount: rides.rides.length),

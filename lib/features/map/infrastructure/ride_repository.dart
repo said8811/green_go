@@ -92,7 +92,7 @@ class RideRepository {
       'rideId': rideId,
       'latitude': latitude,
       'longitude': longitude,
-      // 'image_file': await MultipartFile.fromFile(imgPath)
+      'image_file': await MultipartFile.fromFile(imgPath)
     });
     try {
       final Response response = await _dio.post("/finish/", data: formData);
