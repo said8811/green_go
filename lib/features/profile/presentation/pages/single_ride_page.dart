@@ -40,7 +40,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
     final image = ref.watch(mapImageProvider);
     return Scaffold(
       appBar: CommonAppBar(
-        title: widget.ride.tariff?.nameRu,
+        title: widget.ride.tariff?.getTitle(context.l10n.localeName),
       ),
       body: SingleChildScrollView(
         child: Padding(

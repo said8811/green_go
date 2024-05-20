@@ -17,6 +17,7 @@ class ExpandedTarifWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     return tarif != null
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +30,7 @@ class ExpandedTarifWidget extends ConsumerWidget {
                   offset: const Offset(-10, 0),
                   child: Center(
                     child: Text(
-                      tarif!.getTitle(context.l10n.localeName),
+                      tarif!.getTitle(l10n.localeName),
                       style: context.textTheme.bodyMedium,
                     ),
                   ),
@@ -42,11 +43,11 @@ class ExpandedTarifWidget extends ConsumerWidget {
                     : null,
               ),
               const Gap(10),
-              if (tarif!.descriptionRu.isNotEmpty)
+              if (tarif!.getDescription(l10n.localeName).isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    tarif!.descriptionRu,
+                    tarif!.getDescription(l10n.localeName),
                     style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -57,12 +58,12 @@ class ExpandedTarifWidget extends ConsumerWidget {
                 child: Row(
                   children: [
                     Text(
-                      context.l10n.startPrice,
+                      l10n.startPrice,
                       style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
                     ),
                     const Spacer(),
                     Text(
-                      context.l10n.productPrice(kPriceFormatter.format(tarif!.startPrice)),
+                      l10n.productPrice(kPriceFormatter.format(tarif!.startPrice)),
                       style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
                     ),
                   ],
@@ -74,12 +75,12 @@ class ExpandedTarifWidget extends ConsumerWidget {
                 child: Row(
                   children: [
                     Text(
-                      context.l10n.perMinute,
+                      l10n.perMinute,
                       style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
                     ),
                     const Spacer(),
                     Text(
-                      context.l10n.productPrice(kPriceFormatter.format(tarif!.pricePerMinute)),
+                      l10n.productPrice(kPriceFormatter.format(tarif!.pricePerMinute)),
                       style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
                     ),
                   ],
@@ -91,12 +92,12 @@ class ExpandedTarifWidget extends ConsumerWidget {
                 child: Row(
                   children: [
                     Text(
-                      context.l10n.pousePricePerMinute,
+                      l10n.pousePricePerMinute,
                       style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
                     ),
                     const Spacer(),
                     Text(
-                      context.l10n.productPrice(kPriceFormatter.format(tarif!.pausePricePerMinute)),
+                      l10n.productPrice(kPriceFormatter.format(tarif!.pausePricePerMinute)),
                       style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
                     ),
                   ],

@@ -9,6 +9,7 @@ part 'qa_category_model.g.dart';
 
 @freezed
 class QACategoryModel with _$QACategoryModel {
+  const QACategoryModel._();
   factory QACategoryModel({
     required String nameRu,
     required String nameUz,
@@ -16,6 +17,18 @@ class QACategoryModel with _$QACategoryModel {
     @JsonKey(defaultValue: []) required List<AnswerModel> answers,
   }) = _QACategoryModel;
 
-  factory QACategoryModel.fromJson(Map<String, dynamic> json) =>
-      _$QACategoryModelFromJson(json);
+  factory QACategoryModel.fromJson(Map<String, dynamic> json) => _$QACategoryModelFromJson(json);
+
+  String getTitle(String languageCode) {
+    switch (languageCode) {
+      case 'ru':
+        return nameRu;
+      case 'uz':
+        return nameUz;
+      case 'en':
+        return nameEn;
+      default:
+        return nameRu;
+    }
+  }
 }

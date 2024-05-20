@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/auth/shared/providers.dart';
-import 'package:green_go/features/core/application/helper_functions.dart';
 import 'package:green_go/features/core/presentation/widgets/common_svg_picture.dart';
 
 import 'package:green_go/features/map/shared/providers.dart';
@@ -12,24 +13,47 @@ import 'package:green_go/services/router/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-class SplashPage extends HookConsumerWidget {
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    Future<void> getCurrentPosition() async {
-      await ref.read(locationStateProvider.notifier).getCurrentPosition();
-    }
+  ConsumerState<SplashPage> createState() => _SplashPageState();
+}
 
-    useEffectWithScheduler(action: () async {
-      await getCurrentPosition().then((value) => ref.read(referenceNotifierProvider.notifier).getData());
-    });
+class _SplashPageState extends ConsumerState<SplashPage> {
+  Timer? _timer;
 
+  Future<void> getCurrentPosition() async {
+    await ref
+        .read(locationStateProvider.notifier)
+        .getCurrentPosition()
+        .then((s) => ref.read(referenceNotifierProvider.notifier).getData());
+  }
+
+  @override
+  void initState() {
+    Future.microtask(
+      () async {
+        await getCurrentPosition().then((v) {
+          _timer = Timer.periodic(const Duration(seconds: 10), (t) {
+            if (context.mounted) {
+              ref.read(referenceNotifierProvider.notifier).getData();
+            }
+          });
+        });
+      },
+    );
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.listen(referenceNotifierProvider, (previous, next) async {
       if (next.error != null) {
         ref.read(authNotifierProvider.notifier).signOut();
       }
-      if (previous?.data == null && next.data != null) {
+      if (next.data != null) {
         ref.read(mapNotifierProvider.notifier).addMainObjects(
               PolygonMapObject(
                 mapId: const MapObjectId('polygon_earth'),
@@ -49,7 +73,7 @@ class SplashPage extends HookConsumerWidget {
                 onTap: (PolygonMapObject self, Point point) {},
               ),
             );
-        await Future.delayed(const Duration(seconds: 1)).then((value) => context.go(AppRoute.map.routePathWithSlash));
+        context.go(AppRoute.map.routePathWithSlash);
       }
     });
 
@@ -76,5 +100,11 @@ class SplashPage extends HookConsumerWidget {
               Assets.icons.splashText,
               size: 35,
             )));
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

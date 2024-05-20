@@ -66,7 +66,7 @@ class RidesNotifier extends StateNotifier<RidesState> {
                           : RideAction.stop,
                 ));
       } else {
-        final status = data.rides[0].status;
+        final status = data.rides.isEmpty ? 0 : data.rides[0].status;
         state = state.copyWith(
           rides: data.rides,
           isLoading: false,

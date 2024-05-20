@@ -39,4 +39,17 @@ class TarifModel with _$TarifModel {
         return nameRu;
     }
   }
+
+  String getDescription(String languageCode) {
+    switch (languageCode) {
+      case 'ru':
+        return descriptionRu;
+      case 'uz':
+        return descriptionUz;
+      case 'en':
+        return descriptionEn;
+      default:
+        return descriptionRu;
+    }
+  }
 }

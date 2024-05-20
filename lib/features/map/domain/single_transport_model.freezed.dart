@@ -238,7 +238,7 @@ class __$$SingleTransportModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SingleTransportModelImpl implements _SingleTransportModel {
+class _$SingleTransportModelImpl extends _SingleTransportModel {
   _$SingleTransportModelImpl(
       {required this.id,
       @JsonKey(defaultValue: "") required this.image,
@@ -250,7 +250,8 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
       required final List<TarifModel> tariffs,
       @JsonKey(defaultValue: 0.0) required this.distance,
       required this.book})
-      : _tariffs = tariffs;
+      : _tariffs = tariffs,
+        super._();
 
   factory _$SingleTransportModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SingleTransportModelImplFromJson(json);
@@ -341,7 +342,7 @@ class _$SingleTransportModelImpl implements _SingleTransportModel {
   }
 }
 
-abstract class _SingleTransportModel implements SingleTransportModel {
+abstract class _SingleTransportModel extends SingleTransportModel {
   factory _SingleTransportModel(
       {required final int id,
       @JsonKey(defaultValue: "") required final String image,
@@ -353,6 +354,7 @@ abstract class _SingleTransportModel implements SingleTransportModel {
       required final List<TarifModel> tariffs,
       @JsonKey(defaultValue: 0.0) required final double distance,
       required final BookModel? book}) = _$SingleTransportModelImpl;
+  _SingleTransportModel._() : super._();
 
   factory _SingleTransportModel.fromJson(Map<String, dynamic> json) =
       _$SingleTransportModelImpl.fromJson;

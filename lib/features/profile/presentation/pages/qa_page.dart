@@ -7,6 +7,7 @@ import 'package:green_go/features/core/presentation/components/loading_widget.da
 import 'package:green_go/features/core/presentation/widgets/common_expandable_panel.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/profile/shared/providers.dart';
+import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QAPage extends ConsumerWidget {
@@ -30,7 +31,7 @@ class QAPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data[index].nameRu,
+                        data[index].getTitle(context.l10n.localeName),
                         style: context.textTheme.bodyLarge,
                       ),
                       ...data[index].answers.map((e) => Container(
@@ -40,20 +41,18 @@ class QAPage extends ConsumerWidget {
                               color: context.colorScheme.grey.withOpacity(0.5),
                             ),
                             child: CommonExpandablePanel(
-                              title: e.nameRu,
+                              title: e.getTitle(context.l10n.localeName),
                               childPadded: false,
                               child: Padding(
                                   padding: const EdgeInsets.all(20),
-                                  child: Text(e.descriptionRu)),
+                                  child: Text(e.getDesctiption(context.l10n.localeName))),
                             ),
                           ))
                     ],
                   );
                 }),
-            error: (e, s) => ErrorWithRetry(
-                failure: e as Failure,
-                retry: () =>
-                    ref.read(qaNotifierProvider.notifier).getAnswers()),
+            error: (e, s) =>
+                ErrorWithRetry(failure: e as Failure, retry: () => ref.read(qaNotifierProvider.notifier).getAnswers()),
             loading: () => const LoadingWidget()));
   }
 }

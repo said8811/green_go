@@ -163,14 +163,15 @@ class __$$AnswerModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AnswerModelImpl implements _AnswerModel {
+class _$AnswerModelImpl extends _AnswerModel {
   _$AnswerModelImpl(
       {required this.nameRu,
       required this.nameUz,
       required this.nameEn,
       required this.descriptionRu,
       required this.descriptionUz,
-      required this.descriptionEn});
+      required this.descriptionEn})
+      : super._();
 
   factory _$AnswerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AnswerModelImplFromJson(json);
@@ -228,7 +229,7 @@ class _$AnswerModelImpl implements _AnswerModel {
   }
 }
 
-abstract class _AnswerModel implements AnswerModel {
+abstract class _AnswerModel extends AnswerModel {
   factory _AnswerModel(
       {required final String nameRu,
       required final String nameUz,
@@ -236,6 +237,7 @@ abstract class _AnswerModel implements AnswerModel {
       required final String descriptionRu,
       required final String descriptionUz,
       required final String descriptionEn}) = _$AnswerModelImpl;
+  _AnswerModel._() : super._();
 
   factory _AnswerModel.fromJson(Map<String, dynamic> json) =
       _$AnswerModelImpl.fromJson;

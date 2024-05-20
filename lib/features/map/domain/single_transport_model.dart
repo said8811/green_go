@@ -9,6 +9,7 @@ part 'single_transport_model.g.dart';
 
 @freezed
 class SingleTransportModel with _$SingleTransportModel {
+  const SingleTransportModel._();
   factory SingleTransportModel({
     required int id,
     @JsonKey(defaultValue: "") required String image,
@@ -23,4 +24,17 @@ class SingleTransportModel with _$SingleTransportModel {
   }) = _SingleTransportModel;
 
   factory SingleTransportModel.fromJson(Map<String, dynamic> json) => _$SingleTransportModelFromJson(json);
+
+  String getTitle(String languageCode) {
+    switch (languageCode) {
+      case 'ru':
+        return nameRu;
+      case 'uz':
+        return nameUz;
+      case 'en':
+        return nameEn;
+      default:
+        return nameRu;
+    }
+  }
 }

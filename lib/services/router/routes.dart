@@ -26,7 +26,6 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
         path: '/',
         name: AppRoute.splash.name,
         pageBuilder: (_, __) => const NoTransitionPage(child: SplashPage()),
-        redirect: (context, state) => ref.watch(authRedirectLogicProvider),
       ),
       GoRoute(
           path: '/map',
@@ -40,7 +39,13 @@ final appRoutesListProvider = Provider<List<RouteBase>>(
         pageBuilder: (_, __) => const NoTransitionPage(
           child: ProfilePage(),
         ),
-        redirect: (_, __) => ref.watch(authRedirectLogicProvider),
+        redirect: (context, state) {
+          final user = ref.read(authNotifierProvider.notifier).user;
+          if (user == null) {
+            return AppRoute.auth.routePathWithSlash;
+          }
+          return null;
+        },
       ),
       GoRoute(
         path: '/balance',

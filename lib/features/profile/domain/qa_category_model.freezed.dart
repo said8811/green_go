@@ -138,13 +138,14 @@ class __$$QACategoryModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$QACategoryModelImpl implements _QACategoryModel {
+class _$QACategoryModelImpl extends _QACategoryModel {
   _$QACategoryModelImpl(
       {required this.nameRu,
       required this.nameUz,
       required this.nameEn,
       @JsonKey(defaultValue: []) required final List<AnswerModel> answers})
-      : _answers = answers;
+      : _answers = answers,
+        super._();
 
   factory _$QACategoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$QACategoryModelImplFromJson(json);
@@ -200,13 +201,14 @@ class _$QACategoryModelImpl implements _QACategoryModel {
   }
 }
 
-abstract class _QACategoryModel implements QACategoryModel {
+abstract class _QACategoryModel extends QACategoryModel {
   factory _QACategoryModel(
       {required final String nameRu,
       required final String nameUz,
       required final String nameEn,
       @JsonKey(defaultValue: [])
       required final List<AnswerModel> answers}) = _$QACategoryModelImpl;
+  _QACategoryModel._() : super._();
 
   factory _QACategoryModel.fromJson(Map<String, dynamic> json) =
       _$QACategoryModelImpl.fromJson;

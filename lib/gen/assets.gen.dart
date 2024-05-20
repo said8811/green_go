@@ -444,8 +444,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/user.jpg
   AssetGenImage get user => const AssetGenImage('assets/images/user.jpg');
 
-  /// File path: assets/images/uzCard.jpeg
-  AssetGenImage get uzCard => const AssetGenImage('assets/images/uzCard.jpeg');
+  /// File path: assets/images/uz-card.png
+  AssetGenImage get uzCard => const AssetGenImage('assets/images/uz-card.png');
 
   /// File path: assets/images/wallet.png
   AssetGenImage get wallet => const AssetGenImage('assets/images/wallet.png');

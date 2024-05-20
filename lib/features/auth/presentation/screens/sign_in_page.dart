@@ -58,7 +58,10 @@ class SignInPage extends HookConsumerWidget {
         resizeToAvoidBottomInset: false,
         appBar: CommonAppBar(
           title: context.l10n.signIn,
-          canPop: false,
+          canPop: activeIndex.value != 0,
+          onBack: () {
+            activeIndex.value = 0;
+          },
         ),
         body: pages[activeIndex.value],
       ),

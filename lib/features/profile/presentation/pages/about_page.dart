@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:green_go/features/core/infrastructure/url_launch_service.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
 import 'package:green_go/features/core/presentation/widgets/common_svg_picture.dart';
@@ -52,9 +53,25 @@ class AboutPage extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CommonSvgPicture(Assets.icons.facebook),
-                CommonSvgPicture(Assets.icons.instagram),
-                CommonSvgPicture(Assets.icons.telegram),
+                GestureDetector(
+                  onTap: () {
+                    UrlLaunchService.launchUrl(
+                        'https://www.facebook.com/profile.php?id=61559966455276&is_tour_dismissed');
+                  },
+                  child: CommonSvgPicture(Assets.icons.facebook),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    UrlLaunchService.launchUrl('https://www.instagram.com/greengosharing?utm_source=qr');
+                  },
+                  child: CommonSvgPicture(Assets.icons.instagram),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    UrlLaunchService.launchUrl('https://t.me/greengo_sharing_bot');
+                  },
+                  child: CommonSvgPicture(Assets.icons.telegram),
+                ),
               ],
             ),
           ),

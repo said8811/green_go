@@ -74,7 +74,7 @@ class _TransportWidgetState extends ConsumerState<TransportWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.transport!.nameRu,
+                          state.transport!.getTitle(context.l10n.localeName),
                           style: context.textTheme.bodyMedium,
                         ),
                         const Gap(10),
