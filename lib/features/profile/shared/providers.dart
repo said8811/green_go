@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:green_go/features/core/shared/providers.dart';
 import 'package:green_go/features/profile/application/add_card_notifier.dart';
 import 'package:green_go/features/profile/application/cards_notifier.dart';
+import 'package:green_go/features/profile/application/image_update_notifier.dart';
 import 'package:green_go/features/profile/application/invoice_notifier.dart';
 import 'package:green_go/features/profile/application/map_image_notifier.dart';
 import 'package:green_go/features/profile/application/notification_notifier.dart';
@@ -70,4 +71,8 @@ final selectedCardProvider = StateNotifierProvider.autoDispose<SelectedCardNotif
 
 final notificationProvider = StateNotifierProvider<NotificationNotifier, bool>((ref) {
   return NotificationNotifier(ref.watch(sharedPrefsProvider));
+});
+
+final imageUpdateProvider = StateNotifierProvider<ImageUpdateNotifier, bool>((ref) {
+  return ImageUpdateNotifier(ref.watch(profileRepositoryProvider));
 });

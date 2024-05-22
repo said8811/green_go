@@ -8,18 +8,18 @@ class ProfileTile extends ConsumerWidget {
   final String icon;
   final VoidCallback onTap;
   final String? subtitle;
+  final Color? iconColor;
   const ProfileTile(
-      {super.key,
-      required this.title,
-      required this.icon,
-      required this.onTap,
-      this.subtitle});
+      {super.key, required this.title, required this.icon, required this.onTap, this.iconColor, this.subtitle});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
       onTap: onTap,
-      leading: CommonSvgPicture(icon),
+      leading: CommonSvgPicture(
+        icon,
+        color: iconColor,
+      ),
       title: Text(
         title,
         style: context.textTheme.labelSmall?.copyWith(fontSize: 16),
@@ -31,8 +31,7 @@ class ProfileTile extends ConsumerWidget {
       subtitle: subtitle != null
           ? Text(
               subtitle!,
-              style: context.textTheme.labelSmall
-                  ?.copyWith(fontSize: 14, color: context.colorScheme.greyDark),
+              style: context.textTheme.labelSmall?.copyWith(fontSize: 14, color: context.colorScheme.greyDark),
             )
           : null,
     );

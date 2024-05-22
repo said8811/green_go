@@ -41,6 +41,14 @@ class HelpTilesView extends ConsumerWidget {
           subtitle: "+998 99 511 73 61",
         ),
         ProfileTile(
+          title: l10n.publicOffer,
+          icon: Assets.icons.documentText,
+          iconColor: context.colorScheme.primary,
+          onTap: () {
+            UrlLaunchService.launchUrl("https://oferta.green-go.uz/");
+          },
+        ),
+        ProfileTile(
           title: l10n.aboutApp,
           icon: Assets.icons.versionInfo,
           onTap: () {

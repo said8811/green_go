@@ -180,7 +180,7 @@
       "price": {}
     }
   },
-  "sumPerMin": "{sum} sum/min",
+  "sumPerMin": "{sum} so'm/min",
   "@sumPerMin": {
   "placeholders": {
       "sum": {}

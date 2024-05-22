@@ -13,6 +13,7 @@ _$ProfileModelImpl _$$ProfileModelImplFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as String,
       balance: JsonHelpers.intToDouble(json['balance']),
       language: json['language'] as String? ?? '',
+      image: json['image'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) =>
       'phone': instance.phone,
       'balance': instance.balance,
       'language': instance.language,
+      'image': instance.image,
     };

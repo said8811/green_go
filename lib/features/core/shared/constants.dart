@@ -7,7 +7,7 @@ const kAnimationDuration = Duration(milliseconds: 200);
 
 const kIsProd = bool.fromEnvironment('dart.vm.product');
 
-const kAppTitle = 'Dafna';
+const kAppTitle = 'Green Go';
 
 const kTokenKey = 'token';
 

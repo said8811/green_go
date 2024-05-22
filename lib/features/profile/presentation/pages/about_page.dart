@@ -36,15 +36,16 @@ class AboutPage extends ConsumerWidget {
             l10n.versionDialog,
             style: context.textTheme.labelSmall?.copyWith(color: context.colorScheme.greyDark, fontSize: 14),
           ),
-          const Divider(),
+          const Divider(height: 0),
           ListTile(
+            onTap: () => UrlLaunchService.launchPhone("+998995117361"),
             leading: CommonSvgPicture(Assets.icons.phone),
             title: Text(
               l10n.callSuport,
               style: textTheme.labelSmall?.copyWith(fontSize: 16),
             ),
           ),
-          const Divider(),
+          const Divider(height: 0),
           const Spacer(),
           Text(l10n.ourSocials),
           const Gap(10),

@@ -81,7 +81,7 @@ class _TransportWidgetState extends ConsumerState<TransportWidget> {
                         Text(
                           state.transport!.distance < 1
                               ? "${state.transport!.distance * 1000} m"
-                              : "${state.transport!.distance} km",
+                              : "${state.transport!.distance.toStringAsFixed(1)} km",
                           style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey, fontSize: 12),
                         )
                       ],

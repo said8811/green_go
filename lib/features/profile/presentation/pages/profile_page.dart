@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:gap/gap.dart';
@@ -6,6 +7,7 @@ import 'package:green_go/features/auth/shared/providers.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
 import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/presentation/widgets/common_svg_picture.dart';
+import 'package:green_go/features/core/shared/constants.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/profile/presentation/widgets/help_tile_view.dart';
 import 'package:green_go/features/profile/presentation/widgets/main_tiles_view.dart';
@@ -14,12 +16,19 @@ import 'package:green_go/gen/assets.gen.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:green_go/services/router/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends ConsumerState<ProfilePage> {
+  final ImagePicker _picker = ImagePicker();
+  @override
+  Widget build(BuildContext context) {
     final textTheme = context.textTheme;
     final state = ref.watch(profileNotifierProvider);
     return Scaffold(
@@ -37,18 +46,77 @@ class ProfilePage extends ConsumerWidget {
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Column(
                       children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          padding: const EdgeInsets.only(top: 70, bottom: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              image: DecorationImage(
-                                image: AssetImage(Assets.images.user.path),
-                                fit: BoxFit.cover,
-                              )),
-                          child: CommonSvgPicture(
-                            Assets.icons.changePhotoIcon,
+                        InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) => Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Expanded(
+                                            child: InkWell(
+                                              onTap: _getFromCamera,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    EvaIcons.cameraOutline,
+                                                    size: 50,
+                                                    color: context.colorScheme.primary,
+                                                  ),
+                                                  const Gap(10),
+                                                  Text(
+                                                    "Camera",
+                                                    style: context.textTheme.bodyMedium,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: InkWell(
+                                              onTap: _getFromGalery,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    EvaIcons.imageOutline,
+                                                    size: 50,
+                                                    color: context.colorScheme.primary,
+                                                  ),
+                                                  const Gap(10),
+                                                  Text(
+                                                    "Galery",
+                                                    style: context.textTheme.bodyMedium,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ));
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            padding: const EdgeInsets.only(top: 70, bottom: 5),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                image: data.image.isEmpty
+                                    ? DecorationImage(
+                                        image: AssetImage(Assets.images.user.path),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : DecorationImage(
+                                        image: NetworkImage("$kCDNUrl/users/${data.image}"),
+                                        fit: BoxFit.cover,
+                                      )),
+                            child: CommonSvgPicture(
+                              Assets.icons.changePhotoIcon,
+                            ),
                           ),
                         ),
                         const Gap(15),
@@ -137,5 +205,33 @@ class ProfilePage extends ConsumerWidget {
                 )),
       ),
     );
+  }
+
+  _getFromCamera() async {
+    final XFile? pickedFile = await _picker.pickImage(
+      maxWidth: 1920,
+      maxHeight: 2000,
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      if (!mounted) return;
+      ref.read(imageUpdateProvider.notifier).setProfileImage(pickedFile.path).then((v) => Navigator.pop(context));
+      if (!mounted) return;
+      setState(() {});
+    }
+  }
+
+  _getFromGalery() async {
+    final XFile? pickedFile = await _picker.pickImage(
+      maxWidth: 1920,
+      maxHeight: 2000,
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      if (!mounted) return;
+      ref.read(imageUpdateProvider.notifier).setProfileImage(pickedFile.path).then((v) => Navigator.pop(context));
+      if (!mounted) return;
+      setState(() {});
+    }
   }
 }

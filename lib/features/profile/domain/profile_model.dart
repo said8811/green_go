@@ -14,8 +14,8 @@ class ProfileModel with _$ProfileModel {
     required String phone,
     @JsonKey(fromJson: JsonHelpers.intToDouble) required double balance,
     @JsonKey(defaultValue: "") required String language,
+    @JsonKey(defaultValue: "") required String image,
   }) = _ProfileModel;
 
-  factory ProfileModel.fromJson(Map<String, dynamic> json) =>
-      _$ProfileModelFromJson(json);
+  factory ProfileModel.fromJson(Map<String, dynamic> json) => _$ProfileModelFromJson(json);
 }

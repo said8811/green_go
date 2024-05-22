@@ -10,6 +10,7 @@ class ProfileNotifier extends StateNotifier<AsyncValue<ProfileModel>> {
 
   Future<void> getProfile() async {
     state = const AsyncLoading();
+    if (!mounted) return;
     final dataOrFailue = await _repository.getProfile();
     state = dataOrFailue.fold(
       (l) => AsyncError(l, StackTrace.current),

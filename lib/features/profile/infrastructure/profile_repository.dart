@@ -12,8 +12,7 @@ class ProfileRepository {
 
   Future<Either<Failure, ProfileModel>> getProfile() async {
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.get("/profile");
+      final Response<Map<String, dynamic>> response = await _dio.get("/profile");
       if (response.statusCode == 200) {
         final data = response.data as Map<String, dynamic>;
         return right(ProfileModel.fromJson(data));
@@ -28,11 +27,9 @@ class ProfileRepository {
     }
   }
 
-  Future<Either<Failure, List<RideModel>>> getHistory(
-      String? from, String? to, int page) async {
+  Future<Either<Failure, List<RideModel>>> getHistory(String? from, String? to, int page) async {
     try {
-      final Response<Map<String, dynamic>> response =
-          await _dio.get("/rides", queryParameters: {
+      final Response<Map<String, dynamic>> response = await _dio.get("/rides", queryParameters: {
         'from': from,
         'to': to,
         'page': page,
@@ -74,8 +71,7 @@ class ProfileRepository {
     }
   }
 
-  Future<Either<Failure, bool>> updateProfile(
-      String name, String language) async {
+  Future<Either<Failure, bool>> updateProfile(String name, String language) async {
     try {
       final Response response = await _dio.post("/update-profile", data: {
         "name": name,
@@ -86,6 +82,29 @@ class ProfileRepository {
         return right(
           true,
         );
+      } else {
+        return left(Failure.server(response.data?[0]['message']));
+      }
+    } on DioException catch (e) {
+      if (e.isConnectionError) {
+        return left(const Failure.noConnection());
+      }
+      return left(Failure.server(e.response?.data['message']));
+    }
+  }
+
+  Future<Either<Failure, bool>> updateProfileImage(String image) async {
+    try {
+      final formData = FormData.fromMap({
+        'image_file': await MultipartFile.fromFile(image),
+      });
+      final Response response = await _dio.post(
+        "/update-profile-image",
+        data: formData,
+      );
+
+      if (response.statusCode == 200) {
+        return right(true);
       } else {
         return left(Failure.server(response.data?[0]['message']));
       }

@@ -1,13 +1,14 @@
 import 'dart:async';
 
 // import 'package:dio/dio.dart';
+import 'package:background_location_tracker/background_location_tracker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../features/core/domain/location_model.dart';
+import '../../../features/core/shared/constants.dart';
 
 class LocationService {
-  // final Dio _dio;
   LocationService();
 
   Future<Position?> getCurrentPosition() async {
@@ -17,13 +18,6 @@ class LocationService {
       desiredAccuracy: LocationAccuracy.high,
     );
   }
-
-  // Future<void> startLocationTrack() async {
-  //   final latLong = await getCurrentPosition();
-  //   Geolocator.getPositionStream().listen((event) {
-  //     final distance = getDistance(customerLocation: )
-  //   });
-  // }
 
   Future<double?> getDistance({required LocationModel customerLocation}) async {
     if (await Permission.locationWhenInUse.isGranted && await Permission.locationWhenInUse.serviceStatus.isEnabled) {
@@ -41,9 +35,16 @@ class LocationService {
     return null;
   }
 
+  Future<void> startBackgroundLocationService() async {
+    await BackgroundLocationTrackerManager.startTracking(config: kAndroidConfig);
+  }
+
+  Future<void> stopBackgroundLocationService() async {
+    await BackgroundLocationTrackerManager.stopTracking();
+  }
+
   Future<bool> requestLocationPermission() async {
-    await Geolocator.requestPermission();
-    final status = await Geolocator.checkPermission();
+    final status = await Geolocator.requestPermission();
     if (status == LocationPermission.whileInUse || status == LocationPermission.always) {
       return true;
     } else {
@@ -60,3 +61,9 @@ class LocationService {
     }
   }
 }
+
+const kAndroidConfig = AndroidConfig(
+  notificationIcon: '$kAppTitle is running in background',
+  trackingInterval: Duration(seconds: 25),
+  distanceFilterMeters: 200,
+);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:green_go/features/core/infrastructure/url_launch_service.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -101,19 +102,22 @@ class PersonalDetailsForm extends HookConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        text: context.l10n.agreeAndAccept,
-                        style: context.textTheme.bodySmall,
-                        children: [
-                          TextSpan(
-                            text: " ${context.l10n.publicOffer}",
-                            style: context.textTheme.bodySmall!.copyWith(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue,
+                    child: InkWell(
+                      onTap: () => UrlLaunchService.launchUrl("https://oferta.green-go.uz/"),
+                      child: RichText(
+                        text: TextSpan(
+                          text: context.l10n.agreeAndAccept,
+                          style: context.textTheme.bodySmall,
+                          children: [
+                            TextSpan(
+                              text: " ${context.l10n.publicOffer}",
+                              style: context.textTheme.bodySmall!.copyWith(
+                                decoration: TextDecoration.underline,
+                                color: Colors.blue,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

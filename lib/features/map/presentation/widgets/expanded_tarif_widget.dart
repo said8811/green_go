@@ -45,7 +45,7 @@ class ExpandedTarifWidget extends ConsumerWidget {
               const Gap(10),
               if (tarif!.getDescription(l10n.localeName).isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
                     tarif!.getDescription(l10n.localeName),
                     style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),

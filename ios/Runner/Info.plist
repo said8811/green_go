@@ -14,6 +14,16 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>green_go</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your description why you should use NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your description why you should use NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your description why you should use NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

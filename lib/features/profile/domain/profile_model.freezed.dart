@@ -27,6 +27,8 @@ mixin _$ProfileModel {
   double get balance => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
   String get language => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: "")
+  String get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +47,8 @@ abstract class $ProfileModelCopyWith<$Res> {
       String name,
       String phone,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double balance,
-      @JsonKey(defaultValue: "") String language});
+      @JsonKey(defaultValue: "") String language,
+      @JsonKey(defaultValue: "") String image});
 }
 
 /// @nodoc
@@ -66,6 +69,7 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
     Object? phone = null,
     Object? balance = null,
     Object? language = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,6 +92,10 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -105,7 +113,8 @@ abstract class _$$ProfileModelImplCopyWith<$Res>
       String name,
       String phone,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double balance,
-      @JsonKey(defaultValue: "") String language});
+      @JsonKey(defaultValue: "") String language,
+      @JsonKey(defaultValue: "") String image});
 }
 
 /// @nodoc
@@ -124,6 +133,7 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
     Object? phone = null,
     Object? balance = null,
     Object? language = null,
+    Object? image = null,
   }) {
     return _then(_$ProfileModelImpl(
       id: null == id
@@ -146,6 +156,10 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -158,7 +172,8 @@ class _$ProfileModelImpl implements _ProfileModel {
       required this.name,
       required this.phone,
       @JsonKey(fromJson: JsonHelpers.intToDouble) required this.balance,
-      @JsonKey(defaultValue: "") required this.language});
+      @JsonKey(defaultValue: "") required this.language,
+      @JsonKey(defaultValue: "") required this.image});
 
   factory _$ProfileModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileModelImplFromJson(json);
@@ -175,10 +190,13 @@ class _$ProfileModelImpl implements _ProfileModel {
   @override
   @JsonKey(defaultValue: "")
   final String language;
+  @override
+  @JsonKey(defaultValue: "")
+  final String image;
 
   @override
   String toString() {
-    return 'ProfileModel(id: $id, name: $name, phone: $phone, balance: $balance, language: $language)';
+    return 'ProfileModel(id: $id, name: $name, phone: $phone, balance: $balance, language: $language, image: $image)';
   }
 
   @override
@@ -191,13 +209,14 @@ class _$ProfileModelImpl implements _ProfileModel {
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.balance, balance) || other.balance == balance) &&
             (identical(other.language, language) ||
-                other.language == language));
+                other.language == language) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, phone, balance, language);
+      Object.hash(runtimeType, id, name, phone, balance, language, image);
 
   @JsonKey(ignore: true)
   @override
@@ -219,8 +238,9 @@ abstract class _ProfileModel implements ProfileModel {
       required final String name,
       required final String phone,
       @JsonKey(fromJson: JsonHelpers.intToDouble) required final double balance,
+      @JsonKey(defaultValue: "") required final String language,
       @JsonKey(defaultValue: "")
-      required final String language}) = _$ProfileModelImpl;
+      required final String image}) = _$ProfileModelImpl;
 
   factory _ProfileModel.fromJson(Map<String, dynamic> json) =
       _$ProfileModelImpl.fromJson;
@@ -237,6 +257,9 @@ abstract class _ProfileModel implements ProfileModel {
   @override
   @JsonKey(defaultValue: "")
   String get language;
+  @override
+  @JsonKey(defaultValue: "")
+  String get image;
   @override
   @JsonKey(ignore: true)
   _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>
