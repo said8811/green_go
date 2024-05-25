@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
@@ -30,7 +29,7 @@ class ExpandedTarifWidget extends ConsumerWidget {
                   offset: const Offset(-10, 0),
                   child: Center(
                     child: Text(
-                      tarif!.getTitle(l10n.localeName),
+                      tarif!.tariffInfo.getTitle(l10n.localeName),
                       style: context.textTheme.bodyMedium,
                     ),
                   ),
@@ -43,66 +42,42 @@ class ExpandedTarifWidget extends ConsumerWidget {
                     : null,
               ),
               const Gap(10),
-              if (tarif!.getDescription(l10n.localeName).isNotEmpty)
+              if (tarif!.tariffInfo.getDescription(l10n.localeName).isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
-                    tarif!.getDescription(l10n.localeName),
+                    tarif!.tariffInfo.getDescription(l10n.localeName),
                     style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      l10n.startPrice,
-                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
-                    ),
-                    const Spacer(),
-                    Text(
-                      l10n.productPrice(kPriceFormatter.format(tarif!.startPrice)),
-                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      l10n.perMinute,
-                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
-                    ),
-                    const Spacer(),
-                    Text(
-                      l10n.productPrice(kPriceFormatter.format(tarif!.pricePerMinute)),
-                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      l10n.pousePricePerMinute,
-                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
-                    ),
-                    const Spacer(),
-                    Text(
-                      l10n.productPrice(kPriceFormatter.format(tarif!.pausePricePerMinute)),
-                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
+              ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  separatorBuilder: (context, index) => const Divider(),
+                  shrinkWrap: true,
+                  itemCount: tarif!.tariffFields.length,
+                  itemBuilder: (context, index) {
+                    final field = tarif!.tariffFields[index];
+                    return Row(
+                      children: [
+                        Text(
+                          field.getName(l10n.localeName),
+                          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+                        ),
+                        const Spacer(),
+                        Text(
+                          field.price.toString(),
+                          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                        ),
+                        const Gap(5),
+                        Text(
+                          field.getUnit(l10n.localeName),
+                          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                        ),
+                      ],
+                    );
+                  }),
             ],
           )
         : const SizedBox();

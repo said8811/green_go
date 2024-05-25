@@ -21,9 +21,6 @@ RideModel _$RideModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RideModel {
   int get id => throw _privateConstructorUsedError;
-  int get bicycleId => throw _privateConstructorUsedError;
-  int get lockerId => throw _privateConstructorUsedError;
-  int get userId => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: "")
   String get qrCode => throw _privateConstructorUsedError;
   @JsonKey(fromJson: JsonHelpers.intToDouble)
@@ -32,8 +29,6 @@ mixin _$RideModel {
   double get pausePricePerMinute => throw _privateConstructorUsedError;
   @JsonKey(fromJson: JsonHelpers.intToDouble)
   double get startPrice => throw _privateConstructorUsedError;
-  LatLongModel get startPoint => throw _privateConstructorUsedError;
-  LatLongModel get endPoint => throw _privateConstructorUsedError;
   TarifModel? get tariff => throw _privateConstructorUsedError;
   @JsonKey(fromJson: JsonHelpers.stringToDateTime)
   DateTime? get startAt => throw _privateConstructorUsedError;
@@ -66,15 +61,10 @@ abstract class $RideModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int bicycleId,
-      int lockerId,
-      int userId,
       @JsonKey(defaultValue: "") String qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double startPrice,
-      LatLongModel startPoint,
-      LatLongModel endPoint,
       TarifModel? tariff,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? startAt,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? finishedAt,
@@ -87,8 +77,6 @@ abstract class $RideModelCopyWith<$Res> {
       @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
       List<String> coordinates});
 
-  $LatLongModelCopyWith<$Res> get startPoint;
-  $LatLongModelCopyWith<$Res> get endPoint;
   $TarifModelCopyWith<$Res>? get tariff;
   $PauseModelCopyWith<$Res>? get pause;
 }
@@ -107,15 +95,10 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
   @override
   $Res call({
     Object? id = null,
-    Object? bicycleId = null,
-    Object? lockerId = null,
-    Object? userId = null,
     Object? qrCode = null,
     Object? pricePerMinute = null,
     Object? pausePricePerMinute = null,
     Object? startPrice = null,
-    Object? startPoint = null,
-    Object? endPoint = null,
     Object? tariff = freezed,
     Object? startAt = freezed,
     Object? finishedAt = freezed,
@@ -131,18 +114,6 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      bicycleId: null == bicycleId
-          ? _value.bicycleId
-          : bicycleId // ignore: cast_nullable_to_non_nullable
-              as int,
-      lockerId: null == lockerId
-          ? _value.lockerId
-          : lockerId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
               as int,
       qrCode: null == qrCode
           ? _value.qrCode
@@ -160,14 +131,6 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
           ? _value.startPrice
           : startPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      startPoint: null == startPoint
-          ? _value.startPoint
-          : startPoint // ignore: cast_nullable_to_non_nullable
-              as LatLongModel,
-      endPoint: null == endPoint
-          ? _value.endPoint
-          : endPoint // ignore: cast_nullable_to_non_nullable
-              as LatLongModel,
       tariff: freezed == tariff
           ? _value.tariff
           : tariff // ignore: cast_nullable_to_non_nullable
@@ -213,22 +176,6 @@ class _$RideModelCopyWithImpl<$Res, $Val extends RideModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $LatLongModelCopyWith<$Res> get startPoint {
-    return $LatLongModelCopyWith<$Res>(_value.startPoint, (value) {
-      return _then(_value.copyWith(startPoint: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LatLongModelCopyWith<$Res> get endPoint {
-    return $LatLongModelCopyWith<$Res>(_value.endPoint, (value) {
-      return _then(_value.copyWith(endPoint: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $TarifModelCopyWith<$Res>? get tariff {
     if (_value.tariff == null) {
       return null;
@@ -262,15 +209,10 @@ abstract class _$$RideModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      int bicycleId,
-      int lockerId,
-      int userId,
       @JsonKey(defaultValue: "") String qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) double startPrice,
-      LatLongModel startPoint,
-      LatLongModel endPoint,
       TarifModel? tariff,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? startAt,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) DateTime? finishedAt,
@@ -283,10 +225,6 @@ abstract class _$$RideModelImplCopyWith<$Res>
       @JsonKey(defaultValue: [], fromJson: JsonHelpers.queueToString)
       List<String> coordinates});
 
-  @override
-  $LatLongModelCopyWith<$Res> get startPoint;
-  @override
-  $LatLongModelCopyWith<$Res> get endPoint;
   @override
   $TarifModelCopyWith<$Res>? get tariff;
   @override
@@ -305,15 +243,10 @@ class __$$RideModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? bicycleId = null,
-    Object? lockerId = null,
-    Object? userId = null,
     Object? qrCode = null,
     Object? pricePerMinute = null,
     Object? pausePricePerMinute = null,
     Object? startPrice = null,
-    Object? startPoint = null,
-    Object? endPoint = null,
     Object? tariff = freezed,
     Object? startAt = freezed,
     Object? finishedAt = freezed,
@@ -329,18 +262,6 @@ class __$$RideModelImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      bicycleId: null == bicycleId
-          ? _value.bicycleId
-          : bicycleId // ignore: cast_nullable_to_non_nullable
-              as int,
-      lockerId: null == lockerId
-          ? _value.lockerId
-          : lockerId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
               as int,
       qrCode: null == qrCode
           ? _value.qrCode
@@ -358,14 +279,6 @@ class __$$RideModelImplCopyWithImpl<$Res>
           ? _value.startPrice
           : startPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      startPoint: null == startPoint
-          ? _value.startPoint
-          : startPoint // ignore: cast_nullable_to_non_nullable
-              as LatLongModel,
-      endPoint: null == endPoint
-          ? _value.endPoint
-          : endPoint // ignore: cast_nullable_to_non_nullable
-              as LatLongModel,
       tariff: freezed == tariff
           ? _value.tariff
           : tariff // ignore: cast_nullable_to_non_nullable
@@ -415,16 +328,11 @@ class __$$RideModelImplCopyWithImpl<$Res>
 class _$RideModelImpl implements _RideModel {
   _$RideModelImpl(
       {required this.id,
-      required this.bicycleId,
-      required this.lockerId,
-      required this.userId,
       @JsonKey(defaultValue: "") required this.qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble) required this.pricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble)
       required this.pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble) required this.startPrice,
-      required this.startPoint,
-      required this.endPoint,
       required this.tariff,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) this.startAt,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) this.finishedAt,
@@ -445,12 +353,6 @@ class _$RideModelImpl implements _RideModel {
   @override
   final int id;
   @override
-  final int bicycleId;
-  @override
-  final int lockerId;
-  @override
-  final int userId;
-  @override
   @JsonKey(defaultValue: "")
   final String qrCode;
   @override
@@ -462,10 +364,6 @@ class _$RideModelImpl implements _RideModel {
   @override
   @JsonKey(fromJson: JsonHelpers.intToDouble)
   final double startPrice;
-  @override
-  final LatLongModel startPoint;
-  @override
-  final LatLongModel endPoint;
   @override
   final TarifModel? tariff;
   @override
@@ -502,7 +400,7 @@ class _$RideModelImpl implements _RideModel {
 
   @override
   String toString() {
-    return 'RideModel(id: $id, bicycleId: $bicycleId, lockerId: $lockerId, userId: $userId, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, startPoint: $startPoint, endPoint: $endPoint, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, image: $image, pauseTime: $pauseTime, status: $status, ridingTime: $ridingTime, pause: $pause, total: $total, coordinates: $coordinates)';
+    return 'RideModel(id: $id, qrCode: $qrCode, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, startPrice: $startPrice, tariff: $tariff, startAt: $startAt, finishedAt: $finishedAt, image: $image, pauseTime: $pauseTime, status: $status, ridingTime: $ridingTime, pause: $pause, total: $total, coordinates: $coordinates)';
   }
 
   @override
@@ -511,11 +409,6 @@ class _$RideModelImpl implements _RideModel {
         (other.runtimeType == runtimeType &&
             other is _$RideModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.bicycleId, bicycleId) ||
-                other.bicycleId == bicycleId) &&
-            (identical(other.lockerId, lockerId) ||
-                other.lockerId == lockerId) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.qrCode, qrCode) || other.qrCode == qrCode) &&
             (identical(other.pricePerMinute, pricePerMinute) ||
                 other.pricePerMinute == pricePerMinute) &&
@@ -523,10 +416,6 @@ class _$RideModelImpl implements _RideModel {
                 other.pausePricePerMinute == pausePricePerMinute) &&
             (identical(other.startPrice, startPrice) ||
                 other.startPrice == startPrice) &&
-            (identical(other.startPoint, startPoint) ||
-                other.startPoint == startPoint) &&
-            (identical(other.endPoint, endPoint) ||
-                other.endPoint == endPoint) &&
             (identical(other.tariff, tariff) || other.tariff == tariff) &&
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
             (identical(other.finishedAt, finishedAt) ||
@@ -545,29 +434,23 @@ class _$RideModelImpl implements _RideModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        bicycleId,
-        lockerId,
-        userId,
-        qrCode,
-        pricePerMinute,
-        pausePricePerMinute,
-        startPrice,
-        startPoint,
-        endPoint,
-        tariff,
-        startAt,
-        finishedAt,
-        image,
-        pauseTime,
-        status,
-        ridingTime,
-        pause,
-        total,
-        const DeepCollectionEquality().hash(_coordinates)
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      qrCode,
+      pricePerMinute,
+      pausePricePerMinute,
+      startPrice,
+      tariff,
+      startAt,
+      finishedAt,
+      image,
+      pauseTime,
+      status,
+      ridingTime,
+      pause,
+      total,
+      const DeepCollectionEquality().hash(_coordinates));
 
   @JsonKey(ignore: true)
   @override
@@ -586,9 +469,6 @@ class _$RideModelImpl implements _RideModel {
 abstract class _RideModel implements RideModel {
   factory _RideModel(
       {required final int id,
-      required final int bicycleId,
-      required final int lockerId,
-      required final int userId,
       @JsonKey(defaultValue: "") required final String qrCode,
       @JsonKey(fromJson: JsonHelpers.intToDouble)
       required final double pricePerMinute,
@@ -596,8 +476,6 @@ abstract class _RideModel implements RideModel {
       required final double pausePricePerMinute,
       @JsonKey(fromJson: JsonHelpers.intToDouble)
       required final double startPrice,
-      required final LatLongModel startPoint,
-      required final LatLongModel endPoint,
       required final TarifModel? tariff,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime) final DateTime? startAt,
       @JsonKey(fromJson: JsonHelpers.stringToDateTime)
@@ -618,12 +496,6 @@ abstract class _RideModel implements RideModel {
   @override
   int get id;
   @override
-  int get bicycleId;
-  @override
-  int get lockerId;
-  @override
-  int get userId;
-  @override
   @JsonKey(defaultValue: "")
   String get qrCode;
   @override
@@ -635,10 +507,6 @@ abstract class _RideModel implements RideModel {
   @override
   @JsonKey(fromJson: JsonHelpers.intToDouble)
   double get startPrice;
-  @override
-  LatLongModel get startPoint;
-  @override
-  LatLongModel get endPoint;
   @override
   TarifModel? get tariff;
   @override

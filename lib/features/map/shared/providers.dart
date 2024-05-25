@@ -18,7 +18,7 @@ final mapNotifierProvider = StateNotifierProvider<MapNotifierNotifier, MapNotifi
 final transportRepository = Provider<TransportRepository>((ref) => TransportRepository(ref.watch(dioProvider)));
 
 final transportStateProvider = StateNotifierProvider<TransportNotifier, TransportState>((ref) {
-  return TransportNotifier(ref.watch(transportRepository));
+  return TransportNotifier(ref.watch(transportRepository), ref.watch(locationProvider));
 });
 
 final rideProvider = Provider<RideRepository>((ref) {
@@ -29,7 +29,7 @@ final ridesNotifierProvider = StateNotifierProvider<RidesNotifier, RidesState>((
   return RidesNotifier(ref.watch(rideProvider));
 });
 
-final timerNotifierProvider = StateNotifierProvider.autoDispose<TimerNotifier, TimerState>((ref) {
+final timerNotifierProvider = StateNotifierProvider<TimerNotifier, TimerState>((ref) {
   return TimerNotifier();
 });
 

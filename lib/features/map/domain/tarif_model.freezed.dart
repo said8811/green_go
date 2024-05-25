@@ -47,6 +47,10 @@ mixin _$TarifModel {
   int get pricePerMinute => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 0)
   int get pausePricePerMinute => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: [])
+  List<TarifFieldModel> get tariffFields => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: TarifInfoModel.initial)
+  TarifInfoModel get tariffInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -74,7 +78,12 @@ abstract class $TarifModelCopyWith<$Res> {
       @JsonKey(defaultValue: 0) int price,
       @JsonKey(defaultValue: 0) int startPrice,
       @JsonKey(defaultValue: 0) int pricePerMinute,
-      @JsonKey(defaultValue: 0) int pausePricePerMinute});
+      @JsonKey(defaultValue: 0) int pausePricePerMinute,
+      @JsonKey(defaultValue: []) List<TarifFieldModel> tariffFields,
+      @JsonKey(defaultValue: TarifInfoModel.initial)
+      TarifInfoModel tariffInfo});
+
+  $TarifInfoModelCopyWith<$Res> get tariffInfo;
 }
 
 /// @nodoc
@@ -104,6 +113,8 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
     Object? startPrice = null,
     Object? pricePerMinute = null,
     Object? pausePricePerMinute = null,
+    Object? tariffFields = null,
+    Object? tariffInfo = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -162,7 +173,23 @@ class _$TarifModelCopyWithImpl<$Res, $Val extends TarifModel>
           ? _value.pausePricePerMinute
           : pausePricePerMinute // ignore: cast_nullable_to_non_nullable
               as int,
+      tariffFields: null == tariffFields
+          ? _value.tariffFields
+          : tariffFields // ignore: cast_nullable_to_non_nullable
+              as List<TarifFieldModel>,
+      tariffInfo: null == tariffInfo
+          ? _value.tariffInfo
+          : tariffInfo // ignore: cast_nullable_to_non_nullable
+              as TarifInfoModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TarifInfoModelCopyWith<$Res> get tariffInfo {
+    return $TarifInfoModelCopyWith<$Res>(_value.tariffInfo, (value) {
+      return _then(_value.copyWith(tariffInfo: value) as $Val);
+    });
   }
 }
 
@@ -188,7 +215,13 @@ abstract class _$$TarifModelImplCopyWith<$Res>
       @JsonKey(defaultValue: 0) int price,
       @JsonKey(defaultValue: 0) int startPrice,
       @JsonKey(defaultValue: 0) int pricePerMinute,
-      @JsonKey(defaultValue: 0) int pausePricePerMinute});
+      @JsonKey(defaultValue: 0) int pausePricePerMinute,
+      @JsonKey(defaultValue: []) List<TarifFieldModel> tariffFields,
+      @JsonKey(defaultValue: TarifInfoModel.initial)
+      TarifInfoModel tariffInfo});
+
+  @override
+  $TarifInfoModelCopyWith<$Res> get tariffInfo;
 }
 
 /// @nodoc
@@ -216,6 +249,8 @@ class __$$TarifModelImplCopyWithImpl<$Res>
     Object? startPrice = null,
     Object? pricePerMinute = null,
     Object? pausePricePerMinute = null,
+    Object? tariffFields = null,
+    Object? tariffInfo = null,
   }) {
     return _then(_$TarifModelImpl(
       id: null == id
@@ -274,6 +309,14 @@ class __$$TarifModelImplCopyWithImpl<$Res>
           ? _value.pausePricePerMinute
           : pausePricePerMinute // ignore: cast_nullable_to_non_nullable
               as int,
+      tariffFields: null == tariffFields
+          ? _value._tariffFields
+          : tariffFields // ignore: cast_nullable_to_non_nullable
+              as List<TarifFieldModel>,
+      tariffInfo: null == tariffInfo
+          ? _value.tariffInfo
+          : tariffInfo // ignore: cast_nullable_to_non_nullable
+              as TarifInfoModel,
     ));
   }
 }
@@ -295,8 +338,12 @@ class _$TarifModelImpl extends _TarifModel {
       @JsonKey(defaultValue: 0) required this.price,
       @JsonKey(defaultValue: 0) required this.startPrice,
       @JsonKey(defaultValue: 0) required this.pricePerMinute,
-      @JsonKey(defaultValue: 0) required this.pausePricePerMinute})
-      : super._();
+      @JsonKey(defaultValue: 0) required this.pausePricePerMinute,
+      @JsonKey(defaultValue: [])
+      required final List<TarifFieldModel> tariffFields,
+      @JsonKey(defaultValue: TarifInfoModel.initial) required this.tariffInfo})
+      : _tariffFields = tariffFields,
+        super._();
 
   factory _$TarifModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TarifModelImplFromJson(json);
@@ -342,10 +389,22 @@ class _$TarifModelImpl extends _TarifModel {
   @override
   @JsonKey(defaultValue: 0)
   final int pausePricePerMinute;
+  final List<TarifFieldModel> _tariffFields;
+  @override
+  @JsonKey(defaultValue: [])
+  List<TarifFieldModel> get tariffFields {
+    if (_tariffFields is EqualUnmodifiableListView) return _tariffFields;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tariffFields);
+  }
+
+  @override
+  @JsonKey(defaultValue: TarifInfoModel.initial)
+  final TarifInfoModel tariffInfo;
 
   @override
   String toString() {
-    return 'TarifModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, descriptionRu: $descriptionRu, descriptionUz: $descriptionUz, descriptionEn: $descriptionEn, startMinute: $startMinute, reservedAmount: $reservedAmount, activateCount: $activateCount, price: $price, startPrice: $startPrice, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute)';
+    return 'TarifModel(id: $id, nameRu: $nameRu, nameUz: $nameUz, nameEn: $nameEn, descriptionRu: $descriptionRu, descriptionUz: $descriptionUz, descriptionEn: $descriptionEn, startMinute: $startMinute, reservedAmount: $reservedAmount, activateCount: $activateCount, price: $price, startPrice: $startPrice, pricePerMinute: $pricePerMinute, pausePricePerMinute: $pausePricePerMinute, tariffFields: $tariffFields, tariffInfo: $tariffInfo)';
   }
 
   @override
@@ -375,7 +434,11 @@ class _$TarifModelImpl extends _TarifModel {
             (identical(other.pricePerMinute, pricePerMinute) ||
                 other.pricePerMinute == pricePerMinute) &&
             (identical(other.pausePricePerMinute, pausePricePerMinute) ||
-                other.pausePricePerMinute == pausePricePerMinute));
+                other.pausePricePerMinute == pausePricePerMinute) &&
+            const DeepCollectionEquality()
+                .equals(other._tariffFields, _tariffFields) &&
+            (identical(other.tariffInfo, tariffInfo) ||
+                other.tariffInfo == tariffInfo));
   }
 
   @JsonKey(ignore: true)
@@ -395,7 +458,9 @@ class _$TarifModelImpl extends _TarifModel {
       price,
       startPrice,
       pricePerMinute,
-      pausePricePerMinute);
+      pausePricePerMinute,
+      const DeepCollectionEquality().hash(_tariffFields),
+      tariffInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -413,21 +478,24 @@ class _$TarifModelImpl extends _TarifModel {
 
 abstract class _TarifModel extends TarifModel {
   factory _TarifModel(
-          {required final int id,
-          @JsonKey(defaultValue: "") required final String nameRu,
-          @JsonKey(defaultValue: "") required final String nameUz,
-          @JsonKey(defaultValue: "") required final String nameEn,
-          @JsonKey(defaultValue: "") required final String descriptionRu,
-          @JsonKey(defaultValue: "") required final String descriptionUz,
-          @JsonKey(defaultValue: "") required final String descriptionEn,
-          @JsonKey(defaultValue: 0) required final int startMinute,
-          @JsonKey(defaultValue: 0) required final int reservedAmount,
-          @JsonKey(defaultValue: 0) required final int activateCount,
-          @JsonKey(defaultValue: 0) required final int price,
-          @JsonKey(defaultValue: 0) required final int startPrice,
-          @JsonKey(defaultValue: 0) required final int pricePerMinute,
-          @JsonKey(defaultValue: 0) required final int pausePricePerMinute}) =
-      _$TarifModelImpl;
+      {required final int id,
+      @JsonKey(defaultValue: "") required final String nameRu,
+      @JsonKey(defaultValue: "") required final String nameUz,
+      @JsonKey(defaultValue: "") required final String nameEn,
+      @JsonKey(defaultValue: "") required final String descriptionRu,
+      @JsonKey(defaultValue: "") required final String descriptionUz,
+      @JsonKey(defaultValue: "") required final String descriptionEn,
+      @JsonKey(defaultValue: 0) required final int startMinute,
+      @JsonKey(defaultValue: 0) required final int reservedAmount,
+      @JsonKey(defaultValue: 0) required final int activateCount,
+      @JsonKey(defaultValue: 0) required final int price,
+      @JsonKey(defaultValue: 0) required final int startPrice,
+      @JsonKey(defaultValue: 0) required final int pricePerMinute,
+      @JsonKey(defaultValue: 0) required final int pausePricePerMinute,
+      @JsonKey(defaultValue: [])
+      required final List<TarifFieldModel> tariffFields,
+      @JsonKey(defaultValue: TarifInfoModel.initial)
+      required final TarifInfoModel tariffInfo}) = _$TarifModelImpl;
   _TarifModel._() : super._();
 
   factory _TarifModel.fromJson(Map<String, dynamic> json) =
@@ -474,6 +542,12 @@ abstract class _TarifModel extends TarifModel {
   @override
   @JsonKey(defaultValue: 0)
   int get pausePricePerMinute;
+  @override
+  @JsonKey(defaultValue: [])
+  List<TarifFieldModel> get tariffFields;
+  @override
+  @JsonKey(defaultValue: TarifInfoModel.initial)
+  TarifInfoModel get tariffInfo;
   @override
   @JsonKey(ignore: true)
   _$$TarifModelImplCopyWith<_$TarifModelImpl> get copyWith =>

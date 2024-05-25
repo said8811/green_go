@@ -28,7 +28,7 @@ class FeedBackView extends HookConsumerWidget {
           CommonTitleInfo(
             padded: false,
             title: context.l10n.tariff,
-            subTitle: state.finish!.tariff.getTitle(context.l10n.localeName),
+            subTitle: state.finish!.tariff.tariffInfo.getTitle(context.l10n.localeName),
           ),
           const Gap(20),
           CommonTitleInfo(

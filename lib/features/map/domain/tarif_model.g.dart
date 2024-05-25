@@ -22,6 +22,13 @@ _$TarifModelImpl _$$TarifModelImplFromJson(Map<String, dynamic> json) =>
       startPrice: json['startPrice'] as int? ?? 0,
       pricePerMinute: json['pricePerMinute'] as int? ?? 0,
       pausePricePerMinute: json['pausePricePerMinute'] as int? ?? 0,
+      tariffFields: (json['tariffFields'] as List<dynamic>?)
+              ?.map((e) => TarifFieldModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tariffInfo: json['tariffInfo'] == null
+          ? TarifInfoModel.initial()
+          : TarifInfoModel.fromJson(json['tariffInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TarifModelImplToJson(_$TarifModelImpl instance) =>
@@ -40,4 +47,6 @@ Map<String, dynamic> _$$TarifModelImplToJson(_$TarifModelImpl instance) =>
       'startPrice': instance.startPrice,
       'pricePerMinute': instance.pricePerMinute,
       'pausePricePerMinute': instance.pausePricePerMinute,
+      'tariffFields': instance.tariffFields,
+      'tariffInfo': instance.tariffInfo,
     };

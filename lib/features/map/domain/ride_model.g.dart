@@ -9,16 +9,10 @@ part of 'ride_model.dart';
 _$RideModelImpl _$$RideModelImplFromJson(Map<String, dynamic> json) =>
     _$RideModelImpl(
       id: json['id'] as int,
-      bicycleId: json['bicycleId'] as int,
-      lockerId: json['lockerId'] as int,
-      userId: json['userId'] as int,
       qrCode: json['qrCode'] as String? ?? '',
       pricePerMinute: JsonHelpers.intToDouble(json['pricePerMinute']),
       pausePricePerMinute: JsonHelpers.intToDouble(json['pausePricePerMinute']),
       startPrice: JsonHelpers.intToDouble(json['startPrice']),
-      startPoint:
-          LatLongModel.fromJson(json['startPoint'] as Map<String, dynamic>),
-      endPoint: LatLongModel.fromJson(json['endPoint'] as Map<String, dynamic>),
       tariff: json['tariff'] == null
           ? null
           : TarifModel.fromJson(json['tariff'] as Map<String, dynamic>),
@@ -40,15 +34,10 @@ _$RideModelImpl _$$RideModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$RideModelImplToJson(_$RideModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'bicycleId': instance.bicycleId,
-      'lockerId': instance.lockerId,
-      'userId': instance.userId,
       'qrCode': instance.qrCode,
       'pricePerMinute': instance.pricePerMinute,
       'pausePricePerMinute': instance.pausePricePerMinute,
       'startPrice': instance.startPrice,
-      'startPoint': instance.startPoint,
-      'endPoint': instance.endPoint,
       'tariff': instance.tariff,
       'startAt': instance.startAt?.toIso8601String(),
       'finishedAt': instance.finishedAt?.toIso8601String(),

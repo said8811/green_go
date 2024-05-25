@@ -3,6 +3,7 @@ import 'package:green_go/features/map/domain/books_model.dart';
 import 'package:green_go/features/map/domain/single_transport_model.dart';
 import 'package:green_go/features/map/domain/tarif_model.dart';
 import 'package:green_go/features/map/infrastructure/transport_repository.dart';
+import 'package:green_go/services/location/infrastructure/location_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -46,7 +47,8 @@ class TransportState with _$TransportState {
 
 class TransportNotifier extends StateNotifier<TransportState> {
   final TransportRepository _repository;
-  TransportNotifier(this._repository) : super(TransportState.initial());
+  final LocationService _service;
+  TransportNotifier(this._repository, this._service) : super(TransportState.initial());
 
   Future<bool> getTransport(double latitude, double longitude, String qrCode) async {
     if (state.isLoading) {
@@ -78,7 +80,8 @@ class TransportNotifier extends StateNotifier<TransportState> {
         (l) => state = state.copyWith(
               error: l,
               actionState: TransportActionEnum.pure,
-            ), (r) {
+            ), (r) async {
+      await _service.startLocationSending(r);
       state = state.copyWith(
         actionState: TransportActionEnum.start,
       );

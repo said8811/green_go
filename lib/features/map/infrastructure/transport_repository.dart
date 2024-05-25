@@ -10,11 +10,9 @@ class TransportRepository {
   final Dio _dio;
   TransportRepository(this._dio);
 
-  Future<Either<Failure, SingleTransportModel>> getTransport(
-      double latitude, double longitude, String qrCode) async {
+  Future<Either<Failure, SingleTransportModel>> getTransport(double latitude, double longitude, String qrCode) async {
     try {
-      final Response response =
-          await _dio.get("/transport/$qrCode", queryParameters: {
+      final Response response = await _dio.get("/transport/$qrCode", queryParameters: {
         'latitude': latitude,
         'longitude': longitude,
       });
@@ -31,7 +29,7 @@ class TransportRepository {
     }
   }
 
-  Future<Either<Failure, bool>> start(
+  Future<Either<Failure, String>> start(
     double latitude,
     double longitude,
     String qrCode,
@@ -47,7 +45,7 @@ class TransportRepository {
         "tariffId": tariffId
       });
       if (response.isSuccessful) {
-        return right(true);
+        return right(response.data['id'].toString());
       } else {
         return left(Failure.server(response.data?['message']));
       }

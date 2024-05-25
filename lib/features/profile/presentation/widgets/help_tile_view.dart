@@ -36,9 +36,9 @@ class HelpTilesView extends ConsumerWidget {
           title: l10n.techSupport,
           icon: Assets.icons.support,
           onTap: () {
-            UrlLaunchService.launchPhone("+998995117361");
+            UrlLaunchService.launchPhone("+998336440102");
           },
-          subtitle: "+998 99 511 73 61",
+          subtitle: "+998 33 644 01 02",
         ),
         ProfileTile(
           title: l10n.publicOffer,

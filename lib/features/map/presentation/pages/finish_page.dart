@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_go/features/core/presentation/buttons/primary_button.dart';
 import 'package:green_go/features/core/presentation/components/common_appbar.dart';
-import 'package:green_go/features/core/presentation/helpers/ui_utils.dart';
 import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/rides_notifier.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
@@ -28,10 +28,12 @@ class _FinishPageState extends ConsumerState<FinishPage> {
   @override
   Widget build(BuildContext context) {
     final latlong = ref.watch(locationStateProvider);
+    final l10n = context.l10n;
     final state = ref.watch(ridesNotifierProvider);
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (previous?.actionState != RideAction.stop && next.actionState == RideAction.stop) {
-        ref.read(referenceNotifierProvider.notifier).getData().then((value) => context.pop(true));
+        ref.read(referenceNotifierProvider.notifier).getData();
+        context.pop(true);
         return;
       }
     });
@@ -51,47 +53,32 @@ class _FinishPageState extends ConsumerState<FinishPage> {
                       style: context.textTheme.bodyMedium,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Row(
-                      children: [
-                        Text(
-                          context.l10n.startPrice,
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        const Spacer(),
-                        Text(
-                          context.l10n.productPrice(kPriceFormatter.format(state.rides[0].startPrice)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Row(
-                      children: [
-                        Text(
-                          context.l10n.perMinute,
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        const Spacer(),
-                        Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pricePerMinute)))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        Text(
-                          context.l10n.pousePricePerMinute,
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        const Spacer(),
-                        Text(context.l10n.productPrice(kPriceFormatter.format(state.rides[0].pausePricePerMinute)))
-                      ],
-                    ),
-                  ),
+                  ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      separatorBuilder: (context, index) => const Divider(),
+                      shrinkWrap: true,
+                      itemCount: state.rides[0].tariff!.tariffFields.length,
+                      itemBuilder: (context, index) {
+                        final field = state.rides[0].tariff!.tariffFields[index];
+                        return Row(
+                          children: [
+                            Text(
+                              field.getName(l10n.localeName),
+                              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+                            ),
+                            const Spacer(),
+                            Text(
+                              field.price.toString(),
+                              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                            ),
+                            const Gap(5),
+                            Text(
+                              field.getUnit(l10n.localeName),
+                              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                            ),
+                          ],
+                        );
+                      }),
                   if (state.imgPath != null && state.imgPath!.isNotEmpty)
                     CommonExpandablePanel(
                         symPadding: 20,

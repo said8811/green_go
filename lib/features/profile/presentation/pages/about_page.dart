@@ -38,7 +38,7 @@ class AboutPage extends ConsumerWidget {
           ),
           const Divider(height: 0),
           ListTile(
-            onTap: () => UrlLaunchService.launchPhone("+998995117361"),
+            onTap: () => UrlLaunchService.launchPhone("+998336440102"),
             leading: CommonSvgPicture(Assets.icons.phone),
             title: Text(
               l10n.callSuport,

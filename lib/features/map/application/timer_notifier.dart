@@ -24,7 +24,6 @@ class TimerNotifier extends StateNotifier<TimerState> {
         state = state.copyWith(
           time: DateTime.now().difference(time).inSeconds,
         );
-        if (DateTime.now().difference(time).inSeconds % 60 == 0) {}
       } else {
         _timer?.cancel();
       }

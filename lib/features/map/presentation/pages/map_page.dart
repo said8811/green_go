@@ -111,19 +111,14 @@ class _MapPageState extends ConsumerState<MapPage> {
                 ),
               );
               ref.read(mapNotifierProvider.notifier).updateOneObject(mapObject.mapId.value, updatedPlacemark);
-              ref
-                  .read(transportStateProvider.notifier)
-                  .getTransport(ref.watch(locationStateProvider)!.latitude, ref.watch(locationStateProvider)!.longitude,
-                      transport.qrCode)
-                  .then((value) {
-                if (value) {
-                  openTransportView(context, () {
-                    Future.microtask(() {
-                      ref.read(mapNotifierProvider.notifier).initialPlaceMark(mapObject.mapId.value, intialPlaceMark);
-                    });
-                  }, transport.qrCode);
-                }
-              });
+              ref.read(transportStateProvider.notifier).getTransport(ref.watch(locationStateProvider)!.latitude,
+                  ref.watch(locationStateProvider)!.longitude, transport.qrCode);
+
+              openTransportView(context, () {
+                Future.microtask(() {
+                  ref.read(mapNotifierProvider.notifier).initialPlaceMark(mapObject.mapId.value, intialPlaceMark);
+                });
+              }, transport.qrCode);
             },
           );
           ref.read(mapNotifierProvider.notifier).addMainObjects(placeMark);
@@ -136,9 +131,9 @@ class _MapPageState extends ConsumerState<MapPage> {
   @override
   Widget build(BuildContext context) {
     final rides = ref.watch(ridesNotifierProvider);
-    final transport = ref.watch(transportStateProvider);
     ref.listen(ridesNotifierProvider, (previous, next) {
       if (next.rides.isNotEmpty && (previous?.rides ?? []).isEmpty) {
+        ref.read(locationProvider).startLocationSending(next.rides[0].id.toString());
         openActionsView(context);
       }
       if (next.books.isNotEmpty && (previous?.books ?? []).isEmpty) {
@@ -202,42 +197,6 @@ class _MapPageState extends ConsumerState<MapPage> {
               },
             ),
           ),
-          if (transport.isLoading)
-            Positioned(
-              top: 80,
-              right: 110,
-              left: 110,
-              child: AnimatedOpacity(
-                opacity: 1,
-                duration: const Duration(milliseconds: 500),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                      color: context.colorScheme.textColor.withOpacity(0.8), borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Соединенные",
-                            style: context.textTheme.bodyMedium?.copyWith(
-                              color: context.colorScheme.surface,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: CircularProgressIndicator(
-                            color: context.colorScheme.surface,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
           if (rides.rides.isNotEmpty) const RideTimerWidget(),
           if (rides.books.isNotEmpty) const BookTimerWidget(),
           Positioned(

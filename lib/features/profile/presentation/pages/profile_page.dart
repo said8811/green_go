@@ -31,6 +31,11 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
     final state = ref.watch(profileNotifierProvider);
+    ref.listen(imageUpdateProvider, (p, n) {
+      if (n == true && p == false) {
+        ref.read(profileNotifierProvider.notifier).getProfile();
+      }
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CommonAppBar(

@@ -39,12 +39,12 @@ class TariffWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  tarif.getTitle(context.l10n.localeName),
+                  tarif.tariffInfo.getTitle(context.l10n.localeName),
                   style: context.textTheme.bodyMedium?.copyWith(fontSize: 16),
                 ),
                 const Gap(8),
                 Text(
-                  context.l10n.sumPerMin(kPriceFormatter.format(tarif.pricePerMinute)),
+                  "${kPriceFormatter.format(tarif.pricePerMinute)} ${tarif.tariffInfo.getUnit(context.l10n.localeName)}",
                   style: context.textTheme.bodyMedium?.copyWith(fontSize: 12),
                 ),
               ],

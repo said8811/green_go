@@ -39,7 +39,7 @@ class TransportActionsView extends HookConsumerWidget {
       },
     );
     ref.listen(timerNotifierProvider, (prev, next) async {
-      if (next.time % 60 == 0 && !priceChanged.value) {
+      if ((next.time % 60 == 0 && next.time / 60 >= state.rides[0].tariff!.startMinute) && !priceChanged.value) {
         priceChanged.value = true;
         ref.read(priceNotifierProvider.notifier).getPrice(state);
         await Future.delayed(const Duration(seconds: 1)).then((v) => priceChanged.value = false);
