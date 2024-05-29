@@ -30,14 +30,6 @@ class _MapViewState extends ConsumerState<MapView> {
     return YandexMap(
       onUserLocationAdded: (UserLocationView view) async {
         return view.copyWith(
-          accuracyCircle: CircleMapObject(
-              isVisible: false,
-              mapId: const MapObjectId("accuracy_circle"),
-              circle: Circle(
-                  center: Point(
-                      latitude: latLong?.latitude ?? _centralPoint.latitude,
-                      longitude: latLong?.longitude ?? _centralPoint.longitude),
-                  radius: 0)),
           arrow: view.arrow.copyWith(
             zIndex: 20,
             icon: PlacemarkIcon.single(

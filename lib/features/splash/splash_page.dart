@@ -9,9 +9,10 @@ import 'package:green_go/features/map/shared/providers.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
 import 'package:green_go/gen/assets.gen.dart';
 import 'package:green_go/services/location/shared/providers.dart';
-import 'package:green_go/services/router/constants.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
+
+import '../../services/router/constants.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -23,28 +24,19 @@ class SplashPage extends ConsumerStatefulWidget {
 class _SplashPageState extends ConsumerState<SplashPage> {
   Timer? _timer;
 
-  Future<void> getCurrentPosition() async {
-    await ref
-        .read(locationStateProvider.notifier)
-        .getCurrentPosition()
-        .then((s) => ref.read(referenceNotifierProvider.notifier).getData());
+  Future<void> initialize() async {
+    await ref.read(locationStateProvider.notifier).getCurrentPosition();
+    await ref.read(referenceNotifierProvider.notifier).getData();
   }
 
   @override
   void initState() {
+    super.initState();
     Future.microtask(
       () async {
-        await getCurrentPosition().then((v) {
-          _timer = Timer.periodic(const Duration(seconds: 10), (t) {
-            if (context.mounted) {
-              ref.read(referenceNotifierProvider.notifier).getData();
-            }
-          });
-        });
+        await initialize();
       },
     );
-
-    super.initState();
   }
 
   @override
@@ -63,13 +55,14 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                 isVisible: true,
                 strokeWidth: 1,
                 polygon: const Polygon(
-                    outerRing: LinearRing(points: [
-                      Point(latitude: 85, longitude: -180),
-                      Point(latitude: 85, longitude: 180),
-                      Point(latitude: -85, longitude: 180),
-                      Point(latitude: -85, longitude: -180),
-                    ]),
-                    innerRings: []),
+                  outerRing: LinearRing(points: [
+                    Point(latitude: 85, longitude: -180),
+                    Point(latitude: 85, longitude: 180),
+                    Point(latitude: -85, longitude: 180),
+                    Point(latitude: -85, longitude: -180),
+                  ]),
+                  innerRings: [],
+                ),
                 onTap: (PolygonMapObject self, Point point) {},
               ),
             );
@@ -78,28 +71,30 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     });
 
     return Scaffold(
-        body: SafeArea(
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  child: Assets.images.logo.image(
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            ),
+      body: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 80),
+                child: Assets.images.logo.image(
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
           ),
         ),
-        bottomNavigationBar: SafeArea(
-            minimum: const EdgeInsets.symmetric(vertical: 40),
-            child: CommonSvgPicture(
-              Assets.icons.splashText,
-              size: 35,
-            )));
+      ),
+      bottomNavigationBar: SafeArea(
+        minimum: const EdgeInsets.symmetric(vertical: 40),
+        child: CommonSvgPicture(
+          Assets.icons.splashText,
+          size: 35,
+        ),
+      ),
+    );
   }
 
   @override

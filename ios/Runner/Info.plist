@@ -20,10 +20,6 @@
 	<string>Your description why you should use NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your description why you should use NSLocationAlwaysAndWhenInUseUsageDescription</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

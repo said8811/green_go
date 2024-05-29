@@ -1,7 +1,6 @@
 import 'dart:async';
 
 // import 'package:dio/dio.dart';
-import 'package:background_location_tracker/background_location_tracker.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,7 +9,6 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../features/core/domain/failure.dart';
 import '../../../features/core/domain/location_model.dart';
-import '../../../features/core/shared/constants.dart';
 
 class LocationService {
   final Dio _dio;
@@ -18,11 +16,16 @@ class LocationService {
   StreamSubscription<Position>? _positionStreamSubscription;
 
   Future<Position?> getCurrentPosition() async {
-    final permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) return null;
-    return Geolocator.getCurrentPosition(
+    final permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      await Geolocator.requestPermission();
+      return null;
+    }
+    final data = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
+    return data;
   }
 
   Future<Position?> startLocationSending(String id) async {
@@ -85,14 +88,6 @@ class LocationService {
     return null;
   }
 
-  Future<void> startBackgroundLocationService() async {
-    await BackgroundLocationTrackerManager.startTracking(config: kAndroidConfig);
-  }
-
-  Future<void> stopBackgroundLocationService() async {
-    await BackgroundLocationTrackerManager.stopTracking();
-  }
-
   Future<bool> requestLocationPermission() async {
     final status = await Geolocator.requestPermission();
     if (status == LocationPermission.whileInUse || status == LocationPermission.always) {
@@ -111,9 +106,3 @@ class LocationService {
     }
   }
 }
-
-const kAndroidConfig = AndroidConfig(
-  notificationIcon: '$kAppTitle is running in background',
-  trackingInterval: Duration(seconds: 25),
-  distanceFilterMeters: 200,
-);

@@ -31,4 +31,17 @@ class TarifModel with _$TarifModel {
   }) = _TarifModel;
 
   factory TarifModel.fromJson(Map<String, dynamic> json) => _$TarifModelFromJson(json);
+
+  String getTitle(String languageCode) {
+    switch (languageCode) {
+      case 'ru':
+        return nameRu;
+      case 'uz':
+        return nameUz;
+      case 'en':
+        return nameEn;
+      default:
+        return nameRu;
+    }
+  }
 }

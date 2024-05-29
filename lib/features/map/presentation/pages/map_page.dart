@@ -67,16 +67,6 @@ class _MapPageState extends ConsumerState<MapPage> {
               polygon,
               fillColor: Colors.red.withOpacity(0.2),
               strokeColor: Colors.red,
-              onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Center(child: Text(context.l10n.prohibitedArea)),
-                behavior: SnackBarBehavior.floating,
-                duration: const Duration(seconds: 2),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height - (Platform.isAndroid ? 100 : 150), right: 50, left: 50),
-              )),
             ));
       }
       for (var cat in data.data!.categories) {

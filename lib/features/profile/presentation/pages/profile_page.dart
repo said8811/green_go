@@ -52,6 +52,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                     child: Column(
                       children: [
                         InkWell(
+                          borderRadius: BorderRadius.circular(50),
                           onTap: () {
                             showModalBottomSheet(
                                 context: context,

@@ -38,7 +38,7 @@ class HistoryWidget extends HookConsumerWidget {
                 children: [
                   CommonSvgPicture(Assets.icons.bike),
                   const Gap(10),
-                  Text(ride.tariff?.tariffInfo.getTitle(context.l10n.localeName) ?? ""),
+                  Text(ride.tariff?.getTitle(context.l10n.localeName) ?? ""),
                   const Spacer(),
                   Text(DateFormat("HH:mm", "tr_TR").format(ride.startAt ?? DateTime.now())),
                 ],

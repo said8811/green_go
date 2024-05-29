@@ -94,29 +94,32 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                   context.l10n.fromToDate(widget.ride.pauseTime ~/ 60, widget.ride.pauseTime % 60), context),
               const Divider(),
               const Gap(10),
-              Row(
-                children: [
-                  Text(context.l10n.perMinute),
-                  const Spacer(),
-                  Text(context.l10n.productPrice(kPriceFormatter.format(widget.ride.pricePerMinute)))
-                ],
-              ),
-              const Gap(12),
-              Row(
-                children: [
-                  Text(context.l10n.startPrice),
-                  const Spacer(),
-                  Text(context.l10n.productPrice(kPriceFormatter.format(widget.ride.startPrice)))
-                ],
-              ),
-              const Gap(12),
-              Row(
-                children: [
-                  Text(context.l10n.pousePricePerMinute),
-                  const Spacer(),
-                  Text(context.l10n.productPrice(kPriceFormatter.format(widget.ride.pausePricePerMinute)))
-                ],
-              ),
+              ListView.separated(
+                  padding: EdgeInsets.zero,
+                  separatorBuilder: (context, index) => const Gap(10),
+                  shrinkWrap: true,
+                  itemCount: widget.ride.tariff!.tariffFields.length,
+                  itemBuilder: (context, index) {
+                    final field = widget.ride.tariff!.tariffFields[index];
+                    return Row(
+                      children: [
+                        Text(
+                          field.getName(context.l10n.localeName),
+                          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+                        ),
+                        const Spacer(),
+                        Text(
+                          field.price.toString(),
+                          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                        ),
+                        const Gap(5),
+                        Text(
+                          field.getUnit(context.l10n.localeName),
+                          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                        ),
+                      ],
+                    );
+                  }),
               const Gap(12),
               Row(
                 children: [
