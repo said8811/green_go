@@ -13,8 +13,6 @@ import 'features/core/shared/providers.dart';
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  WidgetsFlutterBinding.ensureInitialized();
-
   final injection = Injection();
   final appInjections = await injection.setUpInjection();
 

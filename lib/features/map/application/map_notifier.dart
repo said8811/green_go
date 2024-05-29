@@ -37,25 +37,23 @@ class MapNotifierNotifier extends StateNotifier<MapNotifierState> {
 
   void clearObjects() {
     state = state.copyWith(
-        mainObjects: state.mainObjects.where((element) {
-      return element.mapId.value == "polygon_earth" ||
-          element.mapId.value == "polygon_currentLocation";
-    }).toList());
+        availableObjects: [],
+        mainObjects: state.mainObjects.where(
+          (element) {
+            return element.mapId.value == "polygon_earth" || element.mapId.value == "polygon_currentLocation";
+          },
+        ).toList());
   }
 
   void updateOneObject(String value, MapObject object) {
-    List<MapObject> objects = List.from(state.mainObjects
-        .where((element) => element.mapId.value != value)
-        .toList());
+    List<MapObject> objects = List.from(state.mainObjects.where((element) => element.mapId.value != value).toList());
 
     objects.add(object);
     state = state.copyWith(mainObjects: objects);
   }
 
   void initialPlaceMark(String value, MapObject object) {
-    List<MapObject> objects = List.from(state.mainObjects
-        .where((element) => element.mapId.value != value)
-        .toList());
+    List<MapObject> objects = List.from(state.mainObjects.where((element) => element.mapId.value != value).toList());
     objects.add(object);
     state = state.copyWith(mainObjects: objects);
   }
