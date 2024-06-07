@@ -55,6 +55,7 @@ void openTransportView(BuildContext context, VoidCallback onDispose, String qr) 
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.white,
+    isScrollControlled: true,
     builder: (_) {
       return TransportWidget(
         onDispose: onDispose,

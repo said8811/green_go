@@ -7,6 +7,4 @@ extension ColorExtension on Color {
     final value = 1 - percent / 100;
     return Color.fromARGB(alpha, (red * value).round(), (green * value).round(), (blue * value).round());
   }
-
-  WidgetStateProperty<Color> get materialStateColor => WidgetStateProperty.resolveWith<Color>((_) => this);
 }
