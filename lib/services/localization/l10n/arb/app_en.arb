@@ -350,5 +350,6 @@
   "addCardDialog":"It is recommended to add the card number before starting the trip",
   "addBankCard":"Add bank card",
   "cardNumber":"Card number",
-  "validityPeriod":"Validity period"
+  "validityPeriod":"Validity period",
+  "bicycleWarning":"You have a bike for a rent"
 }

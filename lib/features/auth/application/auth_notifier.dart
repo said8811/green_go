@@ -41,13 +41,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required int code,
     required String birthday,
     required String gender,
+    required String language,
   }) async {
     state = const AuthState.loading();
-    final failureOrSuccess = await _repository.register(
-      phone: phone,
-      code: code,
-      name: name,
-    );
+    final failureOrSuccess = await _repository.register(phone: phone, code: code, name: name, language: language);
 
     state = failureOrSuccess.fold(
       (l) => AuthState.failure(l),

@@ -22,9 +22,10 @@ class AuthRepository {
   Future<Either<Failure, UserModel>> signIn({
     required String phone,
     required String code,
+    required String language,
   }) async {
     try {
-      final failureOrSuccess = await _remoteService.signIn(phone: phone, code: code);
+      final failureOrSuccess = await _remoteService.signIn(phone: phone, code: code, language: language);
       return failureOrSuccess.fold(
         (failure) => left(failure),
         (user) async {
@@ -41,13 +42,10 @@ class AuthRepository {
     required String phone,
     required String name,
     required int code,
+    required String language,
   }) async {
     try {
-      final failureOrSuccess = await _remoteService.register(
-        phone: phone,
-        code: code,
-        name: name,
-      );
+      final failureOrSuccess = await _remoteService.register(phone: phone, code: code, name: name, language: language);
       return failureOrSuccess.fold(
         (failure) => left(failure),
         (user) async {
@@ -60,11 +58,9 @@ class AuthRepository {
     }
   }
 
-  Future<Either<Failure, bool>> getCode(
-    String phone, {
-    required bool isRequestForRestor,
-  }) async {
-    final isSigned = await _remoteService.getCode(phone, isRequestForRestor: isRequestForRestor);
+  Future<Either<Failure, bool>> getCode(String phone,
+      {required bool isRequestForRestor, required String language}) async {
+    final isSigned = await _remoteService.getCode(phone, isRequestForRestor: isRequestForRestor, language: language);
     return isSigned.fold((l) => left(l), (r) => right(r));
   }
 

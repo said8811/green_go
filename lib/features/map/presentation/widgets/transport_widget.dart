@@ -189,7 +189,7 @@ class _TransportWidgetState extends ConsumerState<TransportWidget> {
                               }
                             });
                           } else {
-                            Fluttertoast.showToast(msg: "Sizda ijarada velik bor");
+                            Fluttertoast.showToast(msg: context.l10n.bicycleWarning);
                           }
                         },
                         isLoading: state.actionState == TransportActionEnum.starting,

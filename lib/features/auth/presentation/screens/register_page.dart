@@ -56,9 +56,9 @@ class RegisterPage extends HookConsumerWidget {
             }
 
             ref.read(registerNotifierProvider.notifier).register(
-                  phone: ref.watch(signInFormNotifierProvider).phone,
-                  code: int.parse(ref.watch(signInFormNotifierProvider).code),
-                );
+                phone: ref.watch(signInFormNotifierProvider).phone,
+                code: int.parse(ref.watch(signInFormNotifierProvider).code),
+                language: context.l10n.localeName);
           },
         ),
       ),

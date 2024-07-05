@@ -179,7 +179,7 @@ class TransportBookWidget extends HookConsumerWidget {
                                 }
                               });
                             } else {
-                              Fluttertoast.showToast(msg: "Sizda ijarada velik bor");
+                              Fluttertoast.showToast(msg: context.l10n.bicycleWarning);
                             }
                           },
                         ),

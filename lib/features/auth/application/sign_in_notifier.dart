@@ -40,12 +40,11 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
   Future<void> getCode(
     String phone, {
     required bool isRequestForRestor,
+    required String language,
   }) async {
     state = state.copyWith(isLoading: true, error: null, phone: phone);
-    final failureOrIsRegistered = await _repository.getCode(
-      phone,
-      isRequestForRestor: isRequestForRestor,
-    );
+    final failureOrIsRegistered =
+        await _repository.getCode(phone, isRequestForRestor: isRequestForRestor, language: language);
     state = failureOrIsRegistered.fold(
       (l) => state.copyWith(error: l, isLoading: false),
       (r) => state.copyWith(
@@ -79,12 +78,9 @@ class SignInFormNotifier extends StateNotifier<SignInFormState> {
     );
   }
 
-  Future<void> signIn({
-    required String phone,
-    required String code,
-  }) async {
+  Future<void> signIn({required String phone, required String code, required String langauge}) async {
     state = state.copyWith(error: null, isLoading: true, phone: phone);
-    final failureOrIsRegistered = await _repository.signIn(code: code, phone: phone);
+    final failureOrIsRegistered = await _repository.signIn(code: code, phone: phone, language: langauge);
     state = failureOrIsRegistered.fold(
       (l) => state.copyWith(error: l, isLoading: false),
       (r) => state.copyWith(error: null, isLoading: false, user: r),

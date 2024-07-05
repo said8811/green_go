@@ -90,11 +90,11 @@ class OtpPage extends HookConsumerWidget {
                 animationDuration: const Duration(milliseconds: 100),
                 onCompleted: (value) {
                   continueAuth(
-                    registered: state.isRegistered,
-                    ref: ref,
-                    phone: state.phone,
-                    code: value,
-                  );
+                      registered: state.isRegistered,
+                      ref: ref,
+                      phone: state.phone,
+                      code: value,
+                      lan: context.l10n.localeName);
                 },
                 onChanged: (_) {},
                 beforeTextPaste: (text) {
@@ -112,11 +112,11 @@ class OtpPage extends HookConsumerWidget {
                 onPress: () {
                   if (isValid.value) {
                     continueAuth(
-                      registered: state.isRegistered,
-                      ref: ref,
-                      phone: state.phone,
-                      code: controller.text,
-                    );
+                        registered: state.isRegistered,
+                        ref: ref,
+                        phone: state.phone,
+                        code: controller.text,
+                        lan: context.l10n.localeName);
                   } else {
                     showErrorDialog(
                       context,
@@ -143,7 +143,7 @@ class OtpPage extends HookConsumerWidget {
                     onPress: () {
                       ref
                           .read(signInFormNotifierProvider.notifier)
-                          .getCode(state.phone, isRequestForRestor: true)
+                          .getCode(state.phone, isRequestForRestor: true, language: context.l10n.localeName)
                           .then((_) {
                         controller.clear();
                         canRequestNewCode.value = false;
@@ -161,14 +161,14 @@ class OtpPage extends HookConsumerWidget {
     );
   }
 
-  void continueAuth({
-    required bool registered,
-    required WidgetRef ref,
-    required String phone,
-    required String code,
-  }) {
+  void continueAuth(
+      {required bool registered,
+      required WidgetRef ref,
+      required String phone,
+      required String code,
+      required String lan}) {
     if (registered) {
-      ref.read(signInFormNotifierProvider.notifier).signIn(phone: phone, code: code);
+      ref.read(signInFormNotifierProvider.notifier).signIn(phone: phone, code: code, langauge: lan);
     } else {
       ref.read(signInFormNotifierProvider.notifier).checkCode(phone: phone, code: int.parse(code));
     }

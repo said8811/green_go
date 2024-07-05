@@ -23,6 +23,7 @@ class AuthRemoteService {
   Future<Either<Failure, UserModel>> signIn({
     required String phone,
     required String code,
+    required String language,
   }) async {
     final params = {
       "phone": phone,
@@ -32,6 +33,7 @@ class AuthRemoteService {
       "systemVersion": _details?.systemVersion,
       "systemName": _details?.systemName,
       "appVersion": _details?.appVersion,
+      "language": language,
       "deviceName": _details?.deviceName,
     };
 
@@ -60,6 +62,7 @@ class AuthRemoteService {
     required String phone,
     required String name,
     required int code,
+    required String language,
   }) async {
     final params = {
       "phone": phone,
@@ -70,6 +73,7 @@ class AuthRemoteService {
       "systemVersion": _details?.systemVersion,
       "systemName": _details?.systemName,
       "appVersion": _details?.appVersion,
+      "language": language,
       "deviceName": _details?.deviceName,
     };
 
@@ -95,9 +99,11 @@ class AuthRemoteService {
   Future<Either<Failure, bool>> getCode(
     String phone, {
     required bool isRequestForRestor,
+    required String language,
   }) async {
     final formData = {
       'phone': phone,
+      'language': language
       // 'resend': isRequestForRestor ? '1' : '0',
     };
     try {

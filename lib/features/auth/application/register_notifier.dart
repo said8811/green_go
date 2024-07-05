@@ -66,13 +66,11 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
   Future<void> register({
     required String phone,
     required int code,
+    required String language,
   }) async {
     state = state.copyWith(isLoading: true, failure: null);
     final userOrFailure = await _repository.register(
-      phone: phone,
-      name: state.personalDetails!.firstName,
-      code: code,
-    );
+        phone: phone, name: state.personalDetails!.firstName, code: code, language: language);
     state = userOrFailure.fold(
       (l) => state.copyWith(
         isLoading: false,

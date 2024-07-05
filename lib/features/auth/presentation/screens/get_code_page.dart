@@ -105,10 +105,9 @@ class GetCodePage extends HookConsumerWidget {
   Future<void> getCode(BuildContext context, String text, PhoneCountryData data, WidgetRef ref) async {
     if (text.clearSymbols.length == data.phoneMaskWithoutCountryCode.clearSymbols.length) {
       final phone = '${data.phoneCode}${text.clearSymbols}';
-      ref.read(signInFormNotifierProvider.notifier).getCode(
-            phone,
-            isRequestForRestor: false,
-          );
+      ref
+          .read(signInFormNotifierProvider.notifier)
+          .getCode(phone, isRequestForRestor: false, language: context.l10n.localeName);
     } else {
       showErrorDialog(
         context,

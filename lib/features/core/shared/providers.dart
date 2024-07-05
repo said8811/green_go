@@ -13,8 +13,7 @@ final appConfigProvider = Provider<AppConfig>(
 );
 
 final dioProvider = StateNotifierProvider<DioNotifier, Dio>((ref) {
-  return DioNotifier(
-      ref.watch(sharedPrefsProvider), ref.watch(appConfigProvider));
+  return DioNotifier(ref.watch(sharedPrefsProvider), ref.watch(appConfigProvider));
 });
 
 final hiveDataStoreProvider = Provider<HiveDataStore>(
@@ -25,8 +24,7 @@ final sharedPrefsProvider = Provider<SharedPreferences>(
   (ref) => throw UnimplementedError(),
 );
 
-final deviceDetailsProvider =
-    Provider<DeviceDetails?>((ref) => throw UnimplementedError());
+final deviceDetailsProvider = Provider<DeviceDetails?>((ref) => throw UnimplementedError());
 
 final secureStorageProvider = Provider<FlutterSecureStorage>(
   (ref) => throw UnimplementedError(),

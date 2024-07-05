@@ -40,7 +40,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
     final image = ref.watch(mapImageProvider);
     return Scaffold(
       appBar: CommonAppBar(
-        title: widget.ride.tariff?.tariffInfo.getTitle(context.l10n.localeName),
+        title: widget.ride.tariff?.getTitle(context.l10n.localeName),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -78,7 +78,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                 children: [
                   Text(context.l10n.tariff),
                   const Spacer(),
-                  Text(widget.ride.tariff?.tariffInfo.getTitle(context.l10n.localeName) ?? ""),
+                  Text(widget.ride.tariff?.getTitle(context.l10n.localeName) ?? ""),
                   const Gap(5),
                   CommonSvgPicture(Assets.icons.checkGreen)
                 ],
@@ -98,6 +98,7 @@ class _SingleRideViewState extends ConsumerState<SingleRideView> {
                   padding: EdgeInsets.zero,
                   separatorBuilder: (context, index) => const Gap(10),
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: widget.ride.tariff!.tariffFields.length,
                   itemBuilder: (context, index) {
                     final field = widget.ride.tariff!.tariffFields[index];

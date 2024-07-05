@@ -351,5 +351,6 @@
   "addCardDialog":"Sayohatni boshlashdan avval karta raqamni qo‘shish tavsiya qilinadi",
   "addBankCard":"Bank karta qo'shish",
   "cardNumber":"Karta raqami",
-  "validityPeriod":"Amal qilish muddati"
+  "validityPeriod":"Amal qilish muddati",
+  "bicycleWarning":"Sizda ijarada velik bor"
 }
