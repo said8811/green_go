@@ -8,7 +8,6 @@ import 'package:green_go/features/core/shared/extensions/theme_extensions.dart';
 import 'package:green_go/features/map/application/transport_notifier.dart';
 import 'package:green_go/features/map/presentation/widgets/expanded_tarif_widget.dart';
 import 'package:green_go/features/map/presentation/widgets/tarif_widget.dart';
-import 'package:green_go/features/map/presentation/widgets/transport_booked_view.dart';
 import 'package:green_go/features/splash/shared/providers.dart';
 import 'package:green_go/services/localization/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,183 +32,183 @@ class TransportWidget extends ConsumerStatefulWidget {
 
 class _TransportWidgetState extends ConsumerState<TransportWidget> {
   bool isTarif = false;
+  int? selectedIndex;
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
     final reference = ref.watch(referenceNotifierProvider).data!;
     final state = ref.watch(transportStateProvider);
     final books = ref.watch(ridesNotifierProvider);
-    if (state.transport?.book != null) {
-      return const TransportBookWidget();
-    } else {
-      if (state.transport != null) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Gap(20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200]!,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.grey[300]!),
-                    ),
-                    child: state.transport!.image.isEmpty
-                        ? Assets.images.examplePic1.image(width: 90)
-                        : CachedImage(
-                            state.transport!.image,
-                            width: 70,
-                            usePlaceHolder: true,
-                            placeHolderWidth: 70,
-                            placeHolderHeight: 70,
-                          ),
+
+    if (state.transport != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Gap(20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200]!,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey[300]!),
                   ),
-                  const Gap(12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        state.transport!.getTitle(context.l10n.localeName),
-                        style: context.textTheme.bodyMedium,
-                      ),
-                      const Gap(10),
-                      Text(
-                        state.transport!.distance < 1
-                            ? "${(state.transport!.distance * 1000).toStringAsFixed(1)} m"
-                            : "${state.transport!.distance.toStringAsFixed(1)} km",
-                        style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey, fontSize: 12),
-                      )
-                    ],
-                  ),
-                  const Spacer(),
-                  CommonSvgPicture(Assets.icons.qrCode),
-                  const Gap(8),
-                  Text(
-                    state.transport!.qrCode,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      fontSize: 14,
-                      color: context.colorScheme.primary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(),
-            const Gap(10),
-            if (!isTarif)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  context.l10n.chooseTariff,
-                  style: textTheme.bodyMedium,
-                ),
-              ),
-            const Gap(15),
-            isTarif
-                ? ExpandedTarifWidget(
-                    tarif: state.selectedTarif,
-                    onClose: () {
-                      setState(() {
-                        isTarif = false;
-                      });
-                    },
-                  )
-                : state.transport?.tariffs.isNotEmpty ?? false
-                    ? SizedBox(
-                        height: 65,
-                        child: ListView.separated(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (_, index) {
-                              final tarif = state.transport!.tariffs[index];
-                              return TariffWidget(
-                                tarif: tarif,
-                                onTap: () {
-                                  setState(() {
-                                    isTarif = true;
-                                  });
-                                },
-                              );
-                            },
-                            separatorBuilder: (i, _) => const Gap(8),
-                            itemCount: state.transport!.tariffs.length),
-                      )
-                    : Text(
-                        "Tariflar hozircha mavjud emas qayta urinib koring",
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w400,
+                  child: state.transport!.image.isEmpty
+                      ? Assets.images.examplePic1.image(width: 90)
+                      : CachedImage(
+                          state.transport!.image,
+                          width: 70,
+                          usePlaceHolder: true,
+                          placeHolderWidth: 70,
+                          placeHolderHeight: 70,
                         ),
-                      ),
-            const Gap(22),
+                ),
+                const Gap(12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      state.transport!.getTitle(context.l10n.localeName),
+                      style: context.textTheme.bodyMedium,
+                    ),
+                    const Gap(10),
+                    Text(
+                      state.transport!.distance < 1
+                          ? "${(state.transport!.distance * 1000).toStringAsFixed(1)} m"
+                          : "${state.transport!.distance.toStringAsFixed(1)} km",
+                      style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey, fontSize: 12),
+                    )
+                  ],
+                ),
+                const Spacer(),
+                CommonSvgPicture(Assets.icons.qrCode),
+                const Gap(8),
+                Text(
+                  state.transport!.qrCode,
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontSize: 14,
+                    color: context.colorScheme.primary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(),
+          const Gap(10),
+          if (!isTarif)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: PrimaryButton(
-                    title: context.l10n.book,
-                    isLoading: state.actionState == TransportActionEnum.booking,
-                    onPress: () {
-                      if (books.books.isEmpty) {
-                        ref.read(transportStateProvider.notifier).book(state.transport!.id).then((value) {
-                          context.pop();
-                          ref.read(ridesNotifierProvider.notifier).getRides();
-                        });
-                      } else {
-                        Fluttertoast.showToast(msg: "Sizda band qilingan velik bor");
-                      }
-                    },
-                    color: context.colorScheme.grey,
-                    textColor: Colors.black,
-                    childStyle: textTheme.labelSmall?.copyWith(fontSize: 16),
-                  )),
-                  if (isTarif) ...[
-                    const Gap(20),
-                    Expanded(
-                      child: PrimaryButton(
-                        title: context.l10n.rent,
-                        onPress: () {
-                          if (books.rides.isEmpty) {
-                            ref
-                                .read(transportStateProvider.notifier)
-                                .start(
-                                  ref.watch(locationStateProvider)!.latitude,
-                                  ref.watch(locationStateProvider)!.longitude,
-                                  state.transport!.qrCode,
-                                  reference.regionId,
-                                )
-                                .then((value) {
-                              if (value) {
-                                ref.read(ridesNotifierProvider.notifier).getRides();
-                                context.pop();
-                              }
-                            });
-                          } else {
-                            Fluttertoast.showToast(msg: context.l10n.bicycleWarning);
-                          }
-                        },
-                        isLoading: state.actionState == TransportActionEnum.starting,
-                      ),
-                    )
-                  ]
-                ],
+              child: Text(
+                context.l10n.chooseTariff,
+                style: textTheme.bodyMedium,
               ),
             ),
-            const Gap(20)
-          ],
-        );
-      } else {
-        return const SizedBox(
-          height: 220,
-          child: Center(
-            child: CircularProgressIndicator(),
+          const Gap(15),
+          state.transport?.tariffs.isNotEmpty ?? false
+              ? SizedBox(
+                  height: 65,
+                  child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (_, index) {
+                        final tarif = state.transport!.tariffs[index];
+                        return TariffWidget(
+                          isSelected: selectedIndex == index,
+                          tarif: tarif,
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = index;
+                              isTarif = true;
+                            });
+                          },
+                        );
+                      },
+                      separatorBuilder: (i, _) => const Gap(8),
+                      itemCount: state.transport!.tariffs.length),
+                )
+              : Text(
+                  "Tariflar hozircha mavjud emas qayta urinib koring",
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+          if (isTarif)
+            ExpandedTarifWidget(
+              tarif: state.transport!.tariffs[selectedIndex!],
+              onClose: () {
+                setState(() {
+                  isTarif = false;
+                });
+              },
+            ),
+          const Gap(22),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Expanded(
+                    child: PrimaryButton(
+                  title: context.l10n.book,
+                  isLoading: state.actionState == TransportActionEnum.booking,
+                  onPress: () {
+                    if (books.books.isEmpty) {
+                      ref.read(transportStateProvider.notifier).book(state.transport!.id).then((value) {
+                        context.pop();
+                        ref.read(ridesNotifierProvider.notifier).getRides();
+                      });
+                    } else {
+                      Fluttertoast.showToast(msg: "Sizda band qilingan velik bor");
+                    }
+                  },
+                  color: context.colorScheme.grey,
+                  textColor: Colors.black,
+                  childStyle: textTheme.labelSmall?.copyWith(fontSize: 16),
+                )),
+                if (isTarif) ...[
+                  const Gap(20),
+                  Expanded(
+                    child: PrimaryButton(
+                      title: context.l10n.rent,
+                      onPress: () {
+                        if (books.rides.isEmpty) {
+                          ref
+                              .read(transportStateProvider.notifier)
+                              .start(
+                                ref.watch(locationStateProvider)!.latitude,
+                                ref.watch(locationStateProvider)!.longitude,
+                                state.transport!.qrCode,
+                                reference.regionId,
+                              )
+                              .then((value) {
+                            if (value) {
+                              ref.read(ridesNotifierProvider.notifier).getRides();
+                              context.pop();
+                            }
+                          });
+                        } else {
+                          Fluttertoast.showToast(msg: context.l10n.bicycleWarning);
+                        }
+                      },
+                      isLoading: state.actionState == TransportActionEnum.starting,
+                    ),
+                  )
+                ]
+              ],
+            ),
           ),
-        );
-      }
+          const Gap(20)
+        ],
+      );
+    } else {
+      return const SizedBox(
+        height: 220,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
   }
 

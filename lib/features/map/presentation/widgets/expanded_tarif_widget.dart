@@ -20,36 +20,15 @@ class ExpandedTarifWidget extends ConsumerWidget {
     if (tarif != null) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            minLeadingWidth: 10,
-            onTap: onClose,
-            title: Transform.translate(
-              offset: const Offset(-10, 0),
-              child: Center(
-                child: Text(
-                  tarif!.tariffInfo.getTitle(l10n.localeName),
-                  style: context.textTheme.bodyMedium,
-                ),
-              ),
-            ),
-            leading: onClose != null
-                ? const Icon(
-                    Icons.arrow_back_ios,
-                    size: 18,
-                  )
-                : null,
-          ),
-          const Gap(10),
           if (tarif!.tariffInfo.getDescription(l10n.localeName).isNotEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
                 tarif!.tariffInfo.getDescription(l10n.localeName),
                 style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+                // overflow: TextOverflow.ellipsis,
               ),
             ),
           ListView.separated(

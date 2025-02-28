@@ -29,7 +29,7 @@ final ridesNotifierProvider = StateNotifierProvider<RidesNotifier, RidesState>((
   return RidesNotifier(ref.watch(rideProvider));
 });
 
-final timerNotifierProvider = StateNotifierProvider<TimerNotifier, TimerState>((ref) {
+final timerNotifierProvider = StateNotifierProvider.autoDispose<TimerNotifier, TimerState>((ref) {
   return TimerNotifier();
 });
 

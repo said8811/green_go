@@ -68,6 +68,7 @@ void openTransportView(BuildContext context, VoidCallback onDispose, String qr) 
 void openBooksView(BuildContext context) {
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     enableDrag: false,
     backgroundColor: Colors.white,
     builder: (_) {

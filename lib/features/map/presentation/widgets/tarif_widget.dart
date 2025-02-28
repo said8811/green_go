@@ -11,11 +11,8 @@ import '../../../core/presentation/helpers/ui_utils.dart';
 class TariffWidget extends ConsumerWidget {
   final TarifModel tarif;
   final VoidCallback onTap;
-  const TariffWidget({
-    super.key,
-    required this.tarif,
-    required this.onTap,
-  });
+  final bool isSelected;
+  const TariffWidget({super.key, required this.tarif, required this.onTap, required this.isSelected});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,6 +26,10 @@ class TariffWidget extends ConsumerWidget {
         padding: const EdgeInsets.only(left: 20),
         width: 180,
         decoration: BoxDecoration(
+          border: Border.all(
+            color: isSelected ? context.colorScheme.primary : context.colorScheme.grey.withOpacity(0.3),
+            width: 2,
+          ),
           borderRadius: BorderRadius.circular(10),
           color: context.colorScheme.grey.withOpacity(0.3),
         ),

@@ -27,6 +27,7 @@ class TransportBookWidget extends HookConsumerWidget {
     final textTheme = context.textTheme;
     final state = ref.watch(ridesNotifierProvider);
     final isTarif = useState(false);
+    final selectedIndex = useState<int?>(null);
     final timer = ref.watch(booksTimerNotifierProvider);
     final reference = ref.watch(referenceNotifierProvider).data!;
     useEffect(() {
@@ -117,27 +118,30 @@ class TransportBookWidget extends HookConsumerWidget {
               const Gap(20),
               if (state.transport?.tariffs.isNotEmpty ?? false)
                 SizedBox(
-                  height: isTarif.value ? null : 65,
-                  child: isTarif.value
-                      ? ExpandedTarifWidget(
-                          tarif: ref.watch(transportStateProvider).selectedTarif,
-                          onClose: () {
-                            isTarif.value = false;
-                          })
-                      : ListView.separated(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (_, index) {
-                            final tarif = state.transport!.tariffs[index];
-                            return TariffWidget(
-                              tarif: tarif,
-                              onTap: () {
-                                isTarif.value = true;
-                              },
-                            );
+                  height: 65,
+                  child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (_, index) {
+                        final tarif = state.transport!.tariffs[index];
+                        return TariffWidget(
+                          isSelected: selectedIndex.value == index,
+                          tarif: tarif,
+                          onTap: () {
+                            selectedIndex.value = index;
+                            isTarif.value = true;
                           },
-                          separatorBuilder: (i, _) => const Gap(8),
-                          itemCount: state.transport!.tariffs.length),
+                        );
+                      },
+                      separatorBuilder: (i, _) => const Gap(8),
+                      itemCount: state.transport!.tariffs.length),
+                ),
+              if (isTarif.value)
+                ExpandedTarifWidget(
+                  tarif: state.transport!.tariffs[selectedIndex.value!],
+                  onClose: () {
+                    isTarif.value = false;
+                  },
                 ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),

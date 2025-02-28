@@ -59,11 +59,13 @@ class RidesNotifier extends StateNotifier<RidesState> {
                   isLoading: false,
                   transport: r,
                   books: data.books,
-                  actionState: data.rides[0].status == 0
+                  actionState: data.rides.isEmpty
                       ? RideAction.pure
-                      : data.rides[0].status == 1
-                          ? RideAction.pause
-                          : RideAction.stop,
+                      : data.rides[0].status == 0
+                          ? RideAction.pure
+                          : data.rides[0].status == 1
+                              ? RideAction.pause
+                              : RideAction.stop,
                 ));
       } else {
         final status = data.rides.isEmpty ? 0 : data.rides[0].status;

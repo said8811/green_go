@@ -3,7 +3,7 @@ description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.1+4
+version: 1.0.2+5
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -15,7 +15,7 @@ dependencies:
   #localization
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.1
+  intl: ^0.19.0
 
   #view
   flutter_staggered_grid_view: ^0.7.0
@@ -39,7 +39,7 @@ dependencies:
   webview_flutter: ^4.4.2
   flutter_staggered_animations: ^1.1.1
   flutter_holo_date_picker: ^1.1.3
-  yandex_mapkit: ^4.0.2
+  yandex_mapkit: ^4.1.0
   flutter_rating_bar: ^4.0.1
   table_calendar: ^3.0.9
   flutter_multi_formatter: ^2.12.1
@@ -75,8 +75,7 @@ dependencies:
   firebase_messaging: ^14.7.6
   firebase_remote_config: ^4.3.6
   
-  flutter_local_notifications: ^16.2.0
-  flutter_app_badger: ^1.5.0
+  flutter_local_notifications: ^18.0.1
 
   #device specific
   package_info_plus: ^5.0.1
@@ -120,6 +119,9 @@ dev_dependencies:
   json_serializable: ^6.7.1
   flutter_gen_runner: ^5.3.2
   flutter_lints: ^3.0.0
+
+dependency_overrides:
+  win32: ^5.3.0 
 
 flutter:
 

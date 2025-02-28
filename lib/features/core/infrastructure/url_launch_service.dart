@@ -35,16 +35,15 @@ class UrlLaunchService {
     } catch (_) {}
   }
 
-  static Future<void> launchNavigator(
+  static void launchNavigator(
     BuildContext context, {
     required LocationModel coords,
-  }) async {
+  }) {
     MapLauncher.installedMaps.then((maps) {
       showModalBottomSheet(
         useRootNavigator: true,
         context: context,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         backgroundColor: context.colorScheme.surface,
         builder: (BuildContext context) {
           return SafeArea(
@@ -54,10 +53,7 @@ class UrlLaunchService {
                 children: [
                   Text(
                     'Построить маршрут:',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Divider(height: 32, indent: 20, endIndent: 20),
                   ListView.separated(
@@ -68,18 +64,14 @@ class UrlLaunchService {
                     itemBuilder: (context, index) {
                       final map = maps[index];
                       return ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                         onTap: () async {
-                          map.showDirections(
-                              destination:
-                                  Coords(coords.latitude, coords.longitude));
+                          map.showDirections(destination: Coords(coords.latitude, coords.longitude));
                           Navigator.pop(context);
                         },
                         title: Text(
                           map.mapName,
-                          style: context.textTheme.bodyLarge
-                              ?.copyWith(fontWeight: FontWeight.w500),
+                          style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
                         ),
                         leading: CommonSvgPicture(map.icon, size: 30),
                       );

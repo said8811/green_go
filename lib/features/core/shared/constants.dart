@@ -11,7 +11,7 @@ const kAppTitle = 'Green Go';
 
 const kTokenKey = 'token';
 
-const kCDNUrl = 'http://80.90.188.12:9000/public';
+const kCDNUrl = 'https://backend.green-go.uz/public';
 
 const kInstallmentPercent = 1.44;
 const kCashbackPercent = 0.02;

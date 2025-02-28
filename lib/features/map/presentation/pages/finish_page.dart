@@ -53,32 +53,6 @@ class _FinishPageState extends ConsumerState<FinishPage> {
                       style: context.textTheme.bodyMedium,
                     ),
                   ),
-                  ListView.separated(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      separatorBuilder: (context, index) => const Divider(),
-                      shrinkWrap: true,
-                      itemCount: state.rides[0].tariff!.tariffFields.length,
-                      itemBuilder: (context, index) {
-                        final field = state.rides[0].tariff!.tariffFields[index];
-                        return Row(
-                          children: [
-                            Text(
-                              field.getName(l10n.localeName),
-                              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
-                            ),
-                            const Spacer(),
-                            Text(
-                              field.price.toString(),
-                              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                            ),
-                            const Gap(5),
-                            Text(
-                              field.getUnit(l10n.localeName),
-                              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                            ),
-                          ],
-                        );
-                      }),
                   if (state.imgPath != null && state.imgPath!.isNotEmpty)
                     CommonExpandablePanel(
                         symPadding: 20,
@@ -104,18 +78,51 @@ class _FinishPageState extends ConsumerState<FinishPage> {
                 ),
               ),
             ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: PrimaryButton(
-            title: context.l10n.finish,
-            isLoading: state.actionState == RideAction.stoping,
-            onPress: () {
-              if (state.imgPath != null) {
-                ref
-                    .read(ridesNotifierProvider.notifier)
-                    .finish(latitude: latlong?.latitude, longitude: latlong?.longitude);
-              }
-            }),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              separatorBuilder: (context, index) => const Divider(),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: state.rides[0].tariff!.tariffFields.length,
+              itemBuilder: (context, index) {
+                final field = state.rides[0].tariff!.tariffFields[index];
+                return Row(
+                  children: [
+                    Text(
+                      field.getName(l10n.localeName),
+                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    const Spacer(),
+                    Text(
+                      field.price.toString(),
+                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                    ),
+                    const Gap(5),
+                    Text(
+                      field.getUnit(l10n.localeName),
+                      style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                    ),
+                  ],
+                );
+              }),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: PrimaryButton(
+                title: context.l10n.finish,
+                isLoading: state.actionState == RideAction.stoping,
+                onPress: () {
+                  if (state.imgPath != null) {
+                    ref
+                        .read(ridesNotifierProvider.notifier)
+                        .finish(latitude: latlong?.latitude, longitude: latlong?.longitude);
+                  }
+                }),
+          ),
+        ],
       ),
     );
   }

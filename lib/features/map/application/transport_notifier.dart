@@ -29,7 +29,6 @@ class TransportState with _$TransportState {
     required bool isLoading,
     Failure? error,
     String? qrCode,
-    TarifModel? selectedTarif,
     required TransportActionEnum actionState,
   }) = _TransportState;
   factory TransportState.initial() => TransportState(
